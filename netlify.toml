@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = "dist"
 
 [build.environment]
   NODE_ENV = "production"
@@ -11,6 +11,3 @@
 
 [dev]
   command = "netlify dev"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
