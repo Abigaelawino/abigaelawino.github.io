@@ -1,12 +1,16 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "out"
 
 [build.environment]
   NODE_ENV = "production"
 
 [context.production.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
 
 [dev]
-  command = "npm run dev"
+  command = "netlify dev"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
