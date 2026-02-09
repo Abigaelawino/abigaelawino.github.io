@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abigael Awino Portfolio · Projects</title>
+    <meta name="description" content="Explore project case studies in ML, analytics, and production data systems." />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="canonical" href="https://abigaelawino.github.io/projects/" />
+    <meta property="og:site_name" content="Abigael Awino Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Abigael Awino Portfolio · Projects" />
+    <meta property="og:description" content="Explore project case studies in ML, analytics, and production data systems." />
+    <meta property="og:url" content="https://abigaelawino.github.io/projects/" />
+    <meta property="og:image" content="https://abigaelawino.github.io/assets/og.png" />
+    <meta property="og:image:alt" content="Abigael Awino Portfolio — Explore project case studies in ML, analytics, and production data systems." />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Abigael Awino Portfolio · Projects" />
+    <meta name="twitter:description" content="Explore project case studies in ML, analytics, and production data systems." />
+    <meta name="twitter:image" content="https://abigaelawino.github.io/assets/og.png" />
+    <meta name="twitter:image:alt" content="Abigael Awino Portfolio — Explore project case studies in ML, analytics, and production data systems." />
+    <link rel="preload" href="/assets/shell.css" as="style" />
+    <link rel="stylesheet" href="/assets/shell.css" />
+    
+    <script src="/assets/analytics.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <a class="shell__skip-link" href="#main-content">Skip to content</a>
+      <header>
+        <nav class="shell__nav" aria-label="Site navigation">
+          <a class="shell__brand" href="/" data-analytics-event="nav_home">Abigael Awino Portfolio</a>
+          <ul class="shell__links">
+            <li><a class="shell__link" href="/projects" data-analytics-event="nav_projects">Projects</a></li>
+            <li><a class="shell__link" href="/about" data-analytics-event="nav_about">About</a></li>
+            <li><a class="shell__link" href="/contact" data-analytics-event="nav_contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main id="main-content" tabindex="-1">
+        <section class="projects-page">
+      <style>
+        .projects-page { display: grid; gap: 1rem; }
+        .projects-page__header { display: grid; gap: 0.45rem; }
+        .projects-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
+        .projects-page__header p { margin: 0; line-height: 1.55; }
+        .projects-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .projects-filter__button {
+          border: 1px solid #e5e7eb;
+          border-radius: 999px;
+          padding: 0.35rem 0.7rem;
+          font: inherit;
+          background: #ffffff;
+          cursor: pointer;
+          font-weight: 600;
+        }
+        .projects-filter__button.is-active { background: #0f172a; border-color: #0f172a; color: #f9fafb; }
+        .projects-grid { display: grid; gap: 0.9rem; }
+        .project-card { border: 1px solid #d1d5db; border-radius: 0.75rem; overflow: hidden; background: #ffffff; }
+        .project-card__cover { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #f3f4f6; }
+        .project-card__body { padding: 0.95rem; display: grid; gap: 0.55rem; }
+        .project-card__meta { margin: 0; color: #4b5563; font-size: 0.92rem; }
+        .project-card__title { margin: 0; font-size: 1.2rem; line-height: 1.25; }
+        .project-card__summary { margin: 0; line-height: 1.55; color: #1f2937; }
+        .project-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+        .project-card__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.82rem; }
+        .project-card__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+        .project-card__cta, .project-card__repo { text-decoration: none; font-weight: 700; }
+        .project-card__cta { color: #0f172a; }
+        .projects-status { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+        @media (min-width: 48rem) {
+          .projects-page { gap: 1.25rem; }
+          .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+      </style>
+      <header class="projects-page__header">
+        <h1>Projects</h1>
+        <p>Case studies covering modeling, analytics, and production-ready data storytelling.</p>
+      </header>
+      <div class="projects-filter" role="toolbar" aria-label="Project tag filters">
+        <button class="projects-filter__button is-active" data-filter="all" data-filter-button type="button" aria-pressed="true" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="all">All</button><button class="projects-filter__button" data-filter="ml" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="ml">ML</button><button class="projects-filter__button" data-filter="analytics" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="analytics">Analytics</button><button class="projects-filter__button" data-filter="visualization" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="visualization">Visualization</button><button class="projects-filter__button" data-filter="nlp" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="nlp">NLP</button><button class="projects-filter__button" data-filter="time-series" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="time-series">Time Series</button>
+      </div>
+      <p class="projects-status" role="status" aria-live="polite" aria-atomic="true" data-projects-status></p>
+      <div class="projects-grid" id="projects-grid" data-projects-grid>
+        <article class="project-card" data-project-card data-tags="ml,analytics,time-series">
+      <img
+        class="project-card__cover"
+        src="/images/projects/churn-risk-cover.svg"
+        alt="Cover image for Customer Churn Risk Modeling"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        width="1200"
+        height="675"
+      />
+      <div class="project-card__body">
+        <p class="project-card__meta">2026-01-12</p>
+        <h2 class="project-card__title">Customer Churn Risk Modeling</h2>
+        <p class="project-card__summary">Built a churn risk model and dashboard to prioritize retention outreach.</p>
+        <ul class="project-card__tags"><li class="project-card__tag">ml</li><li class="project-card__tag">analytics</li><li class="project-card__tag">time-series</li></ul>
+        <div class="project-card__actions">
+          <a class="project-card__cta" href="/projects/customer-churn-case-study" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="customer-churn-case-study">Read case study</a>
+          <a class="project-card__repo" href="https://github.com/abigaelawino/churn-risk-model" data-analytics-event="projects_repo_click" data-analytics-prop-slug="customer-churn-case-study">View repo</a>
+        </div>
+      </div>
+    </article>
+<article class="project-card" data-project-card data-tags="analytics,visualization,time-series">
+      <img
+        class="project-card__cover"
+        src="/images/projects/retail-forecast-cover.svg"
+        alt="Cover image for Retail Sales Forecasting Dashboard"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        width="1200"
+        height="675"
+      />
+      <div class="project-card__body">
+        <p class="project-card__meta">2025-11-03</p>
+        <h2 class="project-card__title">Retail Sales Forecasting Dashboard</h2>
+        <p class="project-card__summary">Built an executive dashboard with rolling forecasts and anomaly alerts for weekly revenue planning.</p>
+        <ul class="project-card__tags"><li class="project-card__tag">analytics</li><li class="project-card__tag">visualization</li><li class="project-card__tag">time-series</li></ul>
+        <div class="project-card__actions">
+          <a class="project-card__cta" href="/projects/sales-forecasting-dashboard" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="sales-forecasting-dashboard">Read case study</a>
+          <a class="project-card__repo" href="https://github.com/abigaelawino/retail-forecast-dashboard" data-analytics-event="projects_repo_click" data-analytics-prop-slug="sales-forecasting-dashboard">View repo</a>
+        </div>
+      </div>
+    </article>
+<article class="project-card" data-project-card data-tags="ml,nlp,analytics">
+      <img
+        class="project-card__cover"
+        src="/images/projects/ticket-nlp-cover.svg"
+        alt="Cover image for Support Ticket NLP Triage"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        width="1200"
+        height="675"
+      />
+      <div class="project-card__body">
+        <p class="project-card__meta">2025-09-18</p>
+        <h2 class="project-card__title">Support Ticket NLP Triage</h2>
+        <p class="project-card__summary">Automated support ticket categorization and urgency scoring to speed up SLA routing.</p>
+        <ul class="project-card__tags"><li class="project-card__tag">ml</li><li class="project-card__tag">nlp</li><li class="project-card__tag">analytics</li></ul>
+        <div class="project-card__actions">
+          <a class="project-card__cta" href="/projects/support-ticket-nlp-triage" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="support-ticket-nlp-triage">Read case study</a>
+          <a class="project-card__repo" href="https://github.com/abigaelawino/ticket-nlp-triage" data-analytics-event="projects_repo_click" data-analytics-prop-slug="support-ticket-nlp-triage">View repo</a>
+        </div>
+      </div>
+    </article>
+      </div>
+      <script src="/assets/projects-filter.js" defer></script>
+    </section>
+      </main>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://abigaelawino.github.io/sitemap.xml

@@ -1,0 +1,7 @@
+[mcp_servers.netlify]
+command = "npx"
+args = ["-y", "@netlify/mcp"]
+
+[mcp_servers.shadcn]
+command = "./node_modules/.bin/shadcn"
+args = ["mcp"]

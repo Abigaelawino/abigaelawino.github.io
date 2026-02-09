@@ -1,0 +1,359 @@
+TAP version 13
+# Subtest: about page renders concise bio with strengths and toolkit sections
+ok 1 - about page renders concise bio with strengths and toolkit sections
+  ---
+  duration_ms: 2.793702
+  ...
+# Subtest: about page keeps mobile-first toolkit layout with desktop enhancement
+ok 2 - about page keeps mobile-first toolkit layout with desktop enhancement
+  ---
+  duration_ms: 0.3338
+  ...
+# Subtest: about page omits speaking and publications section when data is not provided
+ok 3 - about page omits speaking and publications section when data is not provided
+  ---
+  duration_ms: 0.2728
+  ...
+# Subtest: about page renders optional speaking and publication entries when present
+ok 4 - about page renders optional speaking and publication entries when present
+  ---
+  duration_ms: 0.3313
+  ...
+# Subtest: about page renders speaking block without publications when only speaking is provided
+ok 5 - about page renders speaking block without publications when only speaking is provided
+  ---
+  duration_ms: 0.315201
+  ...
+# Subtest: about page renders publications block without speaking when only publications are provided
+ok 6 - about page renders publications block without speaking when only publications are provided
+  ---
+  duration_ms: 1.5096
+  ...
+# Subtest: about page tolerates non-array strengths and toolkit inputs
+ok 7 - about page tolerates non-array strengths and toolkit inputs
+  ---
+  duration_ms: 0.2132
+  ...
+# Subtest: reading time formatter returns a min-read label
+ok 8 - reading time formatter returns a min-read label
+  ---
+  duration_ms: 1.6907
+  ...
+# Subtest: blog card renders slug route and reading-time metadata
+ok 9 - blog card renders slug route and reading-time metadata
+  ---
+  duration_ms: 0.6651
+  ...
+# Subtest: blog card renders when tags are missing
+ok 10 - blog card renders when tags are missing
+  ---
+  duration_ms: 0.3023
+  ...
+# Subtest: blog index page renders list hook and links to posts
+ok 11 - blog index page renders list hook and links to posts
+  ---
+  duration_ms: 3.414402
+  ...
+# Subtest: blog post page renders mdx body and tags when provided
+ok 12 - blog post page renders mdx body and tags when provided
+  ---
+  duration_ms: 1.992501
+  ...
+# Subtest: blog post page omits tags hook when tags are empty
+ok 13 - blog post page omits tags hook when tags are empty
+  ---
+  duration_ms: 0.2754
+  ...
+# Subtest: blog post page omits tags hook when tags is not an array
+ok 14 - blog post page omits tags hook when tags is not an array
+  ---
+  duration_ms: 0.1973
+  ...
+# Subtest: contact page renders form with Netlify honeypot spam protection
+ok 15 - contact page renders form with Netlify honeypot spam protection
+  ---
+  duration_ms: 8.488403
+  ...
+# Subtest: contact page includes privacy/data collection note
+ok 16 - contact page includes privacy/data collection note
+  ---
+  duration_ms: 0.3889
+  ...
+# Subtest: contact page renders default social links and allows overrides
+ok 17 - contact page renders default social links and allows overrides
+  ---
+  duration_ms: 0.4061
+  ...
+# Subtest: content collections load and validate frontmatter schema
+ok 18 - content collections load and validate frontmatter schema
+  ---
+  duration_ms: 20.647609
+  ...
+# Subtest: generateContentIndexes writes projects and blog index JSON files
+ok 19 - generateContentIndexes writes projects and blog index JSON files
+  ---
+  duration_ms: 4.515002
+  ...
+# Subtest: frontmatter parsing supports scalars, lists, and list blocks
+ok 20 - frontmatter parsing supports scalars, lists, and list blocks
+  ---
+  duration_ms: 1.420701
+  ...
+# Subtest: frontmatter parsing supports empty list values
+ok 21 - frontmatter parsing supports empty list values
+  ---
+  duration_ms: 0.2823
+  ...
+# Subtest: frontmatter parsing rejects invalid list entry without a key
+ok 22 - frontmatter parsing rejects invalid list entry without a key
+  ---
+  duration_ms: 0.7478
+  ...
+# Subtest: frontmatter parsing rejects invalid key syntax
+ok 23 - frontmatter parsing rejects invalid key syntax
+  ---
+  duration_ms: 0.2541
+  ...
+# Subtest: splitFrontmatter parses valid MDX and rejects missing delimiters
+ok 24 - splitFrontmatter parses valid MDX and rejects missing delimiters
+  ---
+  duration_ms: 0.3357
+  ...
+# Subtest: parseMdxFile rejects empty bodies and schema validation failures via loadCollectionEntries
+ok 25 - parseMdxFile rejects empty bodies and schema validation failures via loadCollectionEntries
+  ---
+  duration_ms: 2.088701
+  ...
+# Subtest: schema validation reports missing and invalid fields
+ok 26 - schema validation reports missing and invalid fields
+  ---
+  duration_ms: 3.106402
+  ...
+# Subtest: home page renders hero value proposition and primary CTA links
+ok 27 - home page renders hero value proposition and primary CTA links
+  ---
+  duration_ms: 3.428801
+  ...
+# Subtest: home page renders featured project with case study and repository CTAs
+ok 28 - home page renders featured project with case study and repository CTAs
+  ---
+  duration_ms: 0.476901
+  ...
+# Subtest: home page uses mobile-first behavior for CTA layout
+ok 29 - home page uses mobile-first behavior for CTA layout
+  ---
+  duration_ms: 0.2444
+  ...
+# Subtest: home page falls back when a featured project is unavailable
+ok 30 - home page falls back when a featured project is unavailable
+  ---
+  duration_ms: 1.938601
+  ...
+# Subtest: supported project filters include required tag categories
+ok 31 - supported project filters include required tag categories
+  ---
+  duration_ms: 6.062802
+  ...
+# Subtest: projects can be filtered by normalized tag aliases
+ok 32 - projects can be filtered by normalized tag aliases
+  ---
+  duration_ms: 1.2375
+  ...
+# Subtest: projects filter returns all projects when tag is "all"
+ok 33 - projects filter returns all projects when tag is "all"
+  ---
+  duration_ms: 0.2928
+  ...
+# Subtest: project card includes case study CTA and repo link
+ok 34 - project card includes case study CTA and repo link
+  ---
+  duration_ms: 2.045101
+  ...
+# Subtest: projects page renders filter toolbar and cards grid
+ok 35 - projects page renders filter toolbar and cards grid
+  ---
+  duration_ms: 0.5277
+  ...
+# Subtest: project case study renders all required sections and repo link
+ok 36 - project case study renders all required sections and repo link
+  ---
+  duration_ms: 0.386501
+  ...
+# Subtest: resume page renders core sections and download link
+ok 37 - resume page renders core sections and download link
+  ---
+  duration_ms: 2.595701
+  ...
+# Subtest: resume page renders custom skills, highlights, and nav links
+ok 38 - resume page renders custom skills, highlights, and nav links
+  ---
+  duration_ms: 0.3953
+  ...
+# Subtest: resume page tolerates non-array values without throwing
+ok 39 - resume page tolerates non-array values without throwing
+  ---
+  duration_ms: 0.2391
+  ...
+# Subtest: escapeHtml removes unsafe characters
+ok 40 - escapeHtml removes unsafe characters
+  ---
+  duration_ms: 2.382501
+  ...
+# Subtest: home page renderer escapes featured project metadata
+ok 41 - home page renderer escapes featured project metadata
+  ---
+  duration_ms: 0.5695
+  ...
+# Subtest: project card escapes slug/data attributes
+ok 42 - project card escapes slug/data attributes
+  ---
+  duration_ms: 0.4877
+  ...
+# Subtest: blog card escapes title and summary
+ok 43 - blog card escapes title and summary
+  ---
+  duration_ms: 0.4607
+  ...
+# Subtest: resolveSiteUrl prefers configured env vars
+ok 44 - resolveSiteUrl prefers configured env vars
+  ---
+  duration_ms: 2.123001
+  ...
+# Subtest: buildSeoHead includes canonical + social tags
+ok 45 - buildSeoHead includes canonical + social tags
+  ---
+  duration_ms: 0.617901
+  ...
+# Subtest: buildSitemapXml emits expected URL entries
+ok 46 - buildSitemapXml emits expected URL entries
+  ---
+  duration_ms: 0.412
+  ...
+# Subtest: buildRobotsTxt references the sitemap
+ok 47 - buildRobotsTxt references the sitemap
+  ---
+  duration_ms: 0.3266
+  ...
+# Subtest: resolveSiteUrl returns default when no env vars provided
+not ok 48 - resolveSiteUrl returns default when no env vars provided
+  ---
+  duration_ms: 1.340201
+  location: '/home/nick/Projects/abigaelawino.github.io/test/seo.test.js:45:1'
+  failureType: 'testCodeFailure'
+  error: 'The "actual" and "expected" arguments must be specified'
+  code: 'ERR_MISSING_ARGS'
+  name: 'TypeError'
+  stack: |-
+    Function.strictEqual (node:assert:309:11)
+    TestContext.<anonymous> (/home/nick/Projects/abigaelawino.github.io/test/seo.test.js:46:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: toAbsoluteUrl combines site URL and pathname
+not ok 49 - toAbsoluteUrl combines site URL and pathname
+  ---
+  duration_ms: 3.665401
+  location: '/home/nick/Projects/abigaelawino.github.io/test/seo.test.js:49:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'https://example.com/projects/'
+    - 'https://example.com/projects'
+                                   ^
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://example.com/projects'
+  actual: 'https://example.com/projects/'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/nick/Projects/abigaelawino.github.io/test/seo.test.js:51:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: buildRobotsTxt disallows when not allowing all
+ok 50 - buildRobotsTxt disallows when not allowing all
+  ---
+  duration_ms: 1.044401
+  ...
+# Subtest: buildSeoHead uses defaults for missing OG image
+ok 51 - buildSeoHead uses defaults for missing OG image
+  ---
+  duration_ms: 0.3237
+  ...
+# Subtest: getSiteTitle returns a non-empty string
+ok 52 - getSiteTitle returns a non-empty string
+  ---
+  duration_ms: 1.6169
+  ...
+# Subtest: index exports home page renderer
+ok 53 - index exports home page renderer
+  ---
+  duration_ms: 0.9507
+  ...
+# Subtest: index exports about page renderer
+ok 54 - index exports about page renderer
+  ---
+  duration_ms: 0.2171
+  ...
+# Subtest: index exports blog page renderers
+ok 55 - index exports blog page renderers
+  ---
+  duration_ms: 0.2185
+  ...
+# Subtest: index exports contact page renderer
+ok 56 - index exports contact page renderer
+  ---
+  duration_ms: 0.2135
+  ...
+# Subtest: index exports resume page renderer
+ok 57 - index exports resume page renderer
+  ---
+  duration_ms: 0.221101
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 55
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 510.673722
+# start of coverage report
+# ---------------------------------------------------------------------------------
+# file                     | line % | branch % | funcs % | uncovered lines
+# ---------------------------------------------------------------------------------
+# src/about.js             | 100.00 |   100.00 |  100.00 | 
+# src/blog.js              | 100.00 |   100.00 |  100.00 | 
+# src/contact.js           |  98.73 |    85.71 |  100.00 | 23-24
+# src/content.js           |  98.32 |    94.52 |  100.00 | 143-144 196-197
+# src/home.js              | 100.00 |   100.00 |  100.00 | 
+# src/index.js             | 100.00 |   100.00 |  100.00 | 
+# src/projects.js          | 100.00 |   100.00 |  100.00 | 
+# src/resume.js            | 100.00 |   100.00 |  100.00 | 
+# src/seo.js               |  94.33 |    69.44 |  100.00 | 17-18 23-24 27-28 44-45
+# src/utils/escape-html.js | 100.00 |   100.00 |  100.00 | 
+# test/about.test.js       | 100.00 |   100.00 |  100.00 | 
+# test/blog.test.js        | 100.00 |   100.00 |  100.00 | 
+# test/contact.test.js     | 100.00 |   100.00 |  100.00 | 
+# test/content.test.js     | 100.00 |   100.00 |  100.00 | 
+# test/home.test.js        | 100.00 |   100.00 |  100.00 | 
+# test/projects.test.js    | 100.00 |   100.00 |  100.00 | 
+# test/resume.test.js      | 100.00 |   100.00 |  100.00 | 
+# test/security.test.js    | 100.00 |   100.00 |  100.00 | 
+# test/seo.test.js         | 100.00 |   100.00 |  100.00 | 
+# test/site.test.js        | 100.00 |   100.00 |  100.00 | 
+# ---------------------------------------------------------------------------------
+# all files                |  99.28 |    93.96 |  100.00 |
+# ---------------------------------------------------------------------------------
+# end of coverage report

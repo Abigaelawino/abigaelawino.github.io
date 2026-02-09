@@ -1,0 +1,19 @@
+---
+title: Customer Churn Risk Modeling
+date: 2026-01-12
+tags: [ml, analytics, time-series]
+summary: Built a churn risk model and dashboard to prioritize retention outreach.
+caseStudyData: Combined 24 months of CRM activity, subscription transactions, and support logs; standardized IDs and imputed sparse engagement fields before modeling.
+caseStudyMethods: Trained gradient-boosted trees with recency-frequency features, compared against logistic regression baseline, and tuned thresholding for retention team capacity.
+caseStudyResults: Improved top-decile churn capture by 31 percent over baseline and reduced wasted outreach by focusing account-manager effort on high-risk cohorts.
+caseStudyReproducibility: Repository includes pinned dependencies, SQL feature extraction scripts, and notebook-to-pipeline parity checks for repeatable training runs.
+caseStudyReflection: Next iteration should add causal uplift testing to separate true intervention impact from naturally reactivating customers.
+tech: [python, xgboost, postgres, tableau]
+repo: https://github.com/abigaelawino/churn-risk-model
+cover: /images/projects/churn-risk-cover.svg
+status: published
+---
+
+# Customer Churn Risk Modeling
+
+This case study covers problem framing, data preparation, model evaluation, and business impact.

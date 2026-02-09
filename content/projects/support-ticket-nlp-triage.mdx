@@ -1,0 +1,19 @@
+---
+title: Support Ticket NLP Triage
+date: 2025-09-18
+tags: [ml, nlp, analytics]
+summary: Automated support ticket categorization and urgency scoring to speed up SLA routing.
+caseStudyData: Built a labeled corpus from historical support tickets, policy metadata, and escalation outcomes, with PII redaction and language normalization pre-processing.
+caseStudyMethods: Fine-tuned a transformer classifier for intent and urgency, calibrated probabilities, and added rule-based safeguards for critical keywords.
+caseStudyResults: Increased first-pass routing accuracy to 87 percent and cut median triage time from 22 minutes to under 6 minutes for inbound queues.
+caseStudyReproducibility: Project ships containerized inference service, model version manifests, and evaluation scripts for deterministic benchmark reruns.
+caseStudyReflection: A stronger active-learning loop with agent feedback would improve long-tail categories and reduce annotation drift.
+tech: [python, transformers, fastapi, postgres]
+repo: https://github.com/abigaelawino/ticket-nlp-triage
+cover: /images/projects/ticket-nlp-cover.svg
+status: published
+---
+
+# Support Ticket NLP Triage
+
+This case study covers text preprocessing, model serving, and calibration for human-in-the-loop triage.

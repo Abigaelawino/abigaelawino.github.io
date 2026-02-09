@@ -1,0 +1,19 @@
+---
+title: Retail Sales Forecasting Dashboard
+date: 2025-11-03
+tags: [analytics, visualization, time-series]
+summary: Built an executive dashboard with rolling forecasts and anomaly alerts for weekly revenue planning.
+caseStudyData: Aggregated store-level daily sales, promotions, and holiday calendars across 180 locations, then corrected late-arriving records with a weekly reconciliation job.
+caseStudyMethods: Benchmarked Prophet against seasonal naive and gradient boosting regressors, then shipped the best-performing ensemble with confidence interval monitoring.
+caseStudyResults: Lowered weekly MAPE from 14.8 percent to 9.6 percent and gave finance partners two extra planning days through automated refresh workflows.
+caseStudyReproducibility: Repo documents data contracts, environment setup, and one-command pipeline execution to rebuild forecasts and dashboard extracts from raw tables.
+caseStudyReflection: Future work should incorporate price elasticity features and scenario simulation for promotion-heavy periods.
+tech: [python, prophet, duckdb, powerbi]
+repo: https://github.com/abigaelawino/retail-forecast-dashboard
+cover: /images/projects/retail-forecast-cover.svg
+status: published
+---
+
+# Retail Sales Forecasting Dashboard
+
+This case study details feature engineering, forecast validation, and interactive visualization choices.

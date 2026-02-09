@@ -1,0 +1,31 @@
+:root { color-scheme: light; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #0f172a; background: #ffffff; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
+.shell { max-width: 64rem; margin: 0 auto; padding: 1.25rem; }
+.shell__skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.shell__skip-link:focus,
+.shell__skip-link:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin: 0.75rem 0;
+  padding: 0.55rem 0.85rem;
+  border: 2px solid #0f172a;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.shell__nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.shell__brand { font-weight: 700; text-decoration: none; }
+.shell__links { display: flex; gap: 0.75rem; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.shell__link { text-decoration: none; border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.35rem 0.65rem; }

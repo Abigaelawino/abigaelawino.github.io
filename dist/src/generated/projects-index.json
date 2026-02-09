@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "customer-churn-case-study",
+    "title": "Customer Churn Risk Modeling",
+    "date": "2026-01-12",
+    "tags": [
+      "ml",
+      "analytics",
+      "time-series"
+    ],
+    "summary": "Built a churn risk model and dashboard to prioritize retention outreach.",
+    "caseStudyData": "Combined 24 months of CRM activity, subscription transactions, and support logs; standardized IDs and imputed sparse engagement fields before modeling.",
+    "caseStudyMethods": "Trained gradient-boosted trees with recency-frequency features, compared against logistic regression baseline, and tuned thresholding for retention team capacity.",
+    "caseStudyResults": "Improved top-decile churn capture by 31 percent over baseline and reduced wasted outreach by focusing account-manager effort on high-risk cohorts.",
+    "caseStudyReproducibility": "Repository includes pinned dependencies, SQL feature extraction scripts, and notebook-to-pipeline parity checks for repeatable training runs.",
+    "caseStudyReflection": "Next iteration should add causal uplift testing to separate true intervention impact from naturally reactivating customers.",
+    "tech": [
+      "python",
+      "xgboost",
+      "postgres",
+      "tableau"
+    ],
+    "repo": "https://github.com/abigaelawino/churn-risk-model",
+    "cover": "/images/projects/churn-risk-cover.svg",
+    "status": "published"
+  },
+  {
+    "slug": "sales-forecasting-dashboard",
+    "title": "Retail Sales Forecasting Dashboard",
+    "date": "2025-11-03",
+    "tags": [
+      "analytics",
+      "visualization",
+      "time-series"
+    ],
+    "summary": "Built an executive dashboard with rolling forecasts and anomaly alerts for weekly revenue planning.",
+    "caseStudyData": "Aggregated store-level daily sales, promotions, and holiday calendars across 180 locations, then corrected late-arriving records with a weekly reconciliation job.",
+    "caseStudyMethods": "Benchmarked Prophet against seasonal naive and gradient boosting regressors, then shipped the best-performing ensemble with confidence interval monitoring.",
+    "caseStudyResults": "Lowered weekly MAPE from 14.8 percent to 9.6 percent and gave finance partners two extra planning days through automated refresh workflows.",
+    "caseStudyReproducibility": "Repo documents data contracts, environment setup, and one-command pipeline execution to rebuild forecasts and dashboard extracts from raw tables.",
+    "caseStudyReflection": "Future work should incorporate price elasticity features and scenario simulation for promotion-heavy periods.",
+    "tech": [
+      "python",
+      "prophet",
+      "duckdb",
+      "powerbi"
+    ],
+    "repo": "https://github.com/abigaelawino/retail-forecast-dashboard",
+    "cover": "/images/projects/retail-forecast-cover.svg",
+    "status": "published"
+  },
+  {
+    "slug": "support-ticket-nlp-triage",
+    "title": "Support Ticket NLP Triage",
+    "date": "2025-09-18",
+    "tags": [
+      "ml",
+      "nlp",
+      "analytics"
+    ],
+    "summary": "Automated support ticket categorization and urgency scoring to speed up SLA routing.",
+    "caseStudyData": "Built a labeled corpus from historical support tickets, policy metadata, and escalation outcomes, with PII redaction and language normalization pre-processing.",
+    "caseStudyMethods": "Fine-tuned a transformer classifier for intent and urgency, calibrated probabilities, and added rule-based safeguards for critical keywords.",
+    "caseStudyResults": "Increased first-pass routing accuracy to 87 percent and cut median triage time from 22 minutes to under 6 minutes for inbound queues.",
+    "caseStudyReproducibility": "Project ships containerized inference service, model version manifests, and evaluation scripts for deterministic benchmark reruns.",
+    "caseStudyReflection": "A stronger active-learning loop with agent feedback would improve long-tail categories and reduce annotation drift.",
+    "tech": [
+      "python",
+      "transformers",
+      "fastapi",
+      "postgres"
+    ],
+    "repo": "https://github.com/abigaelawino/ticket-nlp-triage",
+    "cover": "/images/projects/ticket-nlp-cover.svg",
+    "status": "published"
+  }
+]
