@@ -67,6 +67,7 @@ function buildSeoHead({
   twitterCard = 'summary_large_image',
   locale = 'en_US',
   themeColor = '#0f172a',
+  robots = 'index,follow',
 }) {
   const resolvedSiteUrl = resolveSiteUrl({ SITE_URL: siteUrl });
   const resolvedTitle = escapeHtml(title);
@@ -80,7 +81,7 @@ function buildSeoHead({
 
   return `
     <meta name="description" content="${resolvedDescription}" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="${escapeHtml(robots)}" />
     <meta name="theme-color" content="${escapeHtml(themeColor)}" />
     <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
     <meta property="og:site_name" content="${resolvedSiteName}" />
@@ -137,5 +138,5 @@ module.exports = {
   buildSitemapXml,
   resolveSiteUrl,
   toAbsoluteUrl,
+  normalizeSiteUrl,
 };
-

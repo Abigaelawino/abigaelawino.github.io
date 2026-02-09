@@ -6,3 +6,30 @@ coverage/
 
 # Local Netlify folder
 .netlify
+
+# Local sandbox config overrides
+.xdg-config/
+
+# Next.js
+.next/
+out/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# Turbo
+.turbo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

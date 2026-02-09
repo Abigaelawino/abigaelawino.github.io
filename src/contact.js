@@ -13,6 +13,14 @@ const DEFAULT_CONTACT_COPY = {
   elsewhereHeading: 'Elsewhere',
 };
 
+const DEFAULT_CONTACT_THANKS_COPY = {
+  heading: 'Message sent',
+  intro: 'Thanks for reaching out. I’ll reply as soon as I can.',
+  followUp: 'If you don’t hear back within 2 business days, feel free to connect on LinkedIn.',
+  primaryCtaLabel: 'Back to home',
+  primaryCtaHref: '/',
+};
+
 function renderElsewhereLinks(links) {
   const entries = [
     { label: 'GitHub', href: links.github },
@@ -112,6 +120,7 @@ function renderContactPage(options = {}) {
           class="contact-form"
           name="contact"
           method="POST"
+          action="/contact/thanks/"
           aria-describedby="contact-privacy-note"
           data-netlify="true"
           netlify-honeypot="bot-field"
@@ -151,8 +160,35 @@ function renderContactPage(options = {}) {
   `.trim();
 }
 
+function renderContactThanksPage(options = {}) {
+  const copy = {
+    ...DEFAULT_CONTACT_THANKS_COPY,
+    ...(options.copy ?? {}),
+  };
+
+  return `
+    <section class="contact-page" data-contact-thanks>
+      <style>
+        .contact-page { display: grid; gap: 1rem; }
+        .contact-thanks { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 1rem; display: grid; gap: 0.75rem; }
+        .contact-thanks h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
+        .contact-thanks p { margin: 0; line-height: 1.55; }
+        .contact-thanks__cta { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid #1f2937; border-radius: 0.6rem; padding: 0.7rem 1rem; background: #0f172a; color: #f9fafb; text-decoration: none; font-weight: 700; width: fit-content; }
+      </style>
+      <div class="contact-thanks">
+        <h1>${escapeHtml(copy.heading)}</h1>
+        <p>${escapeHtml(copy.intro)}</p>
+        <p>${escapeHtml(copy.followUp)}</p>
+        <a class="contact-thanks__cta" href="${escapeHtml(copy.primaryCtaHref)}" data-analytics-event="contact_thanks_primary_click">${escapeHtml(copy.primaryCtaLabel)}</a>
+      </div>
+    </section>
+  `.trim();
+}
+
 module.exports = {
   DEFAULT_CONTACT_COPY,
   DEFAULT_CONTACT_LINKS,
+  DEFAULT_CONTACT_THANKS_COPY,
   renderContactPage,
+  renderContactThanksPage,
 };

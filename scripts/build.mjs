@@ -10,7 +10,7 @@ const { buildRobotsTxt, buildSeoHead, buildSitemapXml, resolveSiteUrl } = requir
 const { DEFAULT_RESUME_ASSET_PATH, renderResumePage } = require('../src/resume.js');
 const { renderHomePage } = require('../src/home.js');
 const { renderAboutPage } = require('../src/about.js');
-const { renderContactPage } = require('../src/contact.js');
+const { renderContactPage, renderContactThanksPage } = require('../src/contact.js');
 const { renderProjectsPage } = require('../src/projects.js');
 const { renderBlogIndexPage } = require('../src/blog.js');
 
@@ -160,7 +160,7 @@ function buildDefaultOgPng({ width = 1200, height = 630 } = {}) {
   ]);
 }
 
-function buildHtmlDocument({ title, description, body, pathname = '/' }) {
+function buildHtmlDocument({ title, description, body, pathname = '/', robots }) {
   const resolvedTitle = escapeHtml(title);
   const siteTitle = getSiteTitle();
   const seoHead = buildSeoHead({
@@ -171,6 +171,7 @@ function buildHtmlDocument({ title, description, body, pathname = '/' }) {
     description,
     ogImagePath: '/assets/og.png',
     ogImageAlt: `${siteTitle} — ${description}`,
+    ...(robots ? { robots } : {}),
   });
   const analyticsSnippet = ANALYTICS_DOMAIN
     ? `
@@ -358,9 +359,9 @@ mkdirSync(join('dist', 'assets'), { recursive: true });
     return `/${normalized}`;
   }
 
-  function writePage(relativePath, { title, description, body }) {
+  function writePage(relativePath, { title, description, body, robots }) {
     const pathname = routePathnameForOutput(relativePath);
-    const document = buildHtmlDocument({ title, description, body, pathname });
+    const document = buildHtmlDocument({ title, description, body, pathname, robots });
     const outputPath = join('dist', relativePath);
     mkdirSync(dirname(outputPath), { recursive: true });
     writeFileSync(outputPath, `${document}\n`);
@@ -384,6 +385,13 @@ mkdirSync(join('dist', 'assets'), { recursive: true });
       title: `${siteTitle} · Contact`,
       description: 'Reach out via the secure contact form or connect on LinkedIn/GitHub.',
       body: renderContactPage(),
+    },
+    {
+      path: join('contact', 'thanks', 'index.html'),
+      title: `${siteTitle} · Message sent`,
+      description: 'Thanks for reaching out — your message has been sent.',
+      body: renderContactThanksPage(),
+      robots: 'noindex,follow',
     },
     {
       path: join('projects', 'index.html'),

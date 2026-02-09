@@ -1,7 +1,13 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { DEFAULT_CONTACT_COPY, DEFAULT_CONTACT_LINKS, renderContactPage } = require('../src/contact.js');
+const {
+  DEFAULT_CONTACT_COPY,
+  DEFAULT_CONTACT_LINKS,
+  DEFAULT_CONTACT_THANKS_COPY,
+  renderContactPage,
+  renderContactThanksPage,
+} = require('../src/contact.js');
 
 test('contact page renders form with Netlify honeypot spam protection', () => {
   const page = renderContactPage();
@@ -13,6 +19,7 @@ test('contact page renders form with Netlify honeypot spam protection', () => {
   assert.match(page, /name="bot-field"/);
   assert.match(page, /name="email" type="email"/);
   assert.match(page, /name="message"/);
+  assert.match(page, /action="\/contact\/thanks\/"/);
   assert.match(page, /data-analytics-event="contact_form_submit"/);
 });
 
@@ -31,4 +38,15 @@ test('contact page renders default social links and allows overrides', () => {
 
   const customized = renderContactPage({ links: { github: 'https://example.com' } });
   assert.match(customized, /https:\/\/example\.com/);
+});
+
+test('contact thanks page renders confirmation copy and CTA', () => {
+  const thanks = renderContactThanksPage();
+
+  assert.match(thanks, /data-contact-thanks/);
+  assert.match(thanks, new RegExp(DEFAULT_CONTACT_THANKS_COPY.heading));
+  assert.match(thanks, /data-analytics-event="contact_thanks_primary_click"/);
+
+  const customized = renderContactThanksPage({ copy: { heading: 'Custom thanks!' } });
+  assert.match(customized, /Custom thanks!/);
 });

@@ -11,6 +11,7 @@ after each iteration and it's included in prompts for context.
 - For analytics events, add `data-analytics-event` (and optional `data-analytics-prop-*`) attributes in render helpers and handle tracking centrally in `assets/analytics.js` to avoid repeating per-page listeners.
 - If delaying navigation on analytics events, include a short timeout fallback so users never get stuck when the provider script hasn't loaded yet.
 - Centralize SEO markup + sitemap/robots generation in `src/seo.js`, and resolve the canonical base URL from Netlify env vars (`SITE_URL`, `URL`, `DEPLOY_PRIME_URL`) so previews and production share correct metadata.
+- In sandboxed environments where `$HOME` is read-only, set `XDG_CONFIG_HOME` to a workspace path before invoking the Netlify CLI so it can write its config store without `EACCES` errors.
 
 ---
 
@@ -57,4 +58,14 @@ after each iteration and it's included in prompts for context.
 - Files changed: `scripts/build.mjs`, `src/seo.js`, `test/seo.test.js`
 - **Learnings:**
   - Using Netlify-provided URL env vars keeps canonical URLs and sitemaps correct across deploy previews and production.
+---
+
+## 2026-02-09 - abigaelawino-github-io-3su.15
+- Ran the full quality gate (`npm run ci`) to confirm lint/security/typecheck/tests/build/coverage all pass before release.
+- Added a `/contact/thanks/` confirmation page and wired the contact form `action` to it for a predictable post-submit UX.
+- Verified the static dev server redirects local POSTs to `/contact/` over to the thanks page (mirrors the Netlify Forms flow for quick smoke checks).
+- Files changed: `src/contact.js`, `src/index.js`, `src/seo.js`, `scripts/build.mjs`, `test/contact.test.js`, `.ralph-tui/progress.md`
+- **Learnings:**
+  - A dedicated thanks page + explicit form `action` makes Netlify form submissions easier to validate and avoids “POST stays on same page” ambiguity.
+  - Netlify CLI expects to write to the XDG config dir; sandboxed homes require `XDG_CONFIG_HOME` to be set to a writable workspace path.
 ---
