@@ -1,0 +1,26 @@
+.page-content h1 {
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.page-content p {
+  margin-bottom: 2rem;
+}
+
+.page-content p:last-child {
+  margin-bottom: 1rem;
+}
+
+.page-content .links {
+  margin-bottom: 1rem;
+}
+
+.page-content .links a {
+  margin: 0 0.5rem;
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.page-content .links a:hover {
+  text-decoration: underline;
+}
