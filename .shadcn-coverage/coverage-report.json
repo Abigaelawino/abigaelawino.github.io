@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-13T20:07:14.351Z",
+  "timestamp": "2026-02-13T20:44:55.914Z",
   "components": {
     "accordion": {
       "exists": false,
@@ -652,7 +652,6 @@
     }
   },
   "performance": {
-    "error": "Command failed: npm run build 2>&1",
     "buildTime": null,
     "bundleSize": null,
     "largestAssets": [],
