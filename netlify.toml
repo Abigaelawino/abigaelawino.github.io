@@ -4,10 +4,23 @@
 
 [build.environment]
   NODE_ENV = "production"
+  PARALLEL_SESSIONS = "true"
+  SESSION_TIMEOUT = "300000"  # 5 minutes
 
 [context.production.environment]
   NEXT_TELEMETRY_DISABLED = "1"
   NETLIFY_NEXT_SKEW_PROTECTION = "true"
+  DEPLOYMENT_ENV = "production"
+
+[context.deploy-preview.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+  DEPLOYMENT_ENV = "preview"
+
+[context.branch-deploy.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+  DEPLOYMENT_ENV = "branch"
 
 [[headers]]
   for = "/*"
@@ -18,7 +31,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action='self';"
 
 [[headers]]
   for = "/assets/*"
@@ -41,5 +54,47 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Hub-Signature-256, X-Gub-Event"
+    Content-Type = "application/json"
+
 [dev]
   command = "netlify dev"
+
+[functions]
+  directory = "netlify/functions"
+
+# Redirects for API endpoints
+[[redirects]]
+  from = "/api/webhooks/build"
+  to = "/.netlify/functions/build-webhook"
+  status = 200
+
+[[redirects]]
+  from = "/api/webhooks/issue-verification"
+  to = "/.netlify/functions/issue-verification"
+  status = 200
+
+[[redirects]]
+  from = "/api/deployments"
+  to = "/.netlify/functions/deployment-monitoring"
+  status = 200
+
+[[redirects]]
+  from = "/api/sessions/*"
+  to = "/.netlify/functions/session-manager"
+  status = 200
+
+[[redirects]]
+  from = "/api/sessions"
+  to = "/.netlify/functions/session-manager"
+  status = 200
+
+[[redirects]]
+  from = "/api/optimize"
+  to = "/.netlify/functions/asset-optimization"
+  status = 200

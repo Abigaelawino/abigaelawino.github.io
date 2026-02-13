@@ -1,19 +1,43 @@
 {
   "version": 1,
-  "sessionId": "f32ee02f-bbb0-4f68-b9cf-0cedb5650abc",
+  "sessionId": "589458ac-8bfe-4ef5-bafe-542fce17d07a",
   "status": "running",
-  "startedAt": "2026-02-08T02:09:22.197Z",
-  "updatedAt": "2026-02-13T04:33:58.708Z",
-  "currentIteration": 3,
+  "startedAt": "2026-02-13T20:20:30.815Z",
+  "updatedAt": "2026-02-13T20:43:49.555Z",
+  "currentIteration": 0,
   "maxIterations": 10,
-  "tasksCompleted": 4,
+  "tasksCompleted": 0,
   "isPaused": false,
-  "agentPlugin": "codex",
+  "agentPlugin": "opencode",
   "trackerState": {
-    "plugin": "beads-bv",
+    "plugin": "beads",
     "epicId": "abigaelawino-github-io-3su",
-    "totalTasks": 16,
+    "totalTasks": 20,
     "tasks": [
+      {
+        "id": "abigaelawino-github-io-lc7",
+        "title": "shadcn/ui performance & render coverage",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "abigaelawino-shadcn-epic-lc7",
+        "title": "shadcn/ui performance & render coverage",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "abigaelawino-security-epic-5wy",
+        "title": "Node/Netlify security and compliance",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "abigaelawino-netlify-ops-epic-qk9",
+        "title": "Netlify infrastructure & deployment sprints",
+        "status": "open",
+        "completedInSession": false
+      },
       {
         "id": "abigaelawino-github-io-3su.16",
         "title": "Configure Netlify deployment via Next Platform Starter",
@@ -24,25 +48,25 @@
         "id": "abigaelawino-github-io-3su.15",
         "title": "Launch readiness validation and release",
         "status": "completed",
-        "completedInSession": true
+        "completedInSession": false
       },
       {
         "id": "abigaelawino-github-io-3su.14",
         "title": "Author and publish at least 3 polished case studies",
-        "status": "open",
+        "status": "completed",
         "completedInSession": false
       },
       {
         "id": "abigaelawino-github-io-3su.13",
         "title": "Performance and accessibility hardening pass",
         "status": "completed",
-        "completedInSession": true
+        "completedInSession": false
       },
       {
         "id": "abigaelawino-github-io-3su.12",
         "title": "Implement SEO and social metadata",
         "status": "completed",
-        "completedInSession": true
+        "completedInSession": false
       },
       {
         "id": "abigaelawino-github-io-3su.9",
@@ -90,12 +114,12 @@
         "id": "abigaelawino-github-io-3su.11",
         "title": "Add privacy-friendly analytics tracking",
         "status": "completed",
-        "completedInSession": true
+        "completedInSession": false
       },
       {
         "id": "abigaelawino-github-io-3su.10",
         "title": "Add resume PDF download and web summary",
-        "status": "in_progress",
+        "status": "completed",
         "completedInSession": false
       },
       {
@@ -112,58 +136,7 @@
       }
     ]
   },
-  "iterations": [
-    {
-      "iteration": 1,
-      "status": "completed",
-      "taskId": "abigaelawino-github-io-3su.13",
-      "taskTitle": "Performance and accessibility hardening pass",
-      "taskCompleted": false,
-      "durationMs": 114232,
-      "startedAt": "2026-02-09T06:12:16.958Z",
-      "endedAt": "2026-02-09T06:14:11.190Z"
-    },
-    {
-      "iteration": 1,
-      "status": "completed",
-      "taskId": "abigaelawino-github-io-3su.13",
-      "taskTitle": "Performance and accessibility hardening pass",
-      "taskCompleted": true,
-      "durationMs": 489760,
-      "startedAt": "2026-02-09T06:15:40.774Z",
-      "endedAt": "2026-02-09T06:23:50.534Z"
-    },
-    {
-      "iteration": 1,
-      "status": "completed",
-      "taskId": "abigaelawino-github-io-3su.11",
-      "taskTitle": "Add privacy-friendly analytics tracking",
-      "taskCompleted": true,
-      "durationMs": 183856,
-      "startedAt": "2026-02-09T06:33:12.181Z",
-      "endedAt": "2026-02-09T06:36:16.037Z"
-    },
-    {
-      "iteration": 2,
-      "status": "completed",
-      "taskId": "abigaelawino-github-io-3su.12",
-      "taskTitle": "Implement SEO and social metadata",
-      "taskCompleted": true,
-      "durationMs": 313695,
-      "startedAt": "2026-02-09T06:36:19.923Z",
-      "endedAt": "2026-02-09T06:41:33.618Z"
-    },
-    {
-      "iteration": 3,
-      "status": "completed",
-      "taskId": "abigaelawino-github-io-3su.15",
-      "taskTitle": "Launch readiness validation and release",
-      "taskCompleted": true,
-      "durationMs": 771560,
-      "startedAt": "2026-02-09T06:41:37.455Z",
-      "endedAt": "2026-02-09T06:54:29.015Z"
-    }
-  ],
+  "iterations": [],
   "skippedTaskIds": [],
   "cwd": "/home/nick/Projects/abigaelawino.github.io",
   "activeTaskIds": [],
