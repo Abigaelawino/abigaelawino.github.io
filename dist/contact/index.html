@@ -24,10 +24,11 @@
     <meta name="twitter:description" content="Reach out via the secure contact form or connect on LinkedIn/GitHub." />
     <meta name="twitter:image" content="https://abigaelawino.github.io/assets/og.png" />
     <meta name="twitter:image:alt" content="Abigael Awino Portfolio — Reach out via the secure contact form or connect on LinkedIn/GitHub." />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self';">
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
     
-    <script src="/assets/analytics.js" defer></script>
+    <script src="/assets/analytics.js" defer nonce="Shd2UbGPjaQcY0RJF/htzg=="></script>
   </head>
   <body>
     <div class="shell">
@@ -107,10 +108,18 @@
           data-analytics-event="contact_form_submit"
         >
           <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="timestamp" value="" data-contact-timestamp />
+          <input type="hidden" name="form-fingerprint" value="" data-contact-fingerprint />
           <div class="contact-form__honeypot" aria-hidden="true">
             <label>
-              Don’t fill this out if you’re human:
+              Don't fill this out if you're human:
               <input name="bot-field" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="contact-form__honeypot" aria-hidden="true">
+            <label>
+              Website (leave blank):
+              <input name="website-field" tabindex="-1" autocomplete="off" />
             </label>
           </div>
           <div class="contact-form__field">

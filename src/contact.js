@@ -128,10 +128,18 @@ function renderContactPage(options = {}) {
           data-analytics-event="contact_form_submit"
         >
           <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="timestamp" value="" data-contact-timestamp />
+          <input type="hidden" name="form-fingerprint" value="" data-contact-fingerprint />
           <div class="contact-form__honeypot" aria-hidden="true">
             <label>
-              Don’t fill this out if you’re human:
+              Don't fill this out if you're human:
               <input name="bot-field" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="contact-form__honeypot" aria-hidden="true">
+            <label>
+              Website (leave blank):
+              <input name="website-field" tabindex="-1" autocomplete="off" />
             </label>
           </div>
           <div class="contact-form__field">

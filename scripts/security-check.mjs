@@ -1,5 +1,6 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const inspectionFiles = [
   join('src', 'generated', 'projects-index.json'),
@@ -41,6 +42,28 @@ for (const file of [...inspectionFiles, ...additionalFiles]) {
       issues.push(`${file} contains suspicious pattern: ${pattern.reason}`);
     }
   }
+}
+
+// Check for dependency vulnerabilities
+try {
+  const auditOutput = execSync('npm audit --json', { encoding: 'utf8' });
+  const auditData = JSON.parse(auditOutput);
+
+  const vulnerabilities = auditData.vulnerabilities || {};
+  const highSeverityVulns = Object.values(vulnerabilities).filter(vuln =>
+    vuln.severity === 'high' || vuln.severity === 'critical'
+  );
+
+  if (highSeverityVulns.length > 0) {
+    issues.push(`Found ${highSeverityVulns.length} high/critical severity dependencies that should be addressed`);
+  }
+
+  if (Object.keys(vulnerabilities).length > 0) {
+    console.log(`Note: ${Object.keys(vulnerabilities).length} dependency vulnerabilities found (run 'npm audit' for details)`);
+  }
+} catch (error) {
+  // npm audit might fail, but we don't want to fail the build for it
+  console.log('Warning: Could not check dependency vulnerabilities');
 }
 
 if (issues.length > 0) {

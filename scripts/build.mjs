@@ -160,9 +160,22 @@ function buildDefaultOgPng({ width = 1200, height = 630 } = {}) {
   ]);
 }
 
+function generateNonce() {
+  const array = new Uint8Array(16);
+  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+    crypto.getRandomValues(array);
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      array[i] = Math.floor(Math.random() * 256);
+    }
+  }
+  return Buffer.from(array).toString('base64');
+}
+
 function buildHtmlDocument({ title, description, body, pathname = '/', robots }) {
   const resolvedTitle = escapeHtml(title);
   const siteTitle = getSiteTitle();
+  const nonce = generateNonce();
   const seoHead = buildSeoHead({
     siteUrl: resolveSiteUrl(process.env),
     siteName: siteTitle,
@@ -175,7 +188,7 @@ function buildHtmlDocument({ title, description, body, pathname = '/', robots })
   });
   const analyticsSnippet = ANALYTICS_DOMAIN
     ? `
-    <script>
+    <script nonce="${nonce}">
       (function () {
         var plausibleDomain = ${escapeScriptString(ANALYTICS_DOMAIN)};
         var plausibleHost = ${escapeScriptString(ANALYTICS_HOST)};
@@ -219,12 +232,17 @@ function buildHtmlDocument({ title, description, body, pathname = '/', robots })
         var script = document.createElement('script');
         script.defer = true;
         script.setAttribute('data-domain', plausibleDomain);
+        script.setAttribute('nonce', '${nonce}');
         script.src = plausibleHost.replace(/\\/$/, '') + '/js/script.js';
         document.head.appendChild(script);
       })();
     </script>
     `.trim()
     : '';
+
+  const cspMetaTag = ANALYTICS_DOMAIN
+    ? `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${nonce}' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action 'self';">`
+    : `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self';">`;
 
   return `
 <!doctype html>
@@ -234,10 +252,11 @@ function buildHtmlDocument({ title, description, body, pathname = '/', robots })
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${resolvedTitle}</title>
     ${seoHead}
+    ${cspMetaTag}
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
     ${analyticsSnippet}
-    <script src="/assets/analytics.js" defer></script>
+    <script src="/assets/analytics.js" defer nonce="${nonce}"></script>
   </head>
   <body>
     <div class="shell">

@@ -175,4 +175,72 @@
 
     trackEvent(eventName, element);
   });
+
+  // Form security enhancements
+  const generateFingerprint = () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillText('Security fingerprint', 2, 2);
+    const canvasFingerprint = canvas.toDataURL().slice(-50);
+    
+    const screenFingerprint = `${screen.width}x${screen.height}x${screen.colorDepth}`;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const language = navigator.language;
+    
+    return btoa(`${canvasFingerprint}|${screenFingerprint}|${timezone}|${language}`).slice(0, 32);
+  };
+
+  const enhanceContactForm = () => {
+    const timestampField = document.querySelector('[data-contact-timestamp]');
+    const fingerprintField = document.querySelector('[data-contact-fingerprint]');
+    const contactForm = document.querySelector('[data-contact-form]');
+
+    if (timestampField && fingerprintField && contactForm) {
+      // Set timestamp when form is interacted with
+      const setTimestamp = () => {
+        if (!timestampField.value) {
+          timestampField.value = Date.now().toString();
+        }
+      };
+
+      // Generate fingerprint
+      fingerprintField.value = generateFingerprint();
+
+      // Set timestamp on first interaction
+      contactForm.addEventListener('focus', setTimestamp, { once: true });
+      contactForm.addEventListener('input', setTimestamp, { once: true });
+
+      // Validate form timing before submit
+      contactForm.addEventListener('submit', (event) => {
+        const submitTime = Date.now();
+        const formTime = parseInt(timestampField.value, 10) || 0;
+        const timeDiff = submitTime - formTime;
+
+        // Prevent submissions made too quickly (< 3 seconds) or too slowly (> 1 hour)
+        if (timeDiff < 3000 || timeDiff > 3600000) {
+          event.preventDefault();
+          alert('Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.');
+          return;
+        }
+
+        // Check for honeypot fields
+        const botField = contactForm.querySelector('input[name="bot-field"]');
+        const websiteField = contactForm.querySelector('input[name="website-field"]');
+        
+        if ((botField && botField.value.trim()) || (websiteField && websiteField.value.trim())) {
+          event.preventDefault();
+          return; // Silently block suspected bots
+        }
+      });
+    }
+  };
+
+  // Initialize form security when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceContactForm);
+  } else {
+    enhanceContactForm();
+  }
 })();
