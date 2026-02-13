@@ -74,3 +74,54 @@ test('buildSeoHead uses defaults for missing OG image', () => {
   assert.match(head, /og:image" content="https:\/\/example\.com\/assets\/og\.png"/);
   assert.match(head, /twitter:image:alt/);
 });
+
+test('normalizePathname handles pathname without leading slash', () => {
+  const { toAbsoluteUrl } = require('../src/seo.js');
+  const absolute = toAbsoluteUrl('https://example.com', 'about');
+  assert.equal(absolute, 'https://example.com/about');
+});
+
+test('normalizePathname returns slash for empty or non-string input', () => {
+  const { toAbsoluteUrl } = require('../src/seo.js');
+  assert.equal(toAbsoluteUrl('https://example.com', ''), 'https://example.com/');
+  assert.equal(toAbsoluteUrl('https://example.com', null), 'https://example.com/');
+  assert.equal(toAbsoluteUrl('https://example.com', undefined), 'https://example.com/');
+});
+
+test('normalizePathname handles path already starting with slash', () => {
+  const { toAbsoluteUrl } = require('../src/seo.js');
+  assert.equal(toAbsoluteUrl('https://example.com', '/about'), 'https://example.com/about');
+});
+
+test('normalizePathname strips query and hash from path', () => {
+  const { toAbsoluteUrl } = require('../src/seo.js');
+  assert.equal(toAbsoluteUrl('https://example.com', '/path?foo=bar'), 'https://example.com/path');
+  assert.equal(toAbsoluteUrl('https://example.com', '/path#section'), 'https://example.com/path');
+});
+
+test('buildSitemapXml handles non-array paths', () => {
+  const xml = buildSitemapXml({ siteUrl: 'https://example.com', paths: null, lastmod: '2026-02-09' });
+  assert.match(xml, /<urlset/);
+  assert.doesNotMatch(xml, /<loc>/);
+});
+
+test('buildSitemapXml handles missing lastmod', () => {
+  const xml = buildSitemapXml({ siteUrl: 'https://example.com', paths: ['/'] });
+  assert.match(xml, /<loc>https:\/\/example\.com\/<\/loc><\/url>/);
+  assert.doesNotMatch(xml, /<lastmod>/);
+});
+
+test('resolveSiteUrl falls back through env vars', () => {
+  assert.equal(
+    resolveSiteUrl({ URL: 'https://fallback.com', DEPLOY_PRIME_URL: 'https://deploy.com' }),
+    'https://fallback.com',
+  );
+  assert.equal(
+    resolveSiteUrl({ DEPLOY_PRIME_URL: 'https://deploy.com' }),
+    'https://deploy.com',
+  );
+  assert.equal(
+    resolveSiteUrl({ DEPLOY_URL: 'https://deploy-url.com/' }),
+    'https://deploy-url.com',
+  );
+});

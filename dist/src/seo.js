@@ -45,7 +45,7 @@ function normalizePathname(pathname) {
   }
 
   const withSlash = raw.startsWith('/') ? raw : `/${raw}`;
-  const withoutQuery = withSlash.split('?')[0]?.split('#')[0] ?? withSlash;
+  const withoutQuery = withSlash.split('?')[0].split('#')[0];
   return withoutQuery.length === 0 ? '/' : withoutQuery;
 }
 

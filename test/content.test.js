@@ -217,3 +217,48 @@ test('schema validation reports missing and invalid fields', () => {
     /must be a non-empty string array/,
   );
 });
+
+test('schema validation rejects whitespace-only string', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'content-whitespace-'));
+  mkdirSync(join(dir, 'blog'), { recursive: true });
+
+  writeFileSync(
+    join(dir, 'blog', 'whitespace-title.mdx'),
+    ['---', 'title: "   "', 'date: 2026-01-01', 'tags: [ml]', 'summary: ok', 'readingTime: 7', '---', 'Body'].join('\n'),
+  );
+
+  assert.throws(
+    () =>
+      loadCollectionEntries(join(dir, 'blog'), {
+        title: 'string',
+        date: 'date',
+        tags: 'string[]',
+        summary: 'string',
+        readingTime: 'number',
+      }),
+    /must be a non-empty string/,
+  );
+});
+
+test('loadCollectionEntries skips non-mdx files', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'content-skip-'));
+  mkdirSync(join(dir, 'blog'), { recursive: true });
+
+  writeFileSync(join(dir, 'blog', 'readme.txt'), 'ignore me');
+  writeFileSync(join(dir, 'blog', 'data.json'), '{"ignore": true}');
+  writeFileSync(
+    join(dir, 'blog', 'valid.mdx'),
+    ['---', 'title: Valid', 'date: 2026-01-01', 'tags: [test]', 'summary: ok', 'readingTime: 5', '---', 'Body'].join('\n'),
+  );
+
+  const entries = loadCollectionEntries(join(dir, 'blog'), {
+    title: 'string',
+    date: 'date',
+    tags: 'string[]',
+    summary: 'string',
+    readingTime: 'number',
+  });
+
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].slug, 'valid');
+});

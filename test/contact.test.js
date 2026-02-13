@@ -50,3 +50,10 @@ test('contact thanks page renders confirmation copy and CTA', () => {
   const customized = renderContactThanksPage({ copy: { heading: 'Custom thanks!' } });
   assert.match(customized, /Custom thanks!/);
 });
+
+test('contact page renders nothing when all links are empty', () => {
+  const page = renderContactPage({ links: { github: '', linkedin: '' } });
+  assert.doesNotMatch(page, /<a class="contact-links__link"/);
+  assert.doesNotMatch(page, /aria-label="Social links"/);
+  assert.match(page, /contact-page/);
+});

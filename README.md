@@ -6,8 +6,8 @@ This repository tracks the Netlify Next Platform Starter-based portfolio site ou
 
 - `npm run build` generates the `dist/` directory that mirrors the template's production output.
 - `npm run deploy` runs the build and then uses the already-installed Netlify CLI to deploy `dist/` to the configured Netlify site (`.netlify/state.json` contains the site ID).
--  - Netlify builds (via `netlify.toml`) rely on `npm run build` and publish from `dist/`.
--  - The CLI login is already established per the user's note; rerun `netlify status` if the session expires.
+- Netlify builds (via `netlify.toml`) now publish `dist/`, matching the stock Next Platform Starter output so both CLI deploys and Netlify’s GitHub-triggered builds resolve the same folder.
+- The CLI login is already established per the user's note; rerun `netlify status` if the session expires.
 - `npm run dev` runs `scripts/dev.mjs`, which rebuilds whenever `src`, `content`, `assets`, or `scripts` change and starts the lightweight dev server at `http://localhost:3000`. That mirrors the stock `netlify dev`/Next.js dev workflow so tmux or helper sessions can hot-reload changes while keeping generated assets in `dist/`.
 - `npm run start` launches `scripts/dev-server.mjs`, serving the built `dist/` folder so `netlify dev` and CLI helpers can rely on the same static output path as production.
 
