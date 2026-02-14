@@ -1,11 +1,11 @@
 {
   "total": 6,
-  "above90": 5,
-  "below90": 1,
+  "above90": 6,
+  "below90": 0,
   "averageScores": {
     "performance": 100,
     "accessibility": 100,
     "bestPractices": 100,
-    "seo": 96
+    "seo": 100
   }
 }

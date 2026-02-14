@@ -89,7 +89,7 @@ function analyzeSEO(html, content) {
   }
 
   // H1 heading
-  const h1Match = html.match(/<h1[^>]*>(.*?)<\/h1>/i);
+  const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
   if (!h1Match) {
     issues.push('missing_h1');
     score -= issueWeights.missing_h1;

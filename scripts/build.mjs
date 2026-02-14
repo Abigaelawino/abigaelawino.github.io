@@ -606,7 +606,8 @@ writeFileSync(
   join('dist', 'resume', 'index.html'),
   buildHtmlDocument({
     title: `Resume · ${getSiteTitle()}`,
-    description: 'Download a PDF resume and view a concise web summary.',
+    description:
+      "Download Abigael Awino's professional resume and view a concise web summary of experience, skills, and qualifications in data science and machine learning.",
     body: renderResumePage(),
     pathname: '/resume/',
   })
