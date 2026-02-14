@@ -32,3 +32,176 @@ The retail organization was struggling with manual forecasting processes that to
 ## Organizational Impact
 
 Beyond the accuracy improvements, the dashboard transformed how the organization approaches sales planning. Regional teams now collaborate using shared assumptions, finance has better visibility into expected performance, and promotional planning is more data-driven. The system created a single source of truth that reduced conflicts between departments and improved overall planning efficiency.
+
+## Summary
+
+**Problem**: Manual sales forecasting was time-consuming, inconsistent, and unable to incorporate complex factors like promotions and local events, leading to inventory misallocation and staffing issues.
+
+**Business Context**: Retail chain with 180 locations needed to improve forecasting accuracy to optimize inventory levels, reduce stockouts, and improve labor scheduling while supporting rapid expansion plans.
+
+**Success Metric**: 35% reduction in forecast error (MAPE) and 80% reduction in forecasting time within 3 months of deployment.
+
+## Data
+
+### Data Sources
+
+- **POS Systems**: Daily transaction data from all 180 retail locations including sales, returns, and customer counts
+- **Promotional Calendars**: Marketing campaign schedules, discount levels, and promotional types by store
+- **Inventory Systems**: Stock levels, reorder points, and supply chain constraints
+- **External Factors**: Local economic indicators, weather data, competitor activities, and local events
+- **Store Metadata**: Location demographics, store size, staffing levels, and operating hours
+
+### Data Volume & Processing
+
+- Total transaction records: 50M+ daily transactions over 3 years
+- Store locations: 180 retail locations across 12 regions
+- Time granularity: Daily forecasts with weekly and monthly aggregations
+- Processing pipeline: 4-hour window for complete forecast generation
+- Historical baseline: 3 years of historical data for seasonal pattern identification
+
+### Data Quality & Cleaning
+
+- Implemented automated detection of late-arriving sales data
+- Handled store reclassifications and format changes over time
+- Corrected system outage periods using interpolation and similar store patterns
+- Standardized promotional categorization across different marketing systems
+- Outlier detection for unusual sales spikes and system errors
+
+### Data Caveats
+
+- Store format changes impacted historical comparability
+- COVID-19 lockdown periods required special treatment and baseline adjustment
+- Regional variations in promotional effectiveness needed local model tuning
+- Weather impacts varied significantly by store location and product category
+- New store openings had limited historical data for model training
+
+## Methods
+
+### Model Architecture
+
+1. **Prophet Base Model**: Facebook Prophet for capturing seasonal patterns and holiday effects
+2. **Gradient Boosting Enhancement**: LightGBM for modeling promotional impact and external factors
+3. **Ensemble Approach**: Weighted combination optimizing for different error metrics
+4. **Hierarchical Modeling**: Store-level forecasts aggregated to regional and total levels
+5. **Anomaly Detection**: Isolation forests and statistical process control charts
+
+### Feature Engineering
+
+- **Temporal Features**: Day of week, month, holiday indicators, seasonal cycles
+- **Promotional Features**: Discount levels, promotion types, marketing spend, competitor promotions
+- **Lag Variables**: Previous day/week/month sales, moving averages, trend indicators
+- **External Factors**: Weather conditions, local events, economic indicators, school schedules
+- **Store Characteristics**: Location demographics, store size, competitive density, accessibility
+
+### Model Training & Evaluation
+
+- **Cross-Validation**: Rolling window approach to prevent look-ahead bias
+- **Error Metrics**: MAPE, SMAPE, RMSE, and business-weighted error metrics
+- **Backtesting**: 12-month holdout period for comprehensive performance evaluation
+- **Model Selection**: Automated hyperparameter tuning with Bayesian optimization
+- **Validation**: Business stakeholder review of forecast reasonableness and usability
+
+## Results
+
+### Quantitative Performance
+
+| Metric               | Previous Method | New Ensemble System | Improvement |
+| -------------------- | --------------- | ------------------- | ----------- |
+| Weekly MAPE          | 14.8%           | 9.6%                | -35%        |
+| Forecast Preparation | 3 days          | 4 hours             | -89%        |
+| 95% CI Coverage      | 82%             | 95%                 | +16%        |
+| Anomaly Detection    | Manual          | Automated           | +100%       |
+| User Adoption        | 45%             | 92%                 | +104%       |
+
+### Business Impact
+
+- **Inventory Optimization**: Reduced stockouts by 34% and overstock situations by 28%
+- **Labor Cost Savings**: $2.1M annual savings through optimized staffing schedules
+- **Promotional ROI**: Identified $4.2M in promotional inefficiencies through better measurement
+- **Planning Efficiency**: Finance team gained 2 extra working days per week for analysis
+- **Decision Speed**: Reduced forecast review meeting time from 4 hours to 1 hour
+
+### Visualizations
+
+The dashboard provided comprehensive visual analytics including:
+
+- **Forecast Confidence Bands**: Interactive charts showing prediction intervals by store and region
+- **Performance Heatmaps**: Geographic visualization of forecast accuracy by location
+- **Promotional Impact Analysis**: Before/after comparison of promotional effectiveness
+- **Anomaly Detection Dashboard**: Real-time alerts for unusual sales patterns requiring investigation
+- **Trend Analysis**: Interactive exploration of seasonal patterns and long-term trends
+- **What-If Scenarios**: Simulation tools for promotional planning and inventory decisions
+
+## Reproducibility
+
+### Code Repository
+
+- **Main Repository**: https://github.com/abigaelawino/retail-forecast-dashboard
+- **Data Pipeline**: SQL and Python scripts for automated ETL and feature engineering
+- **Model Training**: Jupyter notebooks with reproducible training procedures
+- **Dashboard Code**: Power BI templates and custom DAX measures for interactive visualizations
+
+### Environment Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/abigaelawino/retail-forecast-dashboard
+cd retail-forecast-dashboard
+
+# Set up Python environment
+conda create -n retail_forecast python=3.9
+conda activate retail_forecast
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run data processing pipeline
+python scripts/etl_pipeline.py --config configs/production.yaml
+
+# Train forecasting models
+python scripts/train_models.py --cv-folds 5 --optimize-ensemble
+
+# Generate forecasts
+python scripts/generate_forecasts.py --horizon 13 weeks
+```
+
+### Data Requirements
+
+- Sample dataset provided with 20 synthetic stores and 2 years of history
+- Production setup requires POS export in specified format
+- Database schema documentation for connecting to retail systems
+- API documentation for real-time data integration
+- Configuration files for customizing model parameters by region
+
+## Reflection
+
+### Key Learnings
+
+- **Business Usability Over Accuracy**: Simpler ensemble approach achieved better adoption than more complex models
+- **Explainability Critical**: Stakeholders needed to understand forecast drivers for decision-making
+- **Hierarchical Consistency**: Store-level forecasts needed to align with regional and total expectations
+- **Change Management**: User training and support were as important as technical accuracy
+
+### Technical Challenges
+
+- **Data Quality at Scale**: Managing data quality across 180 locations with different systems and update frequencies
+- **Seasonal Pattern Changes**: COVID-19 disrupted traditional seasonal patterns requiring model adaptation
+- **Computational Performance**: Generating forecasts for 180 stores with multiple models required optimization
+- **Integration Complexity**: Connecting to multiple POS systems with different data formats and reliability
+
+### Future Improvements
+
+1. **Price Elasticity Modeling**: Incorporate price changes and competitor pricing impacts
+2. **Weather Integration**: Advanced weather pattern analysis for seasonal product categories
+3. **Scenario Planning**: What-if analysis for expansion plans and new store openings
+4. **Real-time Adjustments**: Move from daily to intra-day forecasting for operational decisions
+5. **Multi-Objective Optimization**: Balance inventory costs, service levels, and labor efficiency
+
+### Trade-offs Made
+
+- Chose Prophet + LightGBM ensemble over deep learning for better interpretability
+- Implemented daily updates instead of real-time for system stability and reduced complexity
+- Used historical seasonal patterns despite COVID disruptions for business continuity
+- Prioritized overall accuracy over perfect accuracy for individual high-traffic locations
+
+The retail forecasting project demonstrated how combining machine learning with thoughtful business process design can transform planning operations, creating significant operational efficiencies while improving decision quality across the organization.

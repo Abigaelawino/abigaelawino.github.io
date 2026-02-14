@@ -32,3 +32,176 @@ The enterprise support team was struggling with increasing ticket volumes (25% y
 ## Impact Beyond Metrics
 
 The solution transformed how the support team operates, enabling junior agents to handle routine categorization while senior agents focus on complex technical issues. This improved team morale and reduced burnout while creating career development pathways for skill advancement.
+
+## Summary
+
+**Problem**: Manual ticket triage was creating bottlenecks and delaying customer support response times, with experienced agents spending most of their time on basic categorization instead of problem-solving.
+
+**Business Context**: Enterprise software company with 10,000+ daily support tickets needed to improve triage efficiency while maintaining SLA compliance and customer satisfaction.
+
+**Success Metric**: 70% reduction in triage time and 90% first-pass routing accuracy within 3 months of deployment.
+
+## Data
+
+### Data Sources
+
+- **Ticket System**: 3 years of historical support tickets including subject, description, and metadata
+- **Resolution Data**: Final categorization, urgency levels, resolution times, and agent assignments
+- **Customer Information**: Customer tier, contract value, and historical support patterns
+- **Knowledge Base**: Resolution articles, frequently asked questions, and technical documentation
+- **Agent Feedback**: Override decisions and correction reasons for model training
+
+### Data Volume & Processing
+
+- Total ticket records: 150,000+ labeled support tickets
+- Time period: 3 years of historical operations data
+- Categories: 25 hierarchical support categories
+- Urgency levels: 5 priority levels from P1 (critical) to P5 (low)
+- Daily volume: 10,000+ tickets requiring classification
+
+### Data Quality & Cleaning
+
+- Implemented PII redaction using spaCy Named Entity Recognition models
+- Performed text normalization including contractions expansion and punctuation standardization
+- Created hierarchical taxonomy through iterative stakeholder validation sessions
+- Handled multilingual content with automatic language detection and translation
+- Addressed class imbalance through stratified sampling and weighted loss functions
+
+### Data Caveats
+
+- Label quality varied by agent experience and time pressure
+- New product releases introduced categories with limited training data
+- Customer language patterns evolved with product changes and market conditions
+- Support processes changed during the 3-year period requiring careful temporal validation
+- Emergency situations (outages, security issues) had different linguistic patterns
+
+## Methods
+
+### Model Architecture
+
+1. **Base Transformer**: DistilBERT-base-uncased pre-trained model for efficient inference
+2. **Multi-Task Learning**: Combined intent classification and urgency prediction heads
+3. **Fine-Tuning**: Custom training on labeled support ticket corpus with domain-specific vocabulary
+4. **Probability Calibration**: Platt scaling for well-calibrated confidence scores
+5. **Hybrid Safeguards**: Rule-based overrides for critical keywords and SLA violations
+
+### Feature Engineering
+
+- **Text Features**: BERT embeddings, TF-IDF vectors, n-gram patterns
+- **Metadata Features**: Customer tier, subscription level, historical interaction patterns
+- **Temporal Features**: Time of day, day of week, seasonal patterns, holiday effects
+- **Urgency Indicators**: Keywords for critical issues, SLA proximity, customer tier
+- **Context Features**: Previous tickets from same customer, recent product changes
+
+### Model Training & Evaluation
+
+- **Multi-Label Classification**: Separate heads for category and urgency prediction
+- **Cross-Validation**: Time-aware splits to prevent data leakage
+- **Evaluation Metrics**: Accuracy, F1-score, precision-recall curves, calibration metrics
+- **A/B Testing**: Online evaluation comparing model performance against human triage
+- **Error Analysis**: Detailed analysis of misclassifications by category and urgency level
+
+## Results
+
+### Quantitative Performance
+
+| Metric                    | Manual Process | Automated System | Improvement |
+| ------------------------- | -------------- | ---------------- | ----------- |
+| First-Pass Accuracy       | 64%            | 87%              | +36%        |
+| Median Triage Time        | 22 minutes     | 6 minutes        | -73%        |
+| Critical Ticket Detection | 78%            | 95%              | +22%        |
+| False Positive Rate       | 18%            | 10%              | -44%        |
+| Agent Hours Saved/Month   | 0              | 180              | +100%       |
+
+### Business Impact
+
+- **Response Time Improvement**: Average first response time reduced by 65%
+- **Customer Satisfaction**: CSAT scores increased by 15 percentage points
+- **Agent Productivity**: Senior agents focused 80% more time on complex problem-solving
+- **Cost Savings**: $1.2M annual savings through reduced manual triage effort
+- **SLA Compliance**: Improved from 78% to 94% compliance with response time SLAs
+
+### Visualizations
+
+The system included comprehensive monitoring and analytics dashboards:
+
+- **Real-time Performance Dashboard**: Live accuracy and latency metrics with alerting
+- **Category Confusion Matrix**: Interactive heat map showing classification errors by category
+- **Urgency Calibration Charts**: Probability calibration curves for different urgency levels
+- **Agent Feedback Analytics**: Visualization of override patterns and improvement opportunities
+- **Model Drift Monitoring**: Performance degradation detection over time with automated alerts
+- **Knowledge Gap Analysis**: Identification of emerging topics requiring new training data
+
+## Reproducibility
+
+### Code Repository
+
+- **Main Repository**: https://github.com/abigaelawino/ticket-nlp-triage
+- **Model Training**: Complete training pipeline with hyperparameter tuning and evaluation
+- **Inference Service**: FastAPI application with batch processing and real-time endpoints
+- **Data Processing**: Comprehensive text preprocessing and feature engineering pipelines
+- **Monitoring Scripts**: Real-time performance tracking and drift detection
+
+### Environment Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/abigaelawino/ticket-nlp-triage
+cd ticket-nlp-triage
+
+# Set up Docker environment
+docker-compose up -d
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Download pre-trained models
+python scripts/download_models.py
+
+# Train custom model on labeled data
+python scripts/train_model.py --data-path data/labeled_tickets.csv
+
+# Run inference service
+uvicorn app:app --host 0.0.0.0 --port 8000
+```
+
+### Data Requirements
+
+- Sample dataset provided with 50,000 synthetic support tickets
+- Production setup requires ticket export in specified JSON format
+- Data labeling guidelines and quality assurance procedures
+- API documentation for integrating with existing ticket systems
+- Privacy compliance guidelines for handling PII and sensitive information
+
+## Reflection
+
+### Key Learnings
+
+- **Human-AI Collaboration**: Active learning with agent feedback was critical for continuous improvement
+- **Explainability Essential**: Agents needed to understand model decisions for trust and adoption
+- **Context Matters**: Customer history and product context significantly improved classification accuracy
+- **Operational Integration**: Model performance depended on seamless integration with existing workflows
+
+### Technical Challenges
+
+- **Concept Drift**: Customer issues evolved rapidly, requiring continuous model updates
+- **Multilingual Support**: Handling tickets in multiple languages added complexity to preprocessing
+- **Real-time Constraints**: Sub-second inference times required for high-volume ticket processing
+- **Class Imbalance**: Critical but infrequent issues required special handling and sampling strategies
+
+### Future Improvements
+
+1. **Multi-Modal Processing**: Incorporate screenshots, logs, and attachments for better context
+2. **Explainable AI**: Add attention visualization and rationale generation for agent understanding
+3. **AutoML Integration**: Automated hyperparameter tuning and model selection for continuous improvement
+4. **Cross-Lingual Transfer**: Leverage multilingual models for better support across global operations
+5. **Predictive Analytics**: Forecast ticket volumes and types for resource planning and proactive support
+
+### Trade-offs Made
+
+- Chose DistilBERT over larger BERT models for faster inference and lower computational costs
+- Implemented hybrid approach with rule-based safeguards for critical scenarios over pure ML
+- Used daily model updates instead of real-time training for system stability and reliability
+- Prioritized accuracy over model complexity to maintain interpretability and agent trust
+
+The support ticket triage project demonstrated how NLP automation can transform enterprise support operations, creating significant efficiency gains while improving customer satisfaction through faster, more accurate ticket routing and response.

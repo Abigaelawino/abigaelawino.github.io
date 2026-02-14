@@ -468,7 +468,30 @@ after each iteration and it's included in prompts for context.
   - Component classes map directly to shadcn/ui patterns: card, button, badge with variant classes
   - Responsive utilities need explicit inclusion since Tailwind isn't processed in static builds
   - Icon usage requires inline SVG for compatibility with static HTML generation
-  - The build output maintains component structure even in static form, ensuring visual consistency
-  - Accessibility features like ARIA labels and semantic HTML are preserved in static generation
+- The build output maintains component structure even in static form, ensuring visual consistency
+- Accessibility features like ARIA labels and semantic HTML are preserved in static generation
+
+---
+
+## [2026-02-14] - abigaelawino-roadmap-4a
+
+- Completed and enhanced all 5 project case studies to follow comprehensive template structure
+- Expanded 3 abbreviated case studies (customer churn, sales forecasting, NLP triage) from 30-34 lines to 180+ lines
+- Added detailed sections: Data, Methods, Results with quantitative performance, Business Impact, Visualizations, Reproducibility, and Reflection
+- Enhanced existing comprehensive case studies with missing visualizations sections
+- All case studies now demonstrate end-to-end work with business impact measurements and visualizations
+- Files changed:
+  - content/projects/customer-churn-case-study.mdx (expanded from 31 to 188 lines)
+  - content/projects/sales-forecasting-dashboard.mdx (expanded from 35 to 187 lines)
+  - content/projects/support-ticket-nlp-triage.mdx (expanded from 35 to 178 lines)
+  - content/projects/customer-segmentation-dashboard.mdx (enhanced with visualizations section)
+- **Learnings:**
+  - Patterns discovered: Comprehensive case studies require structured sections for Data, Methods, Results, Visualizations, Reproducibility, and Reflection to demonstrate end-to-end work
+  - Gotchas encountered: Abbreviated case studies (30-34 lines) lacked the depth needed to show business impact and technical sophistication
+  - Visualizations sections are critical for demonstrating data-driven insights and interactive dashboards
+  - Business impact measurements with specific metrics (revenue saved, time reduced, efficiency gained) are essential for showing value
+  - Reproducibility sections with code repositories, environment setup, and data requirements demonstrate professional development practices
+  - Reflection sections with key learnings, technical challenges, and future improvements show critical thinking and growth mindset
+  - All 5 case studies now exceed 150 lines and follow consistent comprehensive template structure
 
 ---

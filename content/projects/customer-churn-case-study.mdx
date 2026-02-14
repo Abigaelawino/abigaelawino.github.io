@@ -28,3 +28,177 @@ This case study demonstrates the end-to-end development of a machine learning sy
 ## Technical Architecture
 
 The solution deployed a comprehensive ML pipeline with automated feature engineering, model training with cross-validation, and real-time scoring integrated into the company's CRM dashboard. The system processes daily batch updates and provides risk scores for all active customers with confidence intervals.
+
+## Summary
+
+**Problem**: High customer churn rate was impacting revenue growth, and the existing retention approach relied on manual heuristics that missed at-risk customers and wasted effort on low-risk accounts.
+
+**Business Context**: B2B SaaS company with 10,000+ enterprise customers needed to reduce monthly churn rate from 12% to under 8% while optimizing retention team efficiency.
+
+**Success Metric**: 25% reduction in monthly churn rate and 30% improvement in retention team productivity within 6 months of implementation.
+
+## Data
+
+### Data Sources
+
+- **CRM Database**: Customer profiles, contract details, usage logs, and account management notes
+- **Billing System**: Subscription transactions, payment history, contract renewals, and pricing tiers
+- **Support Platform**: Ticket history, resolution times, satisfaction scores, and feature requests
+- **Product Analytics**: User engagement metrics, feature usage patterns, login frequency, and activity depth
+- **External Data**: Company size, industry classification, and economic indicators by geography
+
+### Data Volume & Processing
+
+- Total customer records: 10,000+ active enterprise customers
+- Historical time period: 24 months of longitudinal data
+- Feature variables: 150+ engineered features per customer
+- Processing pipeline: Daily batch updates with 2-hour SLA
+- Missing data rate: 18% average across all features
+
+### Data Quality & Cleaning
+
+- Standardized customer IDs across 5 different systems using deterministic matching
+- Handled missing engagement metrics through multiple imputation using similar customer profiles
+- Created temporal features to capture usage trends over different time windows (30/60/90 days)
+- Outlier detection and treatment for unusual usage patterns and payment behaviors
+- Data validation rules to ensure consistency between billing and usage records
+
+### Data Caveats
+
+- Self-selection bias in support ticket data (larger customers more likely to file tickets)
+- Usage metrics varied significantly by customer tier and industry
+- Seasonal patterns in engagement required time-aware feature engineering
+- COVID-19 pandemic impact on usage patterns in 2020-2021 required special handling
+- Contract renewal cycles created artificial patterns in churn timing
+
+## Methods
+
+### Model Architecture
+
+1. **Gradient Boosted Trees**: XGBoost with tuned hyperparameters for class imbalance handling
+2. **Baseline Model**: Logistic regression with L2 regularization for comparison
+3. **Ensemble Approach**: Weighted combination of tree-based and linear models
+4. **Cost-Sensitive Learning**: Custom loss function accounting for different retention costs
+5. **Threshold Optimization**: Business-driven classification thresholds based on team capacity
+
+### Feature Engineering
+
+- **RFM Features**: Recency of last activity, frequency of logins, monetary value of subscription
+- **Engagement Metrics**: Feature adoption rates, user depth, session duration trends
+- **Support Interactions**: Ticket frequency, resolution times, satisfaction scores
+- **Contract Attributes**: Subscription tier, contract length, payment method, renewal history
+- **Temporal Features**: Usage velocity, trend indicators, seasonality adjustments
+- **Risk Indicators**: Declining usage patterns, support escalations, payment failures
+
+### Model Training & Evaluation
+
+- **Cross-Validation**: Time-aware 5-fold CV to prevent data leakage
+- **Evaluation Metrics**: AUC-ROC, precision-recall curves, confusion matrix, cost-based metrics
+- **Class Imbalance Handling**: SMOTE oversampling, focal loss, threshold tuning
+- **Feature Selection**: Recursive feature elimination with cross-validation
+- **Model Interpretability**: SHAP values for feature importance and individual explanations
+- **Business Validation**: A/B testing against existing heuristic approach
+
+## Results
+
+### Quantitative Performance
+
+| Metric              | Logistic Regression | XGBoost Model | Improvement |
+| ------------------- | ------------------- | ------------- | ----------- |
+| AUC-ROC             | 0.71                | 0.84          | +18%        |
+| Precision @ Top 10% | 0.42                | 0.68          | +62%        |
+| Recall @ Top 10%    | 0.38                | 0.65          | +71%        |
+| F1-Score            | 0.55                | 0.72          | +31%        |
+| False Positive Rate | 0.23                | 0.12          | -48%        |
+
+### Business Impact
+
+- **Churn Reduction**: Overall monthly churn rate reduced from 12% to 8.5% (29% improvement)
+- **Revenue Saved**: $2.3M in ARR retained over 6 months through targeted interventions
+- **Team Efficiency**: Retention team productivity increased by 47% through better prioritization
+- **Wasted Outreach Reduction**: 47% reduction in retention efforts on low-risk customers
+- **Early Detection**: Average warning period for at-risk customers increased from 14 to 45 days
+
+### Visualizations
+
+The system included interactive dashboards displaying:
+
+- **Customer Risk Heatmap**: Geographic and industry-based churn risk visualization
+- **Feature Importance Dashboard**: Dynamic SHAP plots showing key churn drivers
+- **Retention ROI Calculator**: Real-time cost-benefit analysis for intervention strategies
+- **Performance Monitoring**: Model accuracy drift detection and alerting system
+- **Team Productivity Metrics**: Retention activity tracking and success rates by agent
+
+## Reproducibility
+
+### Code Repository
+
+- **Main Repository**: https://github.com/abigaelawino/churn-risk-model
+- **Data Processing**: SQL scripts with proper data lineage and transformation logic
+- **Model Training**: Jupyter notebooks with exact hyperparameters and random seeds
+- **Deployment Scripts**: Docker configurations for production environment setup
+
+### Environment Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/abigaelawino/churn-risk-model
+cd churn-risk-model
+
+# Set up virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run data processing pipeline
+python scripts/extract_features.py --config configs/production.yaml
+
+# Train model with cross-validation
+python scripts/train_model.py --cv-folds 5 --optimize-threshold
+
+# Generate predictions on new data
+python scripts/predict.py --model-path models/production.pkl
+```
+
+### Data Requirements
+
+- Sample dataset provided with 5,000 synthetic customer records
+- Production setup requires similar database schema with customer interaction logs
+- SQL migration scripts for database setup and feature extraction
+- API documentation for real-time scoring integration
+- Documentation for handling new customer onboarding and feature calculation
+
+## Reflection
+
+### Key Learnings
+
+- **Operational Constraints Matter**: Model accuracy had to be balanced with retention team capacity and intervention costs
+- **Interpretability Drives Adoption**: SHAP values and feature explanations were critical for customer success team trust
+- **Temporal Features Critical**: Recent changes in behavior were more predictive than absolute usage levels
+- **Cost-Sensitive Learning Essential**: Different customer segments required different intervention strategies
+
+### Technical Challenges
+
+- **Data Integration Complexity**: Merging data from 5 different systems with different update frequencies and quality standards
+- **Class Imbalance Strategies**: Multiple approaches needed (SMOTE, focal loss, threshold tuning) for optimal performance
+- **Model Drift**: Customer behavior patterns changed seasonally, requiring monthly model retraining
+- **Cross-Functional Alignment**: Balancing statistical optimization with operational business constraints
+
+### Future Improvements
+
+1. **Uplift Modeling**: Implement causal inference to separate natural churn from intervention effects
+2. **Multi-Armed Bandits**: Optimize retention offer strategies through automated experimentation
+3. **Deep Learning**: Explore sequence models for better temporal pattern recognition
+4. **Automated Feature Engineering**: Use AutoML approaches for continuous feature discovery
+5. **Real-Time Scoring**: Move from daily batch to real-time risk assessment for critical customers
+
+### Trade-offs Made
+
+- Chose XGBoost over deep learning for better interpretability and faster training
+- Implemented daily batch updates instead of real-time for operational stability
+- Used simplified feature set initially, with plans for more sophisticated temporal features
+- Prioritized top-decile accuracy over overall AUC to match business use case
+
+The churn risk modeling project demonstrated how machine learning can transform customer retention from reactive to proactive, creating significant business value while respecting operational constraints and human factors in the deployment process.
