@@ -259,3 +259,48 @@ When migrating from static export to OpenNext on Netlify:
 4. Consider adding /issues route redirect if needed for application functionality
 
 ---
+
+## [2026-02-14] - abigaelawino-roadmap-1b
+- What was implemented:
+  - Configured Tailwind CSS v4 with Next.js 16.1.6 and Turbopack
+  - Set up shadcn/ui component system with proper configuration
+  - Created components.json configuration for shadcn/ui with design tokens
+  - Established components/ui directory structure with Button and Card components
+  - Configured design tokens aligned with project's existing color scheme
+  - Updated app/globals.css with Tailwind base styles and shadcn/ui CSS variables
+  - Set up TypeScript path aliases for @/components and @/lib
+  - Created test page to verify component functionality
+
+- Files changed:
+  - package.json (added tailwindcss, autoprefixer, @radix-ui/react-slot, class-variance-authority, clsx, tailwind-merge)
+  - tailwind.config.js (new Tailwind CSS configuration with shadcn/ui theme)
+  - postcss.config.js (new PostCSS configuration)
+  - components.json (new shadcn/ui configuration)
+  - app/globals.css (new global CSS with Tailwind and shadcn/ui styles)
+  - app/layout.tsx (updated to import globals.css)
+  - lib/utils.ts (new utility function for className merging)
+  - components/ui/button.tsx (new Button component)
+  - components/ui/card.tsx (new Card component)
+  - app/shadcn-test/page.tsx (new test page for components)
+  - tsconfig.json (updated with path aliases)
+
+- **Learnings:**
+  - Tailwind CSS v4 has different PostCSS plugin structure compared to v3
+  - shadcn/ui requires proper path aliases in TypeScript configuration
+  - Design tokens need to be configured in both Tailwind config and CSS variables
+  - The existing shell.css styles can be integrated into Tailwind utility classes
+  - Component library setup requires careful dependency management (Radix UI primitives, class-variance-authority)
+  - TypeScript path aliases improve developer experience for importing components
+  - The build process works correctly with the new Tailwind CSS integration
+
+### shadcn/ui Configuration Pattern
+For setting up shadcn/ui with Next.js and Tailwind CSS:
+1. Install Tailwind CSS with proper PostCSS configuration
+2. Configure components.json with correct paths and CSS variables
+3. Set up TypeScript path aliases for clean imports
+4. Create global CSS with design tokens as CSS variables
+5. Install required dependencies (Radix UI primitives, class-variance-authority, clsx, tailwind-merge)
+6. Create utility functions (cn) for className merging
+7. Test components in a dedicated page to verify functionality
+
+---

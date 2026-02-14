@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 15 23% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 15 23% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 15 23% 17%;
+    --primary: 211 70% 55%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 211 70% 55%;
+    --radius: 0.6rem;
+  }
+
+  .dark {
+    --background: 15 23% 17%;
+    --foreground: 210 40% 98%;
+    --card: 15 23% 17%;
+    --card-foreground: 210 40% 98%;
+    --popover: 15 23% 17%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 211 70% 55%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 30 20% 20%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 30 20% 20%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 30 20% 20%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 30 20% 20%;
+    --input: 30 20% 20%;
+    --ring: 211 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+}
+
+/* Shell layout styles from the original project */
+.shell {
+  @apply max-w-4xl mx-auto p-5;
+}
+
+.shell__skip-link {
+  @apply absolute left-0 top-auto w-0.25 h-0.25 overflow-hidden;
+}
+
+.shell__skip-link:focus,
+.shell__skip-link:focus-visible {
+  @apply relative w-auto h-auto inline-block my-3 px-3.5 py-2.75 border-2 border-slate-900 rounded-lg bg-white no-underline font-bold;
+}
+
+.shell__nav {
+  @apply flex justify-between items-center gap-4 mb-4;
+}
+
+.shell__brand {
+  @apply font-bold no-underline;
+}
+
+.shell__links {
+  @apply flex gap-3 flex-wrap list-none m-0 p-0;
+}
+
+.shell__link {
+  @apply no-underline border border-gray-200 rounded-full px-2.5 py-1.25;
+}

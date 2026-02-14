@@ -22,11 +22,17 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "src/**/*.js",
     "app/**/*",
+    "components/**/*",
+    "lib/**/*",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
