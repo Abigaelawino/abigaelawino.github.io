@@ -117,6 +117,36 @@ after each iteration and it's included in prompts for context.
 
 ---
 
+## [2026-02-14] - abigaelawino-forms-2
+- Implemented comprehensive spam protection for inquiry forms with multiple layers of security
+- Enhanced both contact and newsletter forms with client-side validation, rate limiting, and bot detection
+- Created shared form validation utilities for consistency and maintainability
+- Added server-side validation and rate limiting via Netlify Functions
+- Implemented optional reCAPTCHA v3 integration edge function
+- Created comprehensive test coverage for all validation logic
+- Files changed:
+  - components/contact-form.tsx (enhanced with validation and rate limiting)
+  - components/newsletter-form.tsx (enhanced with validation and rate limiting)
+  - netlify/functions/rate-limiter.js (updated with form-specific limits)
+  - netlify/functions/form-validator.js (new - server-side validation)
+  - netlify/edge-functions/recaptcha-validation.js (new - optional reCAPTCHA)
+  - lib/form-validation.ts (new - shared validation utilities)
+  - lib/form-validation.js (new - CommonJS version for tests)
+  - test/lib/form-validation.test.js (new - comprehensive tests)
+  - test/forms-e2e.test.js (new - form integration tests)
+  - docs/FORM_SPAM_PROTECTION.md (new - documentation)
+- **Learnings:**
+  - Patterns discovered: Spam protection requires multiple layers working together (honeypot, validation, rate limiting, timing)
+  - Gotchas encountered: TypeScript modules can't be directly imported in Node.js test runner - needed CommonJS version
+  - Rate limiting should be form-type specific with different windows and limits per form
+  - Client-side validation provides immediate feedback but server-side is essential for security
+  - Honeypot fields should be silently accepted rather than rejected to avoid tipping off bots
+  - Content filtering must balance security with usability (allowing certain domains like YouTube, LinkedIn)
+  - Form validation utilities should be centralized to ensure consistency across all forms
+  - Documentation is crucial for maintainability and future customization of spam protection rules
+
+---
+
 ## [2026-02-14] - abigaelawino-cms-2
 - Successfully integrated Decap CMS (formerly Netlify CMS) with Next.js project
 - Created admin interface with index.html and comprehensive config.yml
