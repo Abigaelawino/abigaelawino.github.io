@@ -1,57 +1,46 @@
-import Link from 'next/link';
+import { BlogClient } from './blog-client';
+import { readFileSync, readdirSync } from 'fs';
+import { join } from 'path';
+import matter from 'gray-matter';
 
-export default function BlogPage() {
-  const posts = [
-    {
-      slug: 'model-monitoring-lessons',
-      frontmatter: {
-        title: 'What Broke in Production and How We Fixed It',
-        date: '2026-01-20',
-        tags: ['ml', 'monitoring', 'reliability'],
-        summary:
-          'A short breakdown of model drift signals, alerting thresholds, and rollback playbooks.',
-        readingTime: '7',
-        status: 'published',
-      },
-    },
-  ];
+async function getBlogPosts() {
+  const blogDir = join(process.cwd(), 'content/blog');
 
-  const publishedPosts = posts.filter(post => post.frontmatter.status === 'published');
+  try {
+    const fileNames = readdirSync(blogDir);
+    const posts = fileNames
+      .filter(name => name.endsWith('.mdx'))
+      .map(fileName => {
+        const fullPath = join(blogDir, fileName);
+        const fileContents = readFileSync(fullPath, 'utf8');
+        const { data, content } = matter(fileContents);
 
-  return (
-    <div className="page-content">
-      <h1>Blog</h1>
-      <p>Read notes on model monitoring, analytics implementation, and production workflows.</p>
+        return {
+          slug: fileName.replace(/\.mdx$/, ''),
+          frontmatter: {
+            title: data.title || '',
+            date: data.date || '',
+            tags: data.tags || [],
+            summary: data.summary || '',
+            readingTime: data.readingTime?.toString() || '1',
+            status: data.status || 'published',
+          },
+          content,
+        };
+      })
+      .sort(
+        (a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+      );
 
-      <div className="posts-grid">
-        {publishedPosts.length === 0 ? (
-          <p>No published posts yet.</p>
-        ) : (
-          publishedPosts.map(post => (
-            <article key={post.slug} className="post-card">
-              <Link href={`/blog/${post.slug}`}>
-                <h2>{post.frontmatter.title}</h2>
-                <p className="post-meta">
-                  {new Date(post.frontmatter.date).toLocaleDateString()} •{' '}
-                  {post.frontmatter.readingTime} min read
-                </p>
-                <p className="post-summary">{post.frontmatter.summary}</p>
-                <div className="post-tags">
-                  {post.frontmatter.tags.map(tag => (
-                    <span key={tag} className="tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </article>
-          ))
-        )}
-      </div>
+    return posts;
+  } catch (error) {
+    console.error('Error reading blog posts:', error);
+    return [];
+  }
+}
 
-      <p>
-        <Link href="/">← Back to Home</Link>
-      </p>
-    </div>
-  );
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
+
+  return <BlogClient posts={posts} />;
 }

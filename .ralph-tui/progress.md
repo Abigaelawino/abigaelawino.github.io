@@ -238,6 +238,30 @@ after each iteration and it's included in prompts for context.
 
 ---
 
+## [2026-02-14] - abigaelawino-roadmap-3b
+
+- Implemented comprehensive blog index page with tag filtering functionality using shadcn/ui Card components
+- Created client-side filtering system with custom hook for blog post state management
+- Added interactive tag filter buttons with active states, post counts, and clear functionality
+- Enhanced user experience with filter summaries, responsive design, and consistent shadcn/ui styling
+- Created sample blog content with 8 posts across various tags for testing filtering functionality
+- Files changed:
+  - app/blog/page.tsx (refactored to server/client pattern)
+  - app/blog/blog-client.tsx (new - client component with filtering UI)
+  - hooks/use-blog-filters.ts (new - custom hook for blog filter state management)
+  - content/blog/\*.mdx (8 new blog post files)
+- **Learnings:**
+  - Patterns discovered: Server/client separation pattern is essential when using Node.js APIs (fs/readdirSync) with client-side interactivity
+  - Gotchas encountered: Adding 'use client' to pages that import server-side modules causes build failures due to fs/Path imports
+  - Custom hooks provide excellent separation of concerns for filtering logic and UI state management
+  - shadcn/ui Card and Badge components work perfectly for blog post layout and interactive filtering
+  - Tag filtering requires multiple posts per tag for meaningful user experience
+  - Post counts on tags help users understand available content before filtering
+  - Blog content structure should follow consistent frontmatter schema for proper filtering
+  - Gray-matter library works well for parsing MDX frontmatter in server components
+
+---
+
 ## [2026-02-14] - abigaelawino-roadmap-2b
 
 - Implemented comprehensive tag filtering functionality for project cards grid with shadcn/ui components
