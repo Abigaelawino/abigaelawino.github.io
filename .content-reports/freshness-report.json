@@ -1,0 +1,688 @@
+{
+  "timestamp": "2026-02-14T22:47:59.359Z",
+  "summary": {
+    "total": 13,
+    "fresh": 4,
+    "aging": 6,
+    "stale": 3,
+    "expired": 0,
+    "errors": 0
+  },
+  "content": [
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+      "title": "API Security Patterns",
+      "date": "2025-12-20",
+      "daysOld": 57,
+      "contentType": "blog",
+      "tags": [
+        "security",
+        "api",
+        "backend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2025-12-20",
+      "wordCount": 23
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+      "title": "Database Indexing Strategies",
+      "date": "2026-01-05",
+      "daysOld": 41,
+      "contentType": "blog",
+      "tags": [
+        "database",
+        "performance",
+        "backend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-05",
+      "wordCount": 24
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+      "title": "Docker Best Practices for Production",
+      "date": "2025-12-28",
+      "daysOld": 49,
+      "contentType": "blog",
+      "tags": [
+        "devops",
+        "docker",
+        "production"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2025-12-28",
+      "wordCount": 25
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+      "title": "Machine Learning in Production",
+      "date": "2025-12-15",
+      "daysOld": 62,
+      "contentType": "blog",
+      "tags": [
+        "ml",
+        "production",
+        "mlops"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "type": "warning",
+          "action": "planned_update",
+          "message": "Content is 62 days old and should be updated soon",
+          "suggestedActions": [
+            "Review for outdated information",
+            "Add recent insights or experiences",
+            "Update related links and resources",
+            "Consider adding new sections"
+          ]
+        },
+        {
+          "type": "content",
+          "action": "blog_refresh",
+          "message": "Blog post may benefit from fresh perspective",
+          "suggestedActions": [
+            "Add follow-up or update section",
+            "Create new post based on updated experiences",
+            "Link to more recent related content"
+          ]
+        }
+      ],
+      "lastModified": "2025-12-15",
+      "wordCount": 25
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+      "title": "What Broke in Production and How We Fixed It",
+      "date": "2026-01-20",
+      "daysOld": 26,
+      "contentType": "blog",
+      "tags": [
+        "ml",
+        "monitoring",
+        "reliability"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-20",
+      "wordCount": 21
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/react-performance-tips.mdx",
+      "title": "React Performance Optimization Techniques",
+      "date": "2026-01-10",
+      "daysOld": 36,
+      "contentType": "blog",
+      "tags": [
+        "react",
+        "performance",
+        "frontend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-10",
+      "wordCount": 27
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/scalable-analytics-pipelines.mdx",
+      "title": "Building Scalable Analytics Pipelines",
+      "date": "2026-01-15",
+      "daysOld": 31,
+      "contentType": "blog",
+      "tags": [
+        "analytics",
+        "data-engineering",
+        "scalability"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-15",
+      "wordCount": 24
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+      "title": "TypeScript Migration Guide",
+      "date": "2025-12-10",
+      "daysOld": 67,
+      "contentType": "blog",
+      "tags": [
+        "typescript",
+        "frontend",
+        "migration"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "type": "warning",
+          "action": "planned_update",
+          "message": "Content is 67 days old and should be updated soon",
+          "suggestedActions": [
+            "Review for outdated information",
+            "Add recent insights or experiences",
+            "Update related links and resources",
+            "Consider adding new sections"
+          ]
+        },
+        {
+          "type": "content",
+          "action": "blog_refresh",
+          "message": "Blog post may benefit from fresh perspective",
+          "suggestedActions": [
+            "Add follow-up or update section",
+            "Create new post based on updated experiences",
+            "Link to more recent related content"
+          ]
+        }
+      ],
+      "lastModified": "2025-12-10",
+      "wordCount": 23
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+      "title": "Customer Churn Risk Modeling",
+      "date": "2026-01-12",
+      "daysOld": 34,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "analytics",
+        "time-series"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [],
+      "lastModified": "2026-01-12",
+      "wordCount": 1271
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+      "title": "Customer Segmentation Analytics Dashboard",
+      "date": "2026-02-14",
+      "daysOld": 1,
+      "contentType": "projects",
+      "tags": [
+        "analytics",
+        "visualization",
+        "dashboard"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [],
+      "lastModified": "2026-02-14",
+      "wordCount": 1273
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+      "title": "E-Commerce Product Recommendation Engine",
+      "date": "2026-02-14",
+      "daysOld": 1,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "recommendation",
+        "analytics"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [],
+      "lastModified": "2026-02-14",
+      "wordCount": 987
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+      "title": "Retail Sales Forecasting Dashboard",
+      "date": "2025-11-03",
+      "daysOld": 104,
+      "contentType": "projects",
+      "tags": [
+        "analytics",
+        "visualization",
+        "time-series"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "type": "temporal",
+          "action": "time_sensitive",
+          "message": "Contains time-sensitive language that may be outdated",
+          "suggestedActions": [
+            "Review and update temporal references",
+            "Add specific dates instead of relative terms",
+            "Update version numbers and status indicators"
+          ]
+        }
+      ],
+      "lastModified": "2025-11-03",
+      "wordCount": 1312
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+      "title": "Support Ticket NLP Triage",
+      "date": "2025-09-18",
+      "daysOld": 150,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "nlp",
+        "analytics"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "type": "warning",
+          "action": "planned_update",
+          "message": "Content is 150 days old and should be updated soon",
+          "suggestedActions": [
+            "Review for outdated information",
+            "Add recent insights or experiences",
+            "Update related links and resources",
+            "Consider adding new sections"
+          ]
+        },
+        {
+          "type": "temporal",
+          "action": "time_sensitive",
+          "message": "Contains time-sensitive language that may be outdated",
+          "suggestedActions": [
+            "Review and update temporal references",
+            "Add specific dates instead of relative terms",
+            "Update version numbers and status indicators"
+          ]
+        }
+      ],
+      "lastModified": "2025-09-18",
+      "wordCount": 1286
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "warning",
+      "action": "planned_update",
+      "message": "Content is 62 days old and should be updated soon",
+      "suggestedActions": [
+        "Review for outdated information",
+        "Add recent insights or experiences",
+        "Update related links and resources",
+        "Consider adding new sections"
+      ]
+    },
+    {
+      "type": "content",
+      "action": "blog_refresh",
+      "message": "Blog post may benefit from fresh perspective",
+      "suggestedActions": [
+        "Add follow-up or update section",
+        "Create new post based on updated experiences",
+        "Link to more recent related content"
+      ]
+    },
+    {
+      "type": "warning",
+      "action": "planned_update",
+      "message": "Content is 67 days old and should be updated soon",
+      "suggestedActions": [
+        "Review for outdated information",
+        "Add recent insights or experiences",
+        "Update related links and resources",
+        "Consider adding new sections"
+      ]
+    },
+    {
+      "type": "content",
+      "action": "blog_refresh",
+      "message": "Blog post may benefit from fresh perspective",
+      "suggestedActions": [
+        "Add follow-up or update section",
+        "Create new post based on updated experiences",
+        "Link to more recent related content"
+      ]
+    },
+    {
+      "type": "temporal",
+      "action": "time_sensitive",
+      "message": "Contains time-sensitive language that may be outdated",
+      "suggestedActions": [
+        "Review and update temporal references",
+        "Add specific dates instead of relative terms",
+        "Update version numbers and status indicators"
+      ]
+    },
+    {
+      "type": "warning",
+      "action": "planned_update",
+      "message": "Content is 150 days old and should be updated soon",
+      "suggestedActions": [
+        "Review for outdated information",
+        "Add recent insights or experiences",
+        "Update related links and resources",
+        "Consider adding new sections"
+      ]
+    },
+    {
+      "type": "temporal",
+      "action": "time_sensitive",
+      "message": "Contains time-sensitive language that may be outdated",
+      "suggestedActions": [
+        "Review and update temporal references",
+        "Add specific dates instead of relative terms",
+        "Update version numbers and status indicators"
+      ]
+    }
+  ],
+  "trends": {
+    "averageAge": 51,
+    "oldestContent": {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+      "title": "Support Ticket NLP Triage",
+      "date": "2025-09-18",
+      "daysOld": 150,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "nlp",
+        "analytics"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "type": "warning",
+          "action": "planned_update",
+          "message": "Content is 150 days old and should be updated soon",
+          "suggestedActions": [
+            "Review for outdated information",
+            "Add recent insights or experiences",
+            "Update related links and resources",
+            "Consider adding new sections"
+          ]
+        },
+        {
+          "type": "temporal",
+          "action": "time_sensitive",
+          "message": "Contains time-sensitive language that may be outdated",
+          "suggestedActions": [
+            "Review and update temporal references",
+            "Add specific dates instead of relative terms",
+            "Update version numbers and status indicators"
+          ]
+        }
+      ],
+      "lastModified": "2025-09-18",
+      "wordCount": 1286
+    },
+    "newestContent": {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+      "title": "Customer Segmentation Analytics Dashboard",
+      "date": "2026-02-14",
+      "daysOld": 1,
+      "contentType": "projects",
+      "tags": [
+        "analytics",
+        "visualization",
+        "dashboard"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [],
+      "lastModified": "2026-02-14",
+      "wordCount": 1273
+    },
+    "contentByType": {
+      "blog": 8,
+      "projects": 5
+    },
+    "contentByStatus": {
+      "AGING": 6,
+      "STALE": 3,
+      "FRESH": 4
+    },
+    "tagsFrequency": {
+      "security": 1,
+      "api": 1,
+      "backend": 2,
+      "database": 1,
+      "performance": 2,
+      "devops": 1,
+      "docker": 1,
+      "production": 2,
+      "ml": 5,
+      "mlops": 1,
+      "monitoring": 1,
+      "reliability": 1,
+      "react": 1,
+      "frontend": 2,
+      "analytics": 6,
+      "data-engineering": 1,
+      "scalability": 1,
+      "typescript": 1,
+      "migration": 1,
+      "time-series": 2,
+      "visualization": 2,
+      "dashboard": 1,
+      "recommendation": 1,
+      "nlp": 1
+    },
+    "temporalKeywordUsage": 5
+  },
+  "updateSchedule": {
+    "immediate": [],
+    "thisMonth": [
+      {
+        "title": "Machine Learning in Production",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+        "currentStatus": "STALE",
+        "urgency": "high",
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 62 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "content",
+            "action": "blog_refresh",
+            "message": "Blog post may benefit from fresh perspective",
+            "suggestedActions": [
+              "Add follow-up or update section",
+              "Create new post based on updated experiences",
+              "Link to more recent related content"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TypeScript Migration Guide",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+        "currentStatus": "STALE",
+        "urgency": "high",
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 67 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "content",
+            "action": "blog_refresh",
+            "message": "Blog post may benefit from fresh perspective",
+            "suggestedActions": [
+              "Add follow-up or update section",
+              "Create new post based on updated experiences",
+              "Link to more recent related content"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Support Ticket NLP Triage",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+        "currentStatus": "STALE",
+        "urgency": "high",
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 150 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "temporal",
+            "action": "time_sensitive",
+            "message": "Contains time-sensitive language that may be outdated",
+            "suggestedActions": [
+              "Review and update temporal references",
+              "Add specific dates instead of relative terms",
+              "Update version numbers and status indicators"
+            ]
+          }
+        ]
+      }
+    ],
+    "thisQuarter": [
+      {
+        "title": "API Security Patterns",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": []
+      },
+      {
+        "title": "Database Indexing Strategies",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": []
+      },
+      {
+        "title": "Docker Best Practices for Production",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": []
+      },
+      {
+        "title": "React Performance Optimization Techniques",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/react-performance-tips.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": []
+      },
+      {
+        "title": "Building Scalable Analytics Pipelines",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/scalable-analytics-pipelines.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": []
+      },
+      {
+        "title": "Retail Sales Forecasting Dashboard",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+        "currentStatus": "AGING",
+        "urgency": "medium",
+        "recommendations": [
+          {
+            "type": "temporal",
+            "action": "time_sensitive",
+            "message": "Contains time-sensitive language that may be outdated",
+            "suggestedActions": [
+              "Review and update temporal references",
+              "Add specific dates instead of relative terms",
+              "Update version numbers and status indicators"
+            ]
+          }
+        ]
+      }
+    ],
+    "thisYear": [
+      {
+        "title": "What Broke in Production and How We Fixed It",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+        "currentStatus": "FRESH",
+        "urgency": "low",
+        "recommendations": []
+      },
+      {
+        "title": "Customer Churn Risk Modeling",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+        "currentStatus": "FRESH",
+        "urgency": "low",
+        "recommendations": []
+      },
+      {
+        "title": "Customer Segmentation Analytics Dashboard",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+        "currentStatus": "FRESH",
+        "urgency": "low",
+        "recommendations": []
+      },
+      {
+        "title": "E-Commerce Product Recommendation Engine",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+        "currentStatus": "FRESH",
+        "urgency": "low",
+        "recommendations": []
+      }
+    ]
+  }
+}

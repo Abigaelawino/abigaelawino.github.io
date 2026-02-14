@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-02-14T22:47:59.998Z",
+  "healthScore": {
+    "score": 82,
+    "grade": "B+",
+    "status": "Good"
+  },
+  "validation": {
+    "passed": true,
+    "warnings": [
+      "23.1% stale content (target: ≤5%)",
+      "30.8% fresh content (target: ≥80%)"
+    ],
+    "errors": [],
+    "metrics": {
+      "expiredContent": {
+        "current": 0,
+        "target": 0,
+        "passed": true
+      },
+      "staleContent": {
+        "current": 23.076923076923077,
+        "target": 5,
+        "passed": false
+      },
+      "freshContent": {
+        "current": 30.76923076923077,
+        "target": 80,
+        "passed": false
+      },
+      "averageAge": {
+        "current": 51,
+        "target": 90,
+        "passed": true
+      },
+      "trend": {
+        "current": "stable",
+        "target": "stable or improving",
+        "passed": true
+      }
+    }
+  },
+  "recommendations": [],
+  "actionItems": [
+    {
+      "metric": "staleContent",
+      "current": 23.076923076923077,
+      "target": 5,
+      "action": "Refresh stale content to reduce from 23.1% to 5%",
+      "priority": "high"
+    },
+    {
+      "metric": "freshContent",
+      "current": 30.76923076923077,
+      "target": 80,
+      "action": "Update content to increase fresh ratio from 30.8% to 80%",
+      "priority": "high"
+    }
+  ]
+}

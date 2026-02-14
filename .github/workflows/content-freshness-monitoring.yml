@@ -1,0 +1,188 @@
+name: Content Freshness Monitoring
+
+on:
+  schedule:
+    # Run on the 1st of every month at 2 AM UTC
+    - cron: '0 2 1 * *'
+  workflow_dispatch:
+    inputs:
+      analysis_type:
+        description: 'Type of content analysis to run'
+        required: true
+        default: 'comprehensive'
+        type: choice
+        options:
+          - freshness
+          - trends
+          - recommendations
+          - comprehensive
+      create_issue:
+        description: 'Create GitHub issue for critical content updates'
+        required: true
+        default: true
+        type: boolean
+      update_schedule:
+        description: 'Generate quarterly update schedule'
+        required: true
+        default: true
+        type: boolean
+
+env:
+  NODE_ENV: production
+
+jobs:
+  content-freshness-analysis:
+    name: Content Freshness Analysis
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate environment
+        run: npm run typecheck && npm run lint
+
+      - name: Run content freshness analysis
+        run: node scripts/content-freshness-monitor.mjs
+        continue-on-error: true
+
+      - name: Generate monthly trends analysis
+        if: github.event.inputs.analysis_type == 'trends' || github.event.inputs.analysis_type == 'comprehensive'
+        run: node scripts/content-monthly-trends.mjs
+        continue-on-error: true
+
+      - name: Generate content recommendations
+        if: github.event.inputs.analysis_type == 'recommendations' || github.event.inputs.analysis_type == 'comprehensive'
+        run: node scripts/content-recommendations.mjs
+        continue-on-error: true
+
+      - name: Create GitHub issue for critical content
+        if: github.event.inputs.create_issue == 'true'
+        run: node scripts/content-issue-creator.mjs
+        continue-on-error: true
+
+      - name: Generate quarterly update schedule
+        if: github.event.inputs.update_schedule == 'true'
+        run: node scripts/content-quarterly-schedule.mjs
+        continue-on-error: true
+
+      - name: Upload content reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: content-freshness-reports
+          path: .content-reports/
+          retention-days: 90
+
+      - name: Summarize findings
+        if: always()
+        run: |
+          echo "## Content Freshness Monitoring Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f ".content-reports/freshness-report.json" ]; then
+            echo "### Freshness Analysis Results" >> $GITHUB_STEP_SUMMARY
+            node -e "
+              const report = JSON.parse(require('fs').readFileSync('.content-reports/freshness-report.json', 'utf8'));
+              console.log('- Total content items:', report.summary.total);
+              console.log('- Fresh content:', report.summary.fresh);
+            echo '- Aging content:', report.summary.aging);
+              console.log('- Stale content:', report.summary.stale);
+              console.log('- Expired content:', report.summary.expired);
+              console.log('- Average age:', report.trends.averageAge, 'days');
+            " >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f ".content-reports/monthly-trends.json" ]; then
+            echo "### Monthly Trends" >> $GITHUB_STEP_SUMMARY
+            node -e "
+              const trends = JSON.parse(require('fs').readFileSync('.content-reports/monthly-trends.json', 'utf8'));
+              console.log('- Content health score:', trends.performanceMetrics.contentHealthScore + '/100');
+              console.log('- Fresh content percentage:', trends.performanceMetrics.freshContentPercentage + '%');
+              console.log('- Overall trend:', trends.historicalAnalysis.trends.overall);
+            " >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f ".content-reports/content-recommendations.json" ]; then
+            echo "### Update Recommendations" >> $GITHUB_STEP_SUMMARY
+            node -e "
+              const recs = JSON.parse(require('fs').readFileSync('.content-reports/content-recommendations.json', 'utf8'));
+              console.log('- Items needing updates:', recs.summary.itemsNeedingUpdates);
+              console.log('- Critical items:', recs.priorityBreakdown.critical);
+              console.log('- High priority items:', recs.priorityBreakdown.high);
+              console.log('- Quick wins:', recs.quickWins.length);
+            " >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  content-health-check:
+    name: Content Health Validation
+    runs-on: ubuntu-latest
+    needs: content-freshness-analysis
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download reports
+        uses: actions/download-artifact@v4
+        with:
+          name: content-freshness-reports
+          path: .content-reports/
+
+      - name: Validate content health metrics
+        run: node scripts/content-health-validator.mjs
+        continue-on-error: true
+
+      - name: Check for critical issues
+        run: |
+          if [ -f ".content-reports/freshness-report.json" ]; then
+            EXPIRED=$(node -e "
+              const report = JSON.parse(require('fs').readFileSync('.content-reports/freshness-report.json', 'utf8'));
+              console.log(report.summary.expired);
+            ")
+
+            if [ "$EXPIRED" -gt 0 ]; then
+              echo "::warning::Found $EXPIRED expired content items requiring immediate attention"
+              exit 1
+            fi
+          fi
+        continue-on-error: true
+
+      - name: Generate content health badge
+        run: node scripts/content-health-badge.mjs
+        continue-on-error: true
+
+      - name: Update README with content health status
+        if: always()
+        run: |
+          if [ -f ".content-reports/content-health-badge.svg" ]; then
+            echo "Content health status badge updated"
+          else
+            echo "Content health badge generation skipped"
+          fi

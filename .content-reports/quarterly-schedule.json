@@ -1,0 +1,321 @@
+{
+  "metadata": {
+    "generated": "2026-02-14T22:47:59.840Z",
+    "quarter": "Q1",
+    "year": 2026,
+    "startDate": "2026-01-01T05:00:00.000Z",
+    "endDate": "2026-03-31T04:00:00.000Z",
+    "totalItems": 13
+  },
+  "monthlySchedule": {
+    "month1": {
+      "monthName": "February",
+      "goals": {
+        "critical": 0,
+        "high": 2,
+        "medium": 0,
+        "routine": 1
+      },
+      "scheduledItems": [
+        {
+          "title": "Machine Learning in Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+          "contentType": "blog",
+          "currentStatus": "STALE",
+          "priority": "high",
+          "daysOld": 62,
+          "topRecommendation": "Update technology references and version numbers",
+          "estimatedEffort": 60,
+          "tags": [
+            "ml",
+            "production",
+            "mlops"
+          ]
+        },
+        {
+          "title": "TypeScript Migration Guide",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+          "contentType": "blog",
+          "currentStatus": "STALE",
+          "priority": "high",
+          "daysOld": 67,
+          "topRecommendation": "Align with Current Trends",
+          "estimatedEffort": 60,
+          "tags": [
+            "typescript",
+            "frontend",
+            "migration"
+          ]
+        },
+        {
+          "title": "What Broke in Production and How We Fixed It",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+          "contentType": "blog",
+          "currentStatus": "FRESH",
+          "priority": "routine",
+          "daysOld": 26,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 30,
+          "tags": [
+            "ml",
+            "monitoring",
+            "reliability"
+          ]
+        }
+      ],
+      "estimatedEffort": {
+        "totalMinutes": 150,
+        "totalHours": 2.5,
+        "dailyTarget": 7
+      }
+    },
+    "month2": {
+      "monthName": "March",
+      "goals": {
+        "critical": 0,
+        "high": 2,
+        "medium": 3,
+        "routine": 1
+      },
+      "scheduledItems": [
+        {
+          "title": "Machine Learning in Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+          "contentType": "blog",
+          "currentStatus": "STALE",
+          "priority": "high",
+          "daysOld": 62,
+          "topRecommendation": "Update technology references and version numbers",
+          "estimatedEffort": 60,
+          "tags": [
+            "ml",
+            "production",
+            "mlops"
+          ]
+        },
+        {
+          "title": "TypeScript Migration Guide",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+          "contentType": "blog",
+          "currentStatus": "STALE",
+          "priority": "high",
+          "daysOld": 67,
+          "topRecommendation": "Align with Current Trends",
+          "estimatedEffort": 60,
+          "tags": [
+            "typescript",
+            "frontend",
+            "migration"
+          ]
+        },
+        {
+          "title": "API Security Patterns",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 57,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 60,
+          "tags": [
+            "security",
+            "api",
+            "backend"
+          ]
+        },
+        {
+          "title": "Database Indexing Strategies",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 41,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 60,
+          "tags": [
+            "database",
+            "performance",
+            "backend"
+          ]
+        },
+        {
+          "title": "Docker Best Practices for Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 49,
+          "topRecommendation": "Align with Current Trends",
+          "estimatedEffort": 60,
+          "tags": [
+            "devops",
+            "docker",
+            "production"
+          ]
+        },
+        {
+          "title": "What Broke in Production and How We Fixed It",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+          "contentType": "blog",
+          "currentStatus": "FRESH",
+          "priority": "routine",
+          "daysOld": 26,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 30,
+          "tags": [
+            "ml",
+            "monitoring",
+            "reliability"
+          ]
+        }
+      ],
+      "estimatedEffort": {
+        "totalMinutes": 330,
+        "totalHours": 5.5,
+        "dailyTarget": 15
+      }
+    },
+    "month3": {
+      "monthName": "April",
+      "goals": {
+        "critical": 0,
+        "high": 0,
+        "medium": 3,
+        "routine": 1
+      },
+      "scheduledItems": [
+        {
+          "title": "API Security Patterns",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 57,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 60,
+          "tags": [
+            "security",
+            "api",
+            "backend"
+          ]
+        },
+        {
+          "title": "Database Indexing Strategies",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 41,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 60,
+          "tags": [
+            "database",
+            "performance",
+            "backend"
+          ]
+        },
+        {
+          "title": "Docker Best Practices for Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+          "contentType": "blog",
+          "currentStatus": "AGING",
+          "priority": "medium",
+          "daysOld": 49,
+          "topRecommendation": "Align with Current Trends",
+          "estimatedEffort": 60,
+          "tags": [
+            "devops",
+            "docker",
+            "production"
+          ]
+        },
+        {
+          "title": "What Broke in Production and How We Fixed It",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+          "contentType": "blog",
+          "currentStatus": "FRESH",
+          "priority": "routine",
+          "daysOld": 26,
+          "topRecommendation": "General content refresh",
+          "estimatedEffort": 30,
+          "tags": [
+            "ml",
+            "monitoring",
+            "reliability"
+          ]
+        }
+      ],
+      "estimatedEffort": {
+        "totalMinutes": 210,
+        "totalHours": 3.5,
+        "dailyTarget": 10
+      }
+    }
+  },
+  "quarterlyGoals": {
+    "contentHealth": {
+      "target": "Zero expired content, minimal stale content",
+      "currentExpired": 0,
+      "currentStale": 3,
+      "targetFreshRatio": 80,
+      "currentFreshRatio": 30.76923076923077
+    },
+    "maintenanceDiscipline": {
+      "target": "Establish regular content review rhythm",
+      "milestones": [
+        "Week 1-2: Address all critical content",
+        "Week 3-6: Complete high-priority updates",
+        "Week 7-10: Handle medium-priority items",
+        "Week 11-12: Routine maintenance and review"
+      ]
+    },
+    "qualityImprovement": {
+      "target": "Improve content quality and relevance",
+      "focusAreas": [
+        "Update temporal references and statistics",
+        "Refresh visual assets and screenshots",
+        "Validate all external links and resources",
+        "Enhance content with recent insights"
+      ]
+    }
+  },
+  "contentMaintenancePlan": {
+    "weeklyCadence": {
+      "monday": "Plan week's content updates",
+      "wednesday": "Progress check on content updates",
+      "friday": "Review completed updates and plan next week"
+    },
+    "qualityChecklist": [
+      "Validate all statistics and metrics",
+      "Check external links and references",
+      "Update temporal language",
+      "Enhance content with new insights",
+      "Review formatting and accessibility"
+    ],
+    "toolsAndResources": [
+      "Content freshness monitoring reports",
+      "Update recommendations and templates",
+      "Bulk operation scripts",
+      "Link validation tools",
+      "Industry trend resources"
+    ],
+    "successMetrics": [
+      "Zero expired content by quarter end",
+      "Stale content under 5% of total",
+      "Fresh content ratio above 80%",
+      "Content health score above 85/100"
+    ]
+  },
+  "trackingMetrics": {
+    "targets": {
+      "expiredContent": 0,
+      "staleContent": 1,
+      "freshContentRatio": 80
+    },
+    "current": {
+      "expiredContent": 0,
+      "staleContent": 3,
+      "freshContentRatio": 30.76923076923077
+    }
+  }
+}

@@ -429,20 +429,16 @@ async function main() {
     }
 
     default: {
-      const helpText = `
-Usage: node scripts/mcp-monitor.mjs <command>
-
-Commands:
-  check     - Run one-time health check on all servers
-  report    - Generate detailed report
-  watch     - Run continuous monitoring (checks every 60 seconds)
-  server <id> - Check specific server (available: ${Object.keys(MCP_SERVERS).join(', ')})
-
-Examples:
-  node scripts/mcp-monitor.mjs check
-  node scripts/mcp-monitor.mjs server netlify
-  node scripts/mcp-monitor.mjs watch
-      `;
+      const helpText = 'Usage: node scripts/mcp-monitor.mjs <command>\n\n' +
+        'Commands:\n' +
+        '  check     - Run one-time health check on all servers\n' +
+        '  report    - Generate detailed report\n' +
+        '  watch     - Run continuous monitoring (checks every 60 seconds)\n' +
+        '  server <id> - Check specific server (available: ' + Object.keys(MCP_SERVERS).join(', ') + ')\n\n' +
+        'Examples:\n' +
+        '  node scripts/mcp-monitor.mjs check\n' +
+        '  node scripts/mcp-monitor.mjs server netlify\n' +
+        '  node scripts/mcp-monitor.mjs watch';
       console.log(helpText);
       process.exit(1);
     }
@@ -460,6 +456,6 @@ process.on('SIGTERM', () => {
 });
 
 // Run the monitoring
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === 'file://' + process.argv[1]) {
   main().catch(console.error);
 }

@@ -1,0 +1,365 @@
+[
+  {
+    "timestamp": "2026-02-14T22:46:15.637Z",
+    "summary": {
+      "total": 13,
+      "fresh": 4,
+      "aging": 6,
+      "stale": 3,
+      "expired": 0,
+      "errors": 0
+    },
+    "trends": {
+      "averageAge": 51,
+      "oldestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+        "title": "Support Ticket NLP Triage",
+        "date": "2025-09-18",
+        "daysOld": 150,
+        "contentType": "projects",
+        "tags": [
+          "ml",
+          "nlp",
+          "analytics"
+        ],
+        "status": "STALE",
+        "urgency": "high",
+        "priority": 2,
+        "hasTemporalKeywords": true,
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 150 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "temporal",
+            "action": "time_sensitive",
+            "message": "Contains time-sensitive language that may be outdated",
+            "suggestedActions": [
+              "Review and update temporal references",
+              "Add specific dates instead of relative terms",
+              "Update version numbers and status indicators"
+            ]
+          }
+        ],
+        "lastModified": "2025-09-18",
+        "wordCount": 1286
+      },
+      "newestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+        "title": "Customer Segmentation Analytics Dashboard",
+        "date": "2026-02-14",
+        "daysOld": 1,
+        "contentType": "projects",
+        "tags": [
+          "analytics",
+          "visualization",
+          "dashboard"
+        ],
+        "status": "FRESH",
+        "urgency": "low",
+        "priority": 4,
+        "hasTemporalKeywords": true,
+        "recommendations": [],
+        "lastModified": "2026-02-14",
+        "wordCount": 1273
+      },
+      "contentByType": {
+        "blog": 8,
+        "projects": 5
+      },
+      "contentByStatus": {
+        "AGING": 6,
+        "STALE": 3,
+        "FRESH": 4
+      },
+      "tagsFrequency": {
+        "security": 1,
+        "api": 1,
+        "backend": 2,
+        "database": 1,
+        "performance": 2,
+        "devops": 1,
+        "docker": 1,
+        "production": 2,
+        "ml": 5,
+        "mlops": 1,
+        "monitoring": 1,
+        "reliability": 1,
+        "react": 1,
+        "frontend": 2,
+        "analytics": 6,
+        "data-engineering": 1,
+        "scalability": 1,
+        "typescript": 1,
+        "migration": 1,
+        "time-series": 2,
+        "visualization": 2,
+        "dashboard": 1,
+        "recommendation": 1,
+        "nlp": 1
+      },
+      "temporalKeywordUsage": 5
+    },
+    "averageAge": 51,
+    "contentByType": {
+      "blog": 8,
+      "projects": 5
+    },
+    "contentByStatus": {
+      "AGING": 6,
+      "STALE": 3,
+      "FRESH": 4
+    },
+    "temporalKeywordUsage": 5
+  },
+  {
+    "timestamp": "2026-02-14T22:46:15.637Z",
+    "summary": {
+      "total": 13,
+      "fresh": 4,
+      "aging": 6,
+      "stale": 3,
+      "expired": 0,
+      "errors": 0
+    },
+    "trends": {
+      "averageAge": 51,
+      "oldestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+        "title": "Support Ticket NLP Triage",
+        "date": "2025-09-18",
+        "daysOld": 150,
+        "contentType": "projects",
+        "tags": [
+          "ml",
+          "nlp",
+          "analytics"
+        ],
+        "status": "STALE",
+        "urgency": "high",
+        "priority": 2,
+        "hasTemporalKeywords": true,
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 150 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "temporal",
+            "action": "time_sensitive",
+            "message": "Contains time-sensitive language that may be outdated",
+            "suggestedActions": [
+              "Review and update temporal references",
+              "Add specific dates instead of relative terms",
+              "Update version numbers and status indicators"
+            ]
+          }
+        ],
+        "lastModified": "2025-09-18",
+        "wordCount": 1286
+      },
+      "newestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+        "title": "Customer Segmentation Analytics Dashboard",
+        "date": "2026-02-14",
+        "daysOld": 1,
+        "contentType": "projects",
+        "tags": [
+          "analytics",
+          "visualization",
+          "dashboard"
+        ],
+        "status": "FRESH",
+        "urgency": "low",
+        "priority": 4,
+        "hasTemporalKeywords": true,
+        "recommendations": [],
+        "lastModified": "2026-02-14",
+        "wordCount": 1273
+      },
+      "contentByType": {
+        "blog": 8,
+        "projects": 5
+      },
+      "contentByStatus": {
+        "AGING": 6,
+        "STALE": 3,
+        "FRESH": 4
+      },
+      "tagsFrequency": {
+        "security": 1,
+        "api": 1,
+        "backend": 2,
+        "database": 1,
+        "performance": 2,
+        "devops": 1,
+        "docker": 1,
+        "production": 2,
+        "ml": 5,
+        "mlops": 1,
+        "monitoring": 1,
+        "reliability": 1,
+        "react": 1,
+        "frontend": 2,
+        "analytics": 6,
+        "data-engineering": 1,
+        "scalability": 1,
+        "typescript": 1,
+        "migration": 1,
+        "time-series": 2,
+        "visualization": 2,
+        "dashboard": 1,
+        "recommendation": 1,
+        "nlp": 1
+      },
+      "temporalKeywordUsage": 5
+    },
+    "averageAge": 51,
+    "contentByType": {
+      "blog": 8,
+      "projects": 5
+    },
+    "contentByStatus": {
+      "AGING": 6,
+      "STALE": 3,
+      "FRESH": 4
+    },
+    "temporalKeywordUsage": 5
+  },
+  {
+    "timestamp": "2026-02-14T22:47:59.359Z",
+    "summary": {
+      "total": 13,
+      "fresh": 4,
+      "aging": 6,
+      "stale": 3,
+      "expired": 0,
+      "errors": 0
+    },
+    "trends": {
+      "averageAge": 51,
+      "oldestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+        "title": "Support Ticket NLP Triage",
+        "date": "2025-09-18",
+        "daysOld": 150,
+        "contentType": "projects",
+        "tags": [
+          "ml",
+          "nlp",
+          "analytics"
+        ],
+        "status": "STALE",
+        "urgency": "high",
+        "priority": 2,
+        "hasTemporalKeywords": true,
+        "recommendations": [
+          {
+            "type": "warning",
+            "action": "planned_update",
+            "message": "Content is 150 days old and should be updated soon",
+            "suggestedActions": [
+              "Review for outdated information",
+              "Add recent insights or experiences",
+              "Update related links and resources",
+              "Consider adding new sections"
+            ]
+          },
+          {
+            "type": "temporal",
+            "action": "time_sensitive",
+            "message": "Contains time-sensitive language that may be outdated",
+            "suggestedActions": [
+              "Review and update temporal references",
+              "Add specific dates instead of relative terms",
+              "Update version numbers and status indicators"
+            ]
+          }
+        ],
+        "lastModified": "2025-09-18",
+        "wordCount": 1286
+      },
+      "newestContent": {
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+        "title": "Customer Segmentation Analytics Dashboard",
+        "date": "2026-02-14",
+        "daysOld": 1,
+        "contentType": "projects",
+        "tags": [
+          "analytics",
+          "visualization",
+          "dashboard"
+        ],
+        "status": "FRESH",
+        "urgency": "low",
+        "priority": 4,
+        "hasTemporalKeywords": true,
+        "recommendations": [],
+        "lastModified": "2026-02-14",
+        "wordCount": 1273
+      },
+      "contentByType": {
+        "blog": 8,
+        "projects": 5
+      },
+      "contentByStatus": {
+        "AGING": 6,
+        "STALE": 3,
+        "FRESH": 4
+      },
+      "tagsFrequency": {
+        "security": 1,
+        "api": 1,
+        "backend": 2,
+        "database": 1,
+        "performance": 2,
+        "devops": 1,
+        "docker": 1,
+        "production": 2,
+        "ml": 5,
+        "mlops": 1,
+        "monitoring": 1,
+        "reliability": 1,
+        "react": 1,
+        "frontend": 2,
+        "analytics": 6,
+        "data-engineering": 1,
+        "scalability": 1,
+        "typescript": 1,
+        "migration": 1,
+        "time-series": 2,
+        "visualization": 2,
+        "dashboard": 1,
+        "recommendation": 1,
+        "nlp": 1
+      },
+      "temporalKeywordUsage": 5
+    },
+    "averageAge": 51,
+    "contentByType": {
+      "blog": 8,
+      "projects": 5
+    },
+    "contentByStatus": {
+      "AGING": 6,
+      "STALE": 3,
+      "FRESH": 4
+    },
+    "temporalKeywordUsage": 5
+  }
+]

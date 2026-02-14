@@ -1,0 +1,929 @@
+{
+  "timestamp": "2026-02-14T22:47:59.685Z",
+  "reportType": "content_recommendations",
+  "summary": {
+    "totalContent": 13,
+    "itemsNeedingUpdates": 9,
+    "totalRecommendations": 15,
+    "bulkOperations": 1
+  },
+  "priorityBreakdown": {
+    "critical": 0,
+    "high": 6,
+    "medium": 4,
+    "low": 4
+  },
+  "contentUpdates": [
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+      "title": "Machine Learning in Production",
+      "date": "2025-12-15",
+      "daysOld": 62,
+      "contentType": "blog",
+      "tags": [
+        "ml",
+        "production",
+        "mlops"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "category": "technologyUpdates",
+          "priority": "high",
+          "title": "Update technology references and version numbers",
+          "actions": [
+            "Check for newer versions of mentioned technologies",
+            "Update version numbers and compatibility notes",
+            "Add recent breaking changes or deprecations",
+            "Include new features or improvements"
+          ],
+          "rationale": "Content contains version, release, latest, current which may be outdated",
+          "estimatedEffort": "medium"
+        }
+      ],
+      "lastModified": "2025-12-15",
+      "wordCount": 25,
+      "updateTemplates": [
+        {
+          "templateName": "technologyUpdates",
+          "title": "Update: Machine Learning in Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+          "contentType": "blog",
+          "priority": "high",
+          "description": "Update technology references and version numbers",
+          "checklist": [
+            "Check for newer versions of mentioned technologies",
+            "Update version numbers and compatibility notes",
+            "Add recent breaking changes or deprecations",
+            "Include new features or improvements"
+          ],
+          "estimatedTime": "1-2 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+      "title": "Customer Churn Risk Modeling",
+      "date": "2026-01-12",
+      "daysOld": 34,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "analytics",
+        "time-series"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "category": "outcomesUpdate",
+          "priority": "high",
+          "title": "Update project outcomes and business impact",
+          "actions": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "rationale": "Content contains results, outcome, impact, success which may be outdated",
+          "estimatedEffort": "high"
+        },
+        {
+          "category": "visualAssets",
+          "priority": "low",
+          "title": "Refresh visual assets and documentation",
+          "actions": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+          "estimatedEffort": "high"
+        }
+      ],
+      "lastModified": "2026-01-12",
+      "wordCount": 1271,
+      "updateTemplates": [
+        {
+          "templateName": "outcomesUpdate",
+          "title": "Update: Customer Churn Risk Modeling",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Update project outcomes and business impact",
+          "checklist": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "estimatedTime": "2-4 hours"
+        },
+        {
+          "templateName": "visualAssets",
+          "title": "Update: Customer Churn Risk Modeling",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+          "contentType": "projects",
+          "priority": "low",
+          "description": "Refresh visual assets and documentation",
+          "checklist": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "estimatedTime": "2-4 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+      "title": "Customer Segmentation Analytics Dashboard",
+      "date": "2026-02-14",
+      "daysOld": 1,
+      "contentType": "projects",
+      "tags": [
+        "analytics",
+        "visualization",
+        "dashboard"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "category": "outcomesUpdate",
+          "priority": "high",
+          "title": "Update project outcomes and business impact",
+          "actions": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "rationale": "Content contains results, outcome, impact, success which may be outdated",
+          "estimatedEffort": "high"
+        },
+        {
+          "category": "visualAssets",
+          "priority": "low",
+          "title": "Refresh visual assets and documentation",
+          "actions": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+          "estimatedEffort": "high"
+        }
+      ],
+      "lastModified": "2026-02-14",
+      "wordCount": 1273,
+      "updateTemplates": [
+        {
+          "templateName": "outcomesUpdate",
+          "title": "Update: Customer Segmentation Analytics Dashboard",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Update project outcomes and business impact",
+          "checklist": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "estimatedTime": "2-4 hours"
+        },
+        {
+          "templateName": "visualAssets",
+          "title": "Update: Customer Segmentation Analytics Dashboard",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+          "contentType": "projects",
+          "priority": "low",
+          "description": "Refresh visual assets and documentation",
+          "checklist": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "estimatedTime": "2-4 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+      "title": "E-Commerce Product Recommendation Engine",
+      "date": "2026-02-14",
+      "daysOld": 1,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "recommendation",
+        "analytics"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "category": "outcomesUpdate",
+          "priority": "high",
+          "title": "Update project outcomes and business impact",
+          "actions": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "rationale": "Content contains results, outcome, impact, success which may be outdated",
+          "estimatedEffort": "high"
+        },
+        {
+          "category": "visualAssets",
+          "priority": "low",
+          "title": "Refresh visual assets and documentation",
+          "actions": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+          "estimatedEffort": "high"
+        }
+      ],
+      "lastModified": "2026-02-14",
+      "wordCount": 987,
+      "updateTemplates": [
+        {
+          "templateName": "outcomesUpdate",
+          "title": "Update: E-Commerce Product Recommendation Engine",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Update project outcomes and business impact",
+          "checklist": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "estimatedTime": "2-4 hours"
+        },
+        {
+          "templateName": "visualAssets",
+          "title": "Update: E-Commerce Product Recommendation Engine",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+          "contentType": "projects",
+          "priority": "low",
+          "description": "Refresh visual assets and documentation",
+          "checklist": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "estimatedTime": "2-4 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+      "title": "Retail Sales Forecasting Dashboard",
+      "date": "2025-11-03",
+      "daysOld": 104,
+      "contentType": "projects",
+      "tags": [
+        "analytics",
+        "visualization",
+        "time-series"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "category": "outcomesUpdate",
+          "priority": "high",
+          "title": "Update project outcomes and business impact",
+          "actions": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "rationale": "Content contains results, outcome, impact, success which may be outdated",
+          "estimatedEffort": "high"
+        },
+        {
+          "category": "technologyStack",
+          "priority": "medium",
+          "title": "Update technology stack and implementation details",
+          "actions": [
+            "Review current technology usage",
+            "Update any deprecated technologies",
+            "Add new tools or methodologies adopted",
+            "Include performance improvements or optimizations"
+          ],
+          "rationale": "Content contains tech stack, technologies, tools which may be outdated",
+          "estimatedEffort": "medium"
+        },
+        {
+          "category": "visualAssets",
+          "priority": "low",
+          "title": "Refresh visual assets and documentation",
+          "actions": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+          "estimatedEffort": "high"
+        }
+      ],
+      "lastModified": "2025-11-03",
+      "wordCount": 1312,
+      "updateTemplates": [
+        {
+          "templateName": "outcomesUpdate",
+          "title": "Update: Retail Sales Forecasting Dashboard",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Update project outcomes and business impact",
+          "checklist": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "estimatedTime": "2-4 hours"
+        },
+        {
+          "templateName": "technologyStack",
+          "title": "Update: Retail Sales Forecasting Dashboard",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+          "contentType": "projects",
+          "priority": "medium",
+          "description": "Update technology stack and implementation details",
+          "checklist": [
+            "Review current technology usage",
+            "Update any deprecated technologies",
+            "Add new tools or methodologies adopted",
+            "Include performance improvements or optimizations"
+          ],
+          "estimatedTime": "1-2 hours"
+        },
+        {
+          "templateName": "visualAssets",
+          "title": "Update: Retail Sales Forecasting Dashboard",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+          "contentType": "projects",
+          "priority": "low",
+          "description": "Refresh visual assets and documentation",
+          "checklist": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "estimatedTime": "2-4 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+      "title": "Support Ticket NLP Triage",
+      "date": "2025-09-18",
+      "daysOld": 150,
+      "contentType": "projects",
+      "tags": [
+        "ml",
+        "nlp",
+        "analytics"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": true,
+      "recommendations": [
+        {
+          "category": "outcomesUpdate",
+          "priority": "high",
+          "title": "Update project outcomes and business impact",
+          "actions": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "rationale": "Content contains results, outcome, impact, success which may be outdated",
+          "estimatedEffort": "high"
+        },
+        {
+          "category": "visualAssets",
+          "priority": "high",
+          "title": "Refresh visual assets and documentation",
+          "actions": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+          "estimatedEffort": "high"
+        }
+      ],
+      "lastModified": "2025-09-18",
+      "wordCount": 1286,
+      "updateTemplates": [
+        {
+          "templateName": "outcomesUpdate",
+          "title": "Update: Support Ticket NLP Triage",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Update project outcomes and business impact",
+          "checklist": [
+            "Add recent project achievements or milestones",
+            "Update business impact metrics",
+            "Include lessons learned or insights",
+            "Add any follow-up projects or developments"
+          ],
+          "estimatedTime": "2-4 hours"
+        },
+        {
+          "templateName": "visualAssets",
+          "title": "Update: Support Ticket NLP Triage",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+          "contentType": "projects",
+          "priority": "high",
+          "description": "Refresh visual assets and documentation",
+          "checklist": [
+            "Update screenshots with current UI",
+            "Refresh diagrams with latest architecture",
+            "Add new visualizations or charts",
+            "Ensure all images are high-quality and relevant"
+          ],
+          "estimatedTime": "2-4 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+      "title": "Docker Best Practices for Production",
+      "date": "2025-12-28",
+      "daysOld": 49,
+      "contentType": "blog",
+      "tags": [
+        "devops",
+        "docker",
+        "production"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "category": "trending_update",
+          "priority": "medium",
+          "title": "Align with Current Trends",
+          "actions": [
+            "Update content to reflect recent developments in: docker",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "rationale": "Tags include currently trending topics: docker",
+          "estimatedEffort": "medium"
+        }
+      ],
+      "lastModified": "2025-12-28",
+      "wordCount": 25,
+      "updateTemplates": [
+        {
+          "templateName": "trending_update",
+          "title": "Update: Docker Best Practices for Production",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+          "contentType": "blog",
+          "priority": "medium",
+          "description": "Align with Current Trends",
+          "checklist": [
+            "Update content to reflect recent developments in: docker",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "estimatedTime": "1-2 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/react-performance-tips.mdx",
+      "title": "React Performance Optimization Techniques",
+      "date": "2026-01-10",
+      "daysOld": 36,
+      "contentType": "blog",
+      "tags": [
+        "react",
+        "performance",
+        "frontend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "category": "trending_update",
+          "priority": "medium",
+          "title": "Align with Current Trends",
+          "actions": [
+            "Update content to reflect recent developments in: react",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "rationale": "Tags include currently trending topics: react",
+          "estimatedEffort": "medium"
+        }
+      ],
+      "lastModified": "2026-01-10",
+      "wordCount": 27,
+      "updateTemplates": [
+        {
+          "templateName": "trending_update",
+          "title": "Update: React Performance Optimization Techniques",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/react-performance-tips.mdx",
+          "contentType": "blog",
+          "priority": "medium",
+          "description": "Align with Current Trends",
+          "checklist": [
+            "Update content to reflect recent developments in: react",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "estimatedTime": "1-2 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+      "title": "TypeScript Migration Guide",
+      "date": "2025-12-10",
+      "daysOld": 67,
+      "contentType": "blog",
+      "tags": [
+        "typescript",
+        "frontend",
+        "migration"
+      ],
+      "status": "STALE",
+      "urgency": "high",
+      "priority": 2,
+      "hasTemporalKeywords": false,
+      "recommendations": [
+        {
+          "category": "trending_update",
+          "priority": "medium",
+          "title": "Align with Current Trends",
+          "actions": [
+            "Update content to reflect recent developments in: typescript",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "rationale": "Tags include currently trending topics: typescript",
+          "estimatedEffort": "medium"
+        }
+      ],
+      "lastModified": "2025-12-10",
+      "wordCount": 23,
+      "updateTemplates": [
+        {
+          "templateName": "trending_update",
+          "title": "Update: TypeScript Migration Guide",
+          "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+          "contentType": "blog",
+          "priority": "medium",
+          "description": "Align with Current Trends",
+          "checklist": [
+            "Update content to reflect recent developments in: typescript",
+            "Add new industry trends or emerging technologies",
+            "Include recent best practices or methodologies",
+            "Reference recent community discussions or developments"
+          ],
+          "estimatedTime": "1-2 hours"
+        }
+      ]
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+      "title": "API Security Patterns",
+      "date": "2025-12-20",
+      "daysOld": 57,
+      "contentType": "blog",
+      "tags": [
+        "security",
+        "api",
+        "backend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2025-12-20",
+      "wordCount": 23,
+      "updateTemplates": []
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+      "title": "Database Indexing Strategies",
+      "date": "2026-01-05",
+      "daysOld": 41,
+      "contentType": "blog",
+      "tags": [
+        "database",
+        "performance",
+        "backend"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-05",
+      "wordCount": 24,
+      "updateTemplates": []
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+      "title": "What Broke in Production and How We Fixed It",
+      "date": "2026-01-20",
+      "daysOld": 26,
+      "contentType": "blog",
+      "tags": [
+        "ml",
+        "monitoring",
+        "reliability"
+      ],
+      "status": "FRESH",
+      "urgency": "low",
+      "priority": 4,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-20",
+      "wordCount": 21,
+      "updateTemplates": []
+    },
+    {
+      "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/scalable-analytics-pipelines.mdx",
+      "title": "Building Scalable Analytics Pipelines",
+      "date": "2026-01-15",
+      "daysOld": 31,
+      "contentType": "blog",
+      "tags": [
+        "analytics",
+        "data-engineering",
+        "scalability"
+      ],
+      "status": "AGING",
+      "urgency": "medium",
+      "priority": 3,
+      "hasTemporalKeywords": false,
+      "recommendations": [],
+      "lastModified": "2026-01-15",
+      "wordCount": 24,
+      "updateTemplates": []
+    }
+  ],
+  "bulkOperations": [
+    {
+      "title": "Update Technology Version References",
+      "description": "Review and update all technology version numbers across content",
+      "affectedItems": 1,
+      "estimatedEffort": "medium",
+      "actions": [
+        "Inventory all technologies mentioned across content",
+        "Check current versions and release notes",
+        "Update version numbers in all relevant content",
+        "Add notes about breaking changes or new features"
+      ]
+    }
+  ],
+  "quickWins": [],
+  "calendarPlan": {
+    "week1": [
+      {
+        "title": "Machine Learning in Production",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/ml-production-deployment.mdx",
+        "priority": "high",
+        "estimatedEffort": 2,
+        "topRecommendations": [
+          {
+            "category": "technologyUpdates",
+            "priority": "high",
+            "title": "Update technology references and version numbers",
+            "actions": [
+              "Check for newer versions of mentioned technologies",
+              "Update version numbers and compatibility notes",
+              "Add recent breaking changes or deprecations",
+              "Include new features or improvements"
+            ],
+            "rationale": "Content contains version, release, latest, current which may be outdated",
+            "estimatedEffort": "medium"
+          }
+        ]
+      },
+      {
+        "title": "Customer Churn Risk Modeling",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-churn-case-study.mdx",
+        "priority": "high",
+        "estimatedEffort": 3,
+        "topRecommendations": [
+          {
+            "category": "outcomesUpdate",
+            "priority": "high",
+            "title": "Update project outcomes and business impact",
+            "actions": [
+              "Add recent project achievements or milestones",
+              "Update business impact metrics",
+              "Include lessons learned or insights",
+              "Add any follow-up projects or developments"
+            ],
+            "rationale": "Content contains results, outcome, impact, success which may be outdated",
+            "estimatedEffort": "high"
+          }
+        ]
+      },
+      {
+        "title": "Customer Segmentation Analytics Dashboard",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/customer-segmentation-dashboard.mdx",
+        "priority": "high",
+        "estimatedEffort": 3,
+        "topRecommendations": [
+          {
+            "category": "outcomesUpdate",
+            "priority": "high",
+            "title": "Update project outcomes and business impact",
+            "actions": [
+              "Add recent project achievements or milestones",
+              "Update business impact metrics",
+              "Include lessons learned or insights",
+              "Add any follow-up projects or developments"
+            ],
+            "rationale": "Content contains results, outcome, impact, success which may be outdated",
+            "estimatedEffort": "high"
+          }
+        ]
+      },
+      {
+        "title": "E-Commerce Product Recommendation Engine",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/ecommerce-recommendation-engine.mdx",
+        "priority": "high",
+        "estimatedEffort": 3,
+        "topRecommendations": [
+          {
+            "category": "outcomesUpdate",
+            "priority": "high",
+            "title": "Update project outcomes and business impact",
+            "actions": [
+              "Add recent project achievements or milestones",
+              "Update business impact metrics",
+              "Include lessons learned or insights",
+              "Add any follow-up projects or developments"
+            ],
+            "rationale": "Content contains results, outcome, impact, success which may be outdated",
+            "estimatedEffort": "high"
+          }
+        ]
+      }
+    ],
+    "week2": [
+      {
+        "title": "Retail Sales Forecasting Dashboard",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/sales-forecasting-dashboard.mdx",
+        "priority": "high",
+        "estimatedEffort": 3,
+        "topRecommendations": [
+          {
+            "category": "outcomesUpdate",
+            "priority": "high",
+            "title": "Update project outcomes and business impact",
+            "actions": [
+              "Add recent project achievements or milestones",
+              "Update business impact metrics",
+              "Include lessons learned or insights",
+              "Add any follow-up projects or developments"
+            ],
+            "rationale": "Content contains results, outcome, impact, success which may be outdated",
+            "estimatedEffort": "high"
+          }
+        ]
+      },
+      {
+        "title": "Support Ticket NLP Triage",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/projects/support-ticket-nlp-triage.mdx",
+        "priority": "high",
+        "estimatedEffort": 3,
+        "topRecommendations": [
+          {
+            "category": "outcomesUpdate",
+            "priority": "high",
+            "title": "Update project outcomes and business impact",
+            "actions": [
+              "Add recent project achievements or milestones",
+              "Update business impact metrics",
+              "Include lessons learned or insights",
+              "Add any follow-up projects or developments"
+            ],
+            "rationale": "Content contains results, outcome, impact, success which may be outdated",
+            "estimatedEffort": "high"
+          },
+          {
+            "category": "visualAssets",
+            "priority": "high",
+            "title": "Refresh visual assets and documentation",
+            "actions": [
+              "Update screenshots with current UI",
+              "Refresh diagrams with latest architecture",
+              "Add new visualizations or charts",
+              "Ensure all images are high-quality and relevant"
+            ],
+            "rationale": "Content contains screenshot, image, diagram, chart which may be outdated",
+            "estimatedEffort": "high"
+          }
+        ]
+      },
+      {
+        "title": "Docker Best Practices for Production",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/docker-production-best-practices.mdx",
+        "priority": "medium",
+        "estimatedEffort": 2,
+        "topRecommendations": []
+      },
+      {
+        "title": "React Performance Optimization Techniques",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/react-performance-tips.mdx",
+        "priority": "medium",
+        "estimatedEffort": 2,
+        "topRecommendations": []
+      }
+    ],
+    "week3": [
+      {
+        "title": "TypeScript Migration Guide",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/typescript-migration-guide.mdx",
+        "priority": "medium",
+        "estimatedEffort": 2,
+        "topRecommendations": []
+      },
+      {
+        "title": "API Security Patterns",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/api-security-patterns.mdx",
+        "priority": "medium",
+        "estimatedEffort": 1,
+        "topRecommendations": []
+      },
+      {
+        "title": "Database Indexing Strategies",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/database-indexing-strategies.mdx",
+        "priority": "medium",
+        "estimatedEffort": 1,
+        "topRecommendations": []
+      },
+      {
+        "title": "What Broke in Production and How We Fixed It",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/model-monitoring-lessons.mdx",
+        "priority": "medium",
+        "estimatedEffort": 1,
+        "topRecommendations": []
+      }
+    ],
+    "week4": [
+      {
+        "title": "Building Scalable Analytics Pipelines",
+        "filePath": "/home/nick/Projects/abigaelawino.github.io/content/blog/scalable-analytics-pipelines.mdx",
+        "priority": "medium",
+        "estimatedEffort": 1,
+        "topRecommendations": []
+      }
+    ]
+  }
+}

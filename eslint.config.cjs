@@ -11,7 +11,6 @@ module.exports = [
       '.next/**',
       'coverage/**',
       '.netlify/**',
-      '**/*.mjs',
       'test/netlify-*.js',
     ],
   },
@@ -37,7 +36,22 @@ module.exports = [
       'no-unused-vars': 'warn',
     },
   },
-  // CommonJS files
+  // ES Module scripts
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      'no-console': 'off',
+      'no-undef': 'off',
+    },
+  },
+  // ES Module test files
   {
     files: ['**/*.js', '!test/**/*.test.js'],
     languageOptions: {

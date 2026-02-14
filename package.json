@@ -26,6 +26,12 @@
     "netlify:dashboard": "node scripts/netlify-dashboard.mjs",
     "netlify:test": "node --test test/netlify-monitoring.test.js",
     "netlify:monitor": "npm run netlify:analyze && npm run netlify:track && npm run netlify:optimize && npm run netlify:dashboard",
+    "content:freshness": "node scripts/content-freshness-monitor.mjs",
+    "content:trends": "node scripts/content-monthly-trends.mjs",
+    "content:recommendations": "node scripts/content-recommendations.mjs",
+    "content:quarterly": "node scripts/content-quarterly-schedule.mjs",
+    "content:health": "node scripts/content-health-validator.mjs",
+    "content:monitor": "npm run content:freshness && npm run content:trends && npm run content:recommendations && npm run content:quarterly && npm run content:health",
     "ci": "npm run lint && npm run format:check && npm run security && node scripts/validate-env.mjs production && npm run typecheck && node --test test/ci-comprehensive.test.js && npm run build && npm run coverage",
     "ci:full": "npm run ci && npm run smoke-test:quick"
   },
