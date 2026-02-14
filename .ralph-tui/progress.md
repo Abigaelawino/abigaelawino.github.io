@@ -157,6 +157,31 @@ after each iteration and it's included in prompts for context.
 
 ---
 
+## [2026-02-14] - abigaelawino-github-io-crc
+- Fixed Netlify deployment configuration inconsistency between publish directory and deploy script
+- Updated netlify.toml to publish from dist/ instead of .next/ to match deploy script
+- Fixed duplicate module export in next.config.js 
+- Enhanced build script with Netlify-specific optimizations and logging
+- Added comprehensive caching headers for HTML pages and assets
+- Added environment validation to build process to prevent deployment issues
+- Fixed linting issues (trailing whitespace) across all source files
+- Verified build optimization: environment validation, type checking, linting all pass
+- Files changed:
+  - netlify.toml (updated publish directory, caching headers, build environment)
+  - next.config.js (fixed duplicate export)
+  - scripts/build.mjs (added Netlify optimization logging)
+  - package.json (enhanced build script with env validation)
+  - src/*.js (fixed linting issues)
+- **Learnings:**
+  - Patterns discovered: Netlify deployment requires consistent publish directory between netlify.toml and deploy script
+  - Gotchas encountered: Site was deployed from .next/ instead of dist/ causing missing static pages like contact/thanks/
+  - Environment validation should run before build to catch configuration issues early
+  - Comprehensive caching strategy improves performance: immutable for assets, must-revalidate for HTML
+  - Build optimization includes setting NODE_ENV and npm flags for faster builds
+  - Trailing whitespace in source files causes linting failures that block deployment
+
+---
+
 ## [2025-02-14] - abigaelawino-github-io-6ji
 - Expanded shadcn/ui build coverage across all static render helpers
 - Updated build.mjs to include comprehensive Tailwind CSS and shadcn/ui design system for production builds

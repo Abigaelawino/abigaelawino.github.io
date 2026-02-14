@@ -49,12 +49,12 @@ function renderProjectCard(project) {
           <div class="flex flex-wrap gap-1">
             ${tagBadges}
           </div>
-          
+
           <h2 class="card-title text-xl">${escapeHtml(project.title)}</h2>
           <p class="card-description text-base">${escapeHtml(project.summary)}</p>
         </div>
       </div>
-      
+
       <div class="card-content space-y-4">
         <div class="flex flex-wrap gap-1">
           ${techBadges}
@@ -79,7 +79,7 @@ function renderProjectCard(project) {
           </div>
         </div>
       </div>
-      
+
       <div class="card-footer flex gap-2 pt-4">
         <a class="button button-primary flex-1" href="/projects/${escapeHtml(project.slug)}" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="${escapeHtml(project.slug)}">
           Read Case Study
@@ -131,7 +131,7 @@ function renderProjectsPage(projects) {
         <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
           Explore project case studies in ML, analytics, and production data systems.
         </p>
-        
+
         ${allTags.length > 0 ? `
           <div class="space-y-3">
             <h3 class="text-lg font-semibold">Topics</h3>

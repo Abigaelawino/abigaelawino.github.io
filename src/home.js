@@ -83,7 +83,7 @@ function renderHomePage(featuredProject, links = DEFAULT_HOME_LINKS) {
       <section class="text-center space-y-4">
         <h2 class="text-2xl font-bold tracking-tight">Let's Work Together</h2>
         <p class="text-muted-foreground max-w-md mx-auto">
-          I'm passionate about solving complex data challenges. Whether you need analysis, 
+          I'm passionate about solving complex data challenges. Whether you need analysis,
           ML models, or data infrastructure, I'd love to help.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">

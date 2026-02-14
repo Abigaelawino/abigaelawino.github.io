@@ -53,13 +53,13 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
         </div>
         <div class="card-content space-y-4">
           <p class="text-muted-foreground">
-            I'm a data scientist with expertise in machine learning, statistical analysis, and data engineering. 
-            My approach combines rigorous methodology with practical implementation, ensuring that insights aren't just 
+            I'm a data scientist with expertise in machine learning, statistical analysis, and data engineering.
+            My approach combines rigorous methodology with practical implementation, ensuring that insights aren't just
             theoretically sound but also deliver real business value.
           </p>
           <p class="text-muted-foreground">
-            I specialize in developing end-to-end data solutions, from initial data collection and cleaning to 
-            model deployment and monitoring. My experience spans various industries, allowing me to bring diverse 
+            I specialize in developing end-to-end data solutions, from initial data collection and cleaning to
+            model deployment and monitoring. My experience spans various industries, allowing me to bring diverse
             perspectives to each unique challenge.
           </p>
         </div>
@@ -113,10 +113,10 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
         </div>
         <div class="card-content space-y-4">
           <p class="text-muted-foreground">
-            I'm always interested in discussing data challenges, collaborations, or opportunities. 
+            I'm always interested in discussing data challenges, collaborations, or opportunities.
             Feel free to reach out through any of the channels below.
           </p>
-          
+
           <div class="flex flex-wrap gap-3">
             <a class="button button-primary" href="/contact">
               <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

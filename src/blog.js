@@ -11,7 +11,7 @@ function renderTags(tags, className) {
 
 function renderBlogCard(post) {
   const tagBadges = (post.tags || []).map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
-  
+
   return `
     <div class="card card-hover" data-blog-card="${escapeHtml(post.slug)}">
       <div class="card-header">
@@ -54,7 +54,7 @@ function renderBlogIndexPage(posts) {
           Read notes on model monitoring, analytics implementation, and production workflows.
         </p>
       </div>
-      
+
       ${posts.length === 0 ? `
         <div class="card">
           <div class="card-content p-12 text-center">
@@ -66,7 +66,7 @@ function renderBlogIndexPage(posts) {
           ${cards}
         </div>
       `}
-      
+
       <div class="text-center">
         <a class="button button-outline" href="/">
           ← Back to Home
@@ -98,10 +98,10 @@ function renderBlogPostPage(post, mdxMarkup = '') {
               ${escapeHtml(formatReadingTime(post.readingTime))}
             </div>
           </div>
-          
+
           <h1 class="text-3xl md:text-4xl font-bold tracking-tight">${escapeHtml(post.title)}</h1>
           <p class="text-lg text-muted-foreground">${escapeHtml(post.summary)}</p>
-          
+
           ${tagBadges ? `<div class="flex flex-wrap gap-2">${tagBadges}</div>` : ''}
         </div>
       </div>
