@@ -96,6 +96,17 @@ after each iteration and it's included in prompts for context.
   8. Generate trend analysis with processing rates and queue depth patterns
   9. Implement intelligent alerting with cooldown periods to prevent spam
   10. Create automated GitHub Actions workflow with 30-minute intervals and issue creation
+- Lighthouse Score Tracking Pattern: For comprehensive automated performance monitoring and regression detection:
+  1. Use weekly GitHub Actions workflow with cron schedule ('0 2 \* \* 0' for Sundays 2 AM UTC) for consistent monitoring
+  2. Implement Core Web Vitals monitoring with threshold-based alerting (LCP: <2.5s, FID: <100ms, CLS: <0.1)
+  3. Create trend analysis with regression detection (>5 point drop considered significant, >10 point critical)
+  4. Build monthly optimization recommendations engine with impact/effort prioritization and implementation tracking
+  5. Implement intelligent alert system with cooldown periods (critical: 4 hours, warnings: 24 hours) to prevent spam
+  6. Use ASCII-based dashboards for real-time performance visualization without external dependencies
+  7. Store historical data in JSON format for trend analysis and pattern detection across multiple time periods
+  8. Create GitHub issues automatically for performance regressions with severity-based labels and recommendations
+  9. Generate comprehensive monthly reports with success metrics, implementation timelines, and progress tracking
+  10. Integrate with CI/CD pipeline for automated performance gates and continuous monitoring of all pages
 
 ---
 
@@ -753,6 +764,37 @@ after each iteration and it's included in prompts for context.
   - GitHub Actions workflow integration enables automated monitoring with artifact storage and issue creation for critical alerts
   - Queue health monitoring benefits from multiple data sources: daemon status, socket connectivity, and bead processing metrics
   - Modular script architecture allows flexible monitoring components (health checks, dashboard, aging analysis) to be used independently
+
+---
+
+## [2026-02-14] - abigaelawino-github-io-cec
+
+- Implemented comprehensive automated Lighthouse score tracking system with weekly monitoring and trend analysis
+- Created Core Web Vitals monitoring system with LCP, FID, CLS, FCP, TTI, TBT, and Speed Index tracking
+- Built monthly optimization recommendations engine based on score patterns and performance regressions
+- Developed GitHub alert system for scores dropping below 90 with intelligent cooldown periods and severity-based issue creation
+- Set up automated GitHub Actions workflow running weekly with manual dispatch options and performance regression detection
+- Added comprehensive trend analysis with regression detection and performance dashboards
+- Created historical data storage system with persistent JSON reports and ASCII-based performance dashboards
+- Implemented risk-based alerting with critical (4-hour) and warning (24-hour) cooldown periods
+- Built comprehensive documentation covering usage, configuration, troubleshooting, and best practices
+- Files changed:
+  - scripts/lighthouse-tracker.mjs (new - main tracking script with regression detection and score analysis)
+  - scripts/lighthouse-core-vitals.mjs (new - Core Web Vitals monitoring with trend analysis and alerts)
+  - scripts/lighthouse-monthly-recommendations.mjs (new - optimization recommendations engine with priority scoring)
+  - scripts/lighthouse-alert-processor.mjs (new - GitHub issue creation and alert management)
+  - .github/workflows/lighthouse-tracking.yml (new - weekly automated workflow with manual dispatch)
+  - docs/lighthouse-tracking.md (new - comprehensive documentation and usage guide)
+  - package.json (updated with lighthouse tracking scripts and comprehensive monitoring command)
+- **Learnings:**
+  - Patterns discovered: Lighthouse tracking requires comprehensive trend analysis to detect regressions before they impact users
+  - Gotchas encountered: GitHub Actions needs proper server startup and Chrome/Headless browser configuration for reliable Lighthouse execution
+  - Core Web Vitals monitoring provides more actionable insights than overall Lighthouse scores for performance optimization
+  - Intelligent alert cooldown periods prevent notification spam while ensuring critical issues are surfaced promptly
+  - Monthly optimization recommendations should be prioritized based on impact/effort analysis and historical patterns
+  - ASCII dashboards provide excellent visibility without external dependencies and work in any terminal environment
+  - Comprehensive documentation is essential for complex monitoring systems with multiple components and configurations
+  - Integration with existing CI/CD patterns ensures consistent monitoring across all project aspects (security, performance, content)
 
 ---
 

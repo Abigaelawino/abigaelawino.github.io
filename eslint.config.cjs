@@ -12,6 +12,7 @@ module.exports = [
       'coverage/**',
       '.netlify/**',
       'test/netlify-*.js',
+      '.github/**',
     ],
   },
   js.configs.recommended,
