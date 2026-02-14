@@ -59,32 +59,69 @@
   }
 }
 
-/* Shell layout styles from the original project */
-.shell {
-  @apply max-w-4xl mx-auto p-5;
-}
-
+/* Skip link styles for accessibility */
 .shell__skip-link {
-  @apply absolute left-0 top-auto w-0.25 h-0.25 overflow-hidden;
+  @apply absolute left-0 top-auto w-0.25 h-0.25 overflow-hidden z-50;
 }
 
 .shell__skip-link:focus,
 .shell__skip-link:focus-visible {
-  @apply relative w-auto h-auto inline-block my-3 px-3.5 py-2.75 border-2 border-slate-900 rounded-lg bg-white no-underline font-bold;
+  @apply relative w-auto h-auto inline-block my-3 px-3.5 py-2.75 border-2 border-primary rounded-lg bg-background text-primary no-underline font-bold;
 }
 
-.shell__nav {
-  @apply flex justify-between items-center gap-4 mb-4;
+/* Container styles */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-.shell__brand {
-  @apply font-bold no-underline;
+/* Page content spacing */
+.page-content {
+  @apply space-y-8;
 }
 
-.shell__links {
-  @apply flex gap-3 flex-wrap list-none m-0 p-0;
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
 }
 
-.shell__link {
-  @apply no-underline border border-gray-200 rounded-full px-2.5 py-1.25;
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Focus styles for better accessibility */
+button:focus-visible,
+a:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg;
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/30;
 }

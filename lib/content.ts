@@ -40,6 +40,11 @@ export function getProjectSlugs() {
 }
 
 export function getProjectBySlug(slug: string): Project | null {
+  if (!slug || slug === 'undefined' || slug === '') {
+    console.error('Invalid slug provided:', slug);
+    return null;
+  }
+  
   try {
     const fullPath = path.join(contentDirectory, 'projects', `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -60,6 +65,7 @@ export function getProjectBySlug(slug: string): Project | null {
 export function getAllProjects(): Project[] {
   const slugs = getProjectSlugs();
   const projects = slugs
+    .filter(slug => slug && slug !== undefined && slug !== 'undefined')
     .map(getProjectBySlug)
     .filter((project): project is Project => project !== null)
     .filter(project => project.frontmatter.status === 'published')
