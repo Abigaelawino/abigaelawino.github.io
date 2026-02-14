@@ -10,15 +10,36 @@ function renderTags(tags, className) {
 }
 
 function renderBlogCard(post) {
+  const tagBadges = (post.tags || []).map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
+  
   return `
-    <article class="blog-card" data-blog-card="${escapeHtml(post.slug)}">
-      <p class="blog-card__meta">${escapeHtml(post.date)} <span aria-hidden="true">·</span> ${escapeHtml(formatReadingTime(post.readingTime))}</p>
-      <h2 class="blog-card__title"><a href="/blog/${escapeHtml(post.slug)}" data-analytics-event="blog_post_open" data-analytics-prop-slug="${escapeHtml(post.slug)}">${escapeHtml(post.title)}</a></h2>
-      <p class="blog-card__summary">${escapeHtml(post.summary)}</p>
-      <ul class="blog-card__tags">
-        ${renderTags(post.tags || [], 'blog-card__tag')}
-      </ul>
-    </article>
+    <div class="card card-hover" data-blog-card="${escapeHtml(post.slug)}">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/blog/${escapeHtml(post.slug)}" class="text-primary hover:text-primary/80 transition-colors" data-analytics-event="blog_post_open" data-analytics-prop-slug="${escapeHtml(post.slug)}">
+            ${escapeHtml(post.title)}
+          </a>
+        </h2>
+        <p class="card-description">${escapeHtml(post.summary)}</p>
+      </div>
+      <div class="card-content space-y-4">
+        <div class="flex items-center gap-4 text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            ${escapeHtml(post.date)}
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            ${escapeHtml(formatReadingTime(post.readingTime))}
+          </div>
+        </div>
+        ${tagBadges ? `<div class="flex flex-wrap gap-2">${tagBadges}</div>` : ''}
+      </div>
+    </div>
   `.trim();
 }
 
@@ -26,81 +47,81 @@ function renderBlogIndexPage(posts) {
   const cards = posts.map(renderBlogCard).join('\n');
 
   return `
-    <section class="blog-index-page" data-blog-index-page>
-      <style>
-        .blog-index-page { display: grid; gap: 1rem; }
-        .blog-index-page__header { display: grid; gap: 0.5rem; }
-        .blog-index-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .blog-index-page__header p { margin: 0; line-height: 1.55; }
-        .blog-index-page__grid { display: grid; gap: 0.8rem; }
-        .blog-card { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.55rem; }
-        .blog-card__meta { margin: 0; color: #4b5563; font-size: 0.92rem; }
-        .blog-card__title { margin: 0; font-size: 1.2rem; line-height: 1.3; }
-        .blog-card__title a { color: inherit; text-decoration: none; }
-        .blog-card__summary { margin: 0; line-height: 1.55; }
-        .blog-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-        .blog-card__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.82rem; }
-        @media (min-width: 48rem) {
-          .blog-index-page { gap: 1.2rem; }
-          .blog-index-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="blog-index-page__header">
-        <h1>Blog</h1>
-        <p>Notes on model reliability, analytics implementation, and production data workflows.</p>
-      </header>
-      <div class="blog-index-page__grid" data-blog-post-list>
-        ${cards}
+    <div class="container space-y-8">
+      <div class="text-center space-y-4">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Blog</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Read notes on model monitoring, analytics implementation, and production workflows.
+        </p>
       </div>
-    </section>
+      
+      ${posts.length === 0 ? `
+        <div class="card">
+          <div class="card-content p-12 text-center">
+            <p class="text-muted-foreground text-lg">No published posts yet.</p>
+          </div>
+        </div>
+      ` : `
+        <div class="grid gap-6 md:grid-cols-2">
+          ${cards}
+        </div>
+      `}
+      
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
   `.trim();
 }
 
 function renderBlogPostPage(post, mdxMarkup = '') {
   const tags = Array.isArray(post.tags) ? post.tags : [];
-  const tagsMarkup =
-    tags.length > 0
-      ? `
-        <ul class="blog-post-page__tags" data-blog-post-tags>
-          ${renderTags(tags, 'blog-post-page__tag')}
-        </ul>
-      `.trim()
-      : '';
+  const tagBadges = tags.map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
 
   return `
-    <article class="blog-post-page" data-blog-post-page="${escapeHtml(post.slug)}">
-      <style>
-        .blog-post-page { display: grid; gap: 0.95rem; }
-        .blog-post-page__header { display: grid; gap: 0.55rem; }
-        .blog-post-page__meta { margin: 0; color: #4b5563; font-size: 0.95rem; }
-        .blog-post-page__title { margin: 0; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.2; }
-        .blog-post-page__summary { margin: 0; line-height: 1.55; }
-        .blog-post-page__tags { display: flex; gap: 0.45rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-        .blog-post-page__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.25rem 0.65rem; font-size: 0.85rem; }
-        .blog-post-page__content { line-height: 1.7; display: grid; gap: 0.75rem; }
-        .blog-post-page__content img { max-width: 100%; height: auto; }
-        .blog-post-page__content pre {
-          margin: 0;
-          overflow-x: auto;
-          border: 1px solid #e5e7eb;
-          border-radius: 0.6rem;
-          padding: 0.75rem;
-          background: #f9fafb;
-        }
-        .blog-post-page__content code {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-      </style>
-      <header class="blog-post-page__header">
-        <p class="blog-post-page__meta">${escapeHtml(post.date)} <span aria-hidden="true">·</span> ${escapeHtml(formatReadingTime(post.readingTime))}</p>
-        <h1 class="blog-post-page__title">${escapeHtml(post.title)}</h1>
-        <p class="blog-post-page__summary">${escapeHtml(post.summary)}</p>
-        ${tagsMarkup}
-      </header>
-      <section class="blog-post-page__content" data-blog-post-body>
-        ${mdxMarkup}
-      </section>
-    </article>
+    <div class="container space-y-8">
+      <div class="card">
+        <div class="card-header space-y-4">
+          <div class="flex items-center gap-4 text-sm text-muted-foreground">
+            <div class="flex items-center gap-1">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              ${escapeHtml(post.date)}
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              ${escapeHtml(formatReadingTime(post.readingTime))}
+            </div>
+          </div>
+          
+          <h1 class="text-3xl md:text-4xl font-bold tracking-tight">${escapeHtml(post.title)}</h1>
+          <p class="text-lg text-muted-foreground">${escapeHtml(post.summary)}</p>
+          
+          ${tagBadges ? `<div class="flex flex-wrap gap-2">${tagBadges}</div>` : ''}
+        </div>
+      </div>
+
+      ${mdxMarkup ? `
+        <div class="card">
+          <div class="card-content">
+            <div class="prose prose-slate max-w-none" data-blog-post-body>
+              ${mdxMarkup}
+            </div>
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="text-center">
+        <a class="button button-outline" href="/blog">
+          ← Back to Blog
+        </a>
+      </div>
+    </div>
   `.trim();
 }
 

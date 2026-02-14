@@ -28,7 +28,7 @@
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
     
-    <script src="/assets/analytics.js" defer nonce="EAwt3JrsoqHQs20zSBV6Jg=="></script>
+    <script src="/assets/analytics.js" defer nonce="fXxQpwnipbND0SlP7iUbCQ=="></script>
   </head>
   <body>
     <div class="shell">
@@ -44,163 +44,331 @@
         </nav>
       </header>
       <main id="main-content" tabindex="-1">
-        <section class="projects-page">
-      <style>
-        .projects-page { display: grid; gap: 1rem; }
-        .projects-page__header { display: grid; gap: 0.45rem; }
-        .projects-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .projects-page__header p { margin: 0; line-height: 1.55; }
-        .projects-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .projects-filter__button {
-          border: 1px solid #e5e7eb;
-          border-radius: 999px;
-          padding: 0.35rem 0.7rem;
-          font: inherit;
-          background: #ffffff;
-          cursor: pointer;
-          font-weight: 600;
-        }
-        .projects-filter__button.is-active { background: #0f172a; border-color: #0f172a; color: #f9fafb; }
-        .projects-grid { display: grid; gap: 0.9rem; }
-        .project-card { border: 1px solid #d1d5db; border-radius: 0.75rem; overflow: hidden; background: #ffffff; }
-        .project-card__cover { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #f3f4f6; }
-        .project-card__body { padding: 0.95rem; display: grid; gap: 0.55rem; }
-        .project-card__meta { margin: 0; color: #4b5563; font-size: 0.92rem; }
-        .project-card__title { margin: 0; font-size: 1.2rem; line-height: 1.25; }
-        .project-card__summary { margin: 0; line-height: 1.55; color: #1f2937; }
-        .project-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-        .project-card__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.82rem; }
-        .project-card__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-        .project-card__cta, .project-card__repo { text-decoration: none; font-weight: 700; }
-        .project-card__cta { color: #0f172a; }
-        .projects-status { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-        @media (min-width: 48rem) {
-          .projects-page { gap: 1.25rem; }
-          .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="projects-page__header">
-        <h1>Projects</h1>
-        <p>Case studies covering modeling, analytics, and production-ready data storytelling.</p>
-      </header>
-      <div class="projects-filter" role="toolbar" aria-label="Project tag filters">
-        <button class="projects-filter__button is-active" data-filter="all" data-filter-button type="button" aria-pressed="true" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="all">All</button><button class="projects-filter__button" data-filter="ml" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="ml">ML</button><button class="projects-filter__button" data-filter="analytics" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="analytics">Analytics</button><button class="projects-filter__button" data-filter="visualization" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="visualization">Visualization</button><button class="projects-filter__button" data-filter="nlp" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="nlp">NLP</button><button class="projects-filter__button" data-filter="time-series" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="time-series">Time Series</button>
+        <div class="container space-y-8">
+      <!-- Header Section -->
+      <div class="text-center space-y-4">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Projects</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Explore project case studies in ML, analytics, and production data systems.
+        </p>
+        
+        
+          <div class="space-y-3">
+            <h3 class="text-lg font-semibold">Topics</h3>
+            <div class="flex flex-wrap gap-2 justify-center">
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  analytics
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  visualization
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  dashboard
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  ml
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  recommendation
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  time-series
+                </span>
+              
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  nlp
+                </span>
+              
+            </div>
+          </div>
+        
       </div>
-      <p class="projects-status" role="status" aria-live="polite" aria-atomic="true" data-projects-status></p>
-      <div class="projects-grid" id="projects-grid" data-projects-grid>
-        <article class="project-card" data-project-card data-tags="analytics,visualization,dashboard">
-      <img
-        class="project-card__cover"
-        src="/images/projects/segmentation-dashboard-cover.svg"
-        alt="Cover image for Customer Segmentation Analytics Dashboard"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">2026-02-14</p>
-        <h2 class="project-card__title">Customer Segmentation Analytics Dashboard</h2>
-        <p class="project-card__summary">Built an interactive analytics dashboard for customer segmentation using clustering algorithms and real-time data visualization.</p>
-        <ul class="project-card__tags"><li class="project-card__tag">analytics</li><li class="project-card__tag">visualization</li><li class="project-card__tag">dashboard</li></ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/customer-segmentation-dashboard" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="customer-segmentation-dashboard">Read case study</a>
-          <a class="project-card__repo" href="https://github.com/abigaelawino/customer-segmentation-dashboard" data-analytics-event="projects_repo_click" data-analytics-prop-slug="customer-segmentation-dashboard">View repo</a>
+
+      <!-- Projects Grid -->
+      
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="card card-hover" data-project-card data-tags="analytics,visualization,dashboard">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="badge badge-secondary">analytics</span><span class="badge badge-secondary">visualization</span><span class="badge badge-secondary">dashboard</span>
+          </div>
+          
+          <h2 class="card-title text-xl">Customer Segmentation Analytics Dashboard</h2>
+          <p class="card-description text-base">Built an interactive analytics dashboard for customer segmentation using clustering algorithms and real-time data visualization.</p>
         </div>
       </div>
-    </article>
-<article class="project-card" data-project-card data-tags="ml,recommendation,analytics">
-      <img
-        class="project-card__cover"
-        src="/images/projects/recommendation-engine-cover.svg"
-        alt="Cover image for E-Commerce Product Recommendation Engine"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">2026-02-14</p>
-        <h2 class="project-card__title">E-Commerce Product Recommendation Engine</h2>
-        <p class="project-card__summary">Developed a hybrid recommendation system combining collaborative filtering and content-based approaches to increase cross-selling and customer engagement.</p>
-        <ul class="project-card__tags"><li class="project-card__tag">ml</li><li class="project-card__tag">recommendation</li><li class="project-card__tag">analytics</li></ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/ecommerce-recommendation-engine" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="ecommerce-recommendation-engine">Read case study</a>
-          <a class="project-card__repo" href="https://github.com/abigaelawino/recommendation-engine" data-analytics-event="projects_repo_click" data-analytics-prop-slug="ecommerce-recommendation-engine">View repo</a>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-outline">python</span><span class="badge badge-outline">plotly</span><span class="badge badge-outline">dash</span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Feb 13, 2026
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            5 min
+          </div>
         </div>
       </div>
-    </article>
-<article class="project-card" data-project-card data-tags="ml,analytics,time-series">
-      <img
-        class="project-card__cover"
-        src="/images/projects/churn-risk-cover.svg"
-        alt="Cover image for Customer Churn Risk Modeling"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">2026-01-12</p>
-        <h2 class="project-card__title">Customer Churn Risk Modeling</h2>
-        <p class="project-card__summary">Built a churn risk model and dashboard to prioritize retention outreach for B2B SaaS customers.</p>
-        <ul class="project-card__tags"><li class="project-card__tag">ml</li><li class="project-card__tag">analytics</li><li class="project-card__tag">time-series</li></ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/customer-churn-case-study" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="customer-churn-case-study">Read case study</a>
-          <a class="project-card__repo" href="https://github.com/abigaelawino/churn-risk-model" data-analytics-event="projects_repo_click" data-analytics-prop-slug="customer-churn-case-study">View repo</a>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/customer-segmentation-dashboard" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="customer-segmentation-dashboard">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        
+          <a class="button button-outline button-icon" href="https://github.com/abigaelawino/customer-segmentation-dashboard" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="customer-segmentation-dashboard" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        
+      </div>
+    </div>
+<div class="card card-hover" data-project-card data-tags="ml,recommendation,analytics">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="badge badge-secondary">ml</span><span class="badge badge-secondary">recommendation</span><span class="badge badge-secondary">analytics</span>
+          </div>
+          
+          <h2 class="card-title text-xl">E-Commerce Product Recommendation Engine</h2>
+          <p class="card-description text-base">Developed a hybrid recommendation system combining collaborative filtering and content-based approaches to increase cross-selling and customer engagement.</p>
         </div>
       </div>
-    </article>
-<article class="project-card" data-project-card data-tags="analytics,visualization,time-series">
-      <img
-        class="project-card__cover"
-        src="/images/projects/retail-forecast-cover.svg"
-        alt="Cover image for Retail Sales Forecasting Dashboard"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">2025-11-03</p>
-        <h2 class="project-card__title">Retail Sales Forecasting Dashboard</h2>
-        <p class="project-card__summary">Built an executive dashboard with rolling forecasts and anomaly alerts for weekly revenue planning across 180 retail locations.</p>
-        <ul class="project-card__tags"><li class="project-card__tag">analytics</li><li class="project-card__tag">visualization</li><li class="project-card__tag">time-series</li></ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/sales-forecasting-dashboard" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="sales-forecasting-dashboard">Read case study</a>
-          <a class="project-card__repo" href="https://github.com/abigaelawino/retail-forecast-dashboard" data-analytics-event="projects_repo_click" data-analytics-prop-slug="sales-forecasting-dashboard">View repo</a>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-outline">python</span><span class="badge badge-outline">spark</span><span class="badge badge-outline">tensorflow</span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Feb 13, 2026
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            5 min
+          </div>
         </div>
       </div>
-    </article>
-<article class="project-card" data-project-card data-tags="ml,nlp,analytics">
-      <img
-        class="project-card__cover"
-        src="/images/projects/ticket-nlp-cover.svg"
-        alt="Cover image for Support Ticket NLP Triage"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">2025-09-18</p>
-        <h2 class="project-card__title">Support Ticket NLP Triage</h2>
-        <p class="project-card__summary">Automated support ticket categorization and urgency scoring to speed up SLA routing for enterprise support operations.</p>
-        <ul class="project-card__tags"><li class="project-card__tag">ml</li><li class="project-card__tag">nlp</li><li class="project-card__tag">analytics</li></ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/support-ticket-nlp-triage" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="support-ticket-nlp-triage">Read case study</a>
-          <a class="project-card__repo" href="https://github.com/abigaelawino/ticket-nlp-triage" data-analytics-event="projects_repo_click" data-analytics-prop-slug="support-ticket-nlp-triage">View repo</a>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/ecommerce-recommendation-engine" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="ecommerce-recommendation-engine">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        
+          <a class="button button-outline button-icon" href="https://github.com/abigaelawino/recommendation-engine" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="ecommerce-recommendation-engine" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        
+      </div>
+    </div>
+<div class="card card-hover" data-project-card data-tags="ml,analytics,time-series">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="badge badge-secondary">ml</span><span class="badge badge-secondary">analytics</span><span class="badge badge-secondary">time-series</span>
+          </div>
+          
+          <h2 class="card-title text-xl">Customer Churn Risk Modeling</h2>
+          <p class="card-description text-base">Built a churn risk model and dashboard to prioritize retention outreach for B2B SaaS customers.</p>
         </div>
       </div>
-    </article>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-outline">python</span><span class="badge badge-outline">xgboost</span><span class="badge badge-outline">postgres</span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Jan 11, 2026
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            5 min
+          </div>
+        </div>
       </div>
-      <script src="/assets/projects-filter.js" defer></script>
-    </section>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/customer-churn-case-study" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="customer-churn-case-study">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        
+          <a class="button button-outline button-icon" href="https://github.com/abigaelawino/churn-risk-model" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="customer-churn-case-study" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        
+      </div>
+    </div>
+<div class="card card-hover" data-project-card data-tags="analytics,visualization,time-series">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="badge badge-secondary">analytics</span><span class="badge badge-secondary">visualization</span><span class="badge badge-secondary">time-series</span>
+          </div>
+          
+          <h2 class="card-title text-xl">Retail Sales Forecasting Dashboard</h2>
+          <p class="card-description text-base">Built an executive dashboard with rolling forecasts and anomaly alerts for weekly revenue planning across 180 retail locations.</p>
+        </div>
+      </div>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-outline">python</span><span class="badge badge-outline">prophet</span><span class="badge badge-outline">lightgbm</span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Nov 2, 2025
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            5 min
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/sales-forecasting-dashboard" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="sales-forecasting-dashboard">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        
+          <a class="button button-outline button-icon" href="https://github.com/abigaelawino/retail-forecast-dashboard" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="sales-forecasting-dashboard" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        
+      </div>
+    </div>
+<div class="card card-hover" data-project-card data-tags="ml,nlp,analytics">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="badge badge-secondary">ml</span><span class="badge badge-secondary">nlp</span><span class="badge badge-secondary">analytics</span>
+          </div>
+          
+          <h2 class="card-title text-xl">Support Ticket NLP Triage</h2>
+          <p class="card-description text-base">Automated support ticket categorization and urgency scoring to speed up SLA routing for enterprise support operations.</p>
+        </div>
+      </div>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-outline">python</span><span class="badge badge-outline">transformers</span><span class="badge badge-outline">fastapi</span>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Sep 17, 2025
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            5 min
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/support-ticket-nlp-triage" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="support-ticket-nlp-triage">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        
+          <a class="button button-outline button-icon" href="https://github.com/abigaelawino/ticket-nlp-triage" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="support-ticket-nlp-triage" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        
+      </div>
+    </div>
+        </div>
+      
+
+      <!-- Footer -->
+      <div class="text-center pt-8">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
       </main>
     </div>
   </body>

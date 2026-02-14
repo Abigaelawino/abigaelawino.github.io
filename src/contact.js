@@ -61,110 +61,194 @@ function renderContactPage(options = {}) {
     ...(options.copy ?? {}),
   };
 
-  const elsewhereLinks = renderElsewhereLinks(resolvedLinks);
-
   return `
-    <section class="contact-page" data-contact-page>
-      <style>
-        .contact-page { display: grid; gap: 1rem; }
-        .contact-page__header { display: grid; gap: 0.5rem; }
-        .contact-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .contact-page__header p { margin: 0; line-height: 1.55; }
-        .contact-layout { display: grid; gap: 1rem; }
-        .contact-card { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.95rem; display: grid; gap: 0.85rem; }
-        .contact-card h2 { margin: 0; font-size: 1.1rem; line-height: 1.3; }
-        .contact-form { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.95rem; display: grid; gap: 0.85rem; }
-        .contact-form__field { display: grid; gap: 0.35rem; }
-        .contact-form__label { font-weight: 600; }
-        .contact-form__input,
-        .contact-form__textarea {
-          border: 1px solid #9ca3af;
-          border-radius: 0.6rem;
-          padding: 0.65rem 0.8rem;
-          font: inherit;
-        }
-        .contact-form__textarea { resize: vertical; min-height: 8.5rem; }
-        .contact-form__actions { display: flex; flex-direction: column; gap: 0.5rem; }
-        .contact-form__submit {
-          border: 1px solid #1f2937;
-          border-radius: 0.6rem;
-          padding: 0.7rem 1rem;
-          background: #0f172a;
-          color: #f9fafb;
-          font-weight: 700;
-          cursor: pointer;
-        }
-        .contact-form__note { margin: 0; font-size: 0.92rem; line-height: 1.55; color: #4b5563; }
-        .contact-form__honeypot {
-          position: absolute;
-          left: -10000px;
-          top: auto;
-          width: 1px;
-          height: 1px;
-          overflow: hidden;
-        }
-        .contact-links { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.5rem; }
-        .contact-links__link { text-decoration: none; font-weight: 600; }
-        @media (min-width: 48rem) {
-          .contact-page { gap: 1.25rem; }
-          .contact-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.9fr); align-items: start; }
-          .contact-form__actions { flex-direction: row; justify-content: flex-start; }
-        }
-      </style>
-      <header class="contact-page__header">
-        <h1>${escapeHtml(copy.heading)}</h1>
-        <p>${escapeHtml(copy.intro)}</p>
-      </header>
-      <div class="contact-layout" data-contact-layout>
-        <form
-          class="contact-form"
-          name="contact"
-          method="POST"
-          action="/contact/thanks/"
-          aria-describedby="contact-privacy-note"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          data-contact-form
-          data-analytics-event="contact_form_submit"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="timestamp" value="" data-contact-timestamp />
-          <input type="hidden" name="form-fingerprint" value="" data-contact-fingerprint />
-          <div class="contact-form__honeypot" aria-hidden="true">
-            <label>
-              Don't fill this out if you're human:
-              <input name="bot-field" tabindex="-1" autocomplete="off" />
-            </label>
+    <div class="container space-y-12">
+      <!-- Header -->
+      <section class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">Get in Touch</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          I'd love to hear about your data science challenges and discuss how I can help.
+        </p>
+      </section>
+
+      <div class="grid gap-8 lg:grid-cols-3">
+        <!-- Contact Information -->
+        <div class="space-y-6">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title flex items-center gap-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                Email
+              </h2>
+              <p class="card-description">
+                For project inquiries, collaborations, or general questions
+              </p>
+            </div>
+            <div class="card-content">
+              <a class="button button-outline w-full" href="mailto:contact@example.com">
+                Send Email
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="contact-form__honeypot" aria-hidden="true">
-            <label>
-              Website (leave blank):
-              <input name="website-field" tabindex="-1" autocomplete="off" />
-            </label>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title flex items-center gap-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                </svg>
+                LinkedIn
+              </h2>
+              <p class="card-description">
+                Professional networking and career opportunities
+              </p>
+            </div>
+            <div class="card-content">
+              <a class="button button-outline w-full" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                Connect on LinkedIn
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="contact-form__field">
-            <label class="contact-form__label" for="contact-name">Name</label>
-            <input class="contact-form__input" id="contact-name" name="name" type="text" autocomplete="name" required />
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title flex items-center gap-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+                GitHub
+              </h2>
+              <p class="card-description">
+                View my open-source projects and contributions
+              </p>
+            </div>
+            <div class="card-content">
+              <a class="button button-outline w-full" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                Visit GitHub
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="contact-form__field">
-            <label class="contact-form__label" for="contact-email">Email</label>
-            <input class="contact-form__input" id="contact-email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-2">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Send a Message</h2>
+              <p class="card-description">
+                Fill out the form below and I'll get back to you as soon as possible.
+              </p>
+            </div>
+            <div class="card-content">
+              <form
+                name="contact"
+                method="POST"
+                action="/contact/thanks/"
+                aria-describedby="contact-privacy-note"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                data-contact-form
+                data-analytics-event="contact_form_submit"
+                class="space-y-4"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="timestamp" value="" data-contact-timestamp />
+                <input type="hidden" name="form-fingerprint" value="" data-contact-fingerprint />
+                
+                <div class="contact-form__honeypot" aria-hidden="true" style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+                  <label>
+                    Don't fill this out if you're human:
+                    <input name="bot-field" tabindex="-1" autocomplete="off" />
+                  </label>
+                </div>
+                <div class="contact-form__honeypot" aria-hidden="true" style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+                  <label>
+                    Website (leave blank):
+                    <input name="website-field" tabindex="-1" autocomplete="off" />
+                  </label>
+                </div>
+                
+                <div class="space-y-2">
+                  <label class="font-semibold" for="contact-name">Name</label>
+                  <input 
+                    class="w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md" 
+                    id="contact-name" 
+                    name="name" 
+                    type="text" 
+                    autocomplete="name" 
+                    required 
+                  />
+                </div>
+                
+                <div class="space-y-2">
+                  <label class="font-semibold" for="contact-email">Email</label>
+                  <input 
+                    class="w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md" 
+                    id="contact-email" 
+                    name="email" 
+                    type="email" 
+                    autocomplete="email" 
+                    required 
+                  />
+                </div>
+                
+                <div class="space-y-2">
+                  <label class="font-semibold" for="contact-message">Message</label>
+                  <textarea 
+                    class="w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md min-h-[8.5rem] resize-vertical" 
+                    id="contact-message" 
+                    name="message" 
+                    required
+                  ></textarea>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <button class="button button-primary" type="submit">Send Message</button>
+                </div>
+                
+                <p class="text-sm text-muted-foreground" id="contact-privacy-note" data-contact-privacy>${escapeHtml(copy.privacyNote)}</p>
+              </form>
+            </div>
           </div>
-          <div class="contact-form__field">
-            <label class="contact-form__label" for="contact-message">Message</label>
-            <textarea class="contact-form__textarea" id="contact-message" name="message" required></textarea>
-          </div>
-          <div class="contact-form__actions">
-            <button class="contact-form__submit" type="submit">Send message</button>
-          </div>
-          <p class="contact-form__note" id="contact-privacy-note" data-contact-privacy>${escapeHtml(copy.privacyNote)}</p>
-        </form>
-        <aside class="contact-card" data-contact-aside>
-          <h2>${escapeHtml(copy.elsewhereHeading)}</h2>
-          ${elsewhereLinks}
-        </aside>
+        </div>
       </div>
-    </section>
+
+      <!-- Availability -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title flex items-center gap-2">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Availability
+          </h2>
+        </div>
+        <div class="card-content">
+          <p class="text-muted-foreground">
+            I'm currently available for freelance projects, consulting, and full-time opportunities. 
+            Typical response time is 24-48 hours. For urgent matters, please mention it in your message.
+          </p>
+        </div>
+      </div>
+
+      <!-- Back Navigation -->
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
   `.trim();
 }
 
@@ -175,21 +259,16 @@ function renderContactThanksPage(options = {}) {
   };
 
   return `
-    <section class="contact-page" data-contact-thanks>
-      <style>
-        .contact-page { display: grid; gap: 1rem; }
-        .contact-thanks { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 1rem; display: grid; gap: 0.75rem; }
-        .contact-thanks h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .contact-thanks p { margin: 0; line-height: 1.55; }
-        .contact-thanks__cta { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid #1f2937; border-radius: 0.6rem; padding: 0.7rem 1rem; background: #0f172a; color: #f9fafb; text-decoration: none; font-weight: 700; width: fit-content; }
-      </style>
-      <div class="contact-thanks">
-        <h1>${escapeHtml(copy.heading)}</h1>
-        <p>${escapeHtml(copy.intro)}</p>
-        <p>${escapeHtml(copy.followUp)}</p>
-        <a class="contact-thanks__cta" href="${escapeHtml(copy.primaryCtaHref)}" data-analytics-event="contact_thanks_primary_click">${escapeHtml(copy.primaryCtaLabel)}</a>
+    <div class="container">
+      <div class="card">
+        <div class="card-content space-y-4">
+          <h1 class="text-3xl font-bold tracking-tight">${escapeHtml(copy.heading)}</h1>
+          <p class="text-muted-foreground">${escapeHtml(copy.intro)}</p>
+          <p class="text-muted-foreground">${escapeHtml(copy.followUp)}</p>
+          <a class="button button-primary" href="${escapeHtml(copy.primaryCtaHref)}" data-analytics-event="contact_thanks_primary_click">${escapeHtml(copy.primaryCtaLabel)}</a>
+        </div>
       </div>
-    </section>
+    </div>
   `.trim();
 }
 

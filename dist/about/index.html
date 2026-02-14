@@ -28,7 +28,7 @@
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
     
-    <script src="/assets/analytics.js" defer nonce="UqKwGhNIrvKlXiFkxnrIfw=="></script>
+    <script src="/assets/analytics.js" defer nonce="tChIYldeQO0L9Mo0d7uJlA=="></script>
   </head>
   <body>
     <div class="shell">
@@ -44,42 +44,207 @@
         </nav>
       </header>
       <main id="main-content" tabindex="-1">
-        <section class="about-page" data-about-page>
-      <style>
-        .about-page { display: grid; gap: 1rem; }
-        .about-hero { display: grid; gap: 0.6rem; }
-        .about-hero__title { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.4rem); line-height: 1.2; }
-        .about-hero__bio { margin: 0; line-height: 1.6; }
-        .about-section { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.75rem; }
-        .about-section__title { margin: 0; font-size: 1.15rem; line-height: 1.3; }
-        .about-section__subtitle { margin: 0; font-size: 1rem; line-height: 1.3; }
-        .about-list { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.45rem; }
-        .about-list__item { line-height: 1.5; }
-        .about-toolkit { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; margin: 0; list-style: none; }
-        .about-toolkit__item { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.35rem 0.65rem; text-align: center; font-size: 0.92rem; }
-        @media (min-width: 48rem) {
-          .about-page { gap: 1.25rem; }
-          .about-toolkit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="about-hero">
-        <h1 class="about-hero__title">About</h1>
-        <p class="about-hero__bio">I am Abigael Awino, a data scientist focused on building practical machine learning and analytics systems that move from prototype to production with measurable impact.</p>
-      </header>
-      <section class="about-section" data-about-strengths>
-        <h2 class="about-section__title">Strengths</h2>
-        <ul class="about-list">
-          <li class="about-list__item">Translate ambiguous business questions into clear, testable data workstreams.</li><li class="about-list__item">Design reproducible ML and analytics pipelines that hold up in production.</li><li class="about-list__item">Communicate findings with concise storytelling for technical and non-technical audiences.</li>
-        </ul>
+        <div class="container space-y-12">
+      <!-- Header -->
+      <section class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">About Me</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Data scientist passionate about transforming complex data into actionable insights and production-ready solutions.
+        </p>
       </section>
-      <section class="about-section" data-about-toolkit>
-        <h2 class="about-section__title">Toolkit</h2>
-        <ul class="about-toolkit">
-          <li class="about-toolkit__item">Python</li><li class="about-toolkit__item">SQL</li><li class="about-toolkit__item">Pandas</li><li class="about-toolkit__item">scikit-learn</li><li class="about-toolkit__item">PyTorch</li><li class="about-toolkit__item">Tableau</li><li class="about-toolkit__item">Power BI</li><li class="about-toolkit__item">Git</li><li class="about-toolkit__item">Docker</li>
-        </ul>
-      </section>
-      
-    </section>
+
+      <!-- Bio -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Background</h2>
+        </div>
+        <div class="card-content space-y-4">
+          <p class="text-muted-foreground">
+            I'm a data scientist with expertise in machine learning, statistical analysis, and data engineering. 
+            My approach combines rigorous methodology with practical implementation, ensuring that insights aren't just 
+            theoretically sound but also deliver real business value.
+          </p>
+          <p class="text-muted-foreground">
+            I specialize in developing end-to-end data solutions, from initial data collection and cleaning to 
+            model deployment and monitoring. My experience spans various industries, allowing me to bring diverse 
+            perspectives to each unique challenge.
+          </p>
+        </div>
+      </div>
+
+      <!-- Strengths -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Core Strengths</h2>
+        </div>
+        <div class="card-content">
+          <ul class="space-y-3">
+            
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">End-to-end project development from data collection to deployment</span>
+              </li>
+            
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">Strong foundation in statistical methods and experimental design</span>
+              </li>
+            
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">Experience with both structured and unstructured data</span>
+              </li>
+            
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">Excellent communication of complex technical concepts</span>
+              </li>
+            
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">Commitment to reproducible research and documentation</span>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Technical Toolkit</h2>
+          <p class="card-description">Technologies and tools I work with regularly</p>
+        </div>
+        <div class="card-content">
+          <div class="grid gap-6 md:grid-cols-2">
+            
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-semibold">Machine Learning</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  
+                    <span class="badge badge-secondary">Python</span>
+                  
+                    <span class="badge badge-secondary">TensorFlow</span>
+                  
+                    <span class="badge badge-secondary">PyTorch</span>
+                  
+                    <span class="badge badge-secondary">Scikit-learn</span>
+                  
+                    <span class="badge badge-secondary">XGBoost</span>
+                  
+                </div>
+              </div>
+            
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-semibold">Data Engineering</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  
+                    <span class="badge badge-secondary">SQL</span>
+                  
+                    <span class="badge badge-secondary">PostgreSQL</span>
+                  
+                    <span class="badge badge-secondary">MongoDB</span>
+                  
+                    <span class="badge badge-secondary">Apache Spark</span>
+                  
+                    <span class="badge badge-secondary">Airflow</span>
+                  
+                </div>
+              </div>
+            
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-semibold">Programming</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  
+                    <span class="badge badge-secondary">Python</span>
+                  
+                    <span class="badge badge-secondary">JavaScript</span>
+                  
+                    <span class="badge badge-secondary">TypeScript</span>
+                  
+                    <span class="badge badge-secondary">R</span>
+                  
+                    <span class="badge badge-secondary">Bash</span>
+                  
+                </div>
+              </div>
+            
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-semibold">Analytics &amp; Visualization</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  
+                    <span class="badge badge-secondary">Tableau</span>
+                  
+                    <span class="badge badge-secondary">Power BI</span>
+                  
+                    <span class="badge badge-secondary">Matplotlib</span>
+                  
+                    <span class="badge badge-secondary">Seaborn</span>
+                  
+                    <span class="badge badge-secondary">Plotly</span>
+                  
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Let's Connect</h2>
+        </div>
+        <div class="card-content space-y-4">
+          <p class="text-muted-foreground">
+            I'm always interested in discussing data challenges, collaborations, or opportunities. 
+            Feel free to reach out through any of the channels below.
+          </p>
+          
+          <div class="flex flex-wrap gap-3">
+            <a class="button button-primary" href="/contact">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Get in Touch
+            </a>
+            <a class="button button-outline" href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              GitHub
+            </a>
+            <a class="button button-outline" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+              </svg>
+              LinkedIn
+            </a>
+            <a class="button button-outline" href="/projects">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              View Projects
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Navigation -->
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
       </main>
     </div>
   </body>

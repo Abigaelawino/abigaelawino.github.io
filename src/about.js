@@ -5,13 +5,20 @@ function renderListItems(items, className) {
 }
 
 const DEFAULT_ABOUT_CONTENT = {
-  bio: 'I am Abigael Awino, a data scientist focused on building practical machine learning and analytics systems that move from prototype to production with measurable impact.',
+  bio: 'Data scientist passionate about transforming complex data into actionable insights and production-ready solutions.',
   strengths: [
-    'Translate ambiguous business questions into clear, testable data workstreams.',
-    'Design reproducible ML and analytics pipelines that hold up in production.',
-    'Communicate findings with concise storytelling for technical and non-technical audiences.',
+    'End-to-end project development from data collection to deployment',
+    'Strong foundation in statistical methods and experimental design',
+    'Experience with both structured and unstructured data',
+    'Excellent communication of complex technical concepts',
+    'Commitment to reproducible research and documentation'
   ],
-  toolkit: ['Python', 'SQL', 'Pandas', 'scikit-learn', 'PyTorch', 'Tableau', 'Power BI', 'Git', 'Docker'],
+  skills: [
+    { category: 'Machine Learning', items: ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'XGBoost'] },
+    { category: 'Data Engineering', items: ['SQL', 'PostgreSQL', 'MongoDB', 'Apache Spark', 'Airflow'] },
+    { category: 'Programming', items: ['Python', 'JavaScript', 'TypeScript', 'R', 'Bash'] },
+    { category: 'Analytics & Visualization', items: ['Tableau', 'Power BI', 'Matplotlib', 'Seaborn', 'Plotly'] }
+  ],
   speaking: [],
   publications: [],
 };
@@ -22,91 +29,141 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
     ...content,
   };
   const strengths = Array.isArray(resolved.strengths) ? resolved.strengths : [];
-  const toolkit = Array.isArray(resolved.toolkit) ? resolved.toolkit : [];
+  const skills = Array.isArray(resolved.skills) ? resolved.skills : [];
   const speaking = Array.isArray(resolved.speaking) ? resolved.speaking : [];
   const publications = Array.isArray(resolved.publications) ? resolved.publications : [];
-  const hasPublicProfile = speaking.length > 0 || publications.length > 0;
 
   // Add error handling for Best Practices improvement
   try {
 
-  const publicProfileMarkup = hasPublicProfile
-    ? `
-      <section class="about-section" data-about-public-profile>
-        <h2 class="about-section__title">Speaking &amp; Publications</h2>
-        ${
-          speaking.length > 0
-            ? `
-          <div>
-            <h3 class="about-section__subtitle">Speaking</h3>
-            <ul class="about-list">${renderListItems(speaking, 'about-list__item')}</ul>
-          </div>
-        `.trim()
-            : ''
-        }
-        ${
-          publications.length > 0
-            ? `
-          <div>
-            <h3 class="about-section__subtitle">Publications</h3>
-            <ul class="about-list">${renderListItems(publications, 'about-list__item')}</ul>
-          </div>
-        `.trim()
-            : ''
-        }
+  return `
+    <div class="container space-y-12">
+      <!-- Header -->
+      <section class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">About Me</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          ${escapeHtml(resolved.bio)}
+        </p>
       </section>
-    `.trim()
-    : '';
 
-  const result = `
-    <section class="about-page" data-about-page>
-      <style>
-        .about-page { display: grid; gap: 1rem; }
-        .about-hero { display: grid; gap: 0.6rem; }
-        .about-hero__title { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.4rem); line-height: 1.2; }
-        .about-hero__bio { margin: 0; line-height: 1.6; }
-        .about-section { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.75rem; }
-        .about-section__title { margin: 0; font-size: 1.15rem; line-height: 1.3; }
-        .about-section__subtitle { margin: 0; font-size: 1rem; line-height: 1.3; }
-        .about-list { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.45rem; }
-        .about-list__item { line-height: 1.5; }
-        .about-toolkit { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; margin: 0; list-style: none; }
-        .about-toolkit__item { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.35rem 0.65rem; text-align: center; font-size: 0.92rem; }
-        @media (min-width: 48rem) {
-          .about-page { gap: 1.25rem; }
-          .about-toolkit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="about-hero">
-        <h1 class="about-hero__title">About</h1>
-        <p class="about-hero__bio">${escapeHtml(resolved.bio)}</p>
-      </header>
-      <section class="about-section" data-about-strengths>
-        <h2 class="about-section__title">Strengths</h2>
-        <ul class="about-list">
-          ${renderListItems(strengths, 'about-list__item')}
-        </ul>
-      </section>
-      <section class="about-section" data-about-toolkit>
-        <h2 class="about-section__title">Toolkit</h2>
-        <ul class="about-toolkit">
-          ${renderListItems(toolkit, 'about-toolkit__item')}
-        </ul>
-      </section>
-      ${publicProfileMarkup}
-    </section>
+      <!-- Bio -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Background</h2>
+        </div>
+        <div class="card-content space-y-4">
+          <p class="text-muted-foreground">
+            I'm a data scientist with expertise in machine learning, statistical analysis, and data engineering. 
+            My approach combines rigorous methodology with practical implementation, ensuring that insights aren't just 
+            theoretically sound but also deliver real business value.
+          </p>
+          <p class="text-muted-foreground">
+            I specialize in developing end-to-end data solutions, from initial data collection and cleaning to 
+            model deployment and monitoring. My experience spans various industries, allowing me to bring diverse 
+            perspectives to each unique challenge.
+          </p>
+        </div>
+      </div>
+
+      <!-- Strengths -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Core Strengths</h2>
+        </div>
+        <div class="card-content">
+          <ul class="space-y-3">
+            ${strengths.map((strength, index) => `
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">${escapeHtml(strength)}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Technical Toolkit</h2>
+          <p class="card-description">Technologies and tools I work with regularly</p>
+        </div>
+        <div class="card-content">
+          <div class="grid gap-6 md:grid-cols-2">
+            ${skills.map(({ category, items }) => `
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-semibold">${escapeHtml(category)}</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  ${items.map(item => `
+                    <span class="badge badge-secondary">${escapeHtml(item)}</span>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Let's Connect</h2>
+        </div>
+        <div class="card-content space-y-4">
+          <p class="text-muted-foreground">
+            I'm always interested in discussing data challenges, collaborations, or opportunities. 
+            Feel free to reach out through any of the channels below.
+          </p>
+          
+          <div class="flex flex-wrap gap-3">
+            <a class="button button-primary" href="/contact">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Get in Touch
+            </a>
+            <a class="button button-outline" href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              GitHub
+            </a>
+            <a class="button button-outline" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+              </svg>
+              LinkedIn
+            </a>
+            <a class="button button-outline" href="/projects">
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              View Projects
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Navigation -->
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
   `.trim();
 
-    return result;
   } catch (error) {
     console.error('Error rendering About page:', error);
     // Return fallback content for Best Practices compliance
-    return `<section class="about-page" data-about-page>
-      <header class="about-hero">
-        <h1 class="about-hero__title">About</h1>
-        <p class="about-hero__bio">${escapeHtml(DEFAULT_ABOUT_CONTENT.bio)}</p>
-      </header>
-    </section>`;
+    return `<div class="container">
+      <section class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">About</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">${escapeHtml(DEFAULT_ABOUT_CONTENT.bio)}</p>
+      </section>
+    </div>`;
   }
 }
 

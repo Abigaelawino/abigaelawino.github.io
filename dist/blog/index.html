@@ -28,7 +28,7 @@
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
     
-    <script src="/assets/analytics.js" defer nonce="FL0fopA/Bvfz3MTSeAdNaQ=="></script>
+    <script src="/assets/analytics.js" defer nonce="ijpJ5LYl/am56ZFTnV5zGQ=="></script>
   </head>
   <body>
     <div class="shell">
@@ -44,40 +44,52 @@
         </nav>
       </header>
       <main id="main-content" tabindex="-1">
-        <section class="blog-index-page" data-blog-index-page>
-      <style>
-        .blog-index-page { display: grid; gap: 1rem; }
-        .blog-index-page__header { display: grid; gap: 0.5rem; }
-        .blog-index-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .blog-index-page__header p { margin: 0; line-height: 1.55; }
-        .blog-index-page__grid { display: grid; gap: 0.8rem; }
-        .blog-card { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.55rem; }
-        .blog-card__meta { margin: 0; color: #4b5563; font-size: 0.92rem; }
-        .blog-card__title { margin: 0; font-size: 1.2rem; line-height: 1.3; }
-        .blog-card__title a { color: inherit; text-decoration: none; }
-        .blog-card__summary { margin: 0; line-height: 1.55; }
-        .blog-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-        .blog-card__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.82rem; }
-        @media (min-width: 48rem) {
-          .blog-index-page { gap: 1.2rem; }
-          .blog-index-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="blog-index-page__header">
-        <h1>Blog</h1>
-        <p>Notes on model reliability, analytics implementation, and production data workflows.</p>
-      </header>
-      <div class="blog-index-page__grid" data-blog-post-list>
-        <article class="blog-card" data-blog-card="model-monitoring-lessons">
-      <p class="blog-card__meta">2026-01-20 <span aria-hidden="true">·</span> 7 min read</p>
-      <h2 class="blog-card__title"><a href="/blog/model-monitoring-lessons" data-analytics-event="blog_post_open" data-analytics-prop-slug="model-monitoring-lessons">What Broke in Production and How We Fixed It</a></h2>
-      <p class="blog-card__summary">A short breakdown of model drift signals, alerting thresholds, and rollback playbooks.</p>
-      <ul class="blog-card__tags">
-        <li class="blog-card__tag">ml</li><li class="blog-card__tag">monitoring</li><li class="blog-card__tag">reliability</li>
-      </ul>
-    </article>
+        <div class="container space-y-8">
+      <div class="text-center space-y-4">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Blog</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Read notes on model monitoring, analytics implementation, and production workflows.
+        </p>
       </div>
-    </section>
+      
+      
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="card card-hover" data-blog-card="model-monitoring-lessons">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/blog/model-monitoring-lessons" class="text-primary hover:text-primary/80 transition-colors" data-analytics-event="blog_post_open" data-analytics-prop-slug="model-monitoring-lessons">
+            What Broke in Production and How We Fixed It
+          </a>
+        </h2>
+        <p class="card-description">A short breakdown of model drift signals, alerting thresholds, and rollback playbooks.</p>
+      </div>
+      <div class="card-content space-y-4">
+        <div class="flex items-center gap-4 text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            2026-01-20
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            7 min read
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2"><span class="badge badge-secondary">ml</span><span class="badge badge-secondary">monitoring</span><span class="badge badge-secondary">reliability</span></div>
+      </div>
+    </div>
+        </div>
+      
+      
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
       </main>
     </div>
   </body>

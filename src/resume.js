@@ -41,85 +41,111 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
   // Add error handling for Best Practices improvement
   try {
 
-  const result = `
-    <section class="resume-page" data-resume-page>
-      <style>
-        .resume-page { display: grid; gap: 1rem; }
-        .resume-hero { display: grid; gap: 0.6rem; }
-        .resume-hero__title { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.4rem); line-height: 1.2; }
-        .resume-hero__headline { margin: 0; font-weight: 600; color: #111827; }
-        .resume-hero__summary { margin: 0; line-height: 1.6; color: #1f2937; }
-        .resume-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
-        .resume-actions__link {
-          border: 1px solid #1f2937;
-          border-radius: 0.6rem;
-          padding: 0.55rem 0.85rem;
-          text-decoration: none;
-          color: inherit;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .resume-actions__link--primary { background: #111827; color: #ffffff; border-color: #111827; }
-        .resume-card { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.75rem; }
-        .resume-card__title { margin: 0; font-size: 1.15rem; line-height: 1.3; }
-        .resume-list { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.45rem; }
-        .resume-list__item { line-height: 1.5; }
-        @media (min-width: 48rem) {
-          .resume-page { gap: 1.25rem; }
-        }
-      </style>
-      <header class="resume-hero">
-        <h1 class="resume-hero__title">Resume</h1>
-        <p class="resume-hero__headline">${escapeHtml(resolved.headline)}</p>
-        <p class="resume-hero__summary">${escapeHtml(resolved.summary)}</p>
-        <nav class="resume-actions" aria-label="Resume actions">
-          <a class="resume-actions__link resume-actions__link--primary" href="${escapeHtml(
+  return `
+    <div class="container space-y-8">
+      <!-- Header -->
+      <div class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">Resume</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Download a PDF resume and view a concise web summary.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a class="button button-primary" href="${escapeHtml(
             DEFAULT_RESUME_ASSET_PATH,
-          )}" download data-analytics-event="resume_download">Download PDF</a>
+          )}" download data-analytics-event="resume_download">
+            <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download PDF
+          </a>
           ${nextLinks
             .map(
               (link) =>
-                `<a class="resume-actions__link" href="${escapeHtml(link.href)}" data-analytics-event="resume_next_link_click" data-analytics-prop-destination="${escapeHtml(
+                `<a class="button button-outline" href="${escapeHtml(link.href)}" data-analytics-event="resume_next_link_click" data-analytics-prop-destination="${escapeHtml(
                   link.label.toLowerCase(),
                 )}">${escapeHtml(link.label)}</a>`,
             )
             .join('')}
-        </nav>
-      </header>
-      <section class="resume-card" data-resume-core-skills>
-        <h2 class="resume-card__title">Core skills</h2>
-        <ul class="resume-list">
-          ${renderList(coreSkills, 'resume-list__item')}
-        </ul>
-      </section>
-      <section class="resume-card" data-resume-highlights>
-        <h2 class="resume-card__title">Experience highlights</h2>
-        <ul class="resume-list">
-          ${renderList(experienceHighlights, 'resume-list__item')}
-        </ul>
-      </section>
-      <section class="resume-card" data-resume-note>
-        <h2 class="resume-card__title">Web summary</h2>
-        <p style="margin: 0; line-height: 1.6;">
-          This page is a concise, web-friendly overview. The downloadable PDF contains the full, formatted resume.
-        </p>
-      </section>
-    </section>
+        </div>
+      </div>
+
+      <!-- Professional Summary -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">${escapeHtml(resolved.headline)}</h2>
+        </div>
+        <div class="card-content">
+          <p class="text-muted-foreground">${escapeHtml(resolved.summary)}</p>
+        </div>
+      </div>
+
+      <!-- Core Skills -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Core Skills</h2>
+        </div>
+        <div class="card-content">
+          <ul class="space-y-2">
+            ${coreSkills.map(skill => `
+              <li class="flex items-start gap-2">
+                <svg class="h-4 w-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>${escapeHtml(skill)}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience Highlights -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Experience Highlights</h2>
+        </div>
+        <div class="card-content">
+          <ul class="space-y-3">
+            ${experienceHighlights.map(highlight => `
+              <li class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span class="text-muted-foreground">${escapeHtml(highlight)}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Web Summary Note -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">About This Page</h2>
+        </div>
+        <div class="card-content">
+          <p class="text-muted-foreground">
+            This page is a concise, web-friendly overview. The downloadable PDF contains the full, formatted resume with complete work history, education, and additional details.
+          </p>
+        </div>
+      </div>
+
+      <!-- Back Navigation -->
+      <div class="text-center">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
   `.trim();
 
-    return result;
   } catch (error) {
     console.error('Error rendering Resume page:', error);
     // Return fallback content for Best Practices compliance
-    return `<section class="resume-page" data-resume-page>
-      <header class="resume-hero">
-        <h1 class="resume-hero__title">Resume</h1>
-        <p class="resume-hero__headline">${escapeHtml(DEFAULT_RESUME_CONTENT.headline)}</p>
-        <p class="resume-hero__summary">${escapeHtml(DEFAULT_RESUME_CONTENT.summary)}</p>
-      </header>
-    </section>`;
+    return `<div class="container">
+      <div class="text-center space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">Resume</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">${escapeHtml(DEFAULT_RESUME_CONTENT.headline)}</p>
+        <p class="text-muted-foreground">${escapeHtml(DEFAULT_RESUME_CONTENT.summary)}</p>
+      </div>
+    </div>`;
   }
 }
 

@@ -39,29 +39,63 @@ function renderTagPills(tags) {
 function renderProjectCard(project) {
   const normalizedTags = project.tags.map((tag) => normalizeTag(tag)).join(',');
 
+  const tagBadges = project.tags.map((tag) => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
+  const techBadges = (project.tech || []).slice(0, 3).map((tech) => `<span class="badge badge-outline">${escapeHtml(tech)}</span>`).join('');
+
   return `
-    <article class="project-card" data-project-card data-tags="${escapeHtml(normalizedTags)}">
-      <img
-        class="project-card__cover"
-        src="${escapeHtml(project.cover)}"
-        alt="Cover image for ${escapeHtml(project.title)}"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-        width="1200"
-        height="675"
-      />
-      <div class="project-card__body">
-        <p class="project-card__meta">${escapeHtml(project.date)}</p>
-        <h2 class="project-card__title">${escapeHtml(project.title)}</h2>
-        <p class="project-card__summary">${escapeHtml(project.summary)}</p>
-        <ul class="project-card__tags">${renderTagPills(project.tags)}</ul>
-        <div class="project-card__actions">
-          <a class="project-card__cta" href="/projects/${escapeHtml(project.slug)}" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="${escapeHtml(project.slug)}">Read case study</a>
-          <a class="project-card__repo" href="${escapeHtml(project.repo)}" data-analytics-event="projects_repo_click" data-analytics-prop-slug="${escapeHtml(project.slug)}">View repo</a>
+    <div class="card card-hover" data-project-card data-tags="${escapeHtml(normalizedTags)}">
+      <div class="card-header space-y-3">
+        <div class="space-y-2">
+          <div class="flex flex-wrap gap-1">
+            ${tagBadges}
+          </div>
+          
+          <h2 class="card-title text-xl">${escapeHtml(project.title)}</h2>
+          <p class="card-description text-base">${escapeHtml(project.summary)}</p>
         </div>
       </div>
-    </article>
+      
+      <div class="card-content space-y-4">
+        <div class="flex flex-wrap gap-1">
+          ${techBadges}
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-muted-foreground">
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            ${new Date(project.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })}
+          </div>
+          <div class="flex items-center gap-1">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            ${Math.round(project.readingTime || 5)} min
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer flex gap-2 pt-4">
+        <a class="button button-primary flex-1" href="/projects/${escapeHtml(project.slug)}" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="${escapeHtml(project.slug)}">
+          Read Case Study
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        ${project.repo ? `
+          <a class="button button-outline button-icon" href="${escapeHtml(project.repo)}" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="${escapeHtml(project.slug)}" aria-label="View repository">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </a>
+        ` : ''}
+      </div>
+    </div>
   `.trim();
 }
 
@@ -80,56 +114,61 @@ function renderFilterButtons() {
 
 function renderProjectsPage(projects) {
   const cards = projects.map(renderProjectCard).join('\n');
+  const allTags = projects.reduce((tags, project) => {
+    project.tags.forEach(tag => {
+      if (!tags.includes(tag)) {
+        tags.push(tag);
+      }
+    });
+    return tags;
+  }, []);
 
   return `
-    <section class="projects-page">
-      <style>
-        .projects-page { display: grid; gap: 1rem; }
-        .projects-page__header { display: grid; gap: 0.45rem; }
-        .projects-page__header h1 { margin: 0; font-size: clamp(1.6rem, 4.8vw, 2.3rem); line-height: 1.2; }
-        .projects-page__header p { margin: 0; line-height: 1.55; }
-        .projects-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .projects-filter__button {
-          border: 1px solid #e5e7eb;
-          border-radius: 999px;
-          padding: 0.35rem 0.7rem;
-          font: inherit;
-          background: #ffffff;
-          cursor: pointer;
-          font-weight: 600;
-        }
-        .projects-filter__button.is-active { background: #0f172a; border-color: #0f172a; color: #f9fafb; }
-        .projects-grid { display: grid; gap: 0.9rem; }
-        .project-card { border: 1px solid #d1d5db; border-radius: 0.75rem; overflow: hidden; background: #ffffff; }
-        .project-card__cover { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #f3f4f6; }
-        .project-card__body { padding: 0.95rem; display: grid; gap: 0.55rem; }
-        .project-card__meta { margin: 0; color: #4b5563; font-size: 0.92rem; }
-        .project-card__title { margin: 0; font-size: 1.2rem; line-height: 1.25; }
-        .project-card__summary { margin: 0; line-height: 1.55; color: #1f2937; }
-        .project-card__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-        .project-card__tag { border: 1px solid #e5e7eb; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.82rem; }
-        .project-card__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-        .project-card__cta, .project-card__repo { text-decoration: none; font-weight: 700; }
-        .project-card__cta { color: #0f172a; }
-        .projects-status { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-        @media (min-width: 48rem) {
-          .projects-page { gap: 1.25rem; }
-          .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-      </style>
-      <header class="projects-page__header">
-        <h1>Projects</h1>
-        <p>Case studies covering modeling, analytics, and production-ready data storytelling.</p>
-      </header>
-      <div class="projects-filter" role="toolbar" aria-label="Project tag filters">
-        ${renderFilterButtons()}
+    <div class="container space-y-8">
+      <!-- Header Section -->
+      <div class="text-center space-y-4">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Projects</h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Explore project case studies in ML, analytics, and production data systems.
+        </p>
+        
+        ${allTags.length > 0 ? `
+          <div class="space-y-3">
+            <h3 class="text-lg font-semibold">Topics</h3>
+            <div class="flex flex-wrap gap-2 justify-center">
+              ${allTags.map(tag => `
+                <span class="badge badge-secondary flex items-center gap-1">
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  ${escapeHtml(tag)}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
       </div>
-      <p class="projects-status" role="status" aria-live="polite" aria-atomic="true" data-projects-status></p>
-      <div class="projects-grid" id="projects-grid" data-projects-grid>
-        ${cards}
+
+      <!-- Projects Grid -->
+      ${projects.length === 0 ? `
+        <div class="card">
+          <div class="card-content p-12 text-center">
+            <p class="text-muted-foreground text-lg">No projects available yet. Check back soon!</p>
+          </div>
+        </div>
+      ` : `
+        <div class="grid gap-6 md:grid-cols-2">
+          ${cards}
+        </div>
+      `}
+
+      <!-- Footer -->
+      <div class="text-center pt-8">
+        <a class="button button-outline" href="/">
+          ← Back to Home
+        </a>
       </div>
-      <script src="/assets/projects-filter.js" defer></script>
-    </section>
+    </div>
   `.trim();
 }
 

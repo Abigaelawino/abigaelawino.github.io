@@ -155,3 +155,28 @@ after each iteration and it's included in prompts for context.
   - shadcn/ui design tokens (CSS variables) ensure consistent theming across components
 
 ---
+
+## [2025-02-14] - abigaelawino-github-io-6ji
+- Expanded shadcn/ui build coverage across all static render helpers
+- Updated build.mjs to include comprehensive Tailwind CSS and shadcn/ui design system for production builds
+- Replaced custom component styles with shadcn/ui equivalents in home.js, projects.js, about.js, contact.js, blog.js, and resume.js
+- Ensured all pages use consistent Card, Button, Badge, and layout components with proper responsive design
+- Verified build output shows properly rendered shadcn/ui components in static HTML
+- Files changed:
+  - scripts/build.mjs (updated with comprehensive shadcn/ui CSS)
+  - src/home.js (updated with Card, Button components)
+  - src/projects.js (updated with Card, Badge, Button components)
+  - src/about.js (updated with Card, Badge components)
+  - src/contact.js (updated with Card, Button components)
+  - src/blog.js (updated with Card, Badge components)
+  - src/resume.js (updated with Card, Button components)
+- **Learnings:**
+  - Patterns discovered: Static render helpers need explicit CSS injection since they don't use React components
+  - Gotchas encountered: shadcn/ui design tokens (CSS variables) must be included in build CSS for proper rendering
+  - Component classes map directly to shadcn/ui patterns: card, button, badge with variant classes
+  - Responsive utilities need explicit inclusion since Tailwind isn't processed in static builds
+  - Icon usage requires inline SVG for compatibility with static HTML generation
+  - The build output maintains component structure even in static form, ensuring visual consistency
+  - Accessibility features like ARIA labels and semantic HTML are preserved in static generation
+
+---
