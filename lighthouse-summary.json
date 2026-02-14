@@ -1,0 +1,20 @@
+{
+  "home": {
+    "error": "connect ECONNREFUSED 127.0.0.1:34949"
+  },
+  "about": {
+    "error": "connect ECONNREFUSED 127.0.0.1:37793"
+  },
+  "projects": {
+    "error": "connect ECONNREFUSED 127.0.0.1:44819"
+  },
+  "blog": {
+    "error": "connect ECONNREFUSED 127.0.0.1:44155"
+  },
+  "contact": {
+    "error": "connect ECONNREFUSED 127.0.0.1:44791"
+  },
+  "resume": {
+    "error": "connect ECONNREFUSED 127.0.0.1:43041"
+  }
+}

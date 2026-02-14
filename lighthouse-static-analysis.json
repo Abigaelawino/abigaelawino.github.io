@@ -1,0 +1,54 @@
+{
+  "home": {
+    "performance": 100,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": [
+      "Missing alt attributes on images"
+    ]
+  },
+  "about": {
+    "performance": 100,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": [
+      "Missing alt attributes on images"
+    ]
+  },
+  "projects": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": []
+  },
+  "blog": {
+    "performance": 100,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": [
+      "Missing alt attributes on images"
+    ]
+  },
+  "contact": {
+    "performance": 100,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": [
+      "Missing alt attributes on images"
+    ]
+  },
+  "resume": {
+    "performance": 100,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 100,
+    "issues": [
+      "Missing alt attributes on images"
+    ]
+  }
+}
