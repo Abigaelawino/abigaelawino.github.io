@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "quarter": 1,
+    "year": 2026,
+    "theme": "Q1 New Year & Goals",
+    "dateRange": {
+      "start": "2026-01-01",
+      "end": "2026-03-31"
+    },
+    "generated": "2026-02-14T23:17:22.174Z",
+    "focus": [
+      "New year tech predictions",
+      "Goal setting",
+      "Learning roadmaps",
+      "Career planning"
+    ],
+    "contentTypes": [
+      "tech-predictions",
+      "goal-setting",
+      "learning-roadmap",
+      "career-planning"
+    ]
+  },
+  "contentPlan": {
+    "blogPosts": [
+      {
+        "type": "tech-predictions",
+        "title": "Top 5 2026 Q1 New Year & Goals Predictions",
+        "summary": "Expert predictions for Q1 New Year & Goals trends in 2026. Based on industry analysis and emerging technologies.",
+        "tags": [
+          "predictions",
+          "Q1 New Year & Goals",
+          "trends",
+          "forecast"
+        ],
+        "targetDate": "2025-12-31",
+        "status": "planned",
+        "estimatedReadTime": 10,
+        "structure": {
+          "introduction": "Brief overview of the current landscape",
+          "predictions": "List of predictions with reasoning",
+          "timeline": "Expected implementation timeline",
+          "resources": "Learning resources and tools"
+        }
+      },
+      {
+        "type": "goal-setting",
+        "title": "2026 Q1 New Year & Goals Goals: A Strategic Approach",
+        "summary": "Strategic goal setting framework for Q1 New Year & Goals with actionable plans and milestones.",
+        "tags": [
+          "goals",
+          "planning",
+          "Q1 New Year & Goals",
+          "strategy"
+        ],
+        "targetDate": "2026-01-28",
+        "status": "planned",
+        "estimatedReadTime": 7,
+        "structure": {
+          "vision": "Long-term vision",
+          "objectives": "SMART objectives",
+          "timeline": "Quarterly breakdown",
+          "measurement": "Success metrics and KPIs"
+        }
+      },
+      {
+        "type": "learning-roadmap",
+        "title": "2026 Q1 New Year & Goals Learning Roadmap",
+        "summary": "Comprehensive learning roadmap for Q1 New Year & Goals with curated resources and skill progression.",
+        "tags": [
+          "learning",
+          "roadmap",
+          "Q1 New Year & Goals",
+          "skills"
+        ],
+        "targetDate": "2026-02-25",
+        "status": "planned",
+        "estimatedReadTime": 15,
+        "structure": {
+          "assessment": "Current skill assessment",
+          "roadmap": "Step-by-step learning path",
+          "resources": "Curated learning resources",
+          "milestones": "Skill milestones and validation"
+        }
+      }
+    ],
+    "projects": {
+      "showcaseOpportunities": [
+        {
+          "title": "Q1 New Year & Goals Project Showcase",
+          "description": "Update and highlight 1-2 key projects relevant to current season",
+          "targetDate": "2026-01-28",
+          "status": "planned"
+        }
+      ],
+      "newProjects": {
+        "suggested": 1,
+        "themes": [
+          "New year tech predictions"
+        ]
+      }
+    },
+    "portfolioUpdates": {
+      "quarterly": {
+        "title": "Q1 2026 Portfolio Update",
+        "description": "Quarterly portfolio refresh with Q1 New Year & Goals focus",
+        "targetDate": "2026-02-25",
+        "status": "planned",
+        "updates": [
+          "Update project descriptions with recent learnings",
+          "Refresh skills and technologies section",
+          "Add recent achievements or certifications",
+          "Update availability and contact information"
+        ]
+      },
+      "seasonal": {
+        "title": "Q1 New Year & Goals Highlights",
+        "description": "Seasonal highlights and achievements",
+        "status": "planned"
+      }
+    }
+  },
+  "milestones": [
+    {
+      "date": "2026-01-15",
+      "title": "January Content Goal",
+      "description": "Complete and publish January content with Q1 New Year & Goals focus",
+      "priority": "medium"
+    },
+    {
+      "date": "2026-02-15",
+      "title": "February Content Goal",
+      "description": "Complete and publish February content with Q1 New Year & Goals focus",
+      "priority": "medium"
+    },
+    {
+      "date": "2026-03-15",
+      "title": "March Content Goal",
+      "description": "Complete and publish March content with Q1 New Year & Goals focus",
+      "priority": "medium"
+    },
+    {
+      "date": "2026-03-31",
+      "title": "Q1 2026 Content Complete",
+      "description": "Complete all Q1 New Year & Goals quarterly content goals",
+      "priority": "high"
+    }
+  ],
+  "holidays": [
+    {
+      "name": "New Year",
+      "contentOpportunity": "Create \"New Year, New Tech Stack\" or \"Year in Review\" content"
+    },
+    {
+      "name": "Valentine's Day",
+      "contentOpportunity": "Share \"Tech Love Story\" or \"Favorite Tools\" content"
+    },
+    {
+      "name": "International Women's Day",
+      "contentOpportunity": "Highlight women in tech and female-led projects"
+    }
+  ],
+  "reminderSchedule": [
+    {
+      "date": "2025-12-25",
+      "title": "Plan Q1 2026 Content",
+      "description": "Review and finalize quarterly content plan",
+      "type": "planning"
+    },
+    {
+      "date": "2026-01-01",
+      "title": "January Content Kickoff",
+      "description": "Start January content creation",
+      "type": "monthly"
+    },
+    {
+      "date": "2026-02-01",
+      "title": "February Content Kickoff",
+      "description": "Start February content creation",
+      "type": "monthly"
+    },
+    {
+      "date": "2026-03-01",
+      "title": "March Content Kickoff",
+      "description": "Start March content creation",
+      "type": "monthly"
+    },
+    {
+      "date": "2026-02-14",
+      "title": "Q1 Mid-Quarter Review",
+      "description": "Review progress and adjust content strategy",
+      "type": "review"
+    }
+  ]
+}
