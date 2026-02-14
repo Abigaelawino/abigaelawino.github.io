@@ -11,6 +11,12 @@ after each iteration and it's included in prompts for context.
   3. Form state handling (idle/pending/success/error) with user feedback
   4. Hidden fields for form-name and bot-field (honeypot)
   5. URLSearchParams for form data encoding
+- CMS Selection Pattern: For developer portfolios with Next.js + Netlify stack:
+  1. Decap CMS (formerly Netlify CMS) is optimal for Git-based workflows
+  2. Requires only 2 files: admin/index.html and admin/config.yml
+  3. Content stored as markdown with frontmatter in repository
+  4. Integrates with Netlify Identity for authentication
+  5. No additional infrastructure or costs required
 
 ---
 
@@ -26,7 +32,22 @@ after each iteration and it's included in prompts for context.
   - Patterns discovered: Netlify Forms require static HTML detection file at `public/__forms.html`
   - Gotchas encountered: Must POST to the static HTML file path, not to API routes
   - Form submission requires `application/x-www-form-urlencoded` content type with URLSearchParams
-  - Important to include hidden fields for form-name and bot-field (honeypot)
-  - State management with TypeScript interfaces provides better type safety
+   - Important to include hidden fields for form-name and bot-field (honeypot)
+   - State management with TypeScript interfaces provides better type safety
 ---
 
+## [2025-02-14] - abigaelawino-cms-1
+- Researched and evaluated 5 headless CMS options for portfolio content management
+- Created comprehensive CMS research document with detailed analysis and recommendations
+- Files changed:
+  - docs/cms-research.md (new)
+- **Learnings:**
+  - Patterns discovered: Decap CMS is optimal for Next.js + Netlify portfolio stack
+  - Gotchas encountered: Netlify CMS was rebranded to Decap CMS in 2023
+  - Decap CMS requires only 2 files for setup: admin/index.html and admin/config.yml
+  - Content stored as markdown files with frontmatter provides version control through Git
+  - Free tier limitations vary significantly between CMS options
+  - Real-time collaboration features come at significant cost premium
+  - Git-based CMS eliminates need for separate database and infrastructure
+  - Developer portfolio use case prioritizes simplicity and zero cost over advanced features
+---
