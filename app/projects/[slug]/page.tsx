@@ -22,12 +22,58 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!project) {
     return {
       title: 'Project Not Found',
+      description: 'The requested project case study could not be found.',
     };
   }
 
+  const title = project.frontmatter.title;
+  const summary = project.frontmatter.summary;
+  const tags = project.frontmatter.tags.slice(0, 3).join(', ');
+  const tech = project.frontmatter.tech.slice(0, 3).join(', ');
+
   return {
-    title: `${project.frontmatter.title} | Case Study`,
-    description: project.frontmatter.summary,
+    title: `${title} · Case Study`,
+    description: `${summary} Technologies used: ${tech}. Tags: ${tags}. A comprehensive data science case study with detailed methodology and results.`,
+    keywords: [
+      ...project.frontmatter.tags,
+      ...project.frontmatter.tech,
+      'case study',
+      'data science',
+      'machine learning',
+    ],
+    openGraph: {
+      title: `${title} · Case Study | Abigael Awino`,
+      description: `${summary} Technologies: ${tech}. Tags: ${tags}.`,
+      url: `https://abigaelawino.github.io/projects/${project.slug}`,
+      type: 'article',
+      images: [
+        {
+          url: `/images/projects/${project.slug}-cover.svg`,
+          width: 1200,
+          height: 630,
+          alt: `${title} · Case Study Cover`,
+        },
+        {
+          url: '/assets/og.png',
+          width: 1200,
+          height: 630,
+          alt: 'Abigael Awino · Data Science Portfolio',
+        },
+      ],
+      publishedTime: project.frontmatter.date,
+      authors: ['Abigael Awino'],
+      section: 'Case Studies',
+      tags: project.frontmatter.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} · Case Study`,
+      description: `${summary} Technologies: ${tech}. Tags: ${tags}.`,
+      images: [`/images/projects/${project.slug}-cover.svg`, '/assets/og.png'],
+    },
+    alternates: {
+      canonical: `https://abigaelawino.github.io/projects/${project.slug}`,
+    },
   };
 }
 

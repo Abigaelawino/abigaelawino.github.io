@@ -3,6 +3,37 @@ import { ContactForm } from '../../components/contact-form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Github, Linkedin, ExternalLink, MapPin, Clock } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description:
+    'Get in touch with Abigael Awino to discuss your data science challenges. Reach out via the secure contact form or connect on LinkedIn and GitHub for collaborations.',
+  openGraph: {
+    title: 'Contact · Abigael Awino',
+    description:
+      'Get in touch with Abigael Awino to discuss your data science challenges. Reach out via the secure contact form or connect on LinkedIn and GitHub.',
+    url: 'https://abigaelawino.github.io/contact',
+    images: [
+      {
+        url: '/assets/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Contact Abigael Awino · Data Science Collaborations',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact · Abigael Awino',
+    description:
+      'Get in touch with Abigael Awino to discuss your data science challenges and collaborations.',
+    images: ['/assets/og.png'],
+  },
+  alternates: {
+    canonical: 'https://abigaelawino.github.io/contact',
+  },
+};
 
 export default function ContactPage() {
   return (

@@ -246,6 +246,41 @@ after each iteration and it's included in prompts for context.
 
 ---
 
+## [2026-02-14] - abigaelawino-roadmap-3d
+
+- Implemented comprehensive SEO with Next.js metadata API across all pages
+- Added per-page titles, descriptions, Open Graph, Twitter cards, and canonical URLs
+- Created dynamic metadata for project and blog detail pages with content-specific optimization
+- Generated sitemap.ts and robots.ts for Next.js metadata API with automatic route discovery
+- Added structured data (JSON-LD) for Person, Organization, WebSite, and BreadcrumbList schemas
+- Separated client navigation components to enable server-side metadata generation
+- Enhanced blog post pages with proper content rendering and metadata generation
+- Files changed:
+  - app/layout.tsx (comprehensive site-wide metadata, structured data integration)
+  - components/navigation.tsx (new - client-side navigation component)
+  - components/structured-data.tsx (new - JSON-LD structured data component)
+  - app/page.tsx (homepage metadata with professional description)
+  - app/about/page.tsx (about page metadata with skill-focused content)
+  - app/projects/page.tsx (projects page metadata with portfolio focus)
+  - app/blog/page.tsx (blog page metadata with content strategy focus)
+  - app/contact/page.tsx (contact page metadata with call-to-action focus)
+  - app/resume/page.tsx (resume page metadata with professional summary)
+  - app/projects/[slug]/page.tsx (enhanced dynamic project metadata with tags and tech)
+  - app/blog/[slug]/page.tsx (enhanced dynamic blog metadata with content generation)
+  - app/sitemap.ts (new - comprehensive sitemap with all routes and metadata)
+  - app/robots.ts (new - advanced robots.txt with multiple user agents)
+- **Learnings:**
+  - Patterns discovered: Next.js metadata API requires server components for generateMetadata functions
+  - Gotchas encountered: useState and client-side hooks require separation into client components
+  - Dynamic metadata generation works best with async generateMetadata functions in dynamic routes
+  - Structured data integration through script tags provides enhanced search engine understanding
+  - Sitemap generation automatically includes all static and dynamic routes with proper priorities
+  - Twitter cards and Open Graph metadata require consistent image dimensions and alt text
+  - Canonical URLs should be set per-page to prevent duplicate content issues
+  - Blog post pages need proper content extraction and tag-based metadata generation
+
+---
+
 ## [2026-02-14] - abigaelawino-roadmap-3c
 
 - Implemented comprehensive privacy-friendly analytics with Plausible Analytics

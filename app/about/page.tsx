@@ -12,6 +12,37 @@ import {
   Brain,
   BarChart3,
 } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Learn about Abigael Awino, a data scientist passionate about transforming complex data into actionable insights and production-ready solutions. Discover skills, background, and technical expertise.',
+  openGraph: {
+    title: 'About Abigael Awino · Data Scientist',
+    description:
+      'Learn about Abigael Awino, a data scientist passionate about transforming complex data into actionable insights and production-ready solutions.',
+    url: 'https://abigaelawino.github.io/about',
+    images: [
+      {
+        url: '/assets/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'About Abigael Awino · Data Scientist',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Abigael Awino · Data Scientist',
+    description:
+      'Learn about Abigael Awino, a data scientist passionate about transforming complex data into actionable insights.',
+    images: ['/assets/og.png'],
+  },
+  alternates: {
+    canonical: 'https://abigaelawino.github.io/about',
+  },
+};
 
 export default function AboutPage() {
   const skills = [

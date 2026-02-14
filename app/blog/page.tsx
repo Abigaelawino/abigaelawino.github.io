@@ -2,6 +2,7 @@ import { BlogClient } from './blog-client';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+import type { Metadata } from 'next';
 
 async function getBlogPosts() {
   const blogDir = join(process.cwd(), 'content/blog');
@@ -38,6 +39,36 @@ async function getBlogPosts() {
     return [];
   }
 }
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Read notes on model monitoring, analytics implementation, and production workflows. Discover insights on data science best practices and machine learning deployment.',
+  openGraph: {
+    title: 'Blog · Abigael Awino',
+    description:
+      'Read notes on model monitoring, analytics implementation, and production workflows. Discover insights on data science best practices.',
+    url: 'https://abigaelawino.github.io/blog',
+    images: [
+      {
+        url: '/assets/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Blog · Abigael Awino Data Science Insights',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog · Abigael Awino',
+    description:
+      'Read notes on model monitoring, analytics implementation, and production workflows.',
+    images: ['/assets/og.png'],
+  },
+  alternates: {
+    canonical: 'https://abigaelawino.github.io/blog',
+  },
+};
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();

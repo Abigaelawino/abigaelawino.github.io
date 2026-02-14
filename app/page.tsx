@@ -11,7 +11,38 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, Clock, ExternalLink, Github } from 'lucide-react';
+import type { Metadata } from 'next';
 import './page.css';
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description:
+    'Data science solutions bridging exploratory analysis to production-ready outcomes. Explore machine learning projects, analytics implementations, and end-to-end data solutions.',
+  openGraph: {
+    title: 'Abigael Awino · Data Science Portfolio',
+    description:
+      'Data science solutions bridging exploratory analysis to production-ready outcomes. Explore machine learning projects, analytics implementations, and end-to-end data solutions.',
+    url: 'https://abigaelawino.github.io',
+    images: [
+      {
+        url: '/assets/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Abigael Awino · Data Science Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Abigael Awino · Data Science Portfolio',
+    description:
+      'Data science solutions bridging exploratory analysis to production-ready outcomes.',
+    images: ['/assets/og.png'],
+  },
+  alternates: {
+    canonical: 'https://abigaelawino.github.io',
+  },
+};
 
 export default function HomePage() {
   const projects = getAllProjects().slice(0, 3); // Get first 3 projects for featured section

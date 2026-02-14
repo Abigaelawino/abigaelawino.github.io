@@ -1,27 +1,83 @@
-'use client';
-
-import { ReactNode, useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import { Menu, X } from 'lucide-react';
+import { ReactNode } from 'react';
+import { Navigation } from '@/components/navigation';
+import { StructuredData } from '@/components/structured-data';
+import type { Metadata } from 'next';
 import './globals.css';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export const metadata: Metadata = {
+  metadataBase: new URL('https://abigaelawino.github.io'),
+  title: {
+    template: '%s · Abigael Awino',
+    default: 'Abigael Awino · Data Science Portfolio',
+  },
+  description:
+    'Data scientist specializing in machine learning, analytics, and production-ready data solutions. End-to-end project development from data collection to deployment.',
+  keywords: [
+    'data science',
+    'machine learning',
+    'analytics',
+    'Python',
+    'TensorFlow',
+    'PyTorch',
+    'data engineering',
+    'statistics',
+  ],
+  authors: [{ name: 'Abigael Awino' }],
+  creator: 'Abigael Awino',
+  publisher: 'Abigael Awino',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://abigaelawino.github.io',
+    title: 'Abigael Awino · Data Science Portfolio',
+    description:
+      'Data scientist specializing in machine learning, analytics, and production-ready data solutions. End-to-end project development from data collection to deployment.',
+    siteName: 'Abigael Awino Portfolio',
+    images: [
+      {
+        url: '/assets/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Abigael Awino · Data Science Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Abigael Awino · Data Science Portfolio',
+    description:
+      'Data scientist specializing in machine learning, analytics, and production-ready data solutions.',
+    images: ['/assets/og.png'],
+    creator: '@abigaelawino',
+  },
+  verification: {
+    google: 'verify-google-site-code',
+    yandex: 'verify-yandex-site-code',
+  },
+  alternates: {
+    canonical: 'https://abigaelawino.github.io',
+    languages: {
+      'en-US': 'https://abigaelawino.github.io',
+    },
+  },
+};
 
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <StructuredData />
       </head>
       <body>
         <div className="min-h-screen bg-background">
@@ -32,165 +88,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             Skip to content
           </a>
 
-          <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <nav
-              className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8"
-              aria-label="Site navigation"
-            >
-              <Link
-                href="/"
-                className="font-bold text-xl hover:text-primary transition-colors text-foreground"
-                data-analytics-event="nav_home"
-                data-analytics-prop-location="header"
-              >
-                <span className="hidden sm:inline">Abigael Awino Portfolio</span>
-                <span className="sm:hidden">AA Portfolio</span>
-              </Link>
-
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-2">
-                <NavigationMenu>
-                  <NavigationMenuList className="flex gap-2">
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Button variant="ghost" asChild>
-                          <Link
-                            href="/projects"
-                            className="hover:bg-accent hover:text-accent-foreground"
-                            data-analytics-event="nav_projects"
-                            data-analytics-prop-location="header"
-                          >
-                            Projects
-                          </Link>
-                        </Button>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Button variant="ghost" asChild>
-                          <Link
-                            href="/about"
-                            className="hover:bg-accent hover:text-accent-foreground"
-                            data-analytics-event="nav_about"
-                            data-analytics-prop-location="header"
-                          >
-                            About
-                          </Link>
-                        </Button>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Button variant="ghost" asChild>
-                          <Link
-                            href="/blog"
-                            className="hover:bg-accent hover:text-accent-foreground"
-                            data-analytics-event="nav_blog"
-                            data-analytics-prop-location="header"
-                          >
-                            Blog
-                          </Link>
-                        </Button>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-
-                <div className="flex items-center gap-2 ml-4 pl-4 border-l">
-                  <Button
-                    variant="default"
-                    asChild
-                    className="bg-primary text-primary-foreground hover:bg-primary/90"
-                    data-analytics-event="cta_contact"
-                    data-analytics-prop-location="header"
-                  >
-                    <Link href="/contact">Contact</Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    asChild
-                    data-analytics-event="cta_resume"
-                    data-analytics-prop-location="header"
-                  >
-                    <Link href="/resume">View Resume</Link>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Mobile menu button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle navigation menu"
-              >
-                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
-            </nav>
-
-            {/* Mobile Navigation */}
-            {mobileMenuOpen && (
-              <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container px-4 py-4 space-y-2">
-                  <Button variant="ghost" asChild className="w-full justify-start">
-                    <Link
-                      href="/projects"
-                      onClick={() => setMobileMenuOpen(false)}
-                      data-analytics-event="nav_projects"
-                      data-analytics-prop-location="mobile_menu"
-                    >
-                      Projects
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" asChild className="w-full justify-start">
-                    <Link
-                      href="/about"
-                      onClick={() => setMobileMenuOpen(false)}
-                      data-analytics-event="nav_about"
-                      data-analytics-prop-location="mobile_menu"
-                    >
-                      About
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" asChild className="w-full justify-start">
-                    <Link
-                      href="/blog"
-                      onClick={() => setMobileMenuOpen(false)}
-                      data-analytics-event="nav_blog"
-                      data-analytics-prop-location="mobile_menu"
-                    >
-                      Blog
-                    </Link>
-                  </Button>
-                  <div className="pt-2 border-t space-y-2">
-                    <Button
-                      variant="default"
-                      asChild
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                      data-analytics-event="cta_contact"
-                      data-analytics-prop-location="mobile_menu"
-                    >
-                      <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                        Contact
-                      </Link>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      asChild
-                      className="w-full"
-                      data-analytics-event="cta_resume"
-                      data-analytics-prop-location="mobile_menu"
-                    >
-                      <Link href="/resume" onClick={() => setMobileMenuOpen(false)}>
-                        View Resume
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </header>
+          <Navigation siteName="Abigael Awino Portfolio" />
 
           <main id="main-content" tabIndex={-1} className="container py-8 px-4 sm:px-6 lg:px-8">
             {children}
