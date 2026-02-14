@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "netlify dev",
+    "dev": "node scripts/dev.mjs",
     "start": "node scripts/dev-server.mjs",
     "lint": "node scripts/lint.mjs",
     "security": "node scripts/security-check.mjs",

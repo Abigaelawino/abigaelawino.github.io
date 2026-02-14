@@ -36,6 +36,20 @@ after each iteration and it's included in prompts for context.
    - State management with TypeScript interfaces provides better type safety
 ---
 
+## [2025-02-14] - abigaelawino-github-io-6n3
+- Updated package.json dev script to run scripts/dev.mjs instead of netlify dev
+- Exposed npm run dev entry that boots the renderer script in watch mode
+- Verified the dev script works correctly with automatic rebuilds on file changes
+- Files changed:
+  - package.json (updated dev script)
+- **Learnings:**
+  - Patterns discovered: The dev.mjs script already implemented watch mode using chokidar
+  - Gotchas encountered: The original package.json had dev script pointing to netlify dev instead of dev.mjs
+  - The dev.mjs script provides both build watching and dev server functionality in one command
+  - This enables the intended workflow where netlify dev and helper tmux sessions can run the portfolio locally
+
+---
+
 ## [2025-02-14] - abigaelawino-cms-1
 - Researched and evaluated 5 headless CMS options for portfolio content management
 - Created comprehensive CMS research document with detailed analysis and recommendations
