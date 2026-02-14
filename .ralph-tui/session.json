@@ -3,10 +3,10 @@
   "sessionId": "db01f0be-7df5-4c2b-b725-990d8849e836",
   "status": "running",
   "startedAt": "2026-02-14T18:27:46.894Z",
-  "updatedAt": "2026-02-14T20:27:15.567Z",
-  "currentIteration": 19,
+  "updatedAt": "2026-02-14T20:33:40.813Z",
+  "currentIteration": 20,
   "maxIterations": 30,
-  "tasksCompleted": 18,
+  "tasksCompleted": 19,
   "isPaused": false,
   "agentPlugin": "opencode",
   "trackerState": {
@@ -106,8 +106,8 @@
       {
         "id": "abigaelawino-roadmap-4a",
         "title": "[Week 4] Add remaining project case studies",
-        "status": "open",
-        "completedInSession": false
+        "status": "completed",
+        "completedInSession": true
       },
       {
         "id": "abigaelawino-roadmap-4b",
@@ -529,6 +529,16 @@
       "durationMs": 575092,
       "startedAt": "2026-02-14T20:13:34.062Z",
       "endedAt": "2026-02-14T20:23:09.154Z"
+    },
+    {
+      "iteration": 20,
+      "status": "completed",
+      "taskId": "abigaelawino-roadmap-4a",
+      "taskTitle": "[Week 4] Add remaining project case studies",
+      "taskCompleted": true,
+      "durationMs": 236433,
+      "startedAt": "2026-02-14T20:23:18.275Z",
+      "endedAt": "2026-02-14T20:27:14.708Z"
     }
   ],
   "skippedTaskIds": [],

@@ -27,6 +27,8 @@ interface ChartProps {
   type: 'bar' | 'line' | 'pie';
   title?: string;
   height?: number;
+  description?: string;
+  accessibilityLabel?: string;
 }
 
 const COLORS = [
@@ -40,7 +42,14 @@ const COLORS = [
   '#ff0000',
 ];
 
-export function Chart({ data, type, title, height = 300 }: ChartProps) {
+export function Chart({
+  data,
+  type,
+  title,
+  height = 300,
+  description,
+  accessibilityLabel,
+}: ChartProps) {
   const renderChart = () => {
     switch (type) {
       case 'bar':
@@ -96,10 +105,65 @@ export function Chart({ data, type, title, height = 300 }: ChartProps) {
     }
   };
 
+  // Generate accessibility description for screen readers
+  const generateAccessibilityDescription = () => {
+    if (accessibilityLabel) return accessibilityLabel;
+
+    if (description) return description;
+
+    // Auto-generate description based on data
+    const dataSummary = data.map(d => `${d.name}: ${d.value}`).join(', ');
+    switch (type) {
+      case 'bar':
+        return `Bar chart showing ${dataSummary}`;
+      case 'line':
+        return `Line chart showing ${dataSummary}`;
+      case 'pie':
+        return `Pie chart showing ${dataSummary}`;
+      default:
+        return `Chart showing ${dataSummary}`;
+    }
+  };
+
+  // Generate data table for accessibility
+  const generateDataTable = () => {
+    return (
+      <table className="sr-only" aria-label={`${title || 'Chart'} data table`}>
+        <caption>{generateAccessibilityDescription()}</caption>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
   return (
     <div className="w-full">
       {title && <h3 className="text-lg font-semibold mb-4">{title}</h3>}
-      {renderChart()}
+      <div
+        role="img"
+        aria-label={generateAccessibilityDescription()}
+        aria-describedby={description ? 'chart-description' : undefined}
+      >
+        {renderChart()}
+      </div>
+      {description && (
+        <p id="chart-description" className="sr-only">
+          {description}
+        </p>
+      )}
+      {generateDataTable()}
     </div>
   );
 }

@@ -495,3 +495,31 @@ after each iteration and it's included in prompts for context.
   - All 5 case studies now exceed 150 lines and follow consistent comprehensive template structure
 
 ---
+
+## [2026-02-14] - abigaelawino-roadmap-4b
+
+- Implemented comprehensive WCAG 2.1 AA accessibility improvements across the portfolio website
+- Fixed skip link implementation with proper CSS classes and visible styling for keyboard navigation
+- Enhanced chart components with accessible alternatives including data tables and comprehensive ARIA attributes
+- Added proper form validation with ARIA attributes, error summaries, and live regions for screen reader announcements
+- Implemented live regions for dynamic content updates in project and blog filtering
+- Enhanced focus states for all interactive elements including buttons, links, form inputs, and filter badges
+- Added semantic HTML5 markup with article elements for project and blog cards
+- Improved color contrast ratios and added enhanced contrast for better accessibility
+- Files changed:
+  - app/layout.tsx (fixed skip link CSS class implementation)
+  - app/globals.css (enhanced focus styles, added screen reader only content, improved color contrast)
+  - components/ui/chart.tsx (added ARIA attributes, data tables, accessibility descriptions)
+  - components/contact-form.tsx (comprehensive form accessibility with validation and live regions)
+  - app/projects/projects-client.tsx (added semantic markup and live regions)
+  - app/blog/blog-client.tsx (added semantic markup and live regions)
+- **Learnings:**
+  - Patterns discovered: WCAG 2.1 AA compliance requires systematic approach across semantic HTML, focus management, ARIA attributes, and color contrast
+  - Gotchas encountered: Skip link CSS class mismatch prevented proper focus styling; JSX structure needs careful attention when adding semantic elements
+  - Form accessibility requires multiple layers: proper labeling, validation association, error summaries, and live regions for status announcements
+  - Charts need comprehensive accessibility including role="img", aria-label, aria-describedby, and data table alternatives
+  - Live regions with aria-live="polite" are essential for announcing dynamic content changes like filter results
+  - Semantic HTML5 elements (article, nav, main, section) provide built-in accessibility benefits when used correctly
+  - Focus management extends beyond just styling to include logical tab order and visible indicators for all interactive elements
+
+---

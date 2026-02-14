@@ -81,10 +81,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <div className="min-h-screen bg-background">
-          <a
-            className="absolute left-0 top-auto w-0.25 h-0.25 overflow-hidden -m-1 p-0 border-0"
-            href="#main-content"
-          >
+          <a className="shell__skip-link" href="#main-content">
             Skip to content
           </a>
 

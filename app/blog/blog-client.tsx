@@ -95,7 +95,7 @@ export function BlogClient({ posts }: BlogClientProps) {
 
       {/* Results Summary */}
       <div className="text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
           Showing {filteredPosts.length} of {publishedPosts.length} posts
           {selectedTags.length > 0 && ` for "${selectedTags.join(', ')}"`}
         </p>
@@ -121,55 +121,57 @@ export function BlogClient({ posts }: BlogClientProps) {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
           {filteredPosts.map(post => (
             <Card key={post.slug} className="flex flex-col">
-              <CardHeader className="space-y-3">
-                <div className="space-y-2">
-                  <div className="flex flex-wrap gap-1">
-                    {post.frontmatter.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
+              <article className="h-full flex flex-col">
+                <CardHeader className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap gap-1">
+                      {post.frontmatter.tags.map(tag => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
 
-                  <CardTitle className="text-xl">
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="hover:text-primary/80 transition-colors"
-                    >
-                      {post.frontmatter.title}
+                    <CardTitle className="text-xl">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="hover:text-primary/80 transition-colors"
+                      >
+                        {post.frontmatter.title}
+                      </Link>
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {post.frontmatter.summary}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="flex-1">
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={14} />
+                      {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock size={14} />
+                      {post.frontmatter.readingTime} min read
+                    </div>
+                  </div>
+                </CardContent>
+
+                <CardFooter className="pt-4">
+                  <Button asChild className="flex-1">
+                    <Link href={`/blog/${post.slug}`}>
+                      Read Post
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {post.frontmatter.summary}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-
-              <CardContent className="flex-1">
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Calendar size={14} />
-                    {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock size={14} />
-                    {post.frontmatter.readingTime} min read
-                  </div>
-                </div>
-              </CardContent>
-
-              <CardFooter className="pt-4">
-                <Button asChild className="flex-1">
-                  <Link href={`/blog/${post.slug}`}>
-                    Read Post
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
+                  </Button>
+                </CardFooter>
+              </article>
             </Card>
           ))}
         </div>

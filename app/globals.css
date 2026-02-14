@@ -78,6 +78,19 @@
   @apply relative w-auto h-auto inline-block my-3 px-3.5 py-2.75 border-2 border-primary rounded-lg bg-background text-primary no-underline font-bold;
 }
 
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Container styles */
 .container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -106,8 +119,37 @@
 
 /* Focus styles for better accessibility */
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* Enhanced focus for interactive elements */
+[role='button']:focus-visible,
+.card:hover:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* Focus for filter badges */
+.badge:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* Enhanced contrast for better accessibility */
+.text-muted-foreground {
+  @apply text-foreground/70;
+}
+
+/* Improved contrast for borders */
+.border-border {
+  @apply border-foreground/10;
+}
+
+/* Better contrast for interactive elements */
+.hover\:bg-secondary\/80:hover {
+  @apply bg-secondary/90;
 }
 
 /* Card hover effects */
