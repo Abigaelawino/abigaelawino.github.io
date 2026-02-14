@@ -148,6 +148,35 @@ For testing rendered endpoints after build/deploy cycles:
 
 ---
 
+## [2026-02-14] - abigaelawino-roadmap-1a
+- What was implemented:
+  - Removed static export mode from Next.js configuration
+  - Updated Netlify publish directory from "dist" to ".next"
+  - Verified NETLIFY_NEXT_SKEW_PROTECTION environment variable is properly configured
+  - Confirmed Next.js 16.1.6 doesn't require experimental.useDeploymentId (only needed for < 14.1.4)
+
+- Files changed:
+  - next.config.js (removed output: 'export')
+  - netlify.toml (changed publish directory from "dist" to ".next")
+
+- **Learnings:**
+  - The project was previously using static export mode which limits Next.js capabilities on Netlify
+  - OpenNext adapter enables server-side features and better performance on Netlify
+  - NETLIFY_NEXT_SKEW_PROTECTION was already configured for security
+  - Next.js 16.1.6 automatically includes deployment optimizations without needing experimental flags
+  - Build successfully generates .next directory with proper server and static assets
+
+### Next.js OpenNext Migration Pattern
+When migrating from static export to OpenNext on Netlify:
+1. Remove output: 'export' from next.config.js to enable server features
+2. Update netlify.toml publish directory to ".next" 
+3. Ensure NETLIFY_NEXT_SKEW_PROTECTION=true is set in environment variables
+4. For Next.js < 14.1.4, add experimental.useDeploymentId to config
+5. Verify build generates .next directory with server/app structure
+6. Test that static assets and server components work correctly
+
+---
+
 ## [2026-02-14] - abigaelawino-github-io-pi4
 - What was implemented:
   - Comprehensive validation of Netlify build configuration and hooks
