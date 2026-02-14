@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ContactForm } from '../../components/contact-form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, Github, Linkedin, ExternalLink, MapPin, Clock } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, Clock, CheckCircle } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -62,7 +62,7 @@ export default function ContactPage() {
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
                 <a
-                  href="mailto:contact@example.com"
+                  href="mailto:contact@abigaelawino.com"
                   data-analytics-event="cta_email"
                   data-analytics-prop-location="contact_page"
                 >
@@ -84,7 +84,7 @@ export default function ContactPage() {
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
                 <a
-                  href="https://linkedin.com"
+                  href="https://linkedin.com/in/abigaelawino"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-analytics-event="cta_linkedin"
@@ -108,7 +108,7 @@ export default function ContactPage() {
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/abigaelawino"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-analytics-event="cta_github"
@@ -143,14 +143,25 @@ export default function ContactPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Clock className="h-5 w-5" />
-            Availability
+            Current Availability
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            I'm currently available for freelance projects, consulting, and full-time opportunities.
-            Typical response time is 24-48 hours. For urgent matters, please mention it in your
-            message.
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-green-500" />
+              <span className="font-semibold text-green-700">Available for Projects</span>
+            </div>
+          </div>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>✅ Open to freelance and consulting projects</p>
+            <p>✅ Available for full-time opportunities</p>
+            <p>✅ Quick response time: 24-48 hours</p>
+            <p>⏰ Priority slots available for urgent projects</p>
+          </div>
+          <p className="text-sm">
+            For urgent matters, please mention it in your message and I'll respond as soon as
+            possible.
           </p>
         </CardContent>
       </Card>
