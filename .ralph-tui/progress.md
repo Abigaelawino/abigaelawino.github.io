@@ -22,6 +22,52 @@ Contact forms should include multiple layers of protection:
 5. Proper CSP headers to restrict form actions
 6. Analytics tracking for form interactions
 
+### MDX Content Pipeline Pattern
+For MDX content management in Next.js with Turbopack:
+1. Use next-mdx-remote with RSC support for dynamic MDX rendering
+2. Create a content library with file system operations for build-time processing
+3. Define TypeScript interfaces for frontmatter schemas
+4. Strip frontmatter from content before MDX rendering
+5. Use client components for interactive content but server components for initial data fetching
+6. Implement proper error handling with notFound() for missing content
+7. Create responsive CSS layouts for content cards and detail pages
+
+---
+
+## [2026-02-14] - abigaelawino-roadmap-2a
+- What was implemented:
+  - MDX content pipeline using next-mdx-remote for dynamic MDX rendering
+  - Frontmatter parsing with comprehensive field support (title, date, tags, summary, tech, repo, cover, status, readingTime, case study fields)
+  - Auto-generated content indexes from frontmatter data
+  - Tag filtering support with dedicated tag pages
+  - Dynamic routes for blog posts and projects
+  - Content library with TypeScript interfaces for type safety
+  - CSS styling for blog and project pages with responsive design
+
+- Files changed:
+  - package.json (added next-mdx-remote, reading-time, gray-matter dependencies)
+  - lib/content.ts (new comprehensive content management library)
+  - app/blog/page.tsx (new blog listing page with post cards)
+  - app/blog/[slug]/page.tsx (new dynamic blog post page with MDX rendering)
+  - app/projects/page.tsx (new projects listing page)
+  - app/projects/[slug]/page.tsx (new dynamic project page with case study details)
+  - app/tags/page.tsx (new tags overview page)
+  - app/tags/[tag]/page.tsx (new tag filtering page)
+  - app/blog/page.css (new blog page styles)
+  - app/blog/[slug]/page.css (new blog post styles)
+  - app/projects/page.css (new projects page styles)
+  - app/projects/[slug]/page.css (new project page styles)
+  - app/tags/page.css (new tags page styles)
+  - app/tags/[tag]/page.css (new tag page styles)
+
+- **Learnings:**
+  - Next.js with Turbopack has strict module resolution for Node.js built-ins in client components
+  - 'use client' directive affects how Node.js modules can be imported and used
+  - MDX content needs careful frontmatter stripping to avoid rendering metadata
+  - TypeScript interfaces improve developer experience for content schemas
+  - CSS modules provide better style isolation than inline styles
+  - Tag-based content organization enables flexible content filtering
+
 ---
 
 ## [2026-02-14] - abigaelawino-github-io-o69
@@ -213,4 +259,3 @@ When migrating from static export to OpenNext on Netlify:
 4. Consider adding /issues route redirect if needed for application functionality
 
 ---
-
