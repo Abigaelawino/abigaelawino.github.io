@@ -238,7 +238,25 @@ after each iteration and it's included in prompts for context.
 
 ---
 
-## [2026-02-14] - abigaelawino-github-io-crc
+## [2026-02-14] - abigaelawino-roadmap-2b
+
+- Implemented comprehensive tag filtering functionality for project cards grid with shadcn/ui components
+- Created client-side filtering system with custom hook for state management
+- Added interactive tag filter buttons with active states, project counts, and clear functionality
+- Enhanced user experience with filter summaries and responsive design
+- Files changed:
+  - app/projects/page.tsx (refactored to server/client pattern)
+  - app/projects/projects-client.tsx (new - client component with filtering UI)
+  - hooks/use-project-filters.ts (new - custom hook for filter state management)
+- **Learnings:**
+  - Patterns discovered: Server/client separation pattern is essential when using Node.js APIs with client-side interactivity
+  - Gotchas encountered: Adding 'use client' to pages that import server-side modules causes build failures due to fs/Path imports
+  - Custom hooks provide excellent separation of concerns for filtering logic and UI state
+  - shadcn/ui Badge components work perfectly for interactive filtering with hover states
+  - Tag filtering requires multiple projects per tag for meaningful user experience
+  - Project counts on tags help users understand available content before filtering
+
+---
 
 - Fixed Netlify deployment configuration inconsistency between publish directory and deploy script
 - Updated netlify.toml to publish from dist/ instead of .next/ to match deploy script
