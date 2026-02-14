@@ -5,11 +5,41 @@ const tsPlugin = require('@typescript-eslint/eslint-plugin');
 
 module.exports = [
   {
-    ignores: ['dist/**', 'node_modules/**', '.next/**', 'coverage/**', '.netlify/**'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '.next/**',
+      'coverage/**',
+      '.netlify/**',
+      '**/*.mjs',
+      'test/netlify-*.js',
+    ],
   },
   js.configs.recommended,
+  // ES Module test files
   {
-    files: ['**/*.js'],
+    files: ['test/**/*.test.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+        console: 'readonly',
+        process: 'readonly',
+        document: 'readonly',
+        Buffer: 'readonly',
+        crypto: 'readonly',
+      },
+    },
+    rules: {
+      'no-undef': 'off',
+      'no-unused-vars': 'warn',
+    },
+  },
+  // CommonJS files
+  {
+    files: ['**/*.js', '!test/**/*.test.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
@@ -24,6 +54,7 @@ module.exports = [
       'no-var': 'error',
     },
   },
+  // TypeScript files
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -45,60 +76,7 @@ module.exports = [
       'no-undef': 'off', // Disable for components with React globals
     },
   },
-  {
-    files: ['**/*.{js,ts}'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-        ...globals.jest,
-        document: 'readonly',
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        URL: 'readonly',
-        crypto: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        fetch: 'readonly',
-        AbortController: 'readonly',
-        React: 'readonly', // Add React global
-      },
-    },
-  },
-  {
-    files: ['test/**/*.js'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-        document: 'readonly',
-        console: 'readonly',
-        process: 'readonly',
-      },
-    },
-    rules: {
-      'no-undef': 'off',
-      'no-unused-vars': 'warn',
-    },
-  },
-  {
-    files: ['scripts/**/*.mjs'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        URL: 'readonly',
-        crypto: 'readonly',
-      },
-    },
-    rules: {
-      'no-undef': 'off',
-      'no-unused-vars': 'warn',
-    },
-  },
+  // React components
   {
     files: ['components/**/*.tsx'],
     languageOptions: {

@@ -63,6 +63,17 @@ after each iteration and it's included in prompts for context.
   5. Track outbound links and file downloads without cookies or personal data
   6. Use nonce-based CSP for secure script execution
   7. Include analytics.js with custom event tracking for user interactions
+- Netlify Performance Monitoring Pattern: For comprehensive automated performance tracking and optimization:
+  1. Use Netlify CLI API integration for automated log fetching and analysis
+  2. Implement risk-based performance classification with health scores and trend analysis
+  3. Auto-detect performance issues with build time thresholds and error pattern analysis
+  4. Require manual review for critical performance degradation and recurring errors
+  5. Create weekly GitHub Actions workflow with cron schedule ('0 2 \* \* 0' for Sundays 2 AM UTC)
+  6. Generate detailed performance reports with trends, optimization opportunities, and actionable recommendations
+  7. Implement notification system for critical performance issues via GitHub Issues
+  8. Handle Netlify API errors and build log parsing with proper error handling and fallbacks
+  9. Use .netlify-reports/ directory for persistent report storage and dashboard generation
+  10. Integrate with CI/CD pipeline for automated performance gates and continuous monitoring
 
 ---
 
@@ -656,5 +667,36 @@ after each iteration and it's included in prompts for context.
   - Thank you pages provide professional user experience and additional navigation opportunities
   - Resume content should include specific achievements with quantifiable business impact (e.g., "25% reduction in churn")
   - Social links should use actual profiles rather than generic URLs for authenticity
+    \*/
+
+---
+
+## [2026-02-14] - abigaelawino-github-io-v97
+
+- Implemented comprehensive automated weekly Netlify log analysis to track build times, error patterns, and function performance
+- Created monthly performance trend reports with strategic recommendations and long-term pattern analysis
+- Developed optimization opportunities detection system with actionable recommendations for build, function, and configuration improvements
+- Built interactive HTML dashboard for visualizing performance metrics, trends, and optimization opportunities with Chart.js integration
+- Added comprehensive test suite covering all monitoring components with unit tests, integration tests, and error handling validation
+- Established automated GitHub Actions workflow for weekly performance monitoring with issue creation for critical findings
+- Files changed:
+  - scripts/netlify-log-analyzer.mjs (new - core log analysis with Netlify API integration)
+  - scripts/netlify-performance-tracker.mjs (new - performance metrics tracking and trend analysis)
+  - scripts/netlify-monthly-trends.mjs (new - monthly trend analysis and strategic recommendations)
+  - scripts/netlify-optimization-detector.mjs (new - optimization opportunities detection)
+  - scripts/netlify-dashboard.mjs (new - interactive HTML dashboard with Chart.js)
+  - test/netlify-monitoring.test.js (new - comprehensive test suite for all components)
+  - .github/workflows/netlify-performance-monitoring.yml (new - automated weekly workflow)
+  - docs/netlify-performance-monitoring.md (new - comprehensive documentation)
+  - package.json (updated with new monitoring scripts)
+  - eslint.config.cjs (updated to handle .mjs ES modules)
+- **Learnings:**
+  - Patterns discovered: Netlify performance monitoring requires systematic approach with automated log analysis, trend detection, and optimization recommendations
+  - Gotchas encountered: ESLint configuration for mixed ES modules and CommonJS requires careful pattern matching and exclusion rules
+  - GitHub Actions workflow design needs proper artifact handling and issue creation for critical findings
+  - Performance monitoring benefits from multiple analysis approaches (weekly, monthly, optimization detection) for comprehensive coverage
+  - Interactive dashboards significantly improve monitoring accessibility and actionability compared to text reports alone
+  - Comprehensive testing is essential for monitoring systems to handle edge cases and API failures gracefully
+  - Modular script architecture enables flexible monitoring pipelines with different analysis types and frequencies
 
 ---
