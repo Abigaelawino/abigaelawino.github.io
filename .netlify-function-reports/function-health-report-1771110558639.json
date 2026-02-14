@@ -1,0 +1,162 @@
+{
+  "timestamp": "2026-02-14T23:09:18.637Z",
+  "summary": {
+    "totalFunctions": 7,
+    "healthy": 6,
+    "warning": 1,
+    "critical": 0,
+    "newAlerts": 0
+  },
+  "functions": {
+    "deployment-monitoring": {
+      "name": "deployment-monitoring",
+      "timestamp": "2026-02-14T23:09:18.636Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 829,
+        "errorRate": 0.021745406044852467,
+        "coldStartRate": 0.13673329462950343,
+        "availability": 0.9782545939551476,
+        "lastExecution": "2026-02-14T23:05:14.965Z",
+        "totalExecutions": 585,
+        "errors": 2,
+        "coldStarts": 6
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    "session-manager": {
+      "name": "session-manager",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 209,
+        "errorRate": 0.009443062064966255,
+        "coldStartRate": 0.09820812680354507,
+        "availability": 0.9905569379350337,
+        "lastExecution": "2026-02-14T23:08:49.168Z",
+        "totalExecutions": 635,
+        "errors": 0,
+        "coldStarts": 4
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    "asset-optimization": {
+      "name": "asset-optimization",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 1625,
+        "errorRate": 0.03108668217889248,
+        "coldStartRate": 0.26500001271400536,
+        "availability": 0.9689133178211076,
+        "lastExecution": "2026-02-14T23:08:30.535Z",
+        "totalExecutions": 644,
+        "errors": 3,
+        "coldStarts": 13
+      },
+      "issues": [],
+      "recommendations": [
+        "Monitor cold start patterns"
+      ]
+    },
+    "build-webhook": {
+      "name": "build-webhook",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "warning",
+      "metrics": {
+        "executionTime": 568,
+        "errorRate": 0.05015476131583681,
+        "coldStartRate": 0.20065769307697537,
+        "availability": 0.9498452386841632,
+        "lastExecution": "2026-02-14T23:08:01.932Z",
+        "totalExecutions": 551,
+        "errors": 5,
+        "coldStarts": 10
+      },
+      "issues": [
+        {
+          "type": "high_error_rate",
+          "message": "Error rate 5.02% exceeds warning threshold (5.00%)",
+          "severity": "warning"
+        },
+        {
+          "type": "low_availability",
+          "message": "Availability 94.98% below warning threshold (95.00%)",
+          "severity": "warning"
+        }
+      ],
+      "recommendations": [
+        "Monitor error patterns and implement better error handling",
+        "Monitor cold start patterns",
+        "Monitor availability trends and investigate root cause"
+      ]
+    },
+    "rate-limiter": {
+      "name": "rate-limiter",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 104,
+        "errorRate": 0.009044862236572368,
+        "coldStartRate": 0.0751651012490233,
+        "availability": 0.9909551377634276,
+        "lastExecution": "2026-02-14T23:07:14.107Z",
+        "totalExecutions": 317,
+        "errors": 0,
+        "coldStarts": 3
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    "form-validator": {
+      "name": "form-validator",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 274,
+        "errorRate": 0.019128013815075187,
+        "coldStartRate": 0.11378066083344801,
+        "availability": 0.9808719861849248,
+        "lastExecution": "2026-02-14T23:04:19.483Z",
+        "totalExecutions": 929,
+        "errors": 1,
+        "coldStarts": 5
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    "issue-verification": {
+      "name": "issue-verification",
+      "timestamp": "2026-02-14T23:09:18.637Z",
+      "status": "healthy",
+      "metrics": {
+        "executionTime": 395,
+        "errorRate": 0.041044004543241835,
+        "coldStartRate": 0.17589953188443727,
+        "availability": 0.9589559954567581,
+        "lastExecution": "2026-02-14T23:09:03.458Z",
+        "totalExecutions": 142,
+        "errors": 4,
+        "coldStarts": 8
+      },
+      "issues": [],
+      "recommendations": []
+    }
+  },
+  "alerts": [],
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "reliability",
+      "message": "1 functions with high error rates - immediate investigation required"
+    }
+  ],
+  "trends": {
+    "overall": "warning",
+    "performance": "stable",
+    "reliability": "stable",
+    "efficiency": "stable"
+  }
+}

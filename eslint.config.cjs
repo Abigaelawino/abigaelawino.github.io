@@ -13,6 +13,7 @@ module.exports = [
       '.netlify/**',
       'test/netlify-*.js',
       '.github/**',
+      '.netlify-function-reports/**',
     ],
   },
   js.configs.recommended,
@@ -28,6 +29,20 @@ module.exports = [
         console: 'readonly',
         process: 'readonly',
         document: 'readonly',
+      },
+    },
+  },
+  // ES Module scripts
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        console: 'readonly',
+        process: 'readonly',
+        fetch: 'readonly',
         Buffer: 'readonly',
         crypto: 'readonly',
       },

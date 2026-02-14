@@ -1,0 +1,198 @@
+{
+  "deployment-monitoring": {
+    "name": "deployment-monitoring",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.636Z",
+        "executionTime": 829,
+        "errorRate": 0.021745406044852467,
+        "coldStartRate": 0.13673329462950343,
+        "availability": 0.9782545939551476,
+        "lastExecution": "2026-02-14T23:05:14.965Z",
+        "totalExecutions": 585,
+        "errors": 2,
+        "coldStarts": 6
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.481Z",
+        "executionTime": 832,
+        "errorRate": 0.02118806471105033,
+        "coldStartRate": 0.14519031701725854,
+        "availability": 0.9788119352889497,
+        "lastExecution": "2026-02-14T23:06:19.400Z",
+        "totalExecutions": 530,
+        "errors": 2,
+        "coldStarts": 7
+      }
+    ],
+    "alerts": []
+  },
+  "session-manager": {
+    "name": "session-manager",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 209,
+        "errorRate": 0.009443062064966255,
+        "coldStartRate": 0.09820812680354507,
+        "availability": 0.9905569379350337,
+        "lastExecution": "2026-02-14T23:08:49.168Z",
+        "totalExecutions": 635,
+        "errors": 0,
+        "coldStarts": 4
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 215,
+        "errorRate": 0.010048794797690387,
+        "coldStartRate": 0.0920241195046785,
+        "availability": 0.9899512052023096,
+        "lastExecution": "2026-02-14T23:06:55.840Z",
+        "totalExecutions": 593,
+        "errors": 1,
+        "coldStarts": 4
+      }
+    ],
+    "alerts": []
+  },
+  "asset-optimization": {
+    "name": "asset-optimization",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 1625,
+        "errorRate": 0.03108668217889248,
+        "coldStartRate": 0.26500001271400536,
+        "availability": 0.9689133178211076,
+        "lastExecution": "2026-02-14T23:08:30.535Z",
+        "totalExecutions": 644,
+        "errors": 3,
+        "coldStarts": 13
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 1644,
+        "errorRate": 0.03199689554111843,
+        "coldStartRate": 0.22916668193664586,
+        "availability": 0.9680031044588816,
+        "lastExecution": "2026-02-14T23:08:57.136Z",
+        "totalExecutions": 245,
+        "errors": 3,
+        "coldStarts": 11
+      }
+    ],
+    "alerts": []
+  },
+  "build-webhook": {
+    "name": "build-webhook",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 568,
+        "errorRate": 0.05015476131583681,
+        "coldStartRate": 0.20065769307697537,
+        "availability": 0.9498452386841632,
+        "lastExecution": "2026-02-14T23:08:01.932Z",
+        "totalExecutions": 551,
+        "errors": 5,
+        "coldStarts": 10
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 639,
+        "errorRate": 0.05432321917817591,
+        "coldStartRate": 0.20153335432938904,
+        "availability": 0.945676780821824,
+        "lastExecution": "2026-02-14T23:08:26.225Z",
+        "totalExecutions": 283,
+        "errors": 5,
+        "coldStarts": 10
+      }
+    ],
+    "alerts": []
+  },
+  "rate-limiter": {
+    "name": "rate-limiter",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 104,
+        "errorRate": 0.009044862236572368,
+        "coldStartRate": 0.0751651012490233,
+        "availability": 0.9909551377634276,
+        "lastExecution": "2026-02-14T23:07:14.107Z",
+        "totalExecutions": 317,
+        "errors": 0,
+        "coldStarts": 3
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 94,
+        "errorRate": 0.009403479858225034,
+        "coldStartRate": 0.07407498193408137,
+        "availability": 0.990596520141775,
+        "lastExecution": "2026-02-14T23:05:39.845Z",
+        "totalExecutions": 131,
+        "errors": 0,
+        "coldStarts": 3
+      }
+    ],
+    "alerts": []
+  },
+  "form-validator": {
+    "name": "form-validator",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 274,
+        "errorRate": 0.019128013815075187,
+        "coldStartRate": 0.11378066083344801,
+        "availability": 0.9808719861849248,
+        "lastExecution": "2026-02-14T23:04:19.483Z",
+        "totalExecutions": 929,
+        "errors": 1,
+        "coldStarts": 5
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 309,
+        "errorRate": 0.021693542129460078,
+        "coldStartRate": 0.11138412791062514,
+        "availability": 0.9783064578705399,
+        "lastExecution": "2026-02-14T23:08:44.214Z",
+        "totalExecutions": 446,
+        "errors": 2,
+        "coldStarts": 5
+      }
+    ],
+    "alerts": []
+  },
+  "issue-verification": {
+    "name": "issue-verification",
+    "metrics": [
+      {
+        "timestamp": "2026-02-14T23:09:18.637Z",
+        "executionTime": 395,
+        "errorRate": 0.041044004543241835,
+        "coldStartRate": 0.17589953188443727,
+        "availability": 0.9589559954567581,
+        "lastExecution": "2026-02-14T23:09:03.458Z",
+        "totalExecutions": 142,
+        "errors": 4,
+        "coldStarts": 8
+      },
+      {
+        "timestamp": "2026-02-14T23:09:26.482Z",
+        "executionTime": 369,
+        "errorRate": 0.03901184287255509,
+        "coldStartRate": 0.18880800427490602,
+        "availability": 0.9609881571274449,
+        "lastExecution": "2026-02-14T23:05:36.161Z",
+        "totalExecutions": 840,
+        "errors": 3,
+        "coldStarts": 9
+      }
+    ],
+    "alerts": []
+  }
+}

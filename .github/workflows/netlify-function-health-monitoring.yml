@@ -1,0 +1,485 @@
+name: Netlify Function Health Monitoring
+
+on:
+  schedule:
+    # Run every 30 minutes for continuous monitoring
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      alerting_enabled:
+        description: 'Enable alerting for this run'
+        required: true
+        default: true
+        type: boolean
+      create_issues:
+        description: 'Create GitHub issues for critical findings'
+        required: true
+        default: true
+        type: boolean
+      monitoring_level:
+        description: 'Level of monitoring to perform'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - basic
+          - standard
+          - comprehensive
+
+env:
+  NODE_ENV: production
+
+jobs:
+  function-health-check:
+    name: Function Health Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate environment
+        run: node scripts/validate-env.mjs production
+
+      - name: Run function health monitoring
+        id: health-monitor
+        run: |
+          echo "🔍 Running Netlify Function Health Monitoring..."
+          node scripts/netlify-function-health-monitor.mjs
+        continue-on-error: true
+
+      - name: Run function health alerting
+        if: ${{ github.event.inputs.alerting_enabled != 'false' }}
+        id: health-alerting
+        run: |
+          echo "🚨 Running Function Health Alerting..."
+          node scripts/netlify-function-health-alerting.mjs
+        continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Extract health metrics
+        id: health-metrics
+        if: always()
+        run: |
+          if [ -f ".netlify-function-reports/latest-function-health-report.json" ]; then
+            HEALTHY=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/latest-function-health-report.json', 'utf8'));
+              console.log(data.summary.healthy || 0);
+            ")
+            WARNING=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/latest-function-health-report.json', 'utf8'));
+              console.log(data.summary.warning || 0);
+            ")
+            CRITICAL=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/latest-function-health-report.json', 'utf8'));
+              console.log(data.summary.critical || 0);
+            ")
+            TOTAL_ALERTS=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/latest-function-health-report.json', 'utf8'));
+              console.log(data.summary.newAlerts || 0);
+            ")
+            OVERALL_TREND=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/latest-function-health-report.json', 'utf8'));
+              console.log(data.trends?.overall || 'stable');
+            ")
+
+            echo "healthy=$HEALTHY" >> $GITHUB_OUTPUT
+            echo "warning=$WARNING" >> $GITHUB_OUTPUT
+            echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+            echo "total_alerts=$TOTAL_ALERTS" >> $GITHUB_OUTPUT
+            echo "overall_trend=$OVERALL_TREND" >> $GITHUB_OUTPUT
+          else
+            echo "healthy=0" >> $GITHUB_OUTPUT
+            echo "warning=0" >> $GITHUB_OUTPUT
+            echo "critical=0" >> $GITHUB_OUTPUT
+            echo "total_alerts=0" >> $GITHUB_OUTPUT
+            echo "overall_trend=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub issues for critical findings
+        if: |
+          steps.health-metrics.outputs.critical > 0 ||
+          (steps.health-metrics.outputs.total_alerts > 0 && github.event.inputs.create_issues == 'true')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const healthy = ${{ steps.health-metrics.outputs.healthy }};
+            const warning = ${{ steps.health-metrics.outputs.warning }};
+            const critical = ${{ steps.health-metrics.outputs.critical }};
+            const totalAlerts = ${{ steps.health-metrics.outputs.total_alerts }};
+            const overallTrend = '${{ steps.health-metrics.outputs.overall_trend }}';
+
+            let priority = 'low';
+            let emoji = 'ℹ️';
+
+            if (critical > 0) {
+              priority = 'high';
+              emoji = '🚨';
+            } else if (warning > 2 || totalAlerts > 3) {
+              priority = 'medium';
+              emoji = '⚠️';
+            }
+
+            const title = `${emoji} Netlify Function Health Alert - ${critical} Critical, ${warning} Warnings`;
+
+            let body = `# Netlify Function Health Analysis Results
+
+            **Analysis Date:** ${new Date().toLocaleDateString()}
+            **Analysis Type:** ${{ github.event.inputs.monitoring_level || 'standard' }}
+            **Priority:** ${priority.toUpperCase()}
+            **Overall Trend:** ${overallTrend.toUpperCase()}
+
+            ## 📊 Function Health Summary
+
+            | Status | Count | Health |
+            |--------|--------|--------|
+            | ✅ Healthy | ${healthy} | Good |
+            | ⚠️ Warning | ${warning} | ${warning <= 2 ? 'Acceptable' : 'Review Needed'} |
+            | 🚨 Critical | ${critical} | ${critical === 0 ? 'None' : 'Action Required'} |
+            | 📨 New Alerts | ${totalAlerts} | ${totalAlerts === 0 ? 'None' : 'Attention Needed'} |
+
+            ## 🎯 Current Status Overview
+
+            **Overall Health:** ${critical === 0 && warning <= 1 ? '✅ Good' : critical === 0 ? '⚠️ Fair' : '❌ Poor'}
+
+            **Function Status Breakdown:**
+            - Healthy Functions: ${healthy}
+            - Functions with Warnings: ${warning}
+            - Critical Functions: ${critical}
+
+            `;
+
+            if (critical > 0) {
+              body += `
+              ## 🚨 Critical Issues
+
+              ${critical} function(s) are in critical state and require immediate attention.
+
+              **Immediate Actions Required:**
+              1. Review function logs for errors
+              2. Check function configurations
+              3. Verify dependencies and deployments
+              4. Monitor execution times and error rates
+
+              `;
+            }
+
+            if (warning > 0) {
+              body += `
+              ## ⚠️ Warning Issues
+
+              ${warning} function(s) showing warning signs that should be monitored.
+
+              **Recommended Actions:**
+              1. Monitor performance trends
+              2. Review optimization opportunities
+              3. Check for memory or timeout issues
+              4. Plan performance improvements
+
+              `;
+            }
+
+            if (totalAlerts > 0) {
+              body += `
+              ## 📨 Alert Summary
+
+              ${totalAlerts} new alerts generated in this monitoring cycle.
+
+              `;
+            }
+
+            body += `
+            ## 📋 Next Steps
+
+            1. Review detailed function health report in workflow artifacts
+            2. Address any critical issues immediately
+            3. Implement performance optimizations for warning-level functions
+            4. Monitor trends in upcoming analysis cycles
+            5. Consider function warming strategies if cold starts are frequent
+
+            ## 📊 Detailed Reports
+
+            - Download the monitoring artifacts from this workflow run
+            - Check the \`function-health-report\` artifacts for detailed metrics
+            - Review individual function performance and error trends
+            - Analyze historical data for patterns and improvements
+
+            ## 🔍 Monitoring Dashboard
+
+            For real-time monitoring, run the local dashboard:
+            \`\`\`bash
+            npm run function-health-dashboard
+            \`\`\`
+
+            ---
+            *This issue was automatically generated by the Netlify Function Health Monitoring workflow*
+            `;
+
+            // Check for existing open issues to avoid duplicates
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['function-health', 'automated'],
+              state: 'open'
+            });
+
+            const hasSimilarCriticalIssue = existingIssues.data.some(issue =>
+              issue.title.includes('Critical') && critical > 0
+            );
+
+            // Only create new issue if no similar critical issue exists
+            if (!hasSimilarCriticalIssue || critical === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['function-health', 'netlify', priority, 'automated']
+              });
+            }
+
+      - name: Upload health monitoring artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: function-health-analysis-${{ github.run_number }}
+          path: .netlify-function-reports/
+          retention-days: 30
+
+      - name: Comment on PRs with function health impact
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const healthy = ${{ steps.health-metrics.outputs.healthy }};
+            const warning = ${{ steps.health-metrics.outputs.warning }};
+            const critical = ${{ steps.health-metrics.outputs.critical }};
+            const overallTrend = '${{ steps.health-metrics.outputs.overall_trend }}';
+
+            let comment = `## 🏥 Function Health Analysis Results
+
+            **Overall Trend:** ${overallTrend.toUpperCase()} ${overallTrend === 'stable' ? '✅' : overallTrend === 'improving' ? '📈' : '📉'}
+            **Function Status:** ${healthy} healthy, ${warning} warning, ${critical} critical
+
+            `;
+
+            if (critical > 0) {
+              comment += `
+            🚨 **Critical Alert:** ${critical} function(s) in critical state. Please review immediately.
+              `;
+            } else if (warning > 2) {
+              comment += `
+            ⚠️ **Performance Warning:** ${warning} function(s) showing warning signs. Please review.
+              `;
+            }
+
+            comment += `
+            📊 **Full Report:** Download \`function-health-analysis-${{ github.run_number }}\` artifact for detailed insights.
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Function Health Summary
+        if: always()
+        run: |
+          echo "## 🏥 Netlify Function Health Monitoring Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|--------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Healthy Functions | ${{ steps.health-metrics.outputs.healthy }} | ✅ Good |" >> $GITHUB_STEP_SUMMARY
+          echo "| Warning Functions | ${{ steps.health-metrics.outputs.warning }} | ${{ steps.health-metrics.outputs.warning <= 2 && '✅ Acceptable' || '⚠️ Review Needed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Critical Functions | ${{ steps.health-metrics.outputs.critical }} | ${{ steps.health-metrics.outputs.critical == 0 && '✅ None' || '🚨 Action Required' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| New Alerts | ${{ steps.health-metrics.outputs.total_alerts }} | ${{ steps.health-metrics.outputs.total_alerts == 0 && '✅ None' || '⚠️ Attention Needed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Overall Trend | ${{ steps.health-metrics.outputs.overall_trend }} | ${{ steps.health-metrics.outputs.overall_trend == 'stable' && '✅ Stable' || steps.health-metrics.outputs.overall_trend == 'improving' && '📈 Improving' || '📉 Degrading' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📈 **Detailed Reports:** Download \`function-health-analysis-${{ github.run_number }}\` artifact for complete analysis" >> $GITHUB_STEP_SUMMARY
+
+  comprehensive-analysis:
+    name: Comprehensive Function Analysis
+    if: ${{ github.event.inputs.monitoring_level == 'comprehensive' }}
+    runs-on: ubuntu-latest
+    needs: function-health-check
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download health analysis artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: function-health-analysis-${{ github.run_number }}
+          path: .netlify-function-reports/
+
+      - name: Generate comprehensive trends analysis
+        run: |
+          echo "📊 Generating comprehensive function health trends..."
+
+          # Create trends analysis script
+          cat > scripts/function-trends-analysis.mjs << 'EOF'
+          import { readFile, writeFile } from 'fs/promises';
+          import { join } from 'path';
+
+          const REPORTS_DIR = '.netlify-function-reports';
+
+          async function analyzeTrends() {
+            console.log('📈 Analyzing function health trends...');
+
+            // Load health data
+            try {
+              const healthData = await readFile(join(REPORTS_DIR, 'function-health-data.json'), 'utf8');
+              const data = JSON.parse(healthData);
+
+              const trends = {
+                timestamp: new Date().toISOString(),
+                functions: {},
+                summary: {
+                  totalFunctions: Object.keys(data).length,
+                  overallTrend: 'stable',
+                  improvementOpportunities: 0,
+                  criticalIssues: 0
+                }
+              };
+
+              // Analyze each function's trends
+              for (const [name, functionData] of Object.entries(data)) {
+                if (functionData.metrics && functionData.metrics.length > 1) {
+                  const recent = functionData.metrics.slice(-5);
+                  const older = functionData.metrics.slice(-10, -5);
+
+                  if (older.length > 0) {
+                    const recentAvg = recent.reduce((sum, m) => sum + m.executionTime, 0) / recent.length;
+                    const olderAvg = older.reduce((sum, m) => sum + m.executionTime, 0) / older.length;
+
+                    const trend = recentAvg < olderAvg * 0.9 ? 'improving' :
+                                 recentAvg > olderAvg * 1.1 ? 'degrading' : 'stable';
+
+                    trends.functions[name] = {
+                      trend,
+                      recentPerformance: Math.round(recentAvg),
+                      olderPerformance: Math.round(olderAvg),
+                      improvement: Math.round(((olderAvg - recentAvg) / olderAvg) * 100)
+                    };
+
+                    if (trend === 'improving') {
+                      trends.summary.improvementOpportunities++;
+                    } else if (trend === 'degrading') {
+                      trends.summary.criticalIssues++;
+                    }
+                  }
+                }
+              }
+
+              // Determine overall trend
+              const degradingCount = Object.values(trends.functions).filter(f => f.trend === 'degrading').length;
+              const improvingCount = Object.values(trends.functions).filter(f => f.trend === 'improving').length;
+
+              if (degradingCount > improvingCount) {
+                trends.summary.overallTrend = 'degrading';
+              } else if (improvingCount > degradingCount) {
+                trends.summary.overallTrend = 'improving';
+              }
+
+              // Save trends
+              await writeFile(join(REPORTS_DIR, 'function-trends-analysis.json'), JSON.stringify(trends, null, 2));
+
+              // Generate markdown report
+              let markdown = `# Netlify Function Health Trends Analysis\n\n`;
+              markdown += `**Analysis Date:** ${new Date().toLocaleDateString()}\n\n`;
+              markdown += `**Overall Trend:** ${trends.summary.overallTrend.toUpperCase()}\n\n`;
+              markdown += `## Summary Statistics\n\n`;
+              markdown += `- Total Functions: ${trends.summary.totalFunctions}\n`;
+              markdown += `- Improving Functions: ${improvingCount}\n`;
+              markdown += `- Degrading Functions: ${degradingCount}\n`;
+              markdown += `- Stable Functions: ${trends.summary.totalFunctions - improvingCount - degradingCount}\n\n`;
+
+              markdown += `## Function Performance Trends\n\n`;
+              markdown += `| Function | Trend | Recent | Older | Improvement |\n`;
+              markdown += `|----------|-------|--------|-------|-------------|\n`;
+
+              for (const [name, data] of Object.entries(trends.functions)) {
+                const trendIcon = data.trend === 'improving' ? '📈' : data.trend === 'degrading' ? '📉' : '➡️';
+                markdown += `| ${name} | ${trendIcon} ${data.trend} | ${data.recentPerformance}ms | ${data.olderPerformance}ms | ${data.improvement}% |\n`;
+              }
+
+              await writeFile(join(REPORTS_DIR, 'function-trends-report.md'), markdown);
+
+              console.log('✅ Trends analysis completed');
+              console.log(`📊 Overall trend: ${trends.summary.overallTrend}`);
+
+            } catch (error) {
+              console.error('❌ Trends analysis failed:', error);
+              process.exit(1);
+            }
+          }
+
+          analyzeTrends().catch(console.error);
+          EOF
+
+          node scripts/function-trends-analysis.mjs
+
+      - name: Upload comprehensive analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: function-trends-analysis-${{ github.run_number }}
+          path: .netlify-function-reports/function-trends-*
+          retention-days: 90
+
+      - name: Create trends summary
+        if: always()
+        run: |
+          if [ -f ".netlify-function-reports/function-trends-analysis.json" ]; then
+            OVERALL_TREND=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/function-trends-analysis.json', 'utf8'));
+              console.log(data.summary.overallTrend || 'unknown');
+            ")
+            IMPROVEMENTS=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/function-trends-analysis.json', 'utf8'));
+              console.log(data.summary.improvementOpportunities || 0);
+            ")
+            CRITICAL=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('.netlify-function-reports/function-trends-analysis.json', 'utf8'));
+              console.log(data.summary.criticalIssues || 0);
+            ")
+
+            echo "## 📈 Comprehensive Function Trends Analysis" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value | Status |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|--------|--------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Overall Trend | $OVERALL_TREND.toUpperCase() | $OVERALL_TREND == 'stable' && '✅ Stable' || $OVERALL_TREND == 'improving' && '📈 Improving' || '📉 Degrading' |" >> $GITHUB_STEP_SUMMARY
+            echo "| Improving Functions | $IMPROVEMENTS | ✅ Positive |" >> $GITHUB_STEP_SUMMARY
+            echo "| Degrading Functions | $CRITICAL | $CRITICAL == 0 && '✅ None' || '🚨 Action Required' |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📊 **Full Trends Report:** Download \`function-trends-analysis-${{ github.run_number }}\` artifact" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 📈 Comprehensive Trends Analysis" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "❌ Trends analysis failed to complete" >> $GITHUB_STEP_SUMMARY
+          fi
