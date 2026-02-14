@@ -1,383 +1,613 @@
 TAP version 13
-# Subtest: about page renders concise bio with strengths and toolkit sections
-ok 1 - about page renders concise bio with strengths and toolkit sections
+# 🚀 Starting smoke tests...
+# 📍 Base URL: http://localhost:3000
+# ⏰ Started at: 2026-02-14T13:59:16.555Z
+# 📄 Testing main endpoints...
+# 🧪 Testing: GET http://localhost:3000/
+#    ❌ GET http://localhost:3000/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/about/
+#    ❌ GET http://localhost:3000/about/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/projects/
+#    ❌ GET http://localhost:3000/projects/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/blog/
+#    ❌ GET http://localhost:3000/blog/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/contact/
+#    ❌ GET http://localhost:3000/contact/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/resume/
+#    ❌ GET http://localhost:3000/resume/ - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/contact/thanks/
+#    ❌ GET http://localhost:3000/contact/thanks/ - Error: fetch failed
+# 🔌 Testing API endpoints...
+# 🧪 Testing: POST http://localhost:3000/api/webhooks/build
+#    ❌ POST http://localhost:3000/api/webhooks/build - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/api/deployments
+#    ❌ GET http://localhost:3000/api/deployments - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/api/sessions
+#    ❌ GET http://localhost:3000/api/sessions - Error: fetch failed
+# 🧪 Testing: POST http://localhost:3000/api/optimize
+#    ❌ POST http://localhost:3000/api/optimize - Error: fetch failed
+# 🧪 Testing: GET http://localhost:3000/api/rate-limit
+#    ❌ GET http://localhost:3000/api/rate-limit - Error: fetch failed
+# 📁 Testing static assets...
+# 🖼️  Testing asset: http://localhost:3000/assets/og.png
+#    ❌ GET http://localhost:3000/assets/og.png - Error: fetch failed
+# 🖼️  Testing asset: http://localhost:3000/robots.txt
+#    ❌ GET http://localhost:3000/robots.txt - Error: fetch failed
+# 🖼️  Testing asset: http://localhost:3000/sitemap.xml
+#    ❌ GET http://localhost:3000/sitemap.xml - Error: fetch failed
+# 🔄 Checking for redirect loops...
+#    ⚠️  Error checking redirects for /about: fetch failed
+#    ⚠️  Error checking redirects for /projects: fetch failed
+#    ⚠️  Error checking redirects for /blog: fetch failed
+#    ⚠️  Error checking redirects for /contact: fetch failed
+#    ⚠️  Error checking redirects for /resume: fetch failed
+# ============================================================
+# 📊 SMOKE TEST RESULTS
+# ============================================================
+# ✅ Passed: 0/15
+# ❌ Errors: 15
+# ⚠️  Warnings: 5
+# 🚨 ERRORS:
+#    1. ❌ GET http://localhost:3000/ - Error: fetch failed
+#    2. ❌ GET http://localhost:3000/about/ - Error: fetch failed
+#    3. ❌ GET http://localhost:3000/projects/ - Error: fetch failed
+#    4. ❌ GET http://localhost:3000/blog/ - Error: fetch failed
+#    5. ❌ GET http://localhost:3000/contact/ - Error: fetch failed
+#    6. ❌ GET http://localhost:3000/resume/ - Error: fetch failed
+#    7. ❌ GET http://localhost:3000/contact/thanks/ - Error: fetch failed
+#    8. ❌ POST http://localhost:3000/api/webhooks/build - Error: fetch failed
+#    9. ❌ GET http://localhost:3000/api/deployments - Error: fetch failed
+#    10. ❌ GET http://localhost:3000/api/sessions - Error: fetch failed
+#    11. ❌ POST http://localhost:3000/api/optimize - Error: fetch failed
+#    12. ❌ GET http://localhost:3000/api/rate-limit - Error: fetch failed
+#    13. ❌ GET http://localhost:3000/assets/og.png - Error: fetch failed
+#    14. ❌ GET http://localhost:3000/robots.txt - Error: fetch failed
+#    15. ❌ GET http://localhost:3000/sitemap.xml - Error: fetch failed
+# ⚠️  WARNINGS:
+#    1. ⚠️  Error checking redirects for /about: fetch failed
+#    2. ⚠️  Error checking redirects for /projects: fetch failed
+#    3. ⚠️  Error checking redirects for /blog: fetch failed
+#    4. ⚠️  Error checking redirects for /contact: fetch failed
+#    5. ⚠️  Error checking redirects for /resume: fetch failed
+# 💥 Smoke tests failed!
+# 🔧 Fix issues before deploying to production
+# ⏰ Completed at: 2026-02-14T13:59:16.679Z
+# Subtest: /home/nick/Projects/abigaelawino.github.io/scripts/smoke-test.mjs
+not ok 1 - /home/nick/Projects/abigaelawino.github.io/scripts/smoke-test.mjs
   ---
-  duration_ms: 2.563499
+  duration_ms: 288.181524
+  location: '/home/nick/Projects/abigaelawino.github.io/scripts/smoke-test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: about page renders concise bio with strengths and toolkit sections
+ok 2 - about page renders concise bio with strengths and toolkit sections
+  ---
+  duration_ms: 2.754696
   ...
 # Subtest: about page keeps mobile-first toolkit layout with desktop enhancement
-ok 2 - about page keeps mobile-first toolkit layout with desktop enhancement
+ok 3 - about page keeps mobile-first toolkit layout with desktop enhancement
   ---
-  duration_ms: 0.2805
+  duration_ms: 0.3601
   ...
 # Subtest: about page omits speaking and publications section when data is not provided
-ok 3 - about page omits speaking and publications section when data is not provided
+ok 4 - about page omits speaking and publications section when data is not provided
   ---
-  duration_ms: 0.2575
+  duration_ms: 0.284599
   ...
 # Subtest: about page renders optional speaking and publication entries when present
-ok 4 - about page renders optional speaking and publication entries when present
+ok 5 - about page renders optional speaking and publication entries when present
   ---
-  duration_ms: 0.3029
+  duration_ms: 0.2653
   ...
 # Subtest: about page renders speaking block without publications when only speaking is provided
-ok 5 - about page renders speaking block without publications when only speaking is provided
+ok 6 - about page renders speaking block without publications when only speaking is provided
   ---
-  duration_ms: 0.4456
+  duration_ms: 0.324299
   ...
 # Subtest: about page renders publications block without speaking when only publications are provided
-ok 6 - about page renders publications block without speaking when only publications are provided
+ok 7 - about page renders publications block without speaking when only publications are provided
   ---
-  duration_ms: 2.217199
+  duration_ms: 1.570397
   ...
 # Subtest: about page tolerates non-array strengths and toolkit inputs
-ok 7 - about page tolerates non-array strengths and toolkit inputs
+ok 8 - about page tolerates non-array strengths and toolkit inputs
   ---
-  duration_ms: 0.2666
+  duration_ms: 0.2615
   ...
 # Subtest: reading time formatter returns a min-read label
-ok 8 - reading time formatter returns a min-read label
+ok 9 - reading time formatter returns a min-read label
   ---
-  duration_ms: 2.350199
+  duration_ms: 4.202993
   ...
 # Subtest: blog card renders slug route and reading-time metadata
-ok 9 - blog card renders slug route and reading-time metadata
+ok 10 - blog card renders slug route and reading-time metadata
   ---
-  duration_ms: 0.571
+  duration_ms: 0.634999
   ...
 # Subtest: blog card renders when tags are missing
-ok 10 - blog card renders when tags are missing
+ok 11 - blog card renders when tags are missing
   ---
-  duration_ms: 0.2381
+  duration_ms: 0.2722
   ...
 # Subtest: blog index page renders list hook and links to posts
-ok 11 - blog index page renders list hook and links to posts
+ok 12 - blog index page renders list hook and links to posts
   ---
-  duration_ms: 0.2772
+  duration_ms: 0.332399
   ...
 # Subtest: blog post page renders mdx body and tags when provided
-ok 12 - blog post page renders mdx body and tags when provided
+ok 13 - blog post page renders mdx body and tags when provided
   ---
-  duration_ms: 2.061499
+  duration_ms: 2.070797
   ...
 # Subtest: blog post page omits tags hook when tags are empty
-ok 13 - blog post page omits tags hook when tags are empty
+ok 14 - blog post page omits tags hook when tags are empty
   ---
-  duration_ms: 0.2613
+  duration_ms: 0.289599
   ...
 # Subtest: blog post page omits tags hook when tags is not an array
-ok 14 - blog post page omits tags hook when tags is not an array
+ok 15 - blog post page omits tags hook when tags is not an array
   ---
-  duration_ms: 0.214799
+  duration_ms: 0.2615
+  ...
+# ALERT: Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.
+# AssertionError [ERR_ASSERTION]: Rapid submission should be prevented
+#     at Proxy.<anonymous> (/home/nick/Projects/abigaelawino.github.io/test/contact-e2e.test.js:229:7)
+#     at Proxy.callTheUserObjectsOperation (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+#     at innerInvokeEventListeners (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+#     at invokeEventListeners (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+#     at HTMLFormElementImpl._dispatch (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+#     at HTMLFormElementImpl.dispatchEvent (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:114:17)
+#     at Proxy.dispatchEvent (/home/nick/Projects/abigaelawino.github.io/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+#     at TestContext.<anonymous> (/home/nick/Projects/abigaelawino.github.io/test/contact-e2e.test.js:233:10)
+#     at Test.runInAsyncScope (node:async_hooks:206:9)
+#     at Test.run (node:internal/test_runner/test:796:25)
+# ALERT: Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.
+# ALERT: Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.
+# ALERT: Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.
+# ALERT: Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.
+# Subtest: contact form end-to-end flow with spam protection
+    # Subtest: renders contact form with all security fields
+    ok 1 - renders contact form with all security fields
+      ---
+      duration_ms: 264.420569
+      ...
+    # Subtest: form fingerprinting works correctly
+    ok 2 - form fingerprinting works correctly
+      ---
+      duration_ms: 40.937134
+      ...
+    # Subtest: form timing validation works
+    ok 3 - form timing validation works
+      ---
+      duration_ms: 23.35908
+      ...
+    # Subtest: honeypot fields block spam submissions
+    ok 4 - honeypot fields block spam submissions
+      ---
+      duration_ms: 20.584492
+      ...
+    # Subtest: valid form submission proceeds normally
+    ok 5 - valid form submission proceeds normally
+      ---
+      duration_ms: 26.04069
+      ...
+    # Subtest: form data includes required Netlify fields
+    ok 6 - form data includes required Netlify fields
+      ---
+      duration_ms: 16.971893
+      ...
+    # Subtest: contact thanks page renders correctly
+    ok 7 - contact thanks page renders correctly
+      ---
+      duration_ms: 9.104996
+      ...
+    # Subtest: form validation works with HTML5 validation
+    ok 8 - form validation works with HTML5 validation
+      ---
+      duration_ms: 19.843092
+      ...
+    # Subtest: analytics tracking is properly configured
+    ok 9 - analytics tracking is properly configured
+      ---
+      duration_ms: 15.923094
+      ...
+    1..9
+ok 16 - contact form end-to-end flow with spam protection
+  ---
+  duration_ms: 441.363734
+  ...
+# Subtest: contact form security edge cases
+    # Subtest: handles missing DOM elements gracefully
+    ok 1 - handles missing DOM elements gracefully
+      ---
+      duration_ms: 6.075898
+      ...
+    # Subtest: prevents submissions with invalid timing
+    ok 2 - prevents submissions with invalid timing
+      ---
+      duration_ms: 24.99729
+      ...
+    # Subtest: handles crypto API unavailability
+    ok 3 - handles crypto API unavailability
+      ---
+      duration_ms: 21.666391
+      ...
+    1..3
+ok 17 - contact form security edge cases
+  ---
+  duration_ms: 53.254478
   ...
 # Subtest: contact page renders form with Netlify honeypot spam protection
-ok 15 - contact page renders form with Netlify honeypot spam protection
+ok 18 - contact page renders form with Netlify honeypot spam protection
   ---
-  duration_ms: 3.131599
+  duration_ms: 3.053395
   ...
 # Subtest: contact page includes privacy/data collection note
-ok 16 - contact page includes privacy/data collection note
+ok 19 - contact page includes privacy/data collection note
   ---
-  duration_ms: 0.3827
+  duration_ms: 0.983398
   ...
 # Subtest: contact page renders default social links and allows overrides
-ok 17 - contact page renders default social links and allows overrides
+ok 20 - contact page renders default social links and allows overrides
   ---
-  duration_ms: 0.4802
+  duration_ms: 0.461899
   ...
 # Subtest: contact thanks page renders confirmation copy and CTA
-ok 18 - contact thanks page renders confirmation copy and CTA
+ok 21 - contact thanks page renders confirmation copy and CTA
   ---
-  duration_ms: 0.3262
+  duration_ms: 0.405799
   ...
 # Subtest: contact page renders nothing when all links are empty
-ok 19 - contact page renders nothing when all links are empty
+ok 22 - contact page renders nothing when all links are empty
   ---
-  duration_ms: 1.777399
+  duration_ms: 1.917997
   ...
 # Subtest: content collections load and validate frontmatter schema
-ok 20 - content collections load and validate frontmatter schema
+ok 23 - content collections load and validate frontmatter schema
   ---
-  duration_ms: 18.774193
+  duration_ms: 24.752559
   ...
 # Subtest: generateContentIndexes writes projects and blog index JSON files
-ok 21 - generateContentIndexes writes projects and blog index JSON files
+ok 24 - generateContentIndexes writes projects and blog index JSON files
   ---
-  duration_ms: 4.022199
+  duration_ms: 5.999891
   ...
 # Subtest: frontmatter parsing supports scalars, lists, and list blocks
-ok 22 - frontmatter parsing supports scalars, lists, and list blocks
+ok 25 - frontmatter parsing supports scalars, lists, and list blocks
   ---
-  duration_ms: 1.159899
+  duration_ms: 1.341098
   ...
 # Subtest: frontmatter parsing supports empty list values
-ok 23 - frontmatter parsing supports empty list values
+ok 26 - frontmatter parsing supports empty list values
   ---
-  duration_ms: 0.2679
+  duration_ms: 0.3165
   ...
 # Subtest: frontmatter parsing rejects invalid list entry without a key
-ok 24 - frontmatter parsing rejects invalid list entry without a key
+ok 27 - frontmatter parsing rejects invalid list entry without a key
   ---
-  duration_ms: 0.6302
+  duration_ms: 0.727399
   ...
 # Subtest: frontmatter parsing rejects invalid key syntax
-ok 25 - frontmatter parsing rejects invalid key syntax
+ok 28 - frontmatter parsing rejects invalid key syntax
   ---
-  duration_ms: 0.2169
+  duration_ms: 0.2849
   ...
 # Subtest: splitFrontmatter parses valid MDX and rejects missing delimiters
-ok 26 - splitFrontmatter parses valid MDX and rejects missing delimiters
+ok 29 - splitFrontmatter parses valid MDX and rejects missing delimiters
   ---
-  duration_ms: 0.308
+  duration_ms: 0.402099
   ...
 # Subtest: parseMdxFile rejects empty bodies and schema validation failures via loadCollectionEntries
-ok 27 - parseMdxFile rejects empty bodies and schema validation failures via loadCollectionEntries
+ok 30 - parseMdxFile rejects empty bodies and schema validation failures via loadCollectionEntries
   ---
-  duration_ms: 2.917098
+  duration_ms: 4.791692
   ...
 # Subtest: schema validation reports missing and invalid fields
-ok 28 - schema validation reports missing and invalid fields
+ok 31 - schema validation reports missing and invalid fields
   ---
-  duration_ms: 3.871399
+  duration_ms: 3.131795
   ...
 # Subtest: schema validation rejects whitespace-only string
-ok 29 - schema validation rejects whitespace-only string
+ok 32 - schema validation rejects whitespace-only string
   ---
-  duration_ms: 2.003599
+  duration_ms: 2.787895
   ...
 # Subtest: loadCollectionEntries skips non-mdx files
-ok 30 - loadCollectionEntries skips non-mdx files
+ok 33 - loadCollectionEntries skips non-mdx files
   ---
-  duration_ms: 1.696399
+  duration_ms: 2.212096
   ...
 # Subtest: home page renders hero value proposition and primary CTA links
-ok 31 - home page renders hero value proposition and primary CTA links
+ok 34 - home page renders hero value proposition and primary CTA links
   ---
-  duration_ms: 3.407398
+  duration_ms: 2.691096
   ...
 # Subtest: home page renders featured project with case study and repository CTAs
-ok 32 - home page renders featured project with case study and repository CTAs
+ok 35 - home page renders featured project with case study and repository CTAs
   ---
-  duration_ms: 0.4832
+  duration_ms: 0.422099
   ...
 # Subtest: home page uses mobile-first behavior for CTA layout
-ok 33 - home page uses mobile-first behavior for CTA layout
+ok 36 - home page uses mobile-first behavior for CTA layout
   ---
-  duration_ms: 0.272
+  duration_ms: 0.775398
   ...
 # Subtest: home page falls back when a featured project is unavailable
-ok 34 - home page falls back when a featured project is unavailable
+ok 37 - home page falls back when a featured project is unavailable
   ---
-  duration_ms: 1.515099
+  duration_ms: 1.198698
   ...
 # Subtest: supported project filters include required tag categories
-ok 35 - supported project filters include required tag categories
+ok 38 - supported project filters include required tag categories
   ---
-  duration_ms: 3.335799
+  duration_ms: 6.360689
   ...
 # Subtest: projects can be filtered by normalized tag aliases
-ok 36 - projects can be filtered by normalized tag aliases
+ok 39 - projects can be filtered by normalized tag aliases
   ---
-  duration_ms: 0.726999
+  duration_ms: 3.648094
   ...
 # Subtest: projects filter returns all projects when tag is "all"
-ok 37 - projects filter returns all projects when tag is "all"
+ok 40 - projects filter returns all projects when tag is "all"
   ---
-  duration_ms: 0.2923
+  duration_ms: 0.365399
   ...
 # Subtest: project card includes case study CTA and repo link
-ok 38 - project card includes case study CTA and repo link
+ok 41 - project card includes case study CTA and repo link
   ---
-  duration_ms: 2.145399
+  duration_ms: 2.303496
   ...
 # Subtest: projects page renders filter toolbar and cards grid
-ok 39 - projects page renders filter toolbar and cards grid
+ok 42 - projects page renders filter toolbar and cards grid
   ---
-  duration_ms: 0.5238
+  duration_ms: 0.549799
   ...
 # Subtest: project case study renders all required sections and repo link
-ok 40 - project case study renders all required sections and repo link
+ok 43 - project case study renders all required sections and repo link
   ---
-  duration_ms: 0.4282
+  duration_ms: 0.4654
   ...
 # Subtest: resume page renders core sections and download link
-ok 41 - resume page renders core sections and download link
+ok 44 - resume page renders core sections and download link
   ---
-  duration_ms: 2.548699
+  duration_ms: 13.537078
   ...
 # Subtest: resume page renders custom skills, highlights, and nav links
-ok 42 - resume page renders custom skills, highlights, and nav links
+ok 45 - resume page renders custom skills, highlights, and nav links
   ---
-  duration_ms: 0.3952
+  duration_ms: 0.539099
   ...
 # Subtest: resume page tolerates non-array values without throwing
-ok 43 - resume page tolerates non-array values without throwing
+ok 46 - resume page tolerates non-array values without throwing
   ---
-  duration_ms: 0.2586
+  duration_ms: 0.312799
   ...
 # Subtest: escapeHtml removes unsafe characters
-ok 44 - escapeHtml removes unsafe characters
+ok 47 - escapeHtml removes unsafe characters
   ---
-  duration_ms: 1.689599
+  duration_ms: 2.611695
   ...
 # Subtest: home page renderer escapes featured project metadata
-ok 45 - home page renderer escapes featured project metadata
+ok 48 - home page renderer escapes featured project metadata
   ---
-  duration_ms: 0.3841
+  duration_ms: 0.671499
   ...
 # Subtest: project card escapes slug/data attributes
-ok 46 - project card escapes slug/data attributes
+ok 49 - project card escapes slug/data attributes
   ---
-  duration_ms: 0.363499
+  duration_ms: 0.500699
   ...
 # Subtest: blog card escapes title and summary
-ok 47 - blog card escapes title and summary
+ok 50 - blog card escapes title and summary
   ---
-  duration_ms: 0.3998
+  duration_ms: 0.443899
+  ...
+# Subtest: netlify.toml contains required security headers
+ok 51 - netlify.toml contains required security headers
+  ---
+  duration_ms: 0.530599
+  ...
+# Subtest: contact form includes honeypot fields
+ok 52 - contact form includes honeypot fields
+  ---
+  duration_ms: 0.3319
+  ...
+# Subtest: contact form includes security enhancements
+ok 53 - contact form includes security enhancements
+  ---
+  duration_ms: 0.308199
+  ...
+# Subtest: analytics.js includes form security logic
+ok 54 - analytics.js includes form security logic
+  ---
+  duration_ms: 0.3222
+  ...
+# Subtest: build script generates CSP nonces
+ok 55 - build script generates CSP nonces
+  ---
+  duration_ms: 0.3857
+  ...
+# Subtest: security-check.mjs validates content patterns
+ok 56 - security-check.mjs validates content patterns
+  ---
+  duration_ms: 0.304899
   ...
 # Subtest: resolveSiteUrl prefers configured env vars
-ok 48 - resolveSiteUrl prefers configured env vars
+ok 57 - resolveSiteUrl prefers configured env vars
   ---
-  duration_ms: 1.9336
+  duration_ms: 2.982795
   ...
 # Subtest: normalizeSiteUrl rejects non-string, empty, and unsupported URLs
-ok 49 - normalizeSiteUrl rejects non-string, empty, and unsupported URLs
+ok 58 - normalizeSiteUrl rejects non-string, empty, and unsupported URLs
   ---
-  duration_ms: 0.2019
+  duration_ms: 0.363099
   ...
 # Subtest: buildSeoHead includes canonical + social tags
-ok 50 - buildSeoHead includes canonical + social tags
+ok 59 - buildSeoHead includes canonical + social tags
   ---
-  duration_ms: 0.4785
+  duration_ms: 0.699799
   ...
 # Subtest: buildSitemapXml emits expected URL entries
-ok 51 - buildSitemapXml emits expected URL entries
+ok 60 - buildSitemapXml emits expected URL entries
   ---
-  duration_ms: 0.2848
+  duration_ms: 0.442399
   ...
 # Subtest: buildRobotsTxt references the sitemap
-ok 52 - buildRobotsTxt references the sitemap
+ok 61 - buildRobotsTxt references the sitemap
   ---
-  duration_ms: 1.0739
+  duration_ms: 0.401699
   ...
 # Subtest: resolveSiteUrl returns default when no env vars provided
-ok 53 - resolveSiteUrl returns default when no env vars provided
+ok 62 - resolveSiteUrl returns default when no env vars provided
   ---
-  duration_ms: 0.119
+  duration_ms: 0.1755
   ...
 # Subtest: toAbsoluteUrl combines site URL and pathname
-ok 54 - toAbsoluteUrl combines site URL and pathname
+ok 63 - toAbsoluteUrl combines site URL and pathname
   ---
-  duration_ms: 0.173199
+  duration_ms: 0.237999
   ...
 # Subtest: buildRobotsTxt disallows when not allowing all
-ok 55 - buildRobotsTxt disallows when not allowing all
+ok 64 - buildRobotsTxt disallows when not allowing all
   ---
-  duration_ms: 0.1411
+  duration_ms: 0.402099
   ...
 # Subtest: buildSeoHead uses defaults for missing OG image
-ok 56 - buildSeoHead uses defaults for missing OG image
+ok 65 - buildSeoHead uses defaults for missing OG image
   ---
-  duration_ms: 0.1572
+  duration_ms: 0.312899
   ...
 # Subtest: normalizePathname handles pathname without leading slash
-ok 57 - normalizePathname handles pathname without leading slash
+ok 66 - normalizePathname handles pathname without leading slash
   ---
-  duration_ms: 0.1452
+  duration_ms: 0.2348
   ...
 # Subtest: normalizePathname returns slash for empty or non-string input
-ok 58 - normalizePathname returns slash for empty or non-string input
+ok 67 - normalizePathname returns slash for empty or non-string input
   ---
-  duration_ms: 0.1419
+  duration_ms: 0.2106
   ...
 # Subtest: normalizePathname handles path already starting with slash
-ok 59 - normalizePathname handles path already starting with slash
+ok 68 - normalizePathname handles path already starting with slash
   ---
-  duration_ms: 0.1492
+  duration_ms: 0.229299
   ...
 # Subtest: normalizePathname strips query and hash from path
-ok 60 - normalizePathname strips query and hash from path
+ok 69 - normalizePathname strips query and hash from path
   ---
-  duration_ms: 0.1372
+  duration_ms: 0.2149
   ...
 # Subtest: buildSitemapXml handles non-array paths
-ok 61 - buildSitemapXml handles non-array paths
+ok 70 - buildSitemapXml handles non-array paths
   ---
-  duration_ms: 0.1559
+  duration_ms: 0.271799
   ...
 # Subtest: buildSitemapXml handles missing lastmod
-ok 62 - buildSitemapXml handles missing lastmod
+ok 71 - buildSitemapXml handles missing lastmod
   ---
-  duration_ms: 0.1443
+  duration_ms: 0.2108
   ...
 # Subtest: resolveSiteUrl falls back through env vars
-ok 63 - resolveSiteUrl falls back through env vars
+ok 72 - resolveSiteUrl falls back through env vars
   ---
-  duration_ms: 0.1467
+  duration_ms: 0.264399
+  ...
+# Subtest: shadcn coverage script exists and is executable
+ok 73 - shadcn coverage script exists and is executable
+  ---
+  duration_ms: 3.035195
+  ...
+# Subtest: shadcn coverage script has required methods
+ok 74 - shadcn coverage script has required methods
+  ---
+  duration_ms: 0.546999
+  ...
+# Subtest: shadcn coverage script tracks all required components
+ok 75 - shadcn coverage script tracks all required components
+  ---
+  duration_ms: 0.4479
+  ...
+# Subtest: shadcn coverage script generates proper output structure
+ok 76 - shadcn coverage script generates proper output structure
+  ---
+  duration_ms: 2.009597
+  ...
+# Subtest: package.json includes shadcn coverage script
+ok 77 - package.json includes shadcn coverage script
+  ---
+  duration_ms: 0.552799
   ...
 # Subtest: getSiteTitle returns a non-empty string
-ok 64 - getSiteTitle returns a non-empty string
+ok 78 - getSiteTitle returns a non-empty string
   ---
-  duration_ms: 2.421399
+  duration_ms: 3.128595
   ...
 # Subtest: index exports home page renderer
-ok 65 - index exports home page renderer
+ok 79 - index exports home page renderer
   ---
-  duration_ms: 1.627799
+  duration_ms: 0.310299
   ...
 # Subtest: index exports about page renderer
-ok 66 - index exports about page renderer
+ok 80 - index exports about page renderer
   ---
-  duration_ms: 0.2101
+  duration_ms: 0.242299
   ...
 # Subtest: index exports blog page renderers
-ok 67 - index exports blog page renderers
+ok 81 - index exports blog page renderers
   ---
-  duration_ms: 0.1657
+  duration_ms: 0.2159
   ...
 # Subtest: index exports contact page renderer
-ok 68 - index exports contact page renderer
+ok 82 - index exports contact page renderer
   ---
-  duration_ms: 0.1335
+  duration_ms: 0.2191
   ...
 # Subtest: index exports resume page renderer
-ok 69 - index exports resume page renderer
+ok 83 - index exports resume page renderer
   ---
-  duration_ms: 0.1154
+  duration_ms: 0.217999
   ...
-1..69
-# tests 69
+1..83
+# tests 95
 # suites 0
-# pass 69
-# fail 0
+# pass 94
+# fail 1
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 290.146982
+# duration_ms 2074.859567
 # start of coverage report
-# -------------------------------------------------------------------------
-# file                     | line % | branch % | funcs % | uncovered lines
-# -------------------------------------------------------------------------
-# src/about.js             | 100.00 |   100.00 |  100.00 | 
-# src/blog.js              | 100.00 |   100.00 |  100.00 | 
-# src/contact.js           | 100.00 |   100.00 |  100.00 | 
-# src/content.js           | 100.00 |    97.33 |  100.00 | 
-# src/home.js              | 100.00 |   100.00 |  100.00 | 
-# src/index.js             | 100.00 |   100.00 |  100.00 | 
-# src/projects.js          | 100.00 |   100.00 |  100.00 | 
-# src/resume.js            | 100.00 |   100.00 |  100.00 | 
-# src/seo.js               | 100.00 |    95.35 |  100.00 | 
-# src/utils/escape-html.js | 100.00 |   100.00 |  100.00 | 
-# test/about.test.js       | 100.00 |   100.00 |  100.00 | 
-# test/blog.test.js        | 100.00 |   100.00 |  100.00 | 
-# test/contact.test.js     | 100.00 |   100.00 |  100.00 | 
-# test/content.test.js     | 100.00 |   100.00 |  100.00 | 
-# test/home.test.js        | 100.00 |   100.00 |  100.00 | 
-# test/projects.test.js    | 100.00 |   100.00 |  100.00 | 
-# test/resume.test.js      | 100.00 |   100.00 |  100.00 | 
-# test/security.test.js    | 100.00 |   100.00 |  100.00 | 
-# test/seo.test.js         | 100.00 |   100.00 |  100.00 | 
-# test/site.test.js        | 100.00 |   100.00 |  100.00 | 
-# -------------------------------------------------------------------------
-# all files                | 100.00 |    98.62 |  100.00 |
-# -------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------
+# file                         | line % | branch % | funcs % | uncovered lines
+# ------------------------------------------------------------------------------------------------------------------------------------
+# scripts/smoke-test.mjs       |  74.01 |    55.56 |   58.33 | 61-62 80-91 93-104 124-135 169-172 180 182-200 271-274 286-289 296-304
+# src/about.js                 |  92.24 |    95.00 |  100.00 | 102-110
+# src/blog.js                  | 100.00 |   100.00 |  100.00 | 
+# src/contact.js               | 100.00 |   100.00 |  100.00 | 
+# src/content.js               | 100.00 |    97.33 |  100.00 | 
+# src/home.js                  | 100.00 |   100.00 |  100.00 | 
+# src/index.js                 | 100.00 |   100.00 |  100.00 | 
+# src/projects.js              | 100.00 |   100.00 |  100.00 | 
+# src/resume.js                |  92.31 |    91.67 |  100.00 | 114-123
+# src/seo.js                   | 100.00 |    95.35 |  100.00 | 
+# src/utils/escape-html.js     | 100.00 |   100.00 |  100.00 | 
+# test/about.test.js           | 100.00 |   100.00 |  100.00 | 
+# test/blog.test.js            | 100.00 |   100.00 |  100.00 | 
+# test/contact-e2e.test.js     |  97.15 |    91.18 |   93.75 | 36-44 58-60 303-304
+# test/contact.test.js         | 100.00 |   100.00 |  100.00 | 
+# test/content.test.js         | 100.00 |   100.00 |  100.00 | 
+# test/home.test.js            | 100.00 |   100.00 |  100.00 | 
+# test/projects.test.js        | 100.00 |   100.00 |  100.00 | 
+# test/resume.test.js          | 100.00 |   100.00 |  100.00 | 
+# test/security.test.js        | 100.00 |   100.00 |  100.00 | 
+# test/seo.test.js             | 100.00 |   100.00 |  100.00 | 
+# test/shadcn-coverage.test.js | 100.00 |   100.00 |  100.00 | 
+# test/site.test.js            | 100.00 |   100.00 |  100.00 | 
+# ------------------------------------------------------------------------------------------------------------------------------------
+# all files                    |  96.40 |    94.28 |   96.37 |
+# ------------------------------------------------------------------------------------------------------------------------------------
 # end of coverage report

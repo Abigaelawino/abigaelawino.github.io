@@ -107,6 +107,47 @@ For Netlify functions that need rate protection:
 
 ---
 
+## [2026-02-14] - abigaelawino-github-io-6xg
+- What was implemented:
+  - Comprehensive smoke testing script for rendered endpoints
+  - Remote smoke testing with HTTP requests to live URLs
+  - Local smoke testing for built files without requiring server
+  - Quick mode for fast CI/CD feedback and full mode for comprehensive testing
+  - Integration into CI pipeline with proper exit codes
+  - Documentation and usage guides for different testing scenarios
+
+- Files changed:
+  - scripts/smoke-test.mjs (new - remote endpoint testing with curl/fetch)
+  - scripts/smoke-test-local.mjs (new - local file testing without server)
+  - package.json (added smoke-test, smoke-test:prod, smoke-test:quick, smoke-test:local scripts)
+  - SMOKE_TEST.md (new comprehensive documentation)
+  - .ralph-tui/progress.md (updated with implementation details)
+
+- **Learnings:**
+  - The smoke test revealed the actual state of the deployed site (6/7 main pages working)
+  - Contact/thanks page is missing from the current deployment (404)
+  - API endpoints return 400/404, suggesting functions need deployment or configuration
+  - Static assets exist in dist but may not be deployed to production
+  - Local testing is more reliable than remote testing for CI/CD pipelines
+  - Quick mode provides fast feedback for main pages while full mode tests everything
+  - Production site uses Netlify (abigael-awino-portfolio.netlify.app) not GitHub Pages
+
+### Smoke Testing Pattern
+For testing rendered endpoints after build/deploy cycles:
+1. Use local smoke testing for fast CI feedback on built files
+2. Use remote smoke testing to validate actual deployed endpoints
+3. Implement quick mode for essential pages and full mode for comprehensive testing
+4. Include proper exit codes (0 for success, 1 for failure) for CI/CD integration
+5. Test both main content pages and supporting assets (robots.txt, sitemap.xml)
+6. Validate expected content presence, not just HTTP status codes
+
+### CI/CD Integration
+- Added smoke-test:quick to the main ci script for automated validation
+- Local testing is more reliable than remote testing in CI environments
+- Remote testing should be used post-deployment to verify live site functionality
+
+---
+
 ## [2026-02-14] - abigaelawino-github-io-pi4
 - What was implemented:
   - Comprehensive validation of Netlify build configuration and hooks
