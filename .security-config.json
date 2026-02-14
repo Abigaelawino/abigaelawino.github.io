@@ -1,0 +1,91 @@
+{
+  "security": {
+    "scanFrequency": "weekly",
+    "autoPatch": {
+      "enabled": true,
+      "maxSeverity": 7,
+      "excludedPackages": [
+        "next",
+        "react",
+        "react-dom",
+        "express",
+        "jsonwebtoken",
+        "bcrypt",
+        "passport"
+      ],
+      "includedPatterns": [
+        "@types/*",
+        "eslint-*",
+        "prettier",
+        "jest",
+        "vitest",
+        "chalk",
+        "rimraf",
+        "cross-env"
+      ]
+    },
+    "notifications": {
+      "enabled": true,
+      "channels": ["github-issues", "slack"],
+      "threshold": {
+        "createIssue": "high",
+        "immediateNotification": "critical"
+      }
+    },
+    "reporting": {
+      "retentionDays": 30,
+      "exportFormats": ["json", "markdown"],
+      "includePatches": true,
+      "includeRecommendations": true
+    },
+    "riskAssessment": {
+      "levels": {
+        "LOW": {
+          "severities": ["low", "moderate"],
+          "autoPatch": true,
+          "reviewRequired": false,
+          "maxSeverity": 7
+        },
+        "MEDIUM": {
+          "severities": ["moderate"],
+          "autoPatch": false,
+          "reviewRequired": true,
+          "maxSeverity": 6
+        },
+        "HIGH": {
+          "severities": ["high", "critical"],
+          "autoPatch": false,
+          "reviewRequired": true,
+          "maxSeverity": 4
+        }
+      }
+    },
+    "integrations": {
+      "github": {
+        "enabled": true,
+        "createIssues": true,
+        "labelStrategy": {
+          "high": ["security", "vulnerabilities", "high-priority"],
+          "critical": ["security", "vulnerabilities", "critical", "urgent"],
+          "moderate": ["security", "vulnerabilities"],
+          "low": ["security", "maintenance"]
+        }
+      },
+      "slack": {
+        "enabled": false,
+        "webhook": "${SLACK_SECURITY_WEBHOOK}",
+        "channel": "#security-alerts",
+        "mention": ["@security-team"]
+      }
+    },
+    "exemptions": {
+      "packages": [],
+      "reasons": [
+        "Under investigation",
+        "No fix available",
+        "Breaking changes required",
+        "False positive"
+      ]
+    }
+  }
+}

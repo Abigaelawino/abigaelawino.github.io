@@ -1,44 +1,100 @@
 {
-  "home": {
-    "performance": 100,
-    "accessibility": 90,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": ["Missing alt attributes on images"]
+  "index": {
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 85
+    },
+    "issues": {
+      "seo": [
+        "missing_h1"
+      ],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": [
+      "missing_h1"
+    ]
   },
   "about": {
-    "performance": 100,
-    "accessibility": 90,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": ["Missing alt attributes on images"]
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    "issues": {
+      "seo": [],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": []
   },
   "projects": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": []
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    "issues": {
+      "seo": [],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": []
   },
   "blog": {
-    "performance": 100,
-    "accessibility": 90,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": ["Missing alt attributes on images"]
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    "issues": {
+      "seo": [],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": []
   },
   "contact": {
-    "performance": 100,
-    "accessibility": 90,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": ["Missing alt attributes on images"]
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    "issues": {
+      "seo": [],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": []
   },
   "resume": {
-    "performance": 100,
-    "accessibility": 90,
-    "bestPractices": 100,
-    "seo": 100,
-    "issues": ["Missing alt attributes on images"]
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 90
+    },
+    "issues": {
+      "seo": [
+        "short_description"
+      ],
+      "accessibility": [],
+      "performance": [],
+      "bestPractices": []
+    },
+    "allIssues": [
+      "short_description"
+    ]
   }
 }

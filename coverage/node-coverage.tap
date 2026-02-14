@@ -2,37 +2,37 @@ TAP version 13
 # Subtest: basic imports work
 ok 1 - basic imports work
   ---
-  duration_ms: 2.8341
+  duration_ms: 1.823704
   ...
 # Subtest: file system access works
 ok 2 - file system access works
   ---
-  duration_ms: 0.442899
+  duration_ms: 0.264501
   ...
 # Subtest: type definitions exist
 ok 3 - type definitions exist
   ---
-  duration_ms: 0.2379
+  duration_ms: 0.1384
   ...
 # Subtest: core source files exist
 ok 4 - core source files exist
   ---
-  duration_ms: 0.2146
+  duration_ms: 0.150901
   ...
 # Subtest: React components exist
 ok 5 - React components exist
   ---
-  duration_ms: 0.2449
+  duration_ms: 0.1477
   ...
 # Subtest: package.json has correct scripts
 ok 6 - package.json has correct scripts
   ---
-  duration_ms: 0.3156
+  duration_ms: 0.1926
   ...
 # Subtest: required config files exist
 ok 7 - required config files exist
   ---
-  duration_ms: 0.232
+  duration_ms: 0.1271
   ...
 1..7
 # tests 7
@@ -42,7 +42,7 @@ ok 7 - required config files exist
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 147.154363
+# duration_ms 79.807757
 # start of coverage report
 # ------------------------------------------------------------------------------
 # file                          | line % | branch % | funcs % | uncovered lines

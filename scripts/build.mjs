@@ -514,6 +514,22 @@ try {
 writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
 writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);
 
+// Copy favicon files
+try {
+  cpSync('public/assets/favicon-32x32.png', join('dist', 'assets', 'favicon-32x32.png'));
+  cpSync('public/assets/favicon-16x16.png', join('dist', 'assets', 'favicon-16x16.png'));
+  cpSync('public/assets/apple-touch-icon.png', join('dist', 'assets', 'apple-touch-icon.png'));
+} catch {
+  // Favicon files are optional, create minimal ones
+  const faviconBuffer = Buffer.from(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+    'base64'
+  );
+  writeFileSync(join('dist', 'assets', 'favicon-32x32.png'), faviconBuffer);
+  writeFileSync(join('dist', 'assets', 'favicon-16x16.png'), faviconBuffer);
+  writeFileSync(join('dist', 'assets', 'apple-touch-icon.png'), faviconBuffer);
+}
+
 const siteTitle = getSiteTitle();
 const featuredProject = projects[0] ?? null;
 const siteUrl = resolveSiteUrl(process.env);
@@ -543,19 +559,21 @@ const staticPages = [
     path: 'index.html',
     title: `${siteTitle} · Home`,
     description:
-      'Data science solutions bridging exploratory analysis to production-ready outcomes.',
+      'Data science portfolio showcasing end-to-end machine learning projects from exploratory analysis to production-ready solutions with measurable business impact.',
     body: renderHomePage(featuredProject),
   },
   {
     path: join('about', 'index.html'),
     title: `${siteTitle} · About`,
-    description: 'Learn about Abigael Awino, her strengths, and her toolkit.',
+    description:
+      "Discover Abigael Awino's expertise in data science, her technical strengths, professional background, and comprehensive toolkit for data-driven solutions.",
     body: renderAboutPage(),
   },
   {
     path: join('contact', 'index.html'),
     title: `${siteTitle} · Contact`,
-    description: 'Reach out via the secure contact form or connect on LinkedIn/GitHub.',
+    description:
+      'Contact Abigael Awino for data science collaborations via secure form or connect professionally on LinkedIn and GitHub for opportunities.',
     body: renderContactPage(),
   },
   {
@@ -568,14 +586,15 @@ const staticPages = [
   {
     path: join('projects', 'index.html'),
     title: `${siteTitle} · Projects`,
-    description: 'Explore project case studies in ML, analytics, and production data systems.',
+    description:
+      'Explore comprehensive data science project case studies showcasing machine learning, analytics dashboards, and production-ready data systems with real impact.',
     body: renderProjectsPage(projects),
   },
   {
     path: join('blog', 'index.html'),
     title: `${siteTitle} · Blog`,
     description:
-      'Read notes on model monitoring, analytics implementation, and production workflows.',
+      'Read technical insights on machine learning model monitoring, analytics implementation strategies, and production data engineering workflows.',
     body: renderBlogIndexPage(blog),
   },
 ];

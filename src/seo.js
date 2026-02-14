@@ -84,6 +84,9 @@ function buildSeoHead({
     <meta name="robots" content="${escapeHtml(robots)}" />
     <meta name="theme-color" content="${escapeHtml(themeColor)}" />
     <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
     <meta property="og:site_name" content="${resolvedSiteName}" />
     <meta property="og:locale" content="${escapeHtml(locale)}" />
     <meta property="og:type" content="${escapeHtml(ogType)}" />
