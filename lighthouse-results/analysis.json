@@ -1,0 +1,55 @@
+{
+  "totalAudited": 6,
+  "pagesNeedingFixes": [
+    {
+      "page": "about",
+      "issues": [
+        {
+          "category": "performance",
+          "score": 88
+        },
+        {
+          "category": "bestPractices",
+          "score": 89
+        }
+      ]
+    },
+    {
+      "page": "projects",
+      "issues": [
+        {
+          "category": "accessibility",
+          "score": 85
+        },
+        {
+          "category": "seo",
+          "score": 88
+        }
+      ]
+    },
+    {
+      "page": "contact",
+      "issues": [
+        {
+          "category": "accessibility",
+          "score": 89
+        }
+      ]
+    },
+    {
+      "page": "resume",
+      "issues": [
+        {
+          "category": "bestPractices",
+          "score": 88
+        }
+      ]
+    }
+  ],
+  "categoriesNeedingFixes": [
+    "performance",
+    "bestPractices",
+    "accessibility",
+    "seo"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "home": {
+    "performance": 95,
+    "accessibility": 92,
+    "bestPractices": 94,
+    "seo": 96
+  },
+  "about": {
+    "performance": 88,
+    "accessibility": 90,
+    "bestPractices": 89,
+    "seo": 91
+  },
+  "projects": {
+    "performance": 92,
+    "accessibility": 85,
+    "bestPractices": 90,
+    "seo": 88
+  },
+  "blog": {
+    "performance": 90,
+    "accessibility": 91,
+    "bestPractices": 92,
+    "seo": 90
+  },
+  "contact": {
+    "performance": 93,
+    "accessibility": 89,
+    "bestPractices": 90,
+    "seo": 92
+  },
+  "resume": {
+    "performance": 91,
+    "accessibility": 90,
+    "bestPractices": 88,
+    "seo": 90
+  }
+}

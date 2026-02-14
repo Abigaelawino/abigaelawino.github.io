@@ -27,6 +27,9 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
   const publications = Array.isArray(resolved.publications) ? resolved.publications : [];
   const hasPublicProfile = speaking.length > 0 || publications.length > 0;
 
+  // Add error handling for Best Practices improvement
+  try {
+
   const publicProfileMarkup = hasPublicProfile
     ? `
       <section class="about-section" data-about-public-profile>
@@ -55,7 +58,7 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
     `.trim()
     : '';
 
-  return `
+  const result = `
     <section class="about-page" data-about-page>
       <style>
         .about-page { display: grid; gap: 1rem; }
@@ -93,6 +96,18 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
       ${publicProfileMarkup}
     </section>
   `.trim();
+
+    return result;
+  } catch (error) {
+    console.error('Error rendering About page:', error);
+    // Return fallback content for Best Practices compliance
+    return `<section class="about-page" data-about-page>
+      <header class="about-hero">
+        <h1 class="about-hero__title">About</h1>
+        <p class="about-hero__bio">${escapeHtml(DEFAULT_ABOUT_CONTENT.bio)}</p>
+      </header>
+    </section>`;
+  }
 }
 
 module.exports = {

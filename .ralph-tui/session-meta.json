@@ -1,14 +1,13 @@
 {
-  "id": "589458ac-8bfe-4ef5-bafe-542fce17d07a",
+  "id": "6964a999-f4e2-402a-baa9-1fe69b4518c8",
   "status": "running",
-  "startedAt": "2026-02-13T20:20:26.158Z",
-  "updatedAt": "2026-02-13T20:43:56.629Z",
+  "startedAt": "2026-02-14T13:32:42.987Z",
+  "updatedAt": "2026-02-14T13:32:42.987Z",
   "agentPlugin": "opencode",
-  "trackerPlugin": "beads",
-  "epicId": "abigaelawino-github-io-3su",
-  "currentIteration": 1,
+  "trackerPlugin": "beads-bv",
+  "currentIteration": 0,
   "maxIterations": 10,
   "totalTasks": 0,
-  "tasksCompleted": 1,
+  "tasksCompleted": 0,
   "cwd": "/home/nick/Projects/abigaelawino.github.io"
 }

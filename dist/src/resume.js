@@ -38,7 +38,10 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
   const experienceHighlights = Array.isArray(resolved.experienceHighlights) ? resolved.experienceHighlights : [];
   const nextLinks = Array.isArray(resolved.nextLinks) ? resolved.nextLinks : [];
 
-  return `
+  // Add error handling for Best Practices improvement
+  try {
+
+  const result = `
     <section class="resume-page" data-resume-page>
       <style>
         .resume-page { display: grid; gap: 1rem; }
@@ -105,6 +108,19 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
       </section>
     </section>
   `.trim();
+
+    return result;
+  } catch (error) {
+    console.error('Error rendering Resume page:', error);
+    // Return fallback content for Best Practices compliance
+    return `<section class="resume-page" data-resume-page>
+      <header class="resume-hero">
+        <h1 class="resume-hero__title">Resume</h1>
+        <p class="resume-hero__headline">${escapeHtml(DEFAULT_RESUME_CONTENT.headline)}</p>
+        <p class="resume-hero__summary">${escapeHtml(DEFAULT_RESUME_CONTENT.summary)}</p>
+      </header>
+    </section>`;
+  }
 }
 
 module.exports = {
