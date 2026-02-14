@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-02-14T21:46:34.327Z",
+  "summary": {
+    "totalServers": 2,
+    "healthyServers": 0,
+    "unhealthyServers": 2,
+    "degradedServers": 0
+  },
+  "servers": [
+    {
+      "serverId": "netlify",
+      "serverName": "Netlify MCP",
+      "status": "unhealthy",
+      "uptime": 0,
+      "averageResponseTime": 10018,
+      "totalChecks": 1,
+      "lastCheck": "2026-02-14T21:46:16.281Z"
+    },
+    {
+      "serverId": "shadcn",
+      "serverName": "shadcn/ui MCP",
+      "status": "unhealthy",
+      "uptime": 0,
+      "averageResponseTime": 8016,
+      "totalChecks": 1,
+      "lastCheck": "2026-02-14T21:46:26.301Z"
+    }
+  ]
+}

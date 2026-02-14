@@ -1,0 +1,14 @@
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:44:10.670Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:44:20.693Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:44:28.760Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:44:38.791Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:44:46.883Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:44:56.905Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:45:15.177Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:45:25.199Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:45:33.308Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:45:43.327Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:45:51.407Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:46:01.431Z"}
+{"type":"server_down","severity":"critical","message":"Netlify MCP is unhealthy","details":"Command failed: npx -y @netlify/mcp\n","serverId":"netlify","timestamp":"2026-02-14T21:46:16.281Z"}
+{"type":"server_down","severity":"critical","message":"shadcn/ui MCP is unhealthy","details":"Command failed: ./node_modules/.bin/shadcn mcp\n","serverId":"shadcn","timestamp":"2026-02-14T21:46:26.301Z"}

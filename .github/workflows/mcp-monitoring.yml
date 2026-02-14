@@ -1,0 +1,152 @@
+name: MCP Server Health Monitoring
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'check'
+        type: choice
+        options:
+          - check
+          - report
+      server:
+        description: 'Specific server to check (optional)'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  monitor:
+    name: MCP Server Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check MCP server health
+        run: |
+          if [ "${{ github.event.inputs.action }}" = "report" ]; then
+            node scripts/mcp-monitor.mjs report
+          elif [ -n "${{ github.event.inputs.server }}" ]; then
+            node scripts/mcp-monitor.mjs server ${{ github.event.inputs.server }}
+          else
+            node scripts/mcp-monitor.mjs check
+          fi
+        id: health-check
+
+      - name: Upload monitoring data
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcp-monitoring-data
+          path: .mcp-monitoring/
+          retention-days: 30
+
+      - name: Check for critical alerts
+        run: |
+          # Check if there are critical alerts
+          if [ -f ".mcp-monitoring/alerts.jsonl" ]; then
+            critical_alerts=$(jq -r 'select(.severity == "critical") | length' .mcp-monitoring/alerts.jsonl 2>/dev/null || echo "0")
+
+            if [ "$critical_alerts" -gt 0 ]; then
+              echo "🚨 Critical MCP server alerts detected!"
+              echo "::error::Critical alerts found: $critical_alerts"
+              exit 1
+            fi
+          fi
+
+      - name: Generate status comment
+        if: always()
+        run: |
+          # Create a summary of the monitoring results
+          if [ -f ".mcp-monitoring/latest-report.json" ]; then
+            echo "## MCP Server Health Status" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Parse and display server status
+            jq -r '.summary | "- Total Servers: \(.totalServers)\n- Healthy: \(.healthyServers)\n- Degraded: \(.degradedServers)\n- Unhealthy: \(.unhealthyServers)"' .mcp-monitoring/latest-report.json >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Display individual server status
+            echo "### Server Details" >> $GITHUB_STEP_SUMMARY
+            jq -r '.servers[] | "- **\(.serverName)**: \(.status | ascii_upcase) (Uptime: \(.uptime)%)"' .mcp-monitoring/latest-report.json >> $GITHUB_STEP_SUMMARY
+
+            # Display recent alerts if any
+            alert_count=$(jq -r '.summary.totalServers - .summary.healthyServers' .mcp-monitoring/latest-report.json 2>/dev/null || echo "0")
+            if [ "$alert_count" -gt 0 ]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "### ⚠️ Issues Detected" >> $GITHUB_STEP_SUMMARY
+              echo "$alert_count server(s) need attention." >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "## MCP Server Health Status" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "❌ No monitoring data available. Monitoring system may need initialization." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Create issue on critical failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Check if there are critical alerts
+            if (fs.existsSync('.mcp-monitoring/alerts.jsonl')) {
+              const alerts = fs.readFileSync('.mcp-monitoring/alerts.jsonl', 'utf8')
+                .trim()
+                .split('\n')
+                .filter(line => line)
+                .map(line => JSON.parse(line));
+
+              const criticalAlerts = alerts.filter(alert => alert.severity === 'critical');
+
+              if (criticalAlerts.length > 0) {
+                const latestCriticalAlert = criticalAlerts[criticalAlerts.length - 1];
+
+                // Create an issue
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: `🚨 MCP Server Alert: ${latestCriticalAlert.serverId}`,
+                  body: |
+                    ## Critical MCP Server Alert
+
+                    **Server:** ${latestCriticalAlert.serverId}
+                    **Type:** ${latestCriticalAlert.type}
+                    **Severity:** ${latestCriticalAlert.severity}
+                    **Time:** ${latestCriticalAlert.timestamp}
+
+                    **Message:** ${latestCriticalAlert.message}
+                    **Details:** ${latestCriticalAlert.details}
+
+                    ---
+
+                    This issue was automatically created by the MCP monitoring workflow.
+
+                    **Actions:**
+                    - [ ] Investigate server status
+                  - [ ] Check server logs
+                  - [ ] Resolve underlying issue
+                  - [ ] Close this issue when resolved
+                  `,
+                  labels: ['mcp', 'alert', 'critical', 'auto-generated']
+                });
+              }
+            }

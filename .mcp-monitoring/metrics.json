@@ -1,0 +1,50 @@
+{
+  "netlify": {
+    "serverName": "Netlify MCP",
+    "checks": [
+      {
+        "serverId": "netlify",
+        "serverName": "Netlify MCP",
+        "timestamp": "2026-02-14T21:46:16.281Z",
+        "status": "unhealthy",
+        "responseTime": 10018,
+        "error": "Command failed: npx -y @netlify/mcp\n",
+        "uptime": null,
+        "errorType": "execution_error"
+      }
+    ],
+    "uptime": 0,
+    "downtime": 100,
+    "totalChecks": 1,
+    "healthyChecks": 0,
+    "unhealthyChecks": 1,
+    "degradedChecks": 0,
+    "averageResponseTime": 10018,
+    "lastStatusChange": null,
+    "lastUpdated": "2026-02-14T21:46:34.324Z"
+  },
+  "shadcn": {
+    "serverName": "shadcn/ui MCP",
+    "checks": [
+      {
+        "serverId": "shadcn",
+        "serverName": "shadcn/ui MCP",
+        "timestamp": "2026-02-14T21:46:26.301Z",
+        "status": "unhealthy",
+        "responseTime": 8016,
+        "error": "Command failed: ./node_modules/.bin/shadcn mcp\n",
+        "uptime": null,
+        "errorType": "execution_error"
+      }
+    ],
+    "uptime": 0,
+    "downtime": 100,
+    "totalChecks": 1,
+    "healthyChecks": 0,
+    "unhealthyChecks": 1,
+    "degradedChecks": 0,
+    "averageResponseTime": 8016,
+    "lastStatusChange": null,
+    "lastUpdated": "2026-02-14T21:46:34.324Z"
+  }
+}
