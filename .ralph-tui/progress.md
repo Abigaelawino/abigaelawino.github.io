@@ -30,6 +30,12 @@ after each iteration and it's included in prompts for context.
   4. Score calculation should be: actual issues * penalty points, not binary failures
   5. Small variations (like meta description length) are acceptable if scores ≥ 90
   6. Production vs development verification: static build may have different structure than runtime
+- Shell Styles Centralization Pattern: For static render helpers with component-specific styles:
+  1. Move inline <style> blocks from render functions to build.mjs SHELL_CSS constant
+  2. Ensure all component styles use shadcn/ui design tokens and follow PORTFOLIO_PLAN visual system
+  3. Include responsive design patterns in centralized shell CSS
+  4. Eliminates duplication and ensures consistent styling across all pages
+  5. Build script automatically generates shell.css with all centralized styles
 
 ---
 
@@ -179,6 +185,24 @@ after each iteration and it's included in prompts for context.
   - Comprehensive caching strategy improves performance: immutable for assets, must-revalidate for HTML
   - Build optimization includes setting NODE_ENV and npm flags for faster builds
   - Trailing whitespace in source files causes linting failures that block deployment
+
+---
+
+## [2026-02-14] - abigaelawino-github-io-6s2
+- Centralized shared shell styles by moving case study component styles from inline <style> blocks to shell.css
+- Updated build.mjs SHELL_CSS constant to include all case study component styles
+- Removed inline <style> block from renderProjectCaseStudy function in src/projects.js
+- Verified build process generates correct shell.css with centralized styles
+- Files changed:
+  - scripts/build.mjs (updated SHELL_CSS with case study styles)
+  - src/projects.js (removed inline <style> block from renderProjectCaseStudy function)
+- **Learnings:**
+  - Patterns discovered: Static render helpers previously used inline <style> blocks for component-specific styles
+  - Gotchas encountered: Case study styles were duplicated across every project detail page due to inline blocks
+  - Centralized approach eliminates duplication and ensures consistent styling across all pages
+  - Build script already has comprehensive SHELL_CSS structure with shadcn/ui design tokens
+  - Shell CSS follows the PORTFOLIO_PLAN visual system with proper responsive design
+  - Case study components now use same design tokens as other shadcn/ui components
 
 ---
 

@@ -188,20 +188,6 @@ function renderProjectCaseStudy(project) {
 
   return `
     <article class="case-study" data-case-study="${escapeHtml(project.slug)}">
-      <style>
-        .case-study { display: grid; gap: 1rem; }
-        .case-study__header { display: grid; gap: 0.4rem; }
-        .case-study__meta { margin: 0; color: #4b5563; font-size: 0.95rem; }
-        .case-study__title { margin: 0; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.2; }
-        .case-study__section { border: 1px solid #d1d5db; border-radius: 0.75rem; padding: 0.9rem; display: grid; gap: 0.5rem; }
-        .case-study__section h2 { margin: 0; font-size: 1.15rem; line-height: 1.3; }
-        .case-study__section p { margin: 0; line-height: 1.65; color: #1f2937; }
-        .case-study__footer { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-        .case-study__repo { text-decoration: none; font-weight: 700; border: 1px solid #1f2937; border-radius: 999px; padding: 0.35rem 0.75rem; }
-        @media (min-width: 48rem) {
-          .case-study { gap: 1.25rem; }
-        }
-      </style>
       <header class="case-study__header">
         <p class="case-study__meta">${escapeHtml(project.date)}</p>
         <h1 class="case-study__title">${escapeHtml(project.title)}</h1>
