@@ -1,0 +1,287 @@
+name: Ralph TUI Queue Health Monitoring
+
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'monitor'
+        type: choice
+        options:
+          - monitor
+          - aging-report
+          - dashboard
+          - report
+
+jobs:
+  ralph-monitoring:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Ralph TUI Health Check
+        id: health-check
+        run: |
+          echo "Running Ralph TUI health monitoring..."
+          npm run ralph:monitor check
+        continue-on-error: true
+
+      - name: Generate Aging Analysis
+        id: aging-analysis
+        run: |
+          echo "Generating bead aging analysis..."
+          node scripts/ralph-bead-aging.mjs analyze > aging-report.json
+        continue-on-error: true
+
+      - name: Generate Trend Analysis
+        id: trend-analysis
+        run: |
+          echo "Generating 7-day trend analysis..."
+          node scripts/ralph-bead-aging.mjs trends 7 > trend-report.json
+        continue-on-error: true
+
+      - name: Check for Critical Alerts
+        id: alerts-check
+        run: |
+          echo "Checking for critical alerts..."
+
+          # Check if monitoring directory exists and has data
+          if [ -d ".ralph-monitoring" ]; then
+            # Check for recent critical alerts
+            if [ -f ".ralph-monitoring/alerts.jsonl" ]; then
+              # Find critical alerts from the last hour
+              CRITICAL_ALERTS=$(jq -r '
+                select((now - (.timestamp | fromdateiso8601)) < 3600) |
+                select(.severity == "critical") |
+                "\(.type): \(.message)"
+              ' .ralph-monitoring/alerts.jsonl 2>/dev/null || echo "")
+
+              if [ -n "$CRITICAL_ALERTS" ]; then
+                echo "CRITICAL_ALERTS=true" >> $GITHUB_OUTPUT
+                echo "ALERTS<<EOF" >> $GITHUB_OUTPUT
+                echo "$CRITICAL_ALERTS" >> $GITHUB_OUTPUT
+                echo "EOF" >> $GITHUB_OUTPUT
+              fi
+            fi
+
+            # Check for stuck beads
+            if [ -f ".ralph-monitoring/metrics.json" ]; then
+              STUCK_BEADS=$(jq -r '.checks[-1].metrics.stuckBeads // 0' .ralph-monitoring/metrics.json 2>/dev/null || echo "0")
+              if [ "$STUCK_BEADS" -gt 0 ]; then
+                echo "STUCK_BEADS=true" >> $GITHUB_OUTPUT
+                echo "STUCK_BEADS_COUNT=$STUCK_BEADS" >> $GITHUB_OUTPUT
+              fi
+            fi
+          fi
+        continue-on-error: true
+
+      - name: Create GitHub Issue for Critical Alerts
+        if: steps.alerts-check.outputs.CRITICAL_ALERTS == 'true' || steps.alerts-check.outputs.STUCK_BEADS == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const alerts = `${{ steps.alerts-check.outputs.ALERTS }}` || '';
+            const stuckBeads = `${{ steps.alerts-check.outputs.STUCK_BEADS_COUNT }}` || '0';
+
+            const title = stuckBeads > 0
+              ? `🚨 Critical: ${stuckBeads} beads stuck in Ralph TUI queue`
+              : '🚨 Critical Ralph TUI Queue Health Alert';
+
+            const body = `
+            ## Ralph TUI Queue Health Alert
+
+            **Time:** ${new Date().toISOString()}
+            **Repository:** ${{ github.repository }}
+            **Workflow:** ${{ github.workflow }}
+
+            ### 🚨 Critical Issues Detected
+
+            ${alerts ? `**Alerts:**\n${alerts.split('\n').map(alert => `- ${alert}`).join('\n')}` : ''}
+            ${stuckBeads > 0 ? `- **Stuck Beads:** ${stuckBeads} beads are stuck in the queue` : ''}
+
+            ### 🔍 Recommended Actions
+
+            1. **Check Ralph daemon status:** \`bd daemon status\`
+            2. **Review stuck beads:** \`bd ls --status=queued\`
+            3. **Check daemon logs:** \`tail -f .beads/daemon.log\`
+            4. **Restart daemon if needed:** \`bd daemon restart\`
+
+            ### 📊 Additional Information
+
+            - **Workflow Run:** [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - **Branch:** ${{ github.ref_name }}
+            - **Trigger:** ${{ github.event_name }}
+
+            ---
+
+            *This issue was automatically created by the Ralph TUI monitoring workflow.*
+            *Please investigate and resolve the issue promptly.*
+            `;
+
+            // Check if similar issue already exists and is open
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['ralph-tui', 'critical-alert'],
+              state: 'open'
+            });
+
+            // Check if there's already an issue about stuck beads from the last 24 hours
+            const recentStuckIssue = existingIssues.data.find(issue => {
+              const createdAt = new Date(issue.created_at);
+              const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+              return issue.title.includes('stuck beads') && createdAt > oneDayAgo;
+            });
+
+            if (recentStuckIssue) {
+              // Comment on existing issue instead of creating new one
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: recentStuckIssue.number,
+                body: `🔄 **Update (${new Date().toISOString()}):**\n\n${body}`
+              });
+              console.log(`Commented on existing issue #${recentStuckIssue.number}`);
+            } else {
+              // Create new issue
+              const issue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['ralph-tui', 'critical-alert', 'automated']
+              });
+              console.log(`Created issue #${issue.data.number}`);
+            }
+
+      - name: Generate Monitoring Dashboard
+        id: dashboard
+        run: |
+          echo "Generating monitoring dashboard..."
+          npm run ralph:dashboard > dashboard-output.txt
+        continue-on-error: true
+
+      - name: Upload Monitoring Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ralph-monitoring-${{ github.run_number }}
+          retention-days: 30
+          path: |
+            .ralph-monitoring/
+            aging-report.json
+            trend-report.json
+            dashboard-output.txt
+
+      - name: Upload Latest Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: ralph-latest-reports
+          retention-days: 7
+          path: |
+            .ralph-monitoring/metrics.json
+            .ralph-monitoring/alerts.jsonl
+            aging-report.json
+            trend-report.json
+          overwrite: true
+
+      - name: Summary Report
+        run: |
+          echo "## Ralph TUI Queue Health Monitoring Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "**Repository:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow Run:** [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f ".ralph-monitoring/metrics.json" ]; then
+            echo "### 📊 Latest Metrics" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            QUEUE_DEPTH=$(jq -r '.checks[-1].metrics.queueDepth // 0' .ralph-monitoring/metrics.json)
+            PROCESSING_RATE=$(jq -r '.checks[-1].metrics.processingRate // 0' .ralph-monitoring/metrics.json)
+            STUCK_BEADS=$(jq -r '.checks[-1].metrics.stuckBeads // 0' .ralph-monitoring/metrics.json)
+            OVERALL_STATUS=$(jq -r '.checks[-1].overall // "unknown"' .ralph-monitoring/metrics.json)
+
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Overall Status | $OVERALL_STATUS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Queue Depth | $QUEUE_DEPTH beads |" >> $GITHUB_STEP_SUMMARY
+            echo "| Processing Rate | $PROCESSING_RATE beads/min |" >> $GITHUB_STEP_SUMMARY
+            echo "| Stuck Beads | $STUCK_BEADS beads |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f "aging-report.json" ]; then
+            echo "### 🎯 Bead Aging Analysis" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            TOTAL_BEADS=$(jq -r '.summary.totalBeads // 0' aging-report.json)
+            CRITICAL_BEADS=$(jq -r '.summary.criticalBeads // 0' aging-report.json)
+            STALE_BEADS=$(jq -r '.summary.staleBeads // 0' aging-report.json)
+            OVERALL_HEALTH=$(jq -r '.summary.overallHealth // "unknown"' aging-report.json)
+            RECOMMENDATIONS=$(jq -r '.summary.recommendations // 0' aging-report.json)
+
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Overall Health | $OVERALL_HEALTH |" >> $GITHUB_STEP_SUMMARY
+            echo "| Total Beads | $TOTAL_BEADS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Critical Beads (>14 days) | $CRITICAL_BEADS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Stale Beads (7-14 days) | $STALE_BEADS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Recommendations | $RECOMMENDATIONS |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f ".ralph-monitoring/alerts.jsonl" ]; then
+            RECENT_ALERTS=$(jq -r 'length' .ralph-monitoring/alerts.jsonl 2>/dev/null || echo "0")
+            echo "### 🚨 Recent Alerts (Last 24h)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Total Alerts:** $RECENT_ALERTS" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "$RECENT_ALERTS" -gt 0 ]; then
+              echo "| Type | Severity | Message |" >> $GITHUB_STEP_SUMMARY
+              echo "|------|----------|---------|" >> $GITHUB_STEP_SUMMARY
+              jq -r '[
+                select((now - (.timestamp | fromdateiso8601)) < 86400) |
+                [.type, .severity, (.message | split("") | .[0:50] | join("") + if .message | length > 50 then "..." else "" end)]
+              ] | .[] | "| \(.[0]) | \(.[1]) | \(.[2]) |"' .ralph-monitoring/alerts.jsonl 2>/dev/null | head -5 >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          echo "### 🎛️ Quick Actions" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **View Dashboard:** Download the 'ralph-latest-reports' artifact and check \`dashboard-output.txt\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Run Local Check:** \`npm run ralph:monitor check\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **View Aging Report:** \`npm run ralph:aging\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Start Watching:** \`npm run ralph:monitor watch\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Update Monitoring Status Badge
+        if: always()
+        run: |
+          # This step can be extended to create/update a status badge
+          # For now, it just outputs the status for reference
+          if [ -f ".ralph-monitoring/metrics.json" ]; then
+            STATUS=$(jq -r '.checks[-1].overall // "unknown"' .ralph-monitoring/metrics.json)
+            echo "Ralph TUI Status: $STATUS"
+            echo "status=$STATUS" >> $GITHUB_OUTPUT
+          else
+            echo "status=unknown" >> $GITHUB_OUTPUT
+          fi
+        id: status

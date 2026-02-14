@@ -85,6 +85,17 @@ after each iteration and it's included in prompts for context.
   8. Create automated GitHub Actions workflow with monthly triggers and manual dispatch options
   9. Generate multiple report formats (JSON/Markdown) for different use cases and stakeholders
   10. Integrate with CI/CD pipeline for automated content quality gates and continuous monitoring
+- Ralph TUI Queue Health Monitoring Pattern: For comprehensive queue monitoring and bead aging management:
+  1. Use queue depth tracking with configurable thresholds (maxQueueDepth: 50 beads)
+  2. Implement processing rate analysis with minimum rate thresholds (minProcessingRate: 0.5 beads/min)
+  3. Auto-detect stuck beads with time-based analysis (maxStuckTime: 1 hour)
+  4. Monitor daemon health with PID checking and activity timestamp validation
+  5. Implement socket connectivity testing for communication channels
+  6. Create ASCII-based real-time dashboard with performance metrics and alerts
+  7. Use bead aging categorization (Fresh: 1d, Aging: 3d, Stale: 7d, Critical: 14d)
+  8. Generate trend analysis with processing rates and queue depth patterns
+  9. Implement intelligent alerting with cooldown periods to prevent spam
+  10. Create automated GitHub Actions workflow with 30-minute intervals and issue creation
 
 ---
 
@@ -715,6 +726,33 @@ after each iteration and it's included in prompts for context.
   - Quarterly planning with monthly breakdowns provides structured approach to content maintenance
   - Comprehensive documentation with examples and troubleshooting is essential for complex automation systems
   - Integration with existing CI/CD patterns ensures consistent monitoring across all project aspects
+
+---
+
+- Implemented comprehensive Ralph TUI queue health monitoring system with real-time dashboard and automated alerting
+- Created queue monitoring script with daemon health checks, socket connectivity testing, and stuck bead detection
+- Built ASCII-based real-time dashboard showing queue depth, processing rates, and performance trends
+- Developed bead aging analysis with categorization (Fresh/Aging/Stale/Critical) and trend detection
+- Implemented intelligent alerting system with cooldown periods and severity-based notifications
+- Created automated GitHub Actions workflow for continuous monitoring with issue creation and artifact storage
+- Added comprehensive documentation with usage examples and troubleshooting guides
+- Files changed:
+  - scripts/ralph-queue-monitor.mjs (new - core monitoring with daemon, queue, and socket health checks)
+  - scripts/ralph-queue-dashboard.mjs (new - real-time ASCII dashboard with metrics visualization)
+  - scripts/ralph-bead-aging.mjs (new - bead aging analysis and trend detection)
+  - .github/workflows/ralph-queue-monitoring.yml (new - automated monitoring workflow every 30 minutes)
+  - docs/ralph-queue-monitoring.md (new - comprehensive documentation and usage guide)
+  - package.json (updated with ralph monitoring scripts: ralph:monitor, ralph:dashboard, ralph:aging)
+  - .ralph-tui/progress.md (updated with Ralph TUI Queue Health Monitoring Pattern)
+- **Learnings:**
+  - Patterns discovered: Ralph TUI monitoring requires access to .beads/ directory and bd command for detailed bead information
+  - Gotchas encountered: bd command syntax differs from expected (bd list vs bd ls), monitoring needs fallback mechanisms when bd unavailable
+  - ASCII dashboards provide excellent visibility without external dependencies and work in any terminal environment
+  - Alert cooldown periods are essential to prevent notification spam while ensuring critical issues are surfaced
+  - Bead aging analysis requires different thresholds by priority and comprehensive categorization for actionable insights
+  - GitHub Actions workflow integration enables automated monitoring with artifact storage and issue creation for critical alerts
+  - Queue health monitoring benefits from multiple data sources: daemon status, socket connectivity, and bead processing metrics
+  - Modular script architecture allows flexible monitoring components (health checks, dashboard, aging analysis) to be used independently
 
 ---
 
