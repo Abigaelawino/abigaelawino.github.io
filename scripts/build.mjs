@@ -359,8 +359,6 @@ mkdirSync(join('dist', 'assets'), { recursive: true });
   }
   writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
   writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);
-  cpSync('src', 'dist/src', { recursive: true });
-  cpSync('content', 'dist/content', { recursive: true });
 
   const siteTitle = getSiteTitle();
   const featuredProject = projects[0] ?? null;
@@ -458,4 +456,4 @@ const sitemapPaths = [
 writeFileSync(join('dist', 'sitemap.xml'), buildSitemapXml({ siteUrl, paths: sitemapPaths, lastmod: sitemapLastmod }));
 writeFileSync(join('dist', 'robots.txt'), buildRobotsTxt({ siteUrl, allowAll: true }));
 
-console.log('Build complete: generated indexes, copied src/content, rendered static pages, and wrote resume outputs');
+console.log('Build complete: generated indexes, rendered static pages, and wrote resume outputs');

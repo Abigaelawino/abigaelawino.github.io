@@ -17,6 +17,12 @@ after each iteration and it's included in prompts for context.
   3. Content stored as markdown with frontmatter in repository
   4. Integrates with Netlify Identity for authentication
   5. No additional infrastructure or costs required
+- Build Output Pattern: For static site deployment, the dist/ folder should contain only:
+  1. Generated HTML files (pages and posts)
+  2. Assets (CSS, JS, images, fonts)
+  3. Downloadable files (PDF resume, etc.)
+  4. SEO files (sitemap.xml, robots.txt)
+  5. Should NOT contain raw source directories (src/, content/)
 
 ---
 
@@ -34,6 +40,18 @@ after each iteration and it's included in prompts for context.
   - Form submission requires `application/x-www-form-urlencoded` content type with URLSearchParams
    - Important to include hidden fields for form-name and bot-field (honeypot)
    - State management with TypeScript interfaces provides better type safety
+---
+
+## [2025-02-14] - abigaelawino-github-io-6p7
+- Updated scripts/build.mjs to streamline build output to only generated assets
+- Removed unnecessary copying of src/ and content/ folders to dist/
+- dist/ now contains only: generated HTML files, resume PDF, shared CSS/JS, and necessary assets
+- Files changed:
+  - scripts/build.mjs (updated)
+- **Learnings:**
+  - Patterns discovered: The build script was copying raw source directories unnecessarily
+  - Gotchas encountered: Need to ensure only generated assets are in dist/ for deployment
+  - The dist folder should match PORTFOLIO_PLAN publish expectations - minimal production-ready output
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-6n3
