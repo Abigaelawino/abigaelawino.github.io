@@ -33,22 +33,23 @@ after each iteration and it's included in prompts for context.
 
 ---
 
-## [Date] - abigaelawino-forms-1
-- Implemented Netlify Forms with Next.js workaround following OpenNext documentation
-- Created ContactForm and NewsletterForm components with proper state management
-- Updated contact page to use the new ContactForm component
-- Files changed: 
-  - components/contact-form.tsx (new)
-  - components/newsletter-form.tsx (new)  
-  - app/contact/page.tsx (updated)
+## [2025-02-14] - abigaelawino-github-io-ves
+- Created comprehensive Netlify build/deploy checklist covering all steps for building, testing, and deploying via Netlify CLI
+- Documented prerequisites, build process, deployment steps, post-deploy monitoring, and troubleshooting
+- Included verification steps for shadcn/ui components, API endpoints, and static assets
+- Added quick reference commands and configuration file monitoring
+- Files changed:
+  - docs/netlify-build-deploy-checklist.md (new)
 - **Learnings:**
-  - Patterns discovered: Netlify Forms require static HTML detection file at `public/__forms.html`
-  - Gotchas encountered: Must POST to the static HTML file path, not to API routes
-  - Form submission requires `application/x-www-form-urlencoded` content type with URLSearchParams
-   - Important to include hidden fields for form-name and bot-field (honeypot)
-   - State management with TypeScript interfaces provides better type safety
----
+  - Patterns discovered: The project uses a hybrid static + Next.js approach with dist/ for static assets and .next/ for functions
+  - Gotchas encountered: Build process involves two stages - static generation (scripts/build.mjs) and Next.js compilation (next build)
+  - Netlify configuration already comprehensive with proper headers, redirects, and function mappings
+  - The deploy script in package.json already uses the correct --dir=dist flag for static deployment
+  - Environment validation script already exists and should be used before builds
+  - Comprehensive testing infrastructure already in place with smoke tests for both local and production
+  - All necessary Netlify functions are implemented including webhooks, session management, and deployment monitoring
 
+---
 ## [2025-02-14] - abigaelawino-github-io-6p7
 - Updated scripts/build.mjs to streamline build output to only generated assets
 - Removed unnecessary copying of src/ and content/ folders to dist/
