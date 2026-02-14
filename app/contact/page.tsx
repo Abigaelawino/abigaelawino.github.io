@@ -44,9 +44,7 @@ export default function ContactPage() {
                 <Linkedin className="h-5 w-5" />
                 LinkedIn
               </CardTitle>
-              <CardDescription>
-                Professional networking and career opportunities
-              </CardDescription>
+              <CardDescription>Professional networking and career opportunities</CardDescription>
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
@@ -64,9 +62,7 @@ export default function ContactPage() {
                 <Github className="h-5 w-5" />
                 GitHub
               </CardTitle>
-              <CardDescription>
-                View my open-source projects and contributions
-              </CardDescription>
+              <CardDescription>View my open-source projects and contributions</CardDescription>
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
@@ -105,8 +101,9 @@ export default function ContactPage() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            I'm currently available for freelance projects, consulting, and full-time opportunities. 
-            Typical response time is 24-48 hours. For urgent matters, please mention it in your message.
+            I'm currently available for freelance projects, consulting, and full-time opportunities.
+            Typical response time is 24-48 hours. For urgent matters, please mention it in your
+            message.
           </p>
         </CardContent>
       </Card>
@@ -114,9 +111,7 @@ export default function ContactPage() {
       {/* Back Navigation */}
       <div className="text-center">
         <Button variant="outline" asChild>
-          <Link href="/">
-            ← Back to Home
-          </Link>
+          <Link href="/">← Back to Home</Link>
         </Button>
       </div>
     </div>

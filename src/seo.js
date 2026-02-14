@@ -106,11 +106,12 @@ function buildSeoHead({
 function buildSitemapXml({ siteUrl, paths, lastmod }) {
   const resolvedSiteUrl = resolveSiteUrl({ SITE_URL: siteUrl });
   const resolvedPaths = Array.isArray(paths) ? paths : [];
-  const resolvedLastmod = typeof lastmod === 'string' && lastmod.trim().length > 0 ? lastmod.trim() : null;
+  const resolvedLastmod =
+    typeof lastmod === 'string' && lastmod.trim().length > 0 ? lastmod.trim() : null;
 
   const urls = resolvedPaths
-    .map((pathname) => normalizePathname(pathname))
-    .map((pathname) => {
+    .map(pathname => normalizePathname(pathname))
+    .map(pathname => {
       const loc = `${resolvedSiteUrl}${pathname}`;
       const lastmodTag = resolvedLastmod ? `<lastmod>${escapeHtml(resolvedLastmod)}</lastmod>` : '';
       return `<url><loc>${escapeHtml(loc)}</loc>${lastmodTag}</url>`;

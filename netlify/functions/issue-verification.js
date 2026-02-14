@@ -11,7 +11,7 @@ function verifySignature(payload, signature, secret) {
 const verificationStore = new Map();
 
 // Main handler function
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const signature = event.headers['x-hub-signature-256'];
   const githubEvent = event.headers['x-github-event'];
   const webhookSecret = process.env.GITHUB_WEBHOOK_SECRET;
@@ -19,14 +19,14 @@ exports.handler = async function(event, context) {
   if (!webhookSecret) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Webhook secret not configured' })
+      body: JSON.stringify({ error: 'Webhook secret not configured' }),
     };
   }
 
   if (!signature) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Missing signature' })
+      body: JSON.stringify({ error: 'Missing signature' }),
     };
   }
 
@@ -35,7 +35,7 @@ exports.handler = async function(event, context) {
     if (!verifySignature(event.body, signature, webhookSecret)) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ error: 'Invalid signature' })
+        body: JSON.stringify({ error: 'Invalid signature' }),
       };
     }
 
@@ -45,7 +45,7 @@ exports.handler = async function(event, context) {
     if (githubEvent !== 'issues') {
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: `Event ${githubEvent} not processed by issue verifier` })
+        body: JSON.stringify({ message: `Event ${githubEvent} not processed by issue verifier` }),
       };
     }
 
@@ -54,7 +54,7 @@ exports.handler = async function(event, context) {
     console.error('Issue verification error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -62,7 +62,7 @@ exports.handler = async function(event, context) {
 // Handle issue verification workflow
 async function handleIssueVerification(payload) {
   const { action, issue, repository, sender } = payload;
-  
+
   const verificationData = {
     issueId: issue.id,
     issueNumber: issue.number,
@@ -72,7 +72,7 @@ async function handleIssueVerification(payload) {
     repository: repository.full_name,
     sender: sender.login,
     timestamp: new Date().toISOString(),
-    labels: issue.labels?.map(label => label.name) || []
+    labels: issue.labels?.map(label => label.name) || [],
   };
 
   // Store verification data
@@ -94,11 +94,11 @@ async function handleIssueVerification(payload) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       message: 'Issue verification completed',
       verificationData,
-      verificationResults
-    })
+      verificationResults,
+    }),
   };
 }
 
@@ -106,14 +106,14 @@ async function handleIssueVerification(payload) {
 async function performVerificationChecks(issue, repository) {
   const results = {
     allPassed: true,
-    checks: []
+    checks: [],
   };
 
   // Check 1: Issue title format
   const titleCheck = {
     name: 'title_format',
     passed: issue.title.length >= 10 && issue.title.length <= 100,
-    message: 'Title should be between 10-100 characters'
+    message: 'Title should be between 10-100 characters',
   };
   results.checks.push(titleCheck);
 
@@ -121,7 +121,7 @@ async function performVerificationChecks(issue, repository) {
   const bodyCheck = {
     name: 'body_present',
     passed: issue.body && issue.body.trim().length > 0,
-    message: 'Issue should have a description'
+    message: 'Issue should have a description',
   };
   results.checks.push(bodyCheck);
 
@@ -129,7 +129,7 @@ async function performVerificationChecks(issue, repository) {
   const labelsCheck = {
     name: 'labels_present',
     passed: issue.labels && issue.labels.length > 0,
-    message: 'Issue should have at least one label'
+    message: 'Issue should have at least one label',
   };
   results.checks.push(labelsCheck);
 
@@ -137,7 +137,7 @@ async function performVerificationChecks(issue, repository) {
   const assigneeCheck = {
     name: 'assignee_present',
     passed: issue.assignees && issue.assignees.length > 0,
-    message: 'Issue should have at least one assignee'
+    message: 'Issue should have at least one assignee',
   };
   results.checks.push(assigneeCheck);
 
@@ -145,7 +145,7 @@ async function performVerificationChecks(issue, repository) {
   const milestoneCheck = {
     name: 'milestone_present',
     passed: issue.milestone !== null,
-    message: 'Issue should be assigned to a milestone'
+    message: 'Issue should be assigned to a milestone',
   };
   results.checks.push(milestoneCheck);
 
@@ -160,7 +160,7 @@ async function sendVerificationNotification(verificationData, verificationResult
   console.log('Verification failed for issue:', {
     issueNumber: verificationData.issueNumber,
     title: verificationData.title,
-    failedChecks: verificationResults.checks.filter(check => !check.passed)
+    failedChecks: verificationResults.checks.filter(check => !check.passed),
   });
 
   // Example: Send to Slack webhook if configured
@@ -168,25 +168,36 @@ async function sendVerificationNotification(verificationData, verificationResult
     try {
       const slackMessage = {
         text: `Issue verification failed for ${verificationData.repository}#${verificationData.issueNumber}`,
-        attachments: [{
-          color: 'warning',
-          fields: [
-            { title: 'Issue', value: verificationData.title, short: true },
-            { title: 'State', value: verificationData.state, short: true },
-            { title: 'Failed Checks', value: verificationResults.checks.filter(check => !check.passed).map(check => check.message).join(', '), short: false }
-          ],
-          actions: [{
-            type: 'button',
-            text: 'View Issue',
-            url: `https://github.com/${verificationData.repository}/issues/${verificationData.issueNumber}`
-          }]
-        }]
+        attachments: [
+          {
+            color: 'warning',
+            fields: [
+              { title: 'Issue', value: verificationData.title, short: true },
+              { title: 'State', value: verificationData.state, short: true },
+              {
+                title: 'Failed Checks',
+                value: verificationResults.checks
+                  .filter(check => !check.passed)
+                  .map(check => check.message)
+                  .join(', '),
+                short: false,
+              },
+            ],
+            actions: [
+              {
+                type: 'button',
+                text: 'View Issue',
+                url: `https://github.com/${verificationData.repository}/issues/${verificationData.issueNumber}`,
+              },
+            ],
+          },
+        ],
       };
 
       await fetch(process.env.SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slackMessage)
+        body: JSON.stringify(slackMessage),
       });
     } catch (error) {
       console.error('Failed to send Slack notification:', error);
@@ -195,11 +206,11 @@ async function sendVerificationNotification(verificationData, verificationResult
 }
 
 // Helper function to get verification status
-exports.getVerificationStatus = function(issueId) {
+exports.getVerificationStatus = function (issueId) {
   return verificationStore.get(issueId) || null;
 };
 
 // Helper function to get all verifications
-exports.getAllVerifications = function() {
+exports.getAllVerifications = function () {
   return Array.from(verificationStore.values());
 };

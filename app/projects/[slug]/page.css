@@ -457,33 +457,33 @@ h1 {
   .case-study-page {
     padding: 1rem 0.75rem;
   }
-  
+
   .case-study-title {
     font-size: 2rem;
   }
-  
+
   .case-study-summary {
     font-size: 1.125rem;
   }
-  
+
   .meta-info {
     flex-direction: column;
     gap: 0.75rem;
   }
-  
+
   .summary-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .case-study-section {
     padding: 1.5rem 0;
   }
-  
+
   .case-study-section h2 {
     font-size: 1.5rem;
   }
-  
+
   .summary-item {
     padding: 1.25rem;
   }
@@ -493,15 +493,15 @@ h1 {
   .case-study-title {
     font-size: 1.75rem;
   }
-  
+
   .case-study-summary {
     font-size: 1rem;
   }
-  
+
   .case-study-section {
     padding: 1rem 0;
   }
-  
+
   .markdown-content {
     padding: 1.5rem;
   }

@@ -14,7 +14,7 @@ const {
 const projects = loadCollectionEntries(PROJECTS_DIR, projectSchema);
 
 test('supported project filters include required tag categories', () => {
-  const filterValues = SUPPORTED_PROJECT_FILTERS.map((filter) => filter.value);
+  const filterValues = SUPPORTED_PROJECT_FILTERS.map(filter => filter.value);
 
   assert.deepEqual(filterValues, ['ml', 'analytics', 'visualization', 'nlp', 'time-series']);
 });
@@ -22,7 +22,9 @@ test('supported project filters include required tag categories', () => {
 test('projects can be filtered by normalized tag aliases', () => {
   const timeSeriesProjects = filterProjectsByTag(projects, 'time series');
   assert.ok(timeSeriesProjects.length > 0);
-  assert.ok(timeSeriesProjects.every((project) => project.tags.join(' ').toLowerCase().includes('time')));
+  assert.ok(
+    timeSeriesProjects.every(project => project.tags.join(' ').toLowerCase().includes('time'))
+  );
 
   const nlpProjects = filterProjectsByTag(projects, 'nlp');
   assert.ok(nlpProjects.length > 0);

@@ -1,21 +1,44 @@
-'use client'
+'use client';
 
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 interface ChartData {
-  name: string
-  value: number
-  [key: string]: any
+  name: string;
+  value: number;
+  [key: string]: any;
 }
 
 interface ChartProps {
-  data: ChartData[]
-  type: 'bar' | 'line' | 'pie'
-  title?: string
-  height?: number
+  data: ChartData[];
+  type: 'bar' | 'line' | 'pie';
+  title?: string;
+  height?: number;
 }
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00ff00', '#ff00ff', '#00ffff', '#ff0000']
+const COLORS = [
+  '#8884d8',
+  '#82ca9d',
+  '#ffc658',
+  '#ff7300',
+  '#00ff00',
+  '#ff00ff',
+  '#00ffff',
+  '#ff0000',
+];
 
 export function Chart({ data, type, title, height = 300 }: ChartProps) {
   const renderChart = () => {
@@ -32,7 +55,7 @@ export function Chart({ data, type, title, height = 300 }: ChartProps) {
               <Bar dataKey="value" fill="#8884d8" />
             </BarChart>
           </ResponsiveContainer>
-        )
+        );
       case 'line':
         return (
           <ResponsiveContainer width="100%" height={height}>
@@ -45,7 +68,7 @@ export function Chart({ data, type, title, height = 300 }: ChartProps) {
               <Line type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
-        )
+        );
       case 'pie':
         return (
           <ResponsiveContainer width="100%" height={height}>
@@ -67,18 +90,18 @@ export function Chart({ data, type, title, height = 300 }: ChartProps) {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-        )
+        );
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="w-full">
       {title && <h3 className="text-lg font-semibold mb-4">{title}</h3>}
       {renderChart()}
     </div>
-  )
+  );
 }
 
 // Sample data for demonstration
@@ -87,7 +110,7 @@ export const sampleBarData = [
   { name: 'Q2', value: 300 },
   { name: 'Q3', value: 600 },
   { name: 'Q4', value: 800 },
-]
+];
 
 export const sampleLineData = [
   { name: 'Jan', value: 100 },
@@ -95,11 +118,11 @@ export const sampleLineData = [
   { name: 'Mar', value: 150 },
   { name: 'Apr', value: 300 },
   { name: 'May', value: 250 },
-]
+];
 
 export const samplePieData = [
   { name: 'Segment A', value: 400 },
   { name: 'Segment B', value: 300 },
   { name: 'Segment C', value: 300 },
   { name: 'Segment D', value: 200 },
-]
+];

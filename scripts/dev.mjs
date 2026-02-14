@@ -20,7 +20,7 @@ function runBuild() {
   building = true;
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [buildScript], { stdio: 'inherit' });
-    child.on('exit', (code) => {
+    child.on('exit', code => {
       building = false;
       if (code === 0) {
         resolve();
@@ -33,7 +33,7 @@ function runBuild() {
         runBuild();
       }
     });
-    child.on('error', (err) => {
+    child.on('error', err => {
       building = false;
       pending = false;
       reject(err);
@@ -57,7 +57,7 @@ async function main() {
   });
 
   const scheduleBuild = () => {
-    runBuild().catch((error) => {
+    runBuild().catch(error => {
       console.error('Rebuild failed:', error);
     });
   };
@@ -76,7 +76,7 @@ async function main() {
   process.on('SIGTERM', cleanUp);
 }
 
-main().catch((err) => {
+main().catch(err => {
   console.error(err);
   process.exit(1);
 });

@@ -6,14 +6,16 @@
       navigator.msDoNotTrack,
       document.doNotTrack,
     ]
-      .map((value) => (value == null ? '' : String(value)))
-      .map((value) => value.trim());
+      .map(value => (value == null ? '' : String(value)))
+      .map(value => value.trim());
 
     return dntValues.includes('1') || dntValues.includes('yes');
   };
 
-  const isLocalHost = (hostname) => {
-    const resolved = String(hostname || '').trim().toLowerCase();
+  const isLocalHost = hostname => {
+    const resolved = String(hostname || '')
+      .trim()
+      .toLowerCase();
     return (
       resolved === '' ||
       resolved === 'localhost' ||
@@ -35,7 +37,7 @@
     return typeof window.plausible === 'function';
   };
 
-  const getPropsFromElement = (element) => {
+  const getPropsFromElement = element => {
     if (!element || !element.attributes) {
       return {};
     }
@@ -126,7 +128,7 @@
     return true;
   };
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', event => {
     const target = event.target;
     if (!target || typeof target.closest !== 'function') {
       return;
@@ -157,7 +159,7 @@
     trackEvent(eventName, element);
   });
 
-  document.addEventListener('submit', (event) => {
+  document.addEventListener('submit', event => {
     const target = event.target;
     if (!target || typeof target.closest !== 'function') {
       return;
@@ -184,11 +186,11 @@
     ctx.font = '14px Arial';
     ctx.fillText('Security fingerprint', 2, 2);
     const canvasFingerprint = canvas.toDataURL().slice(-50);
-    
+
     const screenFingerprint = `${screen.width}x${screen.height}x${screen.colorDepth}`;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const language = navigator.language;
-    
+
     return btoa(`${canvasFingerprint}|${screenFingerprint}|${timezone}|${language}`).slice(0, 32);
   };
 
@@ -213,7 +215,7 @@
       contactForm.addEventListener('input', setTimestamp, { once: true });
 
       // Validate form timing before submit
-      contactForm.addEventListener('submit', (event) => {
+      contactForm.addEventListener('submit', event => {
         const submitTime = Date.now();
         const formTime = parseInt(timestampField.value, 10) || 0;
         const timeDiff = submitTime - formTime;
@@ -221,14 +223,16 @@
         // Prevent submissions made too quickly (< 3 seconds) or too slowly (> 1 hour)
         if (timeDiff < 3000 || timeDiff > 3600000) {
           event.preventDefault();
-          alert('Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.');
+          alert(
+            'Please take your time filling out the form. If you believe this is an error, please refresh the page and try again.'
+          );
           return;
         }
 
         // Check for honeypot fields
         const botField = contactForm.querySelector('input[name="bot-field"]');
         const websiteField = contactForm.querySelector('input[name="website-field"]');
-        
+
         if ((botField && botField.value.trim()) || (websiteField && websiteField.value.trim())) {
           event.preventDefault();
           return; // Silently block suspected bots

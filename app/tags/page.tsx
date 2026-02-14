@@ -5,7 +5,9 @@ export default function TagsPage() {
     <div className="page-content">
       <h1>Tags</h1>
       <p>Browse content by topic and technology.</p>
-      <p><Link href="/">← Back to Home</Link></p>
+      <p>
+        <Link href="/">← Back to Home</Link>
+      </p>
     </div>
   );
 }

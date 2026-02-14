@@ -207,7 +207,8 @@ a { color: inherit; }
 `.trim();
 
 const ANALYTICS_DOMAIN =
-  (process.env.ANALYTICS_DOMAIN || '').trim() || (process.env.NODE_ENV === 'production' ? 'abigaelawino.github.io' : '');
+  (process.env.ANALYTICS_DOMAIN || '').trim() ||
+  (process.env.NODE_ENV === 'production' ? 'abigaelawino.github.io' : '');
 const ANALYTICS_HOST = (process.env.ANALYTICS_HOST || '').trim() || 'https://plausible.io';
 
 function crc32(buffer) {
@@ -476,7 +477,7 @@ function buildSimplePdf(lines) {
   push('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
   startObject();
   push(
-    '3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj\n',
+    '3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj\n'
   );
   startObject();
   push(`4 0 obj\n<< /Length ${streamLength} >>\nstream\n${streamContent}endstream\nendobj\n`);
@@ -487,7 +488,7 @@ function buildSimplePdf(lines) {
   push('xref\n');
   push(`0 ${offsets.length + 1}\n`);
   push('0000000000 65535 f \n');
-  offsets.forEach((offset) => {
+  offsets.forEach(offset => {
     push(`${String(offset).padStart(10, '0')} 00000 n \n`);
   });
   push(`trailer\n<< /Size ${offsets.length + 1} /Root 1 0 R >>\n`);
@@ -499,85 +500,87 @@ function buildSimplePdf(lines) {
 rmSync('dist', { recursive: true, force: true });
 mkdirSync('dist', { recursive: true });
 mkdirSync(join('dist', 'assets'), { recursive: true });
-  cpSync('assets', join('dist', 'assets'), { recursive: true });
-  try {
-    cpSync('images', join('dist', 'images'), { recursive: true });
-  } catch {
-    // Optional images directory.
+cpSync('assets', join('dist', 'assets'), { recursive: true });
+try {
+  cpSync('images', join('dist', 'images'), { recursive: true });
+} catch {
+  // Optional images directory.
+}
+try {
+  cpSync('admin', join('dist', 'admin'), { recursive: true });
+} catch {
+  // Admin directory should exist for CMS.
+}
+writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
+writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);
+
+const siteTitle = getSiteTitle();
+const featuredProject = projects[0] ?? null;
+const siteUrl = resolveSiteUrl(process.env);
+const sitemapLastmod = new Date().toISOString().slice(0, 10);
+
+function routePathnameForOutput(relativePath) {
+  const normalized = String(relativePath).replaceAll('\\', '/');
+  if (normalized === 'index.html') {
+    return '/';
   }
-  try {
-    cpSync('admin', join('dist', 'admin'), { recursive: true });
-  } catch {
-    // Admin directory should exist for CMS.
+  if (normalized.endsWith('/index.html')) {
+    return `/${normalized.slice(0, -'/index.html'.length)}/`;
   }
-  writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
-  writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);
+  return `/${normalized}`;
+}
 
-  const siteTitle = getSiteTitle();
-  const featuredProject = projects[0] ?? null;
-  const siteUrl = resolveSiteUrl(process.env);
-  const sitemapLastmod = new Date().toISOString().slice(0, 10);
+function writePage(relativePath, { title, description, body, robots }) {
+  const pathname = routePathnameForOutput(relativePath);
+  const document = buildHtmlDocument({ title, description, body, pathname, robots });
+  const outputPath = join('dist', relativePath);
+  mkdirSync(dirname(outputPath), { recursive: true });
+  writeFileSync(outputPath, `${document}\n`);
+}
 
-  function routePathnameForOutput(relativePath) {
-    const normalized = String(relativePath).replaceAll('\\', '/');
-    if (normalized === 'index.html') {
-      return '/';
-    }
-    if (normalized.endsWith('/index.html')) {
-      return `/${normalized.slice(0, -'/index.html'.length)}/`;
-    }
-    return `/${normalized}`;
-  }
+const staticPages = [
+  {
+    path: 'index.html',
+    title: `${siteTitle} · Home`,
+    description:
+      'Data science solutions bridging exploratory analysis to production-ready outcomes.',
+    body: renderHomePage(featuredProject),
+  },
+  {
+    path: join('about', 'index.html'),
+    title: `${siteTitle} · About`,
+    description: 'Learn about Abigael Awino, her strengths, and her toolkit.',
+    body: renderAboutPage(),
+  },
+  {
+    path: join('contact', 'index.html'),
+    title: `${siteTitle} · Contact`,
+    description: 'Reach out via the secure contact form or connect on LinkedIn/GitHub.',
+    body: renderContactPage(),
+  },
+  {
+    path: join('contact', 'thanks', 'index.html'),
+    title: `${siteTitle} · Message sent`,
+    description: 'Thanks for reaching out — your message has been sent.',
+    body: renderContactThanksPage(),
+    robots: 'noindex,follow',
+  },
+  {
+    path: join('projects', 'index.html'),
+    title: `${siteTitle} · Projects`,
+    description: 'Explore project case studies in ML, analytics, and production data systems.',
+    body: renderProjectsPage(projects),
+  },
+  {
+    path: join('blog', 'index.html'),
+    title: `${siteTitle} · Blog`,
+    description:
+      'Read notes on model monitoring, analytics implementation, and production workflows.',
+    body: renderBlogIndexPage(blog),
+  },
+];
 
-  function writePage(relativePath, { title, description, body, robots }) {
-    const pathname = routePathnameForOutput(relativePath);
-    const document = buildHtmlDocument({ title, description, body, pathname, robots });
-    const outputPath = join('dist', relativePath);
-    mkdirSync(dirname(outputPath), { recursive: true });
-    writeFileSync(outputPath, `${document}\n`);
-  }
-
-  const staticPages = [
-    {
-      path: 'index.html',
-      title: `${siteTitle} · Home`,
-      description: 'Data science solutions bridging exploratory analysis to production-ready outcomes.',
-      body: renderHomePage(featuredProject),
-    },
-    {
-      path: join('about', 'index.html'),
-      title: `${siteTitle} · About`,
-      description: 'Learn about Abigael Awino, her strengths, and her toolkit.',
-      body: renderAboutPage(),
-    },
-    {
-      path: join('contact', 'index.html'),
-      title: `${siteTitle} · Contact`,
-      description: 'Reach out via the secure contact form or connect on LinkedIn/GitHub.',
-      body: renderContactPage(),
-    },
-    {
-      path: join('contact', 'thanks', 'index.html'),
-      title: `${siteTitle} · Message sent`,
-      description: 'Thanks for reaching out — your message has been sent.',
-      body: renderContactThanksPage(),
-      robots: 'noindex,follow',
-    },
-    {
-      path: join('projects', 'index.html'),
-      title: `${siteTitle} · Projects`,
-      description: 'Explore project case studies in ML, analytics, and production data systems.',
-      body: renderProjectsPage(projects),
-    },
-    {
-      path: join('blog', 'index.html'),
-      title: `${siteTitle} · Blog`,
-      description: 'Read notes on model monitoring, analytics implementation, and production workflows.',
-      body: renderBlogIndexPage(blog),
-    },
-  ];
-
-  staticPages.forEach((page) => writePage(page.path, page));
+staticPages.forEach(page => writePage(page.path, page));
 
 mkdirSync(join('dist', 'resume'), { recursive: true });
 writeFileSync(
@@ -587,7 +590,7 @@ writeFileSync(
     description: 'Download a PDF resume and view a concise web summary.',
     body: renderResumePage(),
     pathname: '/resume/',
-  }),
+  })
 );
 
 const pdfBuffer = buildSimplePdf([
@@ -598,19 +601,17 @@ const pdfBuffer = buildSimplePdf([
 ]);
 writeFileSync(join('dist', 'resume', 'abigael-awino-resume.pdf'), pdfBuffer);
 
-const sitemapPaths = [
-  '/',
-  '/about/',
-  '/contact/',
-  '/projects/',
-  '/blog/',
-  '/resume/',
-];
-writeFileSync(join('dist', 'sitemap.xml'), buildSitemapXml({ siteUrl, paths: sitemapPaths, lastmod: sitemapLastmod }));
+const sitemapPaths = ['/', '/about/', '/contact/', '/projects/', '/blog/', '/resume/'];
+writeFileSync(
+  join('dist', 'sitemap.xml'),
+  buildSitemapXml({ siteUrl, paths: sitemapPaths, lastmod: sitemapLastmod })
+);
 writeFileSync(join('dist', 'robots.txt'), buildRobotsTxt({ siteUrl, allowAll: true }));
 
 // Optimize for Netlify deployment
 addCompressionOptimization();
 
-console.log('✅ Build complete: generated indexes, rendered static pages, and wrote resume outputs');
+console.log(
+  '✅ Build complete: generated indexes, rendered static pages, and wrote resume outputs'
+);
 console.log('🚀 Netlify deployment ready: dist/ folder optimized for static hosting');

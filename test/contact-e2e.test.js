@@ -7,14 +7,14 @@ function createMockDom(html) {
   const dom = new JSDOM(html, {
     url: 'http://localhost:3000/contact/',
     pretendToBeVisual: true,
-    resources: 'usable'
+    resources: 'usable',
   });
 
   // Mock canvas API since it's not fully supported in JSDOM
-  dom.window.HTMLCanvasElement.prototype.getContext = function() {
+  dom.window.HTMLCanvasElement.prototype.getContext = function () {
     return {
       fillText: () => {},
-      toDataURL: () => 'data:image/png;base64,mock-fingerprint-data-for-testing-canvas-to-data-url'
+      toDataURL: () => 'data:image/png;base64,mock-fingerprint-data-for-testing-canvas-to-data-url',
     };
   };
 
@@ -24,34 +24,34 @@ function createMockDom(html) {
       const element = Reflect.apply(target, thisArg, argumentsList);
       if (argumentsList[0] === 'canvas') {
         Object.defineProperty(element, 'toDataURL', {
-          value: () => 'data:image/png;base64,mock-fingerprint-data-for-testing-canvas-to-data-url'
+          value: () => 'data:image/png;base64,mock-fingerprint-data-for-testing-canvas-to-data-url',
         });
       }
       return element;
-    }
+    },
   });
 
   // Mock crypto API
   if (!dom.window.crypto) {
     dom.window.crypto = {
-      getRandomValues: (arr) => {
+      getRandomValues: arr => {
         for (let i = 0; i < arr.length; i++) {
           arr[i] = Math.floor(Math.random() * 256);
         }
         return arr;
-      }
+      },
     };
   }
 
   // Mock Intl API
   dom.window.Intl = {
     DateTimeFormat: () => ({
-      resolvedOptions: () => ({ timeZone: 'UTC' })
-    })
+      resolvedOptions: () => ({ timeZone: 'UTC' }),
+    }),
   };
 
   // Mock btoa function
-  dom.window.btoa = function(str) {
+  dom.window.btoa = function (str) {
     try {
       return Buffer.from(str, 'binary').toString('base64');
     } catch (e) {
@@ -61,7 +61,7 @@ function createMockDom(html) {
   };
 
   // Mock alert function
-  dom.window.alert = function(message) {
+  dom.window.alert = function (message) {
     // In tests, we can capture alert calls if needed
     console.log('ALERT:', message);
   };
@@ -101,7 +101,7 @@ function loadAnalyticsScript() {
     // Set to complete to simulate DOM being ready
     Object.defineProperty(document, 'readyState', {
       value: 'complete',
-      writable: false
+      writable: false,
     });
   }
 
@@ -124,7 +124,7 @@ function loadAnalyticsScript() {
   eval(wrappedCode);
 }
 
-test('contact form end-to-end flow with spam protection', async (t) => {
+test('contact form end-to-end flow with spam protection', async t => {
   const { renderContactPage } = require('../src/contact.js');
 
   // Create a complete contact page with form
@@ -137,9 +137,17 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     const form = document.querySelector('[data-contact-form]');
     assert(form, 'Contact form should exist');
     assert.equal(form.getAttribute('method'), 'POST', 'Form should use POST method');
-    assert.equal(form.getAttribute('action'), '/contact/thanks/', 'Form should submit to thanks page');
+    assert.equal(
+      form.getAttribute('action'),
+      '/contact/thanks/',
+      'Form should submit to thanks page'
+    );
     assert.equal(form.getAttribute('data-netlify'), 'true', 'Form should have Netlify attribute');
-    assert.equal(form.getAttribute('netlify-honeypot'), 'bot-field', 'Form should have Netlify honeypot');
+    assert.equal(
+      form.getAttribute('netlify-honeypot'),
+      'bot-field',
+      'Form should have Netlify honeypot'
+    );
 
     // Check for hidden security fields
     const formNameInput = document.querySelector('input[name="form-name"]');
@@ -152,19 +160,33 @@ test('contact form end-to-end flow with spam protection', async (t) => {
 
     const fingerprintInput = document.querySelector('[data-contact-fingerprint]');
     assert(fingerprintInput, 'Should have fingerprint field');
-    assert.equal(fingerprintInput.name, 'form-fingerprint', 'Fingerprint field should have correct name');
+    assert.equal(
+      fingerprintInput.name,
+      'form-fingerprint',
+      'Fingerprint field should have correct name'
+    );
 
     // Check for honeypot fields
     const botField = document.querySelector('input[name="bot-field"]');
     assert(botField, 'Should have bot-field honeypot');
     const botFieldParent = botField.closest('.contact-form__honeypot');
-    assert(botFieldParent && botFieldParent.getAttribute('aria-hidden') === 'true', 'Honeypot should be aria-hidden');
-    assert.equal(botField.getAttribute('tabindex'), '-1', 'Honeypot should be removed from tab order');
+    assert(
+      botFieldParent && botFieldParent.getAttribute('aria-hidden') === 'true',
+      'Honeypot should be aria-hidden'
+    );
+    assert.equal(
+      botField.getAttribute('tabindex'),
+      '-1',
+      'Honeypot should be removed from tab order'
+    );
 
     const websiteField = document.querySelector('input[name="website-field"]');
     assert(websiteField, 'Should have website-field honeypot');
     const websiteFieldParent = websiteField.closest('.contact-form__honeypot');
-    assert(websiteFieldParent && websiteFieldParent.getAttribute('aria-hidden') === 'true', 'Website honeypot should be aria-hidden');
+    assert(
+      websiteFieldParent && websiteFieldParent.getAttribute('aria-hidden') === 'true',
+      'Website honeypot should be aria-hidden'
+    );
 
     // Check for visible form fields
     const nameInput = document.querySelector('input[name="name"]');
@@ -223,7 +245,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
 
     // Test rapid submission prevention
     let submitEventFired = false;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       submitEventFired = true;
       // Check if event was prevented
       assert(e.defaultPrevented, 'Rapid submission should be prevented');
@@ -247,7 +269,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     let submissionBlocked = false;
 
     // Monitor submit event
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       if (e.defaultPrevented) {
         submissionBlocked = true;
       }
@@ -257,7 +279,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     botField.value = 'spam content';
     const submitEvent1 = new dom.window.Event('submit', {
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
     form.dispatchEvent(submitEvent1);
     assert(submissionBlocked, 'Submission with filled honeypot should be blocked');
@@ -270,7 +292,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     websiteField.value = 'http://spam.com';
     const submitEvent2 = new dom.window.Event('submit', {
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
     form.dispatchEvent(submitEvent2);
     assert(submissionBlocked, 'Submission with filled website field should be blocked');
@@ -298,7 +320,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     timestampInput.value = (now - 10000).toString(); // 10 seconds ago
 
     let submissionBlocked = false;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       if (e.defaultPrevented) {
         submissionBlocked = true;
       }
@@ -370,8 +392,16 @@ test('contact form end-to-end flow with spam protection', async (t) => {
     assert.equal(messageInput.tagName.toLowerCase(), 'textarea', 'Message should be textarea');
 
     // Test autocomplete attributes
-    assert.equal(nameInput.getAttribute('autocomplete'), 'name', 'Name should have name autocomplete');
-    assert.equal(emailInput.getAttribute('autocomplete'), 'email', 'Email should have email autocomplete');
+    assert.equal(
+      nameInput.getAttribute('autocomplete'),
+      'name',
+      'Name should have name autocomplete'
+    );
+    assert.equal(
+      emailInput.getAttribute('autocomplete'),
+      'email',
+      'Email should have email autocomplete'
+    );
 
     cleanupMockDom();
   });
@@ -418,7 +448,7 @@ test('contact form end-to-end flow with spam protection', async (t) => {
   });
 });
 
-test('contact form security edge cases', async (t) => {
+test('contact form security edge cases', async t => {
   const { renderContactPage } = require('../src/contact.js');
 
   await t.test('handles missing DOM elements gracefully', () => {
@@ -441,7 +471,7 @@ test('contact form security edge cases', async (t) => {
     const timestampInput = document.querySelector('[data-contact-timestamp]');
 
     let submissionBlocked = false;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       if (e.defaultPrevented) {
         submissionBlocked = true;
       }
@@ -451,7 +481,7 @@ test('contact form security edge cases', async (t) => {
     timestampInput.value = Date.now().toString();
     const submitEvent1 = new dom.window.Event('submit', {
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
     form.dispatchEvent(submitEvent1);
     assert(submissionBlocked, 'Too fast submission should be blocked');
@@ -463,7 +493,7 @@ test('contact form security edge cases', async (t) => {
     timestampInput.value = (Date.now() - 3700000).toString(); // More than 1 hour ago
     const submitEvent2 = new dom.window.Event('submit', {
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
     form.dispatchEvent(submitEvent2);
     assert(submissionBlocked, 'Too slow submission should be blocked');

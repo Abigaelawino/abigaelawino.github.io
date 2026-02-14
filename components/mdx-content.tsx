@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Chart, sampleBarData, sampleLineData, samplePieData } from '@/components/ui/chart';
@@ -20,10 +20,7 @@ interface MDXContentProps {
 export function MDXContent({ content }: MDXContentProps) {
   return (
     <div className="mdx-content">
-      <MDXRemote 
-        source={content} 
-        components={components}
-      />
+      <MDXRemote source={content} components={components} />
     </div>
   );
 }
@@ -57,7 +54,7 @@ export function enhanceContentWithCharts(content: string, projectSlug: string): 
 `;
     return content + performanceChart;
   }
-  
+
   if (projectSlug === 'customer-segmentation-dashboard') {
     const segmentationChart = `
 ## Interactive Segment Analysis
@@ -85,6 +82,6 @@ export function enhanceContentWithCharts(content: string, projectSlug: string): 
 `;
     return content + segmentationChart;
   }
-  
+
   return content;
 }

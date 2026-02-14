@@ -23,12 +23,12 @@ function renderHomePage(featuredProject, links = DEFAULT_HOME_LINKS) {
         <div class="card-content">
           <div class="flex flex-col sm:flex-row gap-2">
             <a class="button button-primary button-lg" href="/projects/${escapeHtml(
-              featuredProject.slug,
+              featuredProject.slug
             )}" data-analytics-event="home_featured_case_study_click" data-analytics-prop-slug="${escapeHtml(
-              featuredProject.slug,
+              featuredProject.slug
             )}">View Projects →</a>
             <a class="button button-outline button-lg" href="${escapeHtml(featuredProject.repo)}" target="_blank" rel="noopener noreferrer" data-analytics-event="home_featured_repo_click" data-analytics-prop-slug="${escapeHtml(
-              featuredProject.slug,
+              featuredProject.slug
             )}">View Repository</a>
           </div>
         </div>

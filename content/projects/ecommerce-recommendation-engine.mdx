@@ -40,18 +40,21 @@ The solution deployed a microservices architecture with separate services for mo
 ## Data
 
 ### Data Sources
+
 - User interaction logs (clicks, views, purchases, cart events): 3.2M events/day
 - Product catalog database: 50K+ products with categories, descriptions, attributes
 - User demographic data: Age groups, location, purchase history
 - Seasonal trend data: Holiday patterns, fashion trends, regional preferences
 
 ### Data Volume & Processing
+
 - Total raw data: 2.4TB of interaction logs over 18 months
 - Processing pipeline: Spark jobs running daily with 4-hour SLA
 - Feature store: 500M user-item features updated hourly
 - Real-time streaming: Kafka topics for live interaction capture
 
 ### Data Quality & Cleaning
+
 - Bot detection and removal using behavioral patterns
 - Session reconstruction from clickstreams
 - Implicit feedback normalization to address view-purchase bias
@@ -59,6 +62,7 @@ The solution deployed a microservices architecture with separate services for mo
 - Outlier detection for fraudulent activities
 
 ### Data Caveats
+
 - Interaction bias toward popular products
 - Seasonal patterns requiring time-aware evaluation
 - Geographic variations in product preferences
@@ -67,6 +71,7 @@ The solution deployed a microservices architecture with separate services for mo
 ## Methods
 
 ### Model Architecture
+
 1. **Collaborative Filtering**: Alternating Least Squares (ALS) matrix factorization
 2. **Content-Based Filtering**: TF-IDF on product descriptions + CNN image embeddings
 3. **Hybrid Approach**: Weighted ensemble with dynamic weight optimization
@@ -74,6 +79,7 @@ The solution deployed a microservices architecture with separate services for mo
 5. **Temporal Dynamics**: Time-decay functions to capture changing preferences
 
 ### Feature Engineering
+
 - User embedding features from interaction sequences
 - Product attribute embeddings using Word2Vec on descriptions
 - Contextual features (time of day, device, location)
@@ -81,6 +87,7 @@ The solution deployed a microservices architecture with separate services for mo
 - Cross-category compatibility features
 
 ### Model Training & Evaluation
+
 - **Offline Evaluation**: 5-fold cross-validation with precision@K, recall@K, MAP metrics
 - **Online Testing**: Multi-armed bandit A/B framework with sequential testing
 - **Business Metrics**: Revenue per user, conversion rate, session duration
@@ -91,22 +98,25 @@ The solution deployed a microservices architecture with separate services for mo
 
 ### Quantitative Performance
 
-| Metric | Previous System | New Hybrid System | Improvement |
-|--------|----------------|-------------------|-------------|
-| Click-Through Rate | 4.2% | 5.8% | +38% |
-| Conversion Rate | 1.8% | 2.3% | +28% |
-| Average Order Value | $142 | $167 | +18% |
-| Cold Start CTR | 1.2% | 3.1% | +158% |
-| API Response Time | 320ms | 85ms | -73% |
+| Metric              | Previous System | New Hybrid System | Improvement |
+| ------------------- | --------------- | ----------------- | ----------- |
+| Click-Through Rate  | 4.2%            | 5.8%              | +38%        |
+| Conversion Rate     | 1.8%            | 2.3%              | +28%        |
+| Average Order Value | $142            | $167              | +18%        |
+| Cold Start CTR      | 1.2%            | 3.1%              | +158%       |
+| API Response Time   | 320ms           | 85ms              | -73%        |
 
 ### Business Impact
+
 - **Revenue Impact**: $4.2M additional revenue in first 6 months
 - **Customer Engagement**: 45% increase in average session duration
 - **Product Discovery**: 62% improvement in long-tail product exposure
 - **Operational Efficiency**: 80% reduction in manual merchandising effort
 
 ### Visualizations
+
 The system included interactive dashboards showing:
+
 - Real-time recommendation performance metrics
 - User engagement heatmaps across product categories
 - A/B test results with confidence intervals
@@ -115,12 +125,14 @@ The system included interactive dashboards showing:
 ## Reproducibility
 
 ### Code Repository
+
 - **Main Repository**: https://github.com/abigaelawino/recommendation-engine
 - **Data Processing**: Spark pipelines in Scala with detailed documentation
 - **Model Training**: Python notebooks with exact hyperparameters and seeds
 - **API Service**: Flask application with Docker deployment scripts
 
 ### Environment Setup
+
 ```bash
 # Clone and setup
 git clone https://github.com/abigaelawino/recommendation-engine
@@ -137,6 +149,7 @@ python train_model.py --config configs/production.yaml
 ```
 
 ### Data Requirements
+
 - Sample dataset provided for development (10K users, 1K items)
 - Production requires similar interaction log format
 - Documentation for data preprocessing and feature extraction
@@ -144,17 +157,20 @@ python train_model.py --config configs/production.yaml
 ## Reflection
 
 ### Key Learnings
+
 - **Business Metrics Over Accuracy**: Focus on revenue impact rather than pure predictive accuracy drove better adoption
 - **Real-time Constraints**: Model complexity needed to be balanced with latency requirements
 - **Cold Start Criticality**: New user/item recommendations significantly impacted overall system performance
 - **A/B Testing Essential**: Offline metrics didn't always correlate with online performance
 
 ### Technical Challenges
+
 - **Scalability**: Moving from batch to real-time recommendations required architectural rethinking
 - **Data Quality**: Bot traffic and fraudulent activities significantly impacted model training
 - **Feature Drift**: User behavior patterns changed rapidly, requiring frequent model updates
 
 ### Future Improvements
+
 1. **Graph Neural Networks**: Model complex item relationships beyond simple attributes
 2. **Contextual Bandits**: Real-time personalization based on current session context
 3. **Multi-Objective Optimization**: Balance revenue, diversity, and fairness simultaneously
@@ -162,6 +178,7 @@ python train_model.py --config configs/production.yaml
 5. **Cross-Domain Recommendations**: Leverage signals from different product categories
 
 ### Trade-offs Made
+
 - Sacrificed some model accuracy for inference speed and operational simplicity
 - Chose ensemble approach over single complex model for better interpretability
 - Implemented simpler cold-start strategy initially to get to production faster

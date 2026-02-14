@@ -1,22 +1,16 @@
 import { existsSync } from 'node:fs';
 
 const requiredEnvVars = {
-  production: [
-    'NODE_ENV'
+  production: ['NODE_ENV'],
+  development: ['NODE_ENV'],
+  ci: [
+    // CI has different requirements - NODE_ENV is set by the workflow
   ],
-  development: [
-    'NODE_ENV'
-  ],
-  webhook: [
-    'GITHUB_WEBHOOK_SECRET',
-    'NETLIFY_BUILD_HOOK'
-  ]
+  webhook: ['GITHUB_WEBHOOK_SECRET', 'NETLIFY_BUILD_HOOK'],
 };
 
 const optionalEnvVars = {
-  production: [
-    'NETLIFY_BUILD_HOOK'
-  ]
+  production: ['NETLIFY_BUILD_HOOK'],
 };
 
 function validateEnvironment(context = 'production') {
@@ -40,8 +34,13 @@ function validateEnvironment(context = 'production') {
   }
 
   // Validate specific variable values
-  if (process.env.NODE_ENV && !['development', 'production', 'test'].includes(process.env.NODE_ENV)) {
-    errors.push(`Invalid NODE_ENV value: ${process.env.NODE_ENV}. Must be one of: development, production, test`);
+  if (
+    process.env.NODE_ENV &&
+    !['development', 'production', 'test'].includes(process.env.NODE_ENV)
+  ) {
+    errors.push(
+      `Invalid NODE_ENV value: ${process.env.NODE_ENV}. Must be one of: development, production, test`
+    );
   }
 
   // Security-specific validations

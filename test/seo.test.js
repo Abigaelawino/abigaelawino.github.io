@@ -1,7 +1,13 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { buildRobotsTxt, buildSeoHead, buildSitemapXml, normalizeSiteUrl, resolveSiteUrl } = require('../src/seo.js');
+const {
+  buildRobotsTxt,
+  buildSeoHead,
+  buildSitemapXml,
+  normalizeSiteUrl,
+  resolveSiteUrl,
+} = require('../src/seo.js');
 
 test('resolveSiteUrl prefers configured env vars', () => {
   assert.equal(resolveSiteUrl({ SITE_URL: 'https://example.com/' }), 'https://example.com');
@@ -100,7 +106,11 @@ test('normalizePathname strips query and hash from path', () => {
 });
 
 test('buildSitemapXml handles non-array paths', () => {
-  const xml = buildSitemapXml({ siteUrl: 'https://example.com', paths: null, lastmod: '2026-02-09' });
+  const xml = buildSitemapXml({
+    siteUrl: 'https://example.com',
+    paths: null,
+    lastmod: '2026-02-09',
+  });
   assert.match(xml, /<urlset/);
   assert.doesNotMatch(xml, /<loc>/);
 });
@@ -114,14 +124,8 @@ test('buildSitemapXml handles missing lastmod', () => {
 test('resolveSiteUrl falls back through env vars', () => {
   assert.equal(
     resolveSiteUrl({ URL: 'https://fallback.com', DEPLOY_PRIME_URL: 'https://deploy.com' }),
-    'https://fallback.com',
+    'https://fallback.com'
   );
-  assert.equal(
-    resolveSiteUrl({ DEPLOY_PRIME_URL: 'https://deploy.com' }),
-    'https://deploy.com',
-  );
-  assert.equal(
-    resolveSiteUrl({ DEPLOY_URL: 'https://deploy-url.com/' }),
-    'https://deploy-url.com',
-  );
+  assert.equal(resolveSiteUrl({ DEPLOY_PRIME_URL: 'https://deploy.com' }), 'https://deploy.com');
+  assert.equal(resolveSiteUrl({ DEPLOY_URL: 'https://deploy-url.com/' }), 'https://deploy-url.com');
 });

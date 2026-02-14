@@ -24,11 +24,7 @@ const pages = [
 ];
 
 // Static assets to test
-const assets = [
-  'assets/og.png',
-  'robots.txt',
-  'sitemap.xml',
-];
+const assets = ['assets/og.png', 'robots.txt', 'sitemap.xml'];
 
 // Error tracking
 const errors = [];
@@ -46,9 +42,7 @@ function testPage(page) {
   try {
     const content = readFileSync(filePath, 'utf8');
 
-    const missingContent = page.expectedContent.filter(expected =>
-      !content.includes(expected)
-    );
+    const missingContent = page.expectedContent.filter(expected => !content.includes(expected));
 
     if (missingContent.length > 0) {
       errors.push(`❌ ${page.path} - Missing content: ${missingContent.join(', ')}`);
@@ -57,7 +51,6 @@ function testPage(page) {
 
     console.log(`   ✅ ${page.path}`);
     return true;
-
   } catch (error) {
     errors.push(`❌ ${page.path} - Error reading file: ${error.message}`);
     return false;

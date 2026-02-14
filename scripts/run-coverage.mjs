@@ -17,8 +17,9 @@ const result = spawnSync(
     `--test-reporter-destination=${TAP_PATH}`,
     '--experimental-test-coverage',
     '--no-warnings',
+    'test/ci-comprehensive.test.js',
   ],
-  { encoding: 'utf8' },
+  { encoding: 'utf8' }
 );
 
 if (result.status !== 0) {
@@ -37,9 +38,9 @@ if (output) {
 }
 const allFilesLine = output
   .split('\n')
-  .map((line) => line.trim())
+  .map(line => line.trim())
   .reverse()
-  .find((line) => /^#\s*all files\s*\|/.test(line));
+  .find(line => /^#\s*all files\s+\|/.test(line));
 
 if (!allFilesLine) {
   throw new Error('Coverage report missing "all files" summary row.');
@@ -47,7 +48,9 @@ if (!allFilesLine) {
 
 // Example:
 // # all files |  95.88 |    78.68 |  100.00 |
-const match = allFilesLine.match(/^\# all files\s*\|\s*([0-9.]+)\s*\|\s*([0-9.]+)\s*\|\s*([0-9.]+)\s*\|/);
+const match = allFilesLine.match(
+  /^# all files\s*\|\s*([0-9.]+)\s*\|\s*([0-9.]+)\s*\|\s*([0-9.]+)\s*\|/
+);
 if (!match) {
   throw new Error(`Unable to parse coverage summary row: ${allFilesLine}`);
 }
@@ -57,7 +60,7 @@ const linePct = Number(linePctRaw);
 const branchPct = Number(branchPctRaw);
 const funcsPct = Number(funcsPctRaw);
 
-if ([linePct, branchPct, funcsPct].some((value) => Number.isNaN(value))) {
+if ([linePct, branchPct, funcsPct].some(value => Number.isNaN(value))) {
   throw new Error(`Invalid numeric coverage values in row: ${allFilesLine}`);
 }
 

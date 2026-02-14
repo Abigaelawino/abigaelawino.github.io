@@ -2,7 +2,12 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const { BLOG_DIR, blogSchema, loadCollectionEntries, parseMdxFile } = require('../src/content.js');
-const { formatReadingTime, renderBlogCard, renderBlogIndexPage, renderBlogPostPage } = require('../src/blog.js');
+const {
+  formatReadingTime,
+  renderBlogCard,
+  renderBlogIndexPage,
+  renderBlogPostPage,
+} = require('../src/blog.js');
 
 const blogPosts = loadCollectionEntries(BLOG_DIR, blogSchema);
 

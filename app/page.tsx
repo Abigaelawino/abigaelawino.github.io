@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { getAllProjects } from '@/lib/content';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, Clock, ExternalLink, Github } from 'lucide-react';
 import './page.css';
@@ -13,11 +20,10 @@ export default function HomePage() {
     <div className="page-content space-y-12">
       {/* Hero Section */}
       <section className="text-center space-y-6">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Data Science Portfolio
-        </h1>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">Data Science Portfolio</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          End-to-end data projects showcasing rigorous analysis, reproducible methods, and production-ready solutions.
+          End-to-end data projects showcasing rigorous analysis, reproducible methods, and
+          production-ready solutions.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild size="lg">
@@ -49,7 +55,7 @@ export default function HomePage() {
           </Card>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
+            {projects.map(project => (
               <Card key={project.slug} className="flex flex-col">
                 <CardHeader>
                   <div className="flex flex-wrap gap-1 mb-2">
@@ -60,11 +66,9 @@ export default function HomePage() {
                     ))}
                   </div>
                   <CardTitle className="text-xl">{project.frontmatter.title}</CardTitle>
-                  <CardDescription>
-                    {project.frontmatter.summary}
-                  </CardDescription>
+                  <CardDescription>{project.frontmatter.summary}</CardDescription>
                 </CardHeader>
-                
+
                 <CardContent className="flex-1">
                   <div className="flex flex-wrap gap-1 mb-4">
                     {project.frontmatter.tech.slice(0, 3).map(tech => (
@@ -73,13 +77,13 @@ export default function HomePage() {
                       </Badge>
                     ))}
                   </div>
-                  
+
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
                       {new Date(project.frontmatter.date).toLocaleDateString('en-US', {
                         year: 'numeric',
-                        month: 'short'
+                        month: 'short',
                       })}
                     </div>
                     <div className="flex items-center gap-1">
@@ -88,7 +92,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 </CardContent>
-                
+
                 <CardFooter className="flex gap-2">
                   <Button asChild className="flex-1">
                     <Link href={`/projects/${project.slug}`}>
@@ -119,8 +123,8 @@ export default function HomePage() {
       <section className="text-center space-y-4">
         <h2 className="text-2xl font-bold tracking-tight">Let's Work Together</h2>
         <p className="text-muted-foreground max-w-md mx-auto">
-          I'm passionate about solving complex data challenges. Whether you need analysis, 
-          ML models, or data infrastructure, I'd love to help.
+          I'm passionate about solving complex data challenges. Whether you need analysis, ML
+          models, or data infrastructure, I'd love to help.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild>

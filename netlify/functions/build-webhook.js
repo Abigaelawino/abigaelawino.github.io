@@ -9,17 +9,17 @@ function verifySignature(payload, signature, secret) {
 }
 
 // Main handler function
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   // Validate environment variables
   const { errors } = validateEnvironment('webhook');
   if (errors.length > 0) {
     console.error('Environment validation failed:', errors);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Server configuration error' })
+      body: JSON.stringify({ error: 'Server configuration error' }),
     };
   }
-  
+
   const signature = event.headers['x-hub-signature-256'];
   const githubEvent = event.headers['x-github-event'];
   const webhookSecret = process.env.GITHUB_WEBHOOK_SECRET;
@@ -27,14 +27,14 @@ exports.handler = async function(event, context) {
   if (!webhookSecret) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Webhook secret not configured' })
+      body: JSON.stringify({ error: 'Webhook secret not configured' }),
     };
   }
 
   if (!signature) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Missing signature' })
+      body: JSON.stringify({ error: 'Missing signature' }),
     };
   }
 
@@ -43,7 +43,7 @@ exports.handler = async function(event, context) {
     if (!verifySignature(event.body, signature, webhookSecret)) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ error: 'Invalid signature' })
+        body: JSON.stringify({ error: 'Invalid signature' }),
       };
     }
 
@@ -60,14 +60,14 @@ exports.handler = async function(event, context) {
       default:
         return {
           statusCode: 200,
-          body: JSON.stringify({ message: `Event ${githubEvent} received but not processed` })
+          body: JSON.stringify({ message: `Event ${githubEvent} received but not processed` }),
         };
     }
   } catch (error) {
     console.error('Webhook processing error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -75,12 +75,12 @@ exports.handler = async function(event, context) {
 // Handle push events to trigger builds
 async function handlePushEvent(payload) {
   const { ref, repository, commits } = payload;
-  
+
   // Only process pushes to main/master branch
   if (!ref.includes('main') && !ref.includes('master')) {
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Ignoring non-main branch push' })
+      body: JSON.stringify({ message: 'Ignoring non-main branch push' }),
     };
   }
 
@@ -90,39 +90,39 @@ async function handlePushEvent(payload) {
   if (process.env.NETLIFY_BUILD_HOOK) {
     try {
       const response = await fetch(process.env.NETLIFY_BUILD_HOOK, {
-        method: 'POST'
+        method: 'POST',
       });
-      
+
       if (!response.ok) {
         throw new Error(`Build webhook failed: ${response.statusText}`);
       }
 
       return {
         statusCode: 200,
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           message: 'Build triggered successfully',
-          buildUrl: response.headers.get('location') || 'Build initiated'
-        })
+          buildUrl: response.headers.get('location') || 'Build initiated',
+        }),
       };
     } catch (error) {
       console.error('Failed to trigger build:', error);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to trigger build' })
+        body: JSON.stringify({ error: 'Failed to trigger build' }),
       };
     }
   }
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: 'Push event processed' })
+    body: JSON.stringify({ message: 'Push event processed' }),
   };
 }
 
 // Handle pull request events
 async function handlePullRequestEvent(payload) {
   const { action, pull_request, repository } = payload;
-  
+
   console.log(`PR ${action}: ${pull_request.title} in ${repository.full_name}`);
 
   // Only process opened and synchronized PRs
@@ -130,23 +130,23 @@ async function handlePullRequestEvent(payload) {
     // Here you could trigger preview builds or other PR-specific actions
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: `PR ${action} processed`,
-        pullRequest: pull_request.html_url
-      })
+        pullRequest: pull_request.html_url,
+      }),
     };
   }
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: `PR ${action} received but not processed` })
+    body: JSON.stringify({ message: `PR ${action} received but not processed` }),
   };
 }
 
 // Handle issues events for issue verification
 async function handleIssuesEvent(payload) {
   const { action, issue, repository } = payload;
-  
+
   console.log(`Issue ${action}: ${issue.title} in ${repository.full_name}`);
 
   // Process issue events for verification workflow
@@ -159,7 +159,7 @@ async function handleIssuesEvent(payload) {
       state: issue.state,
       action: action,
       repository: repository.full_name,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     // Here you could store this information in a database or trigger other workflows
@@ -167,15 +167,15 @@ async function handleIssuesEvent(payload) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: `Issue ${action} processed for verification`,
-        issueData
-      })
+        issueData,
+      }),
     };
   }
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: `Issue ${action} received but not processed` })
+    body: JSON.stringify({ message: `Issue ${action} received but not processed` }),
   };
 }

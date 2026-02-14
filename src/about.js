@@ -1,7 +1,7 @@
 const { escapeHtml } = require('./utils/escape-html.js');
 
 function renderListItems(items, className) {
-  return items.map((item) => `<li class="${className}">${escapeHtml(item)}</li>`).join('');
+  return items.map(item => `<li class="${className}">${escapeHtml(item)}</li>`).join('');
 }
 
 const DEFAULT_ABOUT_CONTENT = {
@@ -11,13 +11,22 @@ const DEFAULT_ABOUT_CONTENT = {
     'Strong foundation in statistical methods and experimental design',
     'Experience with both structured and unstructured data',
     'Excellent communication of complex technical concepts',
-    'Commitment to reproducible research and documentation'
+    'Commitment to reproducible research and documentation',
   ],
   skills: [
-    { category: 'Machine Learning', items: ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'XGBoost'] },
-    { category: 'Data Engineering', items: ['SQL', 'PostgreSQL', 'MongoDB', 'Apache Spark', 'Airflow'] },
+    {
+      category: 'Machine Learning',
+      items: ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'XGBoost'],
+    },
+    {
+      category: 'Data Engineering',
+      items: ['SQL', 'PostgreSQL', 'MongoDB', 'Apache Spark', 'Airflow'],
+    },
     { category: 'Programming', items: ['Python', 'JavaScript', 'TypeScript', 'R', 'Bash'] },
-    { category: 'Analytics & Visualization', items: ['Tableau', 'Power BI', 'Matplotlib', 'Seaborn', 'Plotly'] }
+    {
+      category: 'Analytics & Visualization',
+      items: ['Tableau', 'Power BI', 'Matplotlib', 'Seaborn', 'Plotly'],
+    },
   ],
   speaking: [],
   publications: [],
@@ -35,8 +44,7 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
 
   // Add error handling for Best Practices improvement
   try {
-
-  return `
+    return `
     <div class="container space-y-12">
       <!-- Header -->
       <section class="text-center space-y-4">
@@ -72,12 +80,16 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
         </div>
         <div class="card-content">
           <ul class="space-y-3">
-            ${strengths.map((strength, index) => `
+            ${strengths
+              .map(
+                (strength, index) => `
               <li class="flex items-start gap-3">
                 <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                 <span class="text-muted-foreground">${escapeHtml(strength)}</span>
               </li>
-            `).join('')}
+            `
+              )
+              .join('')}
           </ul>
         </div>
       </div>
@@ -90,18 +102,26 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
         </div>
         <div class="card-content">
           <div class="grid gap-6 md:grid-cols-2">
-            ${skills.map(({ category, items }) => `
+            ${skills
+              .map(
+                ({ category, items }) => `
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
                   <h3 class="font-semibold">${escapeHtml(category)}</h3>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                  ${items.map(item => `
+                  ${items
+                    .map(
+                      item => `
                     <span class="badge badge-secondary">${escapeHtml(item)}</span>
-                  `).join('')}
+                  `
+                    )
+                    .join('')}
                 </div>
               </div>
-            `).join('')}
+            `
+              )
+              .join('')}
           </div>
         </div>
       </div>
@@ -154,7 +174,6 @@ function renderAboutPage(content = DEFAULT_ABOUT_CONTENT) {
       </div>
     </div>
   `.trim();
-
   } catch (error) {
     console.error('Error rendering About page:', error);
     // Return fallback content for Best Practices compliance

@@ -24,11 +24,59 @@
     <meta name="twitter:description" content="Thanks for reaching out — your message has been sent." />
     <meta name="twitter:image" content="https://abigaelawino.github.io/assets/og.png" />
     <meta name="twitter:image:alt" content="Abigael Awino Portfolio — Thanks for reaching out — your message has been sent." />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-u0WO5wC6lhQTLco9/0pfiQ==' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action 'self';">
     <link rel="preload" href="/assets/shell.css" as="style" />
     <link rel="stylesheet" href="/assets/shell.css" />
-    
-    <script src="/assets/analytics.js" defer nonce="yd4dG3WG8FQhVE0rJUJruQ=="></script>
+    <script nonce="u0WO5wC6lhQTLco9/0pfiQ==">
+      (function () {
+        var plausibleDomain = "abigaelawino.github.io";
+        var plausibleHost = "https://plausible.io";
+
+        var dntValues = [
+          navigator.doNotTrack,
+          window.doNotTrack,
+          navigator.msDoNotTrack,
+          document.doNotTrack,
+        ]
+          .map(function (value) {
+            return value == null ? '' : String(value);
+          })
+          .map(function (value) {
+            return value.trim();
+          });
+
+        if (dntValues.includes('1') || dntValues.includes('yes')) {
+          return;
+        }
+
+        var hostname = String((window.location && window.location.hostname) || '')
+          .trim()
+          .toLowerCase();
+        if (
+          hostname === '' ||
+          hostname === 'localhost' ||
+          hostname === '127.0.0.1' ||
+          hostname === '0.0.0.0' ||
+          hostname.endsWith('.local')
+        ) {
+          return;
+        }
+
+        window.plausible =
+          window.plausible ||
+          function () {
+            (window.plausible.q = window.plausible.q || []).push(arguments);
+          };
+
+        var script = document.createElement('script');
+        script.defer = true;
+        script.setAttribute('data-domain', plausibleDomain);
+        script.setAttribute('nonce', 'u0WO5wC6lhQTLco9/0pfiQ==');
+        script.src = plausibleHost.replace(/\/$/, '') + '/js/script.js';
+        document.head.appendChild(script);
+      })();
+    </script>
+    <script src="/assets/analytics.js" defer nonce="u0WO5wC6lhQTLco9/0pfiQ=="></script>
   </head>
   <body>
     <div class="shell">

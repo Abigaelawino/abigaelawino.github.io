@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { getAllProjects, getAllTags } from '@/lib/content';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowRight, Tag as TagIcon, Github, ExternalLink } from 'lucide-react';
 
@@ -17,7 +24,7 @@ export default function ProjectsPage() {
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Explore project case studies in ML, analytics, and production data systems.
         </p>
-        
+
         {allTags.length > 0 && (
           <div className="space-y-3">
             <h3 className="text-lg font-semibold">Topics</h3>
@@ -37,12 +44,14 @@ export default function ProjectsPage() {
       {projects.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <p className="text-muted-foreground text-lg">No projects available yet. Check back soon!</p>
+            <p className="text-muted-foreground text-lg">
+              No projects available yet. Check back soon!
+            </p>
           </CardContent>
         </Card>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-          {projects.map((project) => (
+          {projects.map(project => (
             <Card key={project.slug} className="flex flex-col">
               <CardHeader className="space-y-3">
                 <div className="space-y-2">
@@ -58,14 +67,14 @@ export default function ProjectsPage() {
                       </Badge>
                     )}
                   </div>
-                  
+
                   <CardTitle className="text-xl">{project.frontmatter.title}</CardTitle>
                   <CardDescription className="text-base">
                     {project.frontmatter.summary}
                   </CardDescription>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="flex-1 space-y-4">
                 <div className="flex flex-wrap gap-1">
                   {project.frontmatter.tech.slice(0, 4).map(tech => (
@@ -86,7 +95,7 @@ export default function ProjectsPage() {
                     {new Date(project.frontmatter.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
-                      day: 'numeric'
+                      day: 'numeric',
                     })}
                   </div>
                   <div className="flex items-center gap-1">
@@ -95,7 +104,7 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               </CardContent>
-              
+
               <CardFooter className="flex gap-2 pt-4">
                 <Button asChild className="flex-1">
                   <Link href={`/projects/${project.slug}`}>
@@ -124,9 +133,7 @@ export default function ProjectsPage() {
       {/* Footer */}
       <div className="text-center pt-8">
         <Button asChild variant="outline">
-          <Link href="/">
-            ← Back to Home
-          </Link>
+          <Link href="/">← Back to Home</Link>
         </Button>
       </div>
     </div>

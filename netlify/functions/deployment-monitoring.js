@@ -2,7 +2,7 @@
 const deploymentStore = new Map();
 
 // Main handler function for deployment status updates
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   try {
     const { httpMethod } = event;
 
@@ -16,14 +16,14 @@ exports.handler = async function(event, context) {
       default:
         return {
           statusCode: 405,
-          body: JSON.stringify({ error: 'Method not allowed' })
+          body: JSON.stringify({ error: 'Method not allowed' }),
         };
     }
   } catch (error) {
     console.error('Deployment monitoring error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -37,17 +37,17 @@ async function getDeploymentStatus(event) {
     const deployment = deploymentStore.get(deploymentId);
     return {
       statusCode: deployment ? 200 : 404,
-      body: JSON.stringify(deployment || { error: 'Deployment not found' })
+      body: JSON.stringify(deployment || { error: 'Deployment not found' }),
     };
   }
 
   // Filter deployments by repository and/or branch
   let deployments = Array.from(deploymentStore.values());
-  
+
   if (repository) {
     deployments = deployments.filter(d => d.repository === repository);
   }
-  
+
   if (branch) {
     deployments = deployments.filter(d => d.branch === branch);
   }
@@ -65,33 +65,33 @@ async function getDeploymentStatus(event) {
     body: JSON.stringify({
       deployments,
       total: deployments.length,
-      timestamp: new Date().toISOString()
-    })
+      timestamp: new Date().toISOString(),
+    }),
   };
 }
 
 // Update deployment status
 async function updateDeploymentStatus(event) {
   const { body } = event;
-  
+
   if (!body) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Missing request body' })
+      body: JSON.stringify({ error: 'Missing request body' }),
     };
   }
 
   try {
     const deploymentData = JSON.parse(body);
-    
+
     // Validate required fields
     const requiredFields = ['deploymentId', 'repository', 'branch', 'status'];
     const missingFields = requiredFields.filter(field => !deploymentData[field]);
-    
+
     if (missingFields.length > 0) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: `Missing required fields: ${missingFields.join(', ')}` })
+        body: JSON.stringify({ error: `Missing required fields: ${missingFields.join(', ')}` }),
       };
     }
 
@@ -109,7 +109,7 @@ async function updateDeploymentStatus(event) {
       deployUrl: deploymentData.deployUrl,
       buildTime: deploymentData.buildTime,
       error: deploymentData.error,
-      environment: deploymentData.environment || 'production'
+      environment: deploymentData.environment || 'production',
     };
 
     // Store deployment
@@ -127,13 +127,13 @@ async function updateDeploymentStatus(event) {
       statusCode: 200,
       body: JSON.stringify({
         message: 'Deployment status updated successfully',
-        deployment
-      })
+        deployment,
+      }),
     };
   } catch (parseError) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid JSON body' })
+      body: JSON.stringify({ error: 'Invalid JSON body' }),
     };
   }
 }
@@ -159,20 +159,20 @@ async function clearDeploymentHistory(event) {
       statusCode: 200,
       body: JSON.stringify({
         message: `Cleared ${clearedCount} deployments older than ${olderThan}`,
-        clearedCount
-      })
+        clearedCount,
+      }),
     };
   } else {
     // Clear all deployments (with confirmation)
     const count = deploymentStore.size;
     deploymentStore.clear();
-    
+
     return {
       statusCode: 200,
       body: JSON.stringify({
         message: `Cleared all ${count} deployments`,
-        clearedCount: count
-      })
+        clearedCount: count,
+      }),
     };
   }
 }
@@ -198,27 +198,35 @@ async function sendFailureNotification(deployment) {
     try {
       const slackMessage = {
         text: `Deployment Failed: ${deployment.repository}:${deployment.branch}`,
-        attachments: [{
-          color: 'danger',
-          fields: [
-            { title: 'Repository', value: deployment.repository, short: true },
-            { title: 'Branch', value: deployment.branch, short: true },
-            { title: 'Commit', value: deployment.commitSha?.substring(0, 7) || 'Unknown', short: true },
-            { title: 'Author', value: deployment.author || 'Unknown', short: true },
-            { title: 'Error', value: deployment.error || 'Unknown error', short: false }
-          ],
-          actions: [{
-            type: 'button',
-            text: 'View Build',
-            url: deployment.buildUrl || '#'
-          }]
-        }]
+        attachments: [
+          {
+            color: 'danger',
+            fields: [
+              { title: 'Repository', value: deployment.repository, short: true },
+              { title: 'Branch', value: deployment.branch, short: true },
+              {
+                title: 'Commit',
+                value: deployment.commitSha?.substring(0, 7) || 'Unknown',
+                short: true,
+              },
+              { title: 'Author', value: deployment.author || 'Unknown', short: true },
+              { title: 'Error', value: deployment.error || 'Unknown error', short: false },
+            ],
+            actions: [
+              {
+                type: 'button',
+                text: 'View Build',
+                url: deployment.buildUrl || '#',
+              },
+            ],
+          },
+        ],
       };
 
       await fetch(process.env.SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slackMessage)
+        body: JSON.stringify(slackMessage),
       });
     } catch (error) {
       console.error('Failed to send failure notification:', error);
@@ -234,27 +242,35 @@ async function sendSuccessNotification(deployment) {
     try {
       const slackMessage = {
         text: `Deployment Success: ${deployment.repository}:${deployment.branch}`,
-        attachments: [{
-          color: 'good',
-          fields: [
-            { title: 'Repository', value: deployment.repository, short: true },
-            { title: 'Branch', value: deployment.branch, short: true },
-            { title: 'Commit', value: deployment.commitSha?.substring(0, 7) || 'Unknown', short: true },
-            { title: 'Author', value: deployment.author || 'Unknown', short: true },
-            { title: 'Build Time', value: `${deployment.buildTime || 'Unknown'}s`, short: true }
-          ],
-          actions: [{
-            type: 'button',
-            text: 'View Deploy',
-            url: deployment.deployUrl || '#'
-          }]
-        }]
+        attachments: [
+          {
+            color: 'good',
+            fields: [
+              { title: 'Repository', value: deployment.repository, short: true },
+              { title: 'Branch', value: deployment.branch, short: true },
+              {
+                title: 'Commit',
+                value: deployment.commitSha?.substring(0, 7) || 'Unknown',
+                short: true,
+              },
+              { title: 'Author', value: deployment.author || 'Unknown', short: true },
+              { title: 'Build Time', value: `${deployment.buildTime || 'Unknown'}s`, short: true },
+            ],
+            actions: [
+              {
+                type: 'button',
+                text: 'View Deploy',
+                url: deployment.deployUrl || '#',
+              },
+            ],
+          },
+        ],
       };
 
       await fetch(process.env.SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slackMessage)
+        body: JSON.stringify(slackMessage),
       });
     } catch (error) {
       console.error('Failed to send success notification:', error);
@@ -272,17 +288,17 @@ function updateDeploymentMetrics(deployment) {
     branch: deployment.branch,
     status: deployment.status,
     buildTime: deployment.buildTime,
-    environment: deployment.environment
+    environment: deployment.environment,
   };
 
   console.log('Deployment metrics:', metrics);
 }
 
 // Helper functions for external access
-exports.getDeploymentStore = function() {
+exports.getDeploymentStore = function () {
   return deploymentStore;
 };
 
-exports.getDeploymentById = function(deploymentId) {
+exports.getDeploymentById = function (deploymentId) {
   return deploymentStore.get(deploymentId);
 };

@@ -7,6 +7,10 @@ const { generateContentIndexes } = require('../src/content.js');
 
 assert.equal(typeof getSiteTitle, 'function', 'getSiteTitle must be a function');
 assert.equal(typeof getSiteTitle(), 'string', 'getSiteTitle() must return a string');
-assert.equal(typeof generateContentIndexes, 'function', 'generateContentIndexes must be a function');
+assert.equal(
+  typeof generateContentIndexes,
+  'function',
+  'generateContentIndexes must be a function'
+);
 
 console.log('Type checks passed.');

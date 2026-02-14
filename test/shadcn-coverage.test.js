@@ -8,7 +8,10 @@ test('shadcn coverage script exists and is executable', () => {
   assert(existsSync(scriptPath), 'shadcn-coverage.mjs should exist');
 
   const scriptContent = readFileSync(scriptPath, 'utf8');
-  assert(scriptContent.includes('ShadcnPerformanceTracker'), 'Should contain ShadcnPerformanceTracker class');
+  assert(
+    scriptContent.includes('ShadcnPerformanceTracker'),
+    'Should contain ShadcnPerformanceTracker class'
+  );
   assert(scriptContent.includes('coverageData'), 'Should contain coverage data structure');
 });
 
@@ -23,7 +26,7 @@ test('shadcn coverage script has required methods', () => {
     'analyzeRenderCoverage',
     'generateReports',
     'generateMarkdownReport',
-    'generateCSVReport'
+    'generateCSVReport',
   ];
 
   for (const method of requiredMethods) {
@@ -36,8 +39,16 @@ test('shadcn coverage script tracks all required components', () => {
   const scriptContent = readFileSync(scriptPath, 'utf8');
 
   const requiredComponents = [
-    'button', 'card', 'input', 'dialog', 'dropdown-menu',
-    'toast', 'table', 'tabs', 'form', 'select'
+    'button',
+    'card',
+    'input',
+    'dialog',
+    'dropdown-menu',
+    'toast',
+    'table',
+    'tabs',
+    'form',
+    'select',
   ];
 
   for (const component of requiredComponents) {
@@ -68,5 +79,9 @@ test('package.json includes shadcn coverage script', () => {
   const packageContent = JSON.parse(readFileSync(packagePath, 'utf8'));
 
   assert(packageContent.scripts['shadcn:coverage'], 'Should include shadcn:coverage script');
-  assert.strictEqual(packageContent.scripts['shadcn:coverage'], 'node scripts/shadcn-coverage.mjs', 'Script should point to correct file');
+  assert.strictEqual(
+    packageContent.scripts['shadcn:coverage'],
+    'node scripts/shadcn-coverage.mjs',
+    'Script should point to correct file'
+  );
 });

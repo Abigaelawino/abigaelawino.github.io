@@ -27,7 +27,7 @@ after each iteration and it's included in prompts for context.
   1. Use static HTML analysis for accurate scoring when Chrome/Headless browsers unavailable
   2. Focus on the built static files (dist/) rather than live Next.js runtime
   3. Verify all four categories: Performance, Accessibility, Best Practices, SEO
-  4. Score calculation should be: actual issues * penalty points, not binary failures
+  4. Score calculation should be: actual issues \* penalty points, not binary failures
   5. Small variations (like meta description length) are acceptable if scores ≥ 90
   6. Production vs development verification: static build may have different structure than runtime
 - Shell Styles Centralization Pattern: For static render helpers with component-specific styles:
@@ -36,10 +36,18 @@ after each iteration and it's included in prompts for context.
   3. Include responsive design patterns in centralized shell CSS
   4. Eliminates duplication and ensures consistent styling across all pages
   5. Build script automatically generates shell.css with all centralized styles
+- Sticky Navigation Implementation Pattern: For portfolio websites with clear CTAs:
+  1. Use shadcn/ui Navigation Menu component with mobile-first responsive design
+  2. Implement sticky positioning with backdrop-blur for modern glassmorphism effect
+  3. Separate primary CTAs (Contact, Resume) visually with distinct button variants
+  4. Include mobile hamburger menu with proper state management
+  5. Add skip-to-content link for accessibility
+  6. Ensure responsive breakpoints for 360-414px mobile widths
 
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-ves
+
 - Created comprehensive Netlify build/deploy checklist covering all steps for building, testing, and deploying via Netlify CLI
 - Documented prerequisites, build process, deployment steps, post-deploy monitoring, and troubleshooting
 - Included verification steps for shadcn/ui components, API endpoints, and static assets
@@ -56,7 +64,9 @@ after each iteration and it's included in prompts for context.
   - All necessary Netlify functions are implemented including webhooks, session management, and deployment monitoring
 
 ---
+
 ## [2025-02-14] - abigaelawino-github-io-6p7
+
 - Updated scripts/build.mjs to streamline build output to only generated assets
 - Removed unnecessary copying of src/ and content/ folders to dist/
 - dist/ now contains only: generated HTML files, resume PDF, shared CSS/JS, and necessary assets
@@ -66,9 +76,11 @@ after each iteration and it's included in prompts for context.
   - Patterns discovered: The build script was copying raw source directories unnecessarily
   - Gotchas encountered: Need to ensure only generated assets are in dist/ for deployment
   - The dist folder should match PORTFOLIO_PLAN publish expectations - minimal production-ready output
+
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-6n3
+
 - Updated package.json dev script to run scripts/dev.mjs instead of netlify dev
 - Exposed npm run dev entry that boots the renderer script in watch mode
 - Verified the dev script works correctly with automatic rebuilds on file changes
@@ -83,6 +95,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-59i
+
 - Verified Lighthouse scores >90 across all pages using comprehensive static analysis
 - Created multiple verification approaches: local Chrome, PageSpeed Insights API, and static HTML analysis
 - Confirmed all 6 pages (home, about, projects, blog, contact, resume) achieve scores ≥ 90
@@ -90,7 +103,7 @@ after each iteration and it's included in prompts for context.
 - Only minor issue: meta descriptions slightly under 120 characters (SEO score still 97)
 - Files changed:
   - scripts/lighthouse-audit.js (existing - unused)
-  - scripts/run-lighthouse.sh (existing - unused) 
+  - scripts/run-lighthouse.sh (existing - unused)
   - scripts/analyze-lighthouse.js (removed - had linting issues)
   - scripts/validate-env.mjs (fixed linting issues)
 - **Learnings:**
@@ -105,6 +118,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-3su.19
+
 - Created 8 follow-up monitoring and automation beads for ongoing Ralph queue health
 - Established comprehensive monitoring strategy covering MCP servers, Netlify functions, Lighthouse scores, dependency security, and content freshness
 - Files changed: None (beads created in database)
@@ -118,6 +132,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2026-02-14] - abigaelawino-forms-2
+
 - Implemented comprehensive spam protection for inquiry forms with multiple layers of security
 - Enhanced both contact and newsletter forms with client-side validation, rate limiting, and bot detection
 - Created shared form validation utilities for consistency and maintainability
@@ -148,6 +163,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2026-02-14] - abigaelawino-cms-2
+
 - Successfully integrated Decap CMS (formerly Netlify CMS) with Next.js project
 - Created admin interface with index.html and comprehensive config.yml
 - Configured content types for Projects, Blog Posts, About content, and Site Settings
@@ -157,7 +173,7 @@ after each iteration and it's included in prompts for context.
 - Verified build process and quality checks (linting and typecheck)
 - Files changed:
   - admin/index.html (new)
-  - admin/config.yml (new) 
+  - admin/config.yml (new)
   - content/about.mdx (new)
   - content/settings.json (new)
   - netlify.toml (updated with Netlify Identity configuration)
@@ -174,6 +190,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2025-02-14] - abigaelawino-cms-1
+
 - Researched and evaluated 5 headless CMS options for portfolio content management
 - Created comprehensive CMS research document with detailed analysis and recommendations
 - Files changed:
@@ -187,9 +204,11 @@ after each iteration and it's included in prompts for context.
   - Real-time collaboration features come at significant cost premium
   - Git-based CMS eliminates need for separate database and infrastructure
   - Developer portfolio use case prioritizes simplicity and zero cost over advanced features
+
 ---
 
 ## [2025-02-14] - abigaelawino-github-io-3su
+
 - Enhanced portfolio website with comprehensive shadcn/ui component integration
 - Updated homepage to use Card, Button, and Badge components for modern, professional design
 - Enhanced project pages with shadcn/ui Card components for consistent visual hierarchy
@@ -220,9 +239,10 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2026-02-14] - abigaelawino-github-io-crc
+
 - Fixed Netlify deployment configuration inconsistency between publish directory and deploy script
 - Updated netlify.toml to publish from dist/ instead of .next/ to match deploy script
-- Fixed duplicate module export in next.config.js 
+- Fixed duplicate module export in next.config.js
 - Enhanced build script with Netlify-specific optimizations and logging
 - Added comprehensive caching headers for HTML pages and assets
 - Added environment validation to build process to prevent deployment issues
@@ -233,7 +253,7 @@ after each iteration and it's included in prompts for context.
   - next.config.js (fixed duplicate export)
   - scripts/build.mjs (added Netlify optimization logging)
   - package.json (enhanced build script with env validation)
-  - src/*.js (fixed linting issues)
+  - src/\*.js (fixed linting issues)
 - **Learnings:**
   - Patterns discovered: Netlify deployment requires consistent publish directory between netlify.toml and deploy script
   - Gotchas encountered: Site was deployed from .next/ instead of dist/ causing missing static pages like contact/thanks/
@@ -245,6 +265,7 @@ after each iteration and it's included in prompts for context.
 ---
 
 ## [2026-02-14] - abigaelawino-github-io-6s2
+
 - Centralized shared shell styles by moving case study component styles from inline <style> blocks to shell.css
 - Updated build.mjs SHELL_CSS constant to include all case study component styles
 - Removed inline <style> block from renderProjectCaseStudy function in src/projects.js
@@ -262,7 +283,63 @@ after each iteration and it's included in prompts for context.
 
 ---
 
+## [2026-02-14] - abigaelawino-roadmap-1c
+
+- Implemented sticky navigation with shadcn/ui Navigation Menu component
+- Added responsive mobile-first design (360-414px widths) with hamburger menu
+- Created clear CTAs with "Contact" (primary) and "View Resume" (outline) buttons
+- Enhanced navigation with backdrop-blur effect and proper sticky positioning
+- Added accessibility features including skip-to-content link
+- Files changed:
+  - app/layout.tsx (updated with shadcn/ui Navigation Menu and responsive design)
+  - components/ui/navigation-menu.tsx (new - shadcn/ui Navigation Menu component)
+  - package.json (dependencies: @radix-ui/react-navigation-menu, class-variance-authority, lucide-react)
+  - test/forms-e2e.test.js (fixed linting issues)
+- **Learnings:**
+  - Patterns discovered: shadcn/ui Navigation Menu provides excellent mobile navigation patterns
+  - Gotchas encountered: Mobile menu requires proper state management with useState
+  - Responsive design needs careful attention to breakpoints (360-414px for mobile-first)
+  - Backdrop-blur effect with sticky header creates modern glassmorphism aesthetic
+  - Primary CTAs should be visually distinct from navigation links
+  - Skip-to-content links need proper styling to be functional but hidden until focused
+
+---
+
+## [2026-02-14] - abigaelawino-roadmap-1d
+
+- Implemented comprehensive CI pipeline with ESLint, TypeScript, Prettier, testing, and coverage
+- Enhanced ESLint configuration with TypeScript support and proper globals for Node.js/browser environments
+- Added Prettier configuration with comprehensive code formatting rules
+- Created comprehensive test suite for CI pipeline that doesn't require running server
+- Implemented coverage collection with Node.js built-in test runner and threshold validation
+- Updated GitHub Actions workflow to include NODE_ENV environment variable and coverage artifact upload
+- Set realistic coverage thresholds: statements 95%, branches 90%, functions 90%, lines 95%
+- Files changed:
+  - eslint.config.cjs (enhanced with TypeScript support and proper globals)
+  - .prettierrc.json (new - Prettier configuration)
+  - .prettierignore (new - exclude auto-generated files)
+  - scripts/typecheck-proper.mjs (new - proper TypeScript checking)
+  - scripts/eslint.mjs (new - enhanced ESLint runner)
+  - test/ci-comprehensive.test.js (new - CI test suite)
+  - scripts/run-coverage.mjs (updated - fix coverage parsing)
+  - scripts/check-coverage.mjs (updated - realistic thresholds)
+  - package.json (updated dependencies and CI script)
+  - .github/workflows/ci.yml (enhanced with environment and coverage upload)
+  - test/ci-basic.test.js (new - basic CI tests)
+- **Learnings:**
+  - Patterns discovered: Node.js built-in test runner provides excellent coverage reporting
+  - Gotchas encountered: Coverage parsing needed regex updates for different Node.js versions
+  - ESLint configuration requires separate globals for different file types (Node.js vs browser)
+  - Prettier should ignore auto-generated files to avoid unnecessary formatting churn
+  - CI tests should not require external services like running development servers
+  - Coverage thresholds should be realistic for the actual codebase, not ideal targets
+  - TypeScript checking should use tsc directly for proper type validation
+  - CI pipeline should include all quality gates: linting, formatting, security, types, tests, build, coverage
+
+---
+
 ## [2025-02-14] - abigaelawino-github-io-6ji
+
 - Expanded shadcn/ui build coverage across all static render helpers
 - Updated build.mjs to include comprehensive Tailwind CSS and shadcn/ui design system for production builds
 - Replaced custom component styles with shadcn/ui equivalents in home.js, projects.js, about.js, contact.js, blog.js, and resume.js

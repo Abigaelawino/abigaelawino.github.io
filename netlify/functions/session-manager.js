@@ -14,11 +14,11 @@ class SessionManager {
       startTime: new Date().toISOString(),
       status: 'active',
       ...sessionData,
-      lastActivity: new Date().toISOString()
+      lastActivity: new Date().toISOString(),
     };
 
     this.sessions.set(sessionId, session);
-    
+
     // Set timeout for session cleanup
     setTimeout(() => this.cleanupSession(sessionId), this.sessionTimeout);
 
@@ -111,13 +111,13 @@ class SessionManager {
   getStats() {
     const allSessions = this.getAllSessions();
     const activeSessions = this.getActiveSessions();
-    
+
     return {
       total: allSessions.length,
       active: activeSessions.length,
       completed: allSessions.filter(s => s.status === 'completed').length,
       failed: allSessions.filter(s => s.status === 'failed').length,
-      maxAllowed: this.maxSessions
+      maxAllowed: this.maxSessions,
     };
   }
 }
@@ -126,10 +126,10 @@ class SessionManager {
 const sessionManager = new SessionManager();
 
 // Netlify function for session management
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const { httpMethod, path } = event;
   const pathSegments = path.split('/').filter(Boolean);
-  
+
   try {
     switch (httpMethod) {
       case 'GET':
@@ -139,19 +139,19 @@ exports.handler = async function(event, context) {
           return await handleGetSession(pathSegments[1]);
         }
         break;
-        
+
       case 'POST':
         if (pathSegments.length === 1 && pathSegments[0] === 'sessions') {
           return await handleCreateSession(event);
         }
         break;
-        
+
       case 'PUT':
         if (pathSegments.length === 2 && pathSegments[0] === 'sessions') {
           return await handleUpdateSession(pathSegments[1], event);
         }
         break;
-        
+
       case 'DELETE':
         if (pathSegments.length === 2 && pathSegments[0] === 'sessions') {
           return await handleDeleteSession(pathSegments[1]);
@@ -161,13 +161,13 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 404,
-      body: JSON.stringify({ error: 'Endpoint not found' })
+      body: JSON.stringify({ error: 'Endpoint not found' }),
     };
   } catch (error) {
     console.error('Session management error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -176,31 +176,31 @@ exports.handler = async function(event, context) {
 async function handleGetSessions() {
   const sessions = sessionManager.getAllSessions();
   const stats = sessionManager.getStats();
-  
+
   return {
     statusCode: 200,
     body: JSON.stringify({
       sessions,
       stats,
-      timestamp: new Date().toISOString()
-    })
+      timestamp: new Date().toISOString(),
+    }),
   };
 }
 
 // Handle GET /sessions/{id}
 async function handleGetSession(sessionId) {
   const session = sessionManager.getSession(sessionId);
-  
+
   if (!session) {
     return {
       statusCode: 404,
-      body: JSON.stringify({ error: 'Session not found' })
+      body: JSON.stringify({ error: 'Session not found' }),
     };
   }
-  
+
   return {
     statusCode: 200,
-    body: JSON.stringify(session)
+    body: JSON.stringify(session),
   };
 }
 
@@ -208,14 +208,14 @@ async function handleGetSession(sessionId) {
 async function handleCreateSession(event) {
   const { body } = event;
   let sessionData = {};
-  
+
   if (body) {
     try {
       sessionData = JSON.parse(body);
     } catch (error) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Invalid JSON body' })
+        body: JSON.stringify({ error: 'Invalid JSON body' }),
       };
     }
   }
@@ -223,21 +223,21 @@ async function handleCreateSession(event) {
   if (!sessionManager.canCreateSession()) {
     return {
       statusCode: 429,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Maximum parallel sessions reached',
-        stats: sessionManager.getStats()
-      })
+        stats: sessionManager.getStats(),
+      }),
     };
   }
 
   const session = sessionManager.createSession(sessionData);
-  
+
   return {
     statusCode: 201,
     body: JSON.stringify({
       message: 'Session created successfully',
-      session
-    })
+      session,
+    }),
   };
 }
 
@@ -245,55 +245,55 @@ async function handleCreateSession(event) {
 async function handleUpdateSession(sessionId, event) {
   const { body } = event;
   let updates = {};
-  
+
   if (body) {
     try {
       updates = JSON.parse(body);
     } catch (error) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Invalid JSON body' })
+        body: JSON.stringify({ error: 'Invalid JSON body' }),
       };
     }
   }
 
   const session = sessionManager.updateSession(sessionId, updates);
-  
+
   if (!session) {
     return {
       statusCode: 404,
-      body: JSON.stringify({ error: 'Session not found' })
+      body: JSON.stringify({ error: 'Session not found' }),
     };
   }
-  
+
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Session updated successfully',
-      session
-    })
+      session,
+    }),
   };
 }
 
 // Handle DELETE /sessions/{id}
 async function handleDeleteSession(sessionId) {
   const session = sessionManager.getSession(sessionId);
-  
+
   if (!session) {
     return {
       statusCode: 404,
-      body: JSON.stringify({ error: 'Session not found' })
+      body: JSON.stringify({ error: 'Session not found' }),
     };
   }
 
   sessionManager.sessions.delete(sessionId);
-  
+
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Session deleted successfully',
-      sessionId
-    })
+      sessionId,
+    }),
   };
 }
 

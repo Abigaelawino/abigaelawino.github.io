@@ -10,7 +10,10 @@ test('home page renders hero value proposition and primary CTA links', () => {
   const page = renderHomePage(projects[0]);
 
   assert.match(page, /data-home-page/);
-  assert.match(page, /Data science solutions from exploratory insight to production-ready outcomes\./);
+  assert.match(
+    page,
+    /Data science solutions from exploratory insight to production-ready outcomes\./
+  );
   assert.match(page, /Primary profile links/);
   assert.match(page, /Resume/);
   assert.match(page, /GitHub/);
@@ -40,7 +43,10 @@ test('home page renders featured project with case study and repository CTAs', (
 test('home page uses mobile-first behavior for CTA layout', () => {
   const page = renderHomePage(projects[0]);
 
-  assert.match(page, /\.home-hero__links \{ display: grid; gap: 0\.6rem; grid-template-columns: 1fr; \}/);
+  assert.match(
+    page,
+    /\.home-hero__links \{ display: grid; gap: 0\.6rem; grid-template-columns: 1fr; \}/
+  );
   assert.match(page, /@media \(min-width: 48rem\)/);
   assert.match(page, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
 });

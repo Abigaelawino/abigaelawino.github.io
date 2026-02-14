@@ -262,30 +262,30 @@
   .projects-page {
     padding: 1rem 0.75rem;
   }
-  
+
   .projects-header h1 {
     font-size: 2rem;
   }
-  
+
   .projects-header p {
     font-size: 1rem;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .project-card-meta {
     flex-direction: column;
     gap: 0.75rem;
     align-items: flex-start;
   }
-  
+
   .project-tags {
     margin-right: 0;
   }
-  
+
   .project-card-footer {
     flex-direction: column;
     gap: 0.75rem;
@@ -297,23 +297,23 @@
   .projects-header h1 {
     font-size: 1.75rem;
   }
-  
+
   .project-card-content {
     padding: 1.25rem;
   }
-  
+
   .project-title {
     font-size: 1.125rem;
   }
-  
+
   .project-summary {
     font-size: 0.875rem;
   }
-  
+
   .tags-list {
     gap: 0.5rem;
   }
-  
+
   .topic-tag {
     padding: 0.375rem 0.75rem;
     font-size: 0.813rem;

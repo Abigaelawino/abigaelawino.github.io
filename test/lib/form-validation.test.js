@@ -8,7 +8,7 @@ const {
   calculateRateLimit,
   formatRateLimitMessage,
   generateFormId,
-  validateFormSubmission
+  validateFormSubmission,
 } = require('../../lib/form-validation.js');
 
 test('validateEmail validates valid emails', () => {
@@ -60,7 +60,7 @@ test('validateField validates text length', () => {
 
 test('validateField checks for suspicious content in textarea', () => {
   const error = validateField('<script>alert("xss")</script>', {
-    type: 'textarea'
+    type: 'textarea',
   });
   assert.strictEqual(error, 'Content contains suspicious patterns');
 });

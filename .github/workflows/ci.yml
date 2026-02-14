@@ -23,4 +23,13 @@ jobs:
         run: npm ci
 
       - name: Run quality gates
+        env:
+          NODE_ENV: production
         run: npm run ci
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/

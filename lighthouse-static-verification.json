@@ -6,9 +6,7 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   },
   "about": {
     "scores": {
@@ -17,9 +15,7 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   },
   "projects": {
     "scores": {
@@ -28,9 +24,7 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   },
   "blog": {
     "scores": {
@@ -39,9 +33,7 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   },
   "contact": {
     "scores": {
@@ -50,9 +42,7 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   },
   "resume": {
     "scores": {
@@ -61,8 +51,6 @@
       "bestPractices": 100,
       "seo": 97
     },
-    "issues": [
-      "Meta description too short (< 120 characters)"
-    ]
+    "issues": ["Meta description too short (< 120 characters)"]
   }
 }

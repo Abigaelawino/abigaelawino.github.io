@@ -27,20 +27,25 @@ function filterProjectsByTag(projects, tag) {
     return projects;
   }
 
-  return projects.filter((project) => project.tags.some((projectTag) => normalizeTag(projectTag) === normalizedTag));
+  return projects.filter(project =>
+    project.tags.some(projectTag => normalizeTag(projectTag) === normalizedTag)
+  );
 }
 
 function renderTagPills(tags) {
-  return tags
-    .map((tag) => `<li class="project-card__tag">${escapeHtml(tag)}</li>`)
-    .join('');
+  return tags.map(tag => `<li class="project-card__tag">${escapeHtml(tag)}</li>`).join('');
 }
 
 function renderProjectCard(project) {
-  const normalizedTags = project.tags.map((tag) => normalizeTag(tag)).join(',');
+  const normalizedTags = project.tags.map(tag => normalizeTag(tag)).join(',');
 
-  const tagBadges = project.tags.map((tag) => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
-  const techBadges = (project.tech || []).slice(0, 3).map((tech) => `<span class="badge badge-outline">${escapeHtml(tech)}</span>`).join('');
+  const tagBadges = project.tags
+    .map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`)
+    .join('');
+  const techBadges = (project.tech || [])
+    .slice(0, 3)
+    .map(tech => `<span class="badge badge-outline">${escapeHtml(tech)}</span>`)
+    .join('');
 
   return `
     <div class="card card-hover" data-project-card data-tags="${escapeHtml(normalizedTags)}">
@@ -68,7 +73,7 @@ function renderProjectCard(project) {
             ${new Date(project.date).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'short',
-              day: 'numeric'
+              day: 'numeric',
             })}
           </div>
           <div class="flex items-center gap-1">
@@ -87,13 +92,17 @@ function renderProjectCard(project) {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
-        ${project.repo ? `
+        ${
+          project.repo
+            ? `
           <a class="button button-outline button-icon" href="${escapeHtml(project.repo)}" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="${escapeHtml(project.slug)}" aria-label="View repository">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
             </svg>
           </a>
-        ` : ''}
+        `
+            : ''
+        }
       </div>
     </div>
   `.trim();
@@ -102,12 +111,10 @@ function renderProjectCard(project) {
 function renderFilterButtons() {
   const allButton =
     '<button class="projects-filter__button is-active" data-filter="all" data-filter-button type="button" aria-pressed="true" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="all">All</button>';
-  const buttons = SUPPORTED_PROJECT_FILTERS
-    .map(
-      (filter) =>
-        `<button class="projects-filter__button" data-filter="${filter.value}" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="${escapeHtml(filter.value)}">${escapeHtml(filter.label)}</button>`,
-    )
-    .join('');
+  const buttons = SUPPORTED_PROJECT_FILTERS.map(
+    filter =>
+      `<button class="projects-filter__button" data-filter="${filter.value}" data-filter-button type="button" aria-pressed="false" aria-controls="projects-grid" data-analytics-event="projects_filter_click" data-analytics-prop-filter="${escapeHtml(filter.value)}">${escapeHtml(filter.label)}</button>`
+  ).join('');
 
   return `${allButton}${buttons}`;
 }
@@ -132,35 +139,47 @@ function renderProjectsPage(projects) {
           Explore project case studies in ML, analytics, and production data systems.
         </p>
 
-        ${allTags.length > 0 ? `
+        ${
+          allTags.length > 0
+            ? `
           <div class="space-y-3">
             <h3 class="text-lg font-semibold">Topics</h3>
             <div class="flex flex-wrap gap-2 justify-center">
-              ${allTags.map(tag => `
+              ${allTags
+                .map(
+                  tag => `
                 <span class="badge badge-secondary flex items-center gap-1">
                   <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                   </svg>
                   ${escapeHtml(tag)}
                 </span>
-              `).join('')}
+              `
+                )
+                .join('')}
             </div>
           </div>
-        ` : ''}
+        `
+            : ''
+        }
       </div>
 
       <!-- Projects Grid -->
-      ${projects.length === 0 ? `
+      ${
+        projects.length === 0
+          ? `
         <div class="card">
           <div class="card-content p-12 text-center">
             <p class="text-muted-foreground text-lg">No projects available yet. Check back soon!</p>
           </div>
         </div>
-      ` : `
+      `
+          : `
         <div class="grid gap-6 md:grid-cols-2">
           ${cards}
         </div>
-      `}
+      `
+      }
 
       <!-- Footer -->
       <div class="text-center pt-8">
@@ -182,8 +201,8 @@ function renderCaseStudySection(title, content, dataKey) {
 }
 
 function renderProjectCaseStudy(project) {
-  const sections = CASE_STUDY_SECTIONS.map((section) =>
-    renderCaseStudySection(section.title, project[section.key], section.key),
+  const sections = CASE_STUDY_SECTIONS.map(section =>
+    renderCaseStudySection(section.title, project[section.key], section.key)
   ).join('\n');
 
   return `

@@ -7,7 +7,7 @@ const { promisify } = require('util');
 const pipelineAsync = promisify(pipeline);
 
 // Build optimization for static assets
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const { httpMethod } = event;
 
   try {
@@ -19,14 +19,14 @@ exports.handler = async function(event, context) {
       default:
         return {
           statusCode: 405,
-          body: JSON.stringify({ error: 'Method not allowed' })
+          body: JSON.stringify({ error: 'Method not allowed' }),
         };
     }
   } catch (error) {
     console.error('Asset optimization error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -34,11 +34,11 @@ exports.handler = async function(event, context) {
 // Optimize assets during build
 async function optimizeAssets(event) {
   const { body } = event;
-  
+
   if (!body) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Missing request body' })
+      body: JSON.stringify({ error: 'Missing request body' }),
     };
   }
 
@@ -49,7 +49,7 @@ async function optimizeAssets(event) {
     if (!assetPath) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'assetPath is required' })
+        body: JSON.stringify({ error: 'assetPath is required' }),
       };
     }
 
@@ -59,13 +59,13 @@ async function optimizeAssets(event) {
       statusCode: 200,
       body: JSON.stringify({
         message: 'Asset optimization completed',
-        results
-      })
+        results,
+      }),
     };
   } catch (parseError) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid JSON body' })
+      body: JSON.stringify({ error: 'Invalid JSON body' }),
     };
   }
 }
@@ -79,7 +79,7 @@ async function getOptimizationStatus(event) {
     const stats = await getAssetStats(assetPath);
     return {
       statusCode: 200,
-      body: JSON.stringify({ stats })
+      body: JSON.stringify({ stats }),
     };
   }
 
@@ -87,8 +87,8 @@ async function getOptimizationStatus(event) {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Asset optimization service is running',
-      timestamp: new Date().toISOString()
-    })
+      timestamp: new Date().toISOString(),
+    }),
   };
 }
 
@@ -99,7 +99,7 @@ async function performOptimization(assetPath, outputPath) {
     optimizedSize: 0,
     compressionRatio: 0,
     filesProcessed: 0,
-    optimizations: []
+    optimizations: [],
   };
 
   try {
@@ -119,7 +119,10 @@ async function performOptimization(assetPath, outputPath) {
 
     // Calculate compression ratio
     if (results.originalSize > 0) {
-      results.compressionRatio = ((results.originalSize - results.optimizedSize) / results.originalSize * 100).toFixed(2);
+      results.compressionRatio = (
+        ((results.originalSize - results.optimizedSize) / results.originalSize) *
+        100
+      ).toFixed(2);
     }
 
     return results;
@@ -160,7 +163,7 @@ async function processFile(inputPath, outputPath, results) {
     file: path.basename(inputPath),
     originalSize,
     optimizedSize,
-    techniques: []
+    techniques: [],
   };
 
   try {
@@ -204,7 +207,7 @@ async function processFile(inputPath, outputPath, results) {
 // Optimize CSS files
 async function optimizeCSS(inputPath, outputPath, optimization) {
   let content = fs.readFileSync(inputPath, 'utf8');
-  
+
   // Minify CSS
   content = content
     .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
@@ -219,14 +222,14 @@ async function optimizeCSS(inputPath, outputPath, optimization) {
 
   fs.writeFileSync(outputPath, content, 'utf8');
   optimization.techniques.push('css-minify');
-  
+
   return Buffer.byteLength(content, 'utf8');
 }
 
 // Optimize JavaScript files
 async function optimizeJS(inputPath, outputPath, optimization) {
   let content = fs.readFileSync(inputPath, 'utf8');
-  
+
   // Basic minification
   content = content
     .replace(/\/\*[\s\S]*?\*\//g, '') // Remove block comments
@@ -241,14 +244,14 @@ async function optimizeJS(inputPath, outputPath, optimization) {
 
   fs.writeFileSync(outputPath, content, 'utf8');
   optimization.techniques.push('js-minify');
-  
+
   return Buffer.byteLength(content, 'utf8');
 }
 
 // Optimize HTML files
 async function optimizeHTML(inputPath, outputPath, optimization) {
   let content = fs.readFileSync(inputPath, 'utf8');
-  
+
   // Basic minification
   content = content
     .replace(/<!--[\s\S]*?-->/g, '') // Remove HTML comments
@@ -258,7 +261,7 @@ async function optimizeHTML(inputPath, outputPath, optimization) {
 
   fs.writeFileSync(outputPath, content, 'utf8');
   optimization.techniques.push('html-minify');
-  
+
   return Buffer.byteLength(content, 'utf8');
 }
 
@@ -268,7 +271,7 @@ async function optimizeImage(inputPath, outputPath, optimization) {
   // In production, you'd use sharp or similar for image optimization
   fs.copyFileSync(inputPath, outputPath);
   optimization.techniques.push('image-copied');
-  
+
   const stats = fs.statSync(outputPath);
   return stats.size;
 }
@@ -278,7 +281,7 @@ async function getAssetStats(assetPath) {
   try {
     const fullPath = path.resolve(assetPath);
     const stats = fs.statSync(fullPath);
-    
+
     if (stats.isDirectory()) {
       return await getDirectoryStats(fullPath);
     } else {
@@ -286,7 +289,7 @@ async function getAssetStats(assetPath) {
         type: 'file',
         size: stats.size,
         modified: stats.mtime.toISOString(),
-        path: fullPath
+        path: fullPath,
       };
     }
   } catch (error) {
@@ -301,11 +304,11 @@ async function getDirectoryStats(dirPath) {
   const files = [];
 
   const items = fs.readdirSync(dirPath);
-  
+
   for (const item of items) {
     const itemPath = path.join(dirPath, item);
     const itemStats = fs.statSync(itemPath);
-    
+
     if (itemStats.isDirectory()) {
       const subStats = await getDirectoryStats(itemPath);
       totalSize += subStats.totalSize;
@@ -316,7 +319,7 @@ async function getDirectoryStats(dirPath) {
       files.push({
         name: item,
         size: itemStats.size,
-        modified: itemStats.mtime.toISOString()
+        modified: itemStats.mtime.toISOString(),
       });
     }
   }
@@ -326,6 +329,6 @@ async function getDirectoryStats(dirPath) {
     totalSize,
     fileCount,
     path: dirPath,
-    files: files.sort((a, b) => b.size - a.size).slice(0, 20) // Top 20 largest files
+    files: files.sort((a, b) => b.size - a.size).slice(0, 20), // Top 20 largest files
   };
 }

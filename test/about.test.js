@@ -23,7 +23,10 @@ test('about page renders concise bio with strengths and toolkit sections', () =>
 test('about page keeps mobile-first toolkit layout with desktop enhancement', () => {
   const page = renderAboutPage();
 
-  assert.match(page, /\.about-toolkit \{ display: grid; gap: 0\.5rem; grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(
+    page,
+    /\.about-toolkit \{ display: grid; gap: 0\.5rem; grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/
+  );
   assert.match(page, /@media \(min-width: 48rem\)/);
   assert.match(page, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
 });

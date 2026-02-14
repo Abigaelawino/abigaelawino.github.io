@@ -27,21 +27,58 @@ class ShadcnPerformanceTracker {
         usedComponents: 0,
         coveragePercentage: 0,
         totalRenderTime: 0,
-        averageRenderTime: 0
-      }
+        averageRenderTime: 0,
+      },
     };
 
     this.shadcnComponents = [
       // Core UI components
-      'accordion', 'alert', 'alert-dialog', 'avatar', 'badge', 'button',
-      'calendar', 'card', 'carousel', 'chart', 'checkbox', 'collapsible',
-      'combobox', 'command', 'context-menu', 'data-table', 'date-picker',
-      'dialog', 'drawer', 'dropdown-menu', 'form', 'hover-card', 'input',
-      'label', 'menubar', 'navigation-menu', 'pagination', 'popover',
-      'progress', 'radio-group', 'resizable', 'scroll-area', 'select',
-      'separator', 'sheet', 'skeleton', 'slider', 'sonner', 'switch',
-      'table', 'tabs', 'textarea', 'toast', 'toggle', 'toggle-group',
-      'tooltip'
+      'accordion',
+      'alert',
+      'alert-dialog',
+      'avatar',
+      'badge',
+      'button',
+      'calendar',
+      'card',
+      'carousel',
+      'chart',
+      'checkbox',
+      'collapsible',
+      'combobox',
+      'command',
+      'context-menu',
+      'data-table',
+      'date-picker',
+      'dialog',
+      'drawer',
+      'dropdown-menu',
+      'form',
+      'hover-card',
+      'input',
+      'label',
+      'menubar',
+      'navigation-menu',
+      'pagination',
+      'popover',
+      'progress',
+      'radio-group',
+      'resizable',
+      'scroll-area',
+      'select',
+      'separator',
+      'sheet',
+      'skeleton',
+      'slider',
+      'sonner',
+      'switch',
+      'table',
+      'tabs',
+      'textarea',
+      'toast',
+      'toggle',
+      'toggle-group',
+      'tooltip',
     ];
   }
 
@@ -85,7 +122,7 @@ class ShadcnPerformanceTracker {
       join(this.projectRoot, 'components', 'ui'),
       join(this.projectRoot, 'app', 'components', 'ui'),
       join(this.projectRoot, 'src', 'components', 'ui'),
-      join(this.projectRoot, 'lib', 'components', 'ui')
+      join(this.projectRoot, 'lib', 'components', 'ui'),
     ];
 
     for (const component of this.shadcnComponents) {
@@ -100,7 +137,7 @@ class ShadcnPerformanceTracker {
         lastModified: null,
         propsInterface: null,
         hasStyling: false,
-        hasTests: false
+        hasTests: false,
       };
     }
 
@@ -108,13 +145,21 @@ class ShadcnPerformanceTracker {
       if (!existsSync(componentPath)) continue;
 
       try {
-        const files = execSync(`find "${componentPath}" -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js"`, { encoding: 'utf8' }).trim().split('\n');
+        const files = execSync(
+          `find "${componentPath}" -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js"`,
+          { encoding: 'utf8' }
+        )
+          .trim()
+          .split('\n');
 
         for (const file of files) {
           if (!file) continue;
 
-          const fileName = file.split('/').pop().replace(/\.(tsx?|jsx?)$/, '');
-          const componentName = fileName.replace(/-\w/g, (match) => match[1].toUpperCase());
+          const fileName = file
+            .split('/')
+            .pop()
+            .replace(/\.(tsx?|jsx?)$/, '');
+          const componentName = fileName.replace(/-\w/g, match => match[1].toUpperCase());
 
           if (this.shadcnComponents.includes(fileName)) {
             const content = readFileSync(file, 'utf8');
@@ -132,7 +177,7 @@ class ShadcnPerformanceTracker {
               propsInterface: this.extractPropsInterface(content),
               hasStyling: this.hasStyling(content),
               hasTests: this.hasTestFile(file),
-              variants: this.extractVariants(content, fileName)
+              variants: this.extractVariants(content, fileName),
             };
           }
         }
@@ -151,14 +196,19 @@ class ShadcnPerformanceTracker {
     const pagePaths = [
       join(this.projectRoot, 'app'),
       join(this.projectRoot, 'pages'),
-      join(this.projectRoot, 'src', 'pages')
+      join(this.projectRoot, 'src', 'pages'),
     ];
 
     for (const pagePath of pagePaths) {
       if (!existsSync(pagePath)) continue;
 
       try {
-        const files = execSync(`find "${pagePath}" -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js" | head -20`, { encoding: 'utf8' }).trim().split('\n');
+        const files = execSync(
+          `find "${pagePath}" -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js" | head -20`,
+          { encoding: 'utf8' }
+        )
+          .trim()
+          .split('\n');
 
         for (const file of files) {
           if (!file) continue;
@@ -171,7 +221,7 @@ class ShadcnPerformanceTracker {
             components: this.extractComponentUsage(content),
             renderComplexity: this.calculateRenderComplexity(content),
             hasServerComponents: this.hasServerComponents(content),
-            hasClientComponents: this.hasClientComponents(content)
+            hasClientComponents: this.hasClientComponents(content),
           };
         }
       } catch (error) {
@@ -190,14 +240,14 @@ class ShadcnPerformanceTracker {
       // Run Next.js build with performance profiling
       const buildOutput = execSync('npm run build 2>&1', {
         encoding: 'utf8',
-        timeout: 120000
+        timeout: 120000,
       });
 
       this.coverageData.performance = {
         buildTime: this.extractBuildTime(buildOutput),
         bundleSize: this.extractBundleSize(buildOutput),
         largestAssets: this.extractLargestAssets(buildOutput),
-        optimizationWarnings: this.extractOptimizationWarnings(buildOutput)
+        optimizationWarnings: this.extractOptimizationWarnings(buildOutput),
       };
     } catch (error) {
       console.warn('Build performance tracking failed:', error.message);
@@ -206,7 +256,7 @@ class ShadcnPerformanceTracker {
         buildTime: null,
         bundleSize: null,
         largestAssets: [],
-        optimizationWarnings: []
+        optimizationWarnings: [],
       };
     }
   }
@@ -258,7 +308,7 @@ class ShadcnPerformanceTracker {
           usagePercentage: totalPages > 0 ? (usageCount / totalPages) * 100 : 0,
           averageRenderTime: componentData.fileSize > 0 ? componentData.fileSize / 1000 : 0, // Rough estimate
           isOptimized: componentData.hasStyling && componentData.hasTests,
-          needsOptimization: componentData.fileSize > 10000 || !componentData.hasTests
+          needsOptimization: componentData.fileSize > 10000 || !componentData.hasTests,
         };
       }
     }
@@ -269,7 +319,7 @@ class ShadcnPerformanceTracker {
       usedComponents,
       coveragePercentage: totalComponents > 0 ? (usedComponents / totalComponents) * 100 : 0,
       totalRenderTime,
-      averageRenderTime: renderCount > 0 ? totalRenderTime / renderCount : 0
+      averageRenderTime: renderCount > 0 ? totalRenderTime / renderCount : 0,
     };
   }
 
@@ -289,17 +339,11 @@ class ShadcnPerformanceTracker {
 
     // Generate markdown report
     const markdownReport = this.generateMarkdownReport();
-    writeFileSync(
-      join(outputDir, 'coverage-report.md'),
-      markdownReport
-    );
+    writeFileSync(join(outputDir, 'coverage-report.md'), markdownReport);
 
     // Generate CSV for spreadsheet analysis
     const csvReport = this.generateCSVReport();
-    writeFileSync(
-      join(outputDir, 'coverage-report.csv'),
-      csvReport
-    );
+    writeFileSync(join(outputDir, 'coverage-report.csv'), csvReport);
 
     // Print summary to console
     this.printSummary();
@@ -331,7 +375,11 @@ Generated: ${this.coverageData.timestamp}
     for (const [componentName, data] of Object.entries(components)) {
       if (data.exists) {
         const stats = renderStats[componentName] || {};
-        const status = stats.isOptimized ? '✅ Optimized' : stats.needsOptimization ? '⚠️ Needs Work' : '📝 Basic';
+        const status = stats.isOptimized
+          ? '✅ Optimized'
+          : stats.needsOptimization
+            ? '⚠️ Needs Work'
+            : '📝 Basic';
 
         markdown += `| ${componentName} | ✅ | ${stats.usageCount || 0} | ${(data.fileSize / 1024).toFixed(1)}KB | ${data.hasTests ? '✅' : '❌'} | ${(stats.usagePercentage || 0).toFixed(1)}% | ${status} |\n`;
       } else {
@@ -353,16 +401,20 @@ Generated: ${this.coverageData.timestamp}
 
     // Add recommendations based on coverage data
     if (summary.coveragePercentage < 50) {
-      markdown += "- 🎯 **Low Coverage**: Consider implementing more shadcn/ui components for consistency\n";
+      markdown +=
+        '- 🎯 **Low Coverage**: Consider implementing more shadcn/ui components for consistency\n';
     }
 
-    const componentsNeedingTests = Object.values(components).filter(c => c.exists && !c.hasTests).length;
+    const componentsNeedingTests = Object.values(components).filter(
+      c => c.exists && !c.hasTests
+    ).length;
     if (componentsNeedingTests > 0) {
       markdown += `- 🧪 **Missing Tests**: ${componentsNeedingTests} components lack test coverage\n`;
     }
 
-    const componentsNeedingOptimization = Object.entries(renderStats)
-      .filter(([_, stats]) => stats.needsOptimization).length;
+    const componentsNeedingOptimization = Object.entries(renderStats).filter(
+      ([_, stats]) => stats.needsOptimization
+    ).length;
     if (componentsNeedingOptimization > 0) {
       markdown += `- ⚡ **Performance**: ${componentsNeedingOptimization} components need optimization\n`;
     }
@@ -374,11 +426,18 @@ Generated: ${this.coverageData.timestamp}
    * Generate CSV report
    */
   generateCSVReport() {
-    let csv = 'Component,Exists,Used,FileSizeKB,HasTests,UsagePercentage,Status,NeedsOptimization\n';
+    let csv =
+      'Component,Exists,Used,FileSizeKB,HasTests,UsagePercentage,Status,NeedsOptimization\n';
 
     for (const [componentName, data] of Object.entries(this.coverageData.components)) {
       const stats = this.coverageData.renderStats[componentName] || {};
-      const status = data.exists ? (stats.isOptimized ? 'Optimized' : stats.needsOptimization ? 'Needs Work' : 'Basic') : 'Not Implemented';
+      const status = data.exists
+        ? stats.isOptimized
+          ? 'Optimized'
+          : stats.needsOptimization
+            ? 'Needs Work'
+            : 'Basic'
+        : 'Not Implemented';
 
       csv += `${componentName},${data.exists},${stats.usageCount || 0},${data.exists ? (data.fileSize / 1024).toFixed(1) : 0},${data.hasTests},${(stats.usagePercentage || 0).toFixed(1)},${status},${stats.needsOptimization || false}\n`;
     }
@@ -425,12 +484,13 @@ Generated: ${this.coverageData.timestamp}
   }
 
   extractDependencies(content) {
-    const deps = this.extractImports(content).filter(imp =>
-      imp.startsWith('@/lib/') ||
-      imp.startsWith('@/components/') ||
-      imp.includes('radix-ui') ||
-      imp.includes('class-variance-authority') ||
-      imp.includes('lucide-react')
+    const deps = this.extractImports(content).filter(
+      imp =>
+        imp.startsWith('@/lib/') ||
+        imp.startsWith('@/components/') ||
+        imp.includes('radix-ui') ||
+        imp.includes('class-variance-authority') ||
+        imp.includes('lucide-react')
     );
     return deps;
   }
@@ -446,8 +506,9 @@ Generated: ${this.coverageData.timestamp}
   }
 
   hasTestFile(filePath) {
-    const testPath = filePath.replace(/\.(tsx?|jsx?)$/, '.test.$1') ||
-                    filePath.replace(/\.(tsx?|jsx?)$/, '.spec.$1');
+    const testPath =
+      filePath.replace(/\.(tsx?|jsx?)$/, '.test.$1') ||
+      filePath.replace(/\.(tsx?|jsx?)$/, '.spec.$1');
     return existsSync(testPath);
   }
 
@@ -477,11 +538,13 @@ Generated: ${this.coverageData.timestamp}
 
     for (const component of this.shadcnComponents) {
       // Check for direct imports
-      if (content.includes(`import.*${component}`) ||
-          content.includes(`from ['"].*${component}['"]`) ||
-          // Check for JSX usage
-          content.includes(`<${component}`) ||
-          content.includes(`<${component.replace(/-(\w)/g, (m, c) => c.toUpperCase())}`)) {
+      if (
+        content.includes(`import.*${component}`) ||
+        content.includes(`from ['"].*${component}['"]`) ||
+        // Check for JSX usage
+        content.includes(`<${component}`) ||
+        content.includes(`<${component.replace(/-(\w)/g, (m, c) => c.toUpperCase())}`)
+      ) {
         usedComponents.push(component);
       }
     }
@@ -513,7 +576,11 @@ Generated: ${this.coverageData.timestamp}
   }
 
   hasClientComponents(content) {
-    return content.includes('use client') || content.includes('useState') || content.includes('useEffect');
+    return (
+      content.includes('use client') ||
+      content.includes('useState') ||
+      content.includes('useEffect')
+    );
   }
 
   extractBuildTime(buildOutput) {
@@ -547,8 +614,10 @@ Generated: ${this.coverageData.timestamp}
     const lines = buildOutput.split('\n');
 
     for (const line of lines) {
-      if (line.toLowerCase().includes('warning') &&
-          (line.includes('large') || line.includes('unused') || line.includes('optimization'))) {
+      if (
+        line.toLowerCase().includes('warning') &&
+        (line.includes('large') || line.includes('unused') || line.includes('optimization'))
+      ) {
         warnings.push(line.trim());
       }
     }

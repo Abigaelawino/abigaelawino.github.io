@@ -9,14 +9,16 @@ import { MDXContent, enhanceContentWithCharts } from '@/components/mdx-content';
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  })).filter((params) => params.slug !== undefined);
+  return projects
+    .map(project => ({
+      slug: project.slug,
+    }))
+    .filter(params => params.slug !== undefined);
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const project = getProjectBySlug(params.slug);
-  
+
   if (!project) {
     return {
       title: 'Project Not Found',
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
   const project = getProjectBySlug(params.slug);
-  
+
   if (!project) {
     notFound();
   }
@@ -50,16 +52,16 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 Back to Projects
               </Link>
             </Button>
-            
+
             <div className="flex flex-wrap gap-2">
-              {frontmatter.tags.map((tag) => (
+              {frontmatter.tags.map(tag => (
                 <Badge key={tag} variant="secondary">
                   <Tag className="mr-1 h-3 w-3" />
                   {tag}
                 </Badge>
               ))}
             </div>
-            
+
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
@@ -72,25 +74,25 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent className="space-y-6">
           <div className="space-y-4">
             <h1 className="text-3xl font-bold tracking-tight">{frontmatter.title}</h1>
             <p className="text-lg text-muted-foreground">{frontmatter.summary}</p>
           </div>
-          
+
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold mb-2">Technologies</h3>
               <div className="flex flex-wrap gap-2">
-                {frontmatter.tech.map((tech) => (
+                {frontmatter.tech.map(tech => (
                   <Badge key={tech} variant="outline">
                     {tech}
                   </Badge>
                 ))}
               </div>
             </div>
-            
+
             {frontmatter.repo && (
               <Button asChild>
                 <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer">
@@ -108,8 +110,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {frontmatter.cover && (
         <Card>
           <CardContent className="p-0">
-            <img 
-              src={frontmatter.cover} 
+            <img
+              src={frontmatter.cover}
               alt={frontmatter.title}
               className="w-full h-auto rounded-t-lg"
             />
@@ -132,29 +134,32 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Implemented a solution to address critical business challenges through data-driven approaches.
+                    Implemented a solution to address critical business challenges through
+                    data-driven approaches.
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Context</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Leveraged available data sources and industry best practices to develop an effective solution.
+                    Leveraged available data sources and industry best practices to develop an
+                    effective solution.
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Success Metric</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Achieved measurable improvements in key performance indicators through systematic implementation.
+                    Achieved measurable improvements in key performance indicators through
+                    systematic implementation.
                   </p>
                 </CardContent>
               </Card>

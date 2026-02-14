@@ -25,19 +25,19 @@ function renderElsewhereLinks(links) {
   const entries = [
     { label: 'GitHub', href: links.github },
     { label: 'LinkedIn', href: links.linkedin },
-  ].filter((entry) => typeof entry.href === 'string' && entry.href.trim().length > 0);
+  ].filter(entry => typeof entry.href === 'string' && entry.href.trim().length > 0);
 
   if (entries.length === 0) {
     return '';
   }
 
   const items = entries
-    .map(
-      (entry) => `
+    .map(entry =>
+      `
         <li class="contact-links__item">
           <a class="contact-links__link" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener noreferrer" data-analytics-event="contact_social_click" data-analytics-prop-destination="${escapeHtml(entry.label.toLowerCase())}">${escapeHtml(entry.label)}</a>
         </li>
-      `.trim(),
+      `.trim()
     )
     .join('\n');
 

@@ -6,7 +6,9 @@ export default function ResumePage() {
     <div className="page-content">
       <h1>Resume</h1>
       <p>Download a PDF resume and view a concise web summary.</p>
-      <p><Link href="/">← Back to Home</Link></p>
+      <p>
+        <Link href="/">← Back to Home</Link>
+      </p>
     </div>
   );
 }

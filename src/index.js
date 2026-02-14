@@ -8,8 +8,17 @@ const {
   renderContactThanksPage,
 } = require('./contact.js');
 const { DEFAULT_HOME_LINKS, renderHomePage } = require('./home.js');
-const { DEFAULT_RESUME_ASSET_PATH, DEFAULT_RESUME_CONTENT, renderResumePage } = require('./resume.js');
-const { formatReadingTime, renderBlogCard, renderBlogIndexPage, renderBlogPostPage } = require('./blog.js');
+const {
+  DEFAULT_RESUME_ASSET_PATH,
+  DEFAULT_RESUME_CONTENT,
+  renderResumePage,
+} = require('./resume.js');
+const {
+  formatReadingTime,
+  renderBlogCard,
+  renderBlogIndexPage,
+  renderBlogPostPage,
+} = require('./blog.js');
 const {
   SUPPORTED_PROJECT_FILTERS,
   filterProjectsByTag,

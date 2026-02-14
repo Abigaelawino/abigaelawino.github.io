@@ -40,6 +40,7 @@ The solution deployed a modular architecture with automated data pipelines, mach
 ## Data
 
 ### Data Sources
+
 - **CRM Database**: Customer profiles, purchase history, loyalty program data
 - **Web Analytics**: Website behavior, page views, time on site, device usage
 - **Email Platform**: Open rates, click-through rates, engagement patterns
@@ -47,6 +48,7 @@ The solution deployed a modular architecture with automated data pipelines, mach
 - **Customer Support**: Ticket history, resolution times, satisfaction scores
 
 ### Data Volume & Processing
+
 - Total customer records: 2.5M active customers
 - Feature variables: 50+ engineered features per customer
 - Daily processing: 100K new interactions processed
@@ -54,6 +56,7 @@ The solution deployed a modular architecture with automated data pipelines, mach
 - Processing pipeline: 4-hour window for complete segmentation update
 
 ### Feature Engineering
+
 - **RFM Metrics**: Recency, Frequency, Monetary values with 30/60/90-day windows
 - **Behavioral Features**: Channel preferences, product category affinities, price sensitivity
 - **Engagement Metrics**: Email engagement, website interaction depth, mobile usage
@@ -61,6 +64,7 @@ The solution deployed a modular architecture with automated data pipelines, mach
 - **Demographic Features**: Age groups, location clusters, income brackets (where available)
 
 ### Data Quality & Cleaning
+
 - Removed 150K inactive accounts (no activity >24 months)
 - Standardized addresses and geographic information
 - Handled missing values using KNN imputation for similar customers
@@ -68,6 +72,7 @@ The solution deployed a modular architecture with automated data pipelines, mach
 - Data validation rules for consistency across sources
 
 ### Data Caveats
+
 - Offline purchase data incomplete for some customer segments
 - Mobile app tracking data quality varied by platform version
 - Seasonal patterns required periodic model retraining
@@ -76,24 +81,28 @@ The solution deployed a modular architecture with automated data pipelines, mach
 ## Methods
 
 ### Clustering Approach
+
 1. **Dimensionality Reduction**: PCA reduced 50+ features to 12 principal components (95% variance)
 2. **Primary Clustering**: K-means algorithm with k=6 determined through elbow method
 3. **Validation**: Hierarchical clustering to verify segment stability
 4. **Incremental Updates**: Mini-batch K-means for daily segment adjustments
 
 ### Model Selection Process
+
 - **Elbow Method**: Optimal k determined at 6 clusters
 - **Silhouette Analysis**: Score of 0.65 indicated good cluster separation
 - **Domain Expertise**: Marketing team validated business relevance of segments
 - **Stability Testing**: Segments remained consistent across different time periods
 
 ### Feature Importance Analysis
+
 - **RFM Features**: 40% contribution to segment differentiation
 - **Channel Preferences**: 25% impact on segment identification
 - **Product Affinities**: 20% contribution to clustering
 - **Engagement Patterns**: 15% influence on segment formation
 
 ### Real-Time Processing
+
 - **Daily Batch Updates**: Overnight processing of new customer data
 - **Incremental Learning**: Mini-batch updates for existing segments
 - **Change Detection**: Automated alerts for significant segment migrations
@@ -103,32 +112,35 @@ The solution deployed a modular architecture with automated data pipelines, mach
 
 ### Customer Segments Identified
 
-| Segment | Size | Characteristics | Avg. Annual Value |
-|---------|------|----------------|-------------------|
-| High-Value Loyalists | 8% | Frequent buyers, high AOV, brand advocates | $3,200 |
-| Occasional Bargain Hunters | 22% | Price-sensitive, seasonal shoppers | $850 |
-| New Explorers | 15% | Recent acquisitions, browsing-heavy | $450 |
+| Segment                    | Size | Characteristics                            | Avg. Annual Value |
+| -------------------------- | ---- | ------------------------------------------ | ----------------- |
+| High-Value Loyalists       | 8%   | Frequent buyers, high AOV, brand advocates | $3,200            |
+| Occasional Bargain Hunters | 22%  | Price-sensitive, seasonal shoppers         | $850              |
+| New Explorers              | 15%  | Recent acquisitions, browsing-heavy        | $450              |
+
 - **Brand Devotees** (12%): Single-category loyal customers, $1,800 AOV
 - **Multi-Channel Shoppers** (18%): Use both online and offline, $2,100 AOV
 - **At-Risk Customers** (8%): Declining engagement, $1,200 historical AOV
 
 ### Quantitative Performance
 
-| Metric | Before Segmentation | After Segmentation | Improvement |
-|--------|---------------------|--------------------|-------------|
-| Campaign Conversion Rate | 3.2% | 4.5% | +41% |
-| Customer Acquisition Cost | $45 | $32 | -29% |
-| Email Open Rate | 18% | 26% | +44% |
-| Repeat Purchase Rate | 22% | 31% | +41% |
-| Marketing ROI | 3.2x | 4.8x | +50% |
+| Metric                    | Before Segmentation | After Segmentation | Improvement |
+| ------------------------- | ------------------- | ------------------ | ----------- |
+| Campaign Conversion Rate  | 3.2%                | 4.5%               | +41%        |
+| Customer Acquisition Cost | $45                 | $32                | -29%        |
+| Email Open Rate           | 18%                 | 26%                | +44%        |
+| Repeat Purchase Rate      | 22%                 | 31%                | +41%        |
+| Marketing ROI             | 3.2x                | 4.8x               | +50%        |
 
 ### Business Impact
+
 - **Marketing Efficiency**: $1.8M annual savings through targeted campaigns
 - **Revenue Growth**: 23% increase in customer lifetime value
 - **Customer Retention**: 34% improvement in at-risk customer retention
 - **Team Productivity**: 60% reduction in manual segment analysis time
 
 ### Interactive Dashboard Features
+
 - **Segment Explorer**: Drill-down capabilities for detailed customer profiles
 - **Trend Analysis**: Time-series visualization of segment migration
 - **Campaign Performance**: A/B testing results by segment
@@ -137,12 +149,14 @@ The solution deployed a modular architecture with automated data pipelines, mach
 ## Reproducibility
 
 ### Code Repository
+
 - **Main Repository**: https://github.com/abigaelawino/customer-segmentation-dashboard
 - **Data Processing**: ETL scripts with proper error handling and logging
 - **Model Training**: Jupyter notebooks with complete clustering pipeline
 - **Dashboard Code**: Plotly Dash application with responsive design
 
 ### Environment Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/abigaelawino/customer-segmentation-dashboard
@@ -162,6 +176,7 @@ python app.py --debug
 ```
 
 ### Data Requirements
+
 - Sample dataset provided with 10K synthetic customer records
 - Production setup requires similar database schema
 - SQL migration scripts for database setup
@@ -170,17 +185,20 @@ python app.py --debug
 ## Reflection
 
 ### Key Learnings
+
 - **Behavior Over Demographics**: Purchase behavior and engagement patterns proved more valuable than traditional demographic data
 - **Interpretability Critical**: Complex statistical clusters needed to be translated into actionable marketing personas
 - **Real-Time Value**: Daily segment updates provided significant advantage over quarterly analysis
 - **Cross-Functional Collaboration**: Marketing team input essential for validating business relevance
 
 ### Technical Challenges
+
 - **Feature Engineering Complexity**: Creating meaningful features from disparate data sources required extensive domain knowledge
 - **Scalability Constraints**: Processing millions of customer records required careful optimization of clustering algorithms
 - **Change Management**: Marketing team needed training and support to adopt data-driven approach
 
 ### Future Improvements
+
 1. **Temporal Segmentation**: Incorporate customer lifecycle stage into clustering
 2. **Deep Learning**: Use autoencoders for automatic feature extraction and representation learning
 3. **Predictive Modeling**: Add churn prediction and lifetime value forecasting
@@ -188,6 +206,7 @@ python app.py --debug
 5. **Real-Time Personalization**: Integrate segmentation results into real-time recommendation systems
 
 ### Trade-offs Made
+
 - Chose K-means over more complex clustering algorithms for better interpretability
 - Implemented daily batch updates instead of true real-time for system stability
 - Used historical purchase data rather than real-time browsing behavior for privacy compliance

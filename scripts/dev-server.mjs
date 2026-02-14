@@ -47,7 +47,7 @@ function isContactFormPost(req) {
 }
 
 function drainRequest(req) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     req.on('error', () => resolve());
     req.on('data', () => {});
     req.on('end', () => resolve());

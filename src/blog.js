@@ -6,11 +6,13 @@ function formatReadingTime(readingTime) {
 }
 
 function renderTags(tags, className) {
-  return tags.map((tag) => `<li class="${className}">${escapeHtml(tag)}</li>`).join('');
+  return tags.map(tag => `<li class="${className}">${escapeHtml(tag)}</li>`).join('');
 }
 
 function renderBlogCard(post) {
-  const tagBadges = (post.tags || []).map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
+  const tagBadges = (post.tags || [])
+    .map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`)
+    .join('');
 
   return `
     <div class="card card-hover" data-blog-card="${escapeHtml(post.slug)}">
@@ -55,17 +57,21 @@ function renderBlogIndexPage(posts) {
         </p>
       </div>
 
-      ${posts.length === 0 ? `
+      ${
+        posts.length === 0
+          ? `
         <div class="card">
           <div class="card-content p-12 text-center">
             <p class="text-muted-foreground text-lg">No published posts yet.</p>
           </div>
         </div>
-      ` : `
+      `
+          : `
         <div class="grid gap-6 md:grid-cols-2">
           ${cards}
         </div>
-      `}
+      `
+      }
 
       <div class="text-center">
         <a class="button button-outline" href="/">
@@ -78,7 +84,9 @@ function renderBlogIndexPage(posts) {
 
 function renderBlogPostPage(post, mdxMarkup = '') {
   const tags = Array.isArray(post.tags) ? post.tags : [];
-  const tagBadges = tags.map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`).join('');
+  const tagBadges = tags
+    .map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`)
+    .join('');
 
   return `
     <div class="container space-y-8">
@@ -106,7 +114,9 @@ function renderBlogPostPage(post, mdxMarkup = '') {
         </div>
       </div>
 
-      ${mdxMarkup ? `
+      ${
+        mdxMarkup
+          ? `
         <div class="card">
           <div class="card-content">
             <div class="prose prose-slate max-w-none" data-blog-post-body>
@@ -114,7 +124,9 @@ function renderBlogPostPage(post, mdxMarkup = '') {
             </div>
           </div>
         </div>
-      ` : ''}
+      `
+          : ''
+      }
 
       <div class="text-center">
         <a class="button button-outline" href="/blog">

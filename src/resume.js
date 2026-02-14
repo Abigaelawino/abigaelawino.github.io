@@ -25,7 +25,7 @@ const DEFAULT_RESUME_CONTENT = {
 };
 
 function renderList(items, className) {
-  return items.map((item) => `<li class="${className}">${escapeHtml(item)}</li>`).join('');
+  return items.map(item => `<li class="${className}">${escapeHtml(item)}</li>`).join('');
 }
 
 function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
@@ -35,13 +35,14 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
   };
 
   const coreSkills = Array.isArray(resolved.coreSkills) ? resolved.coreSkills : [];
-  const experienceHighlights = Array.isArray(resolved.experienceHighlights) ? resolved.experienceHighlights : [];
+  const experienceHighlights = Array.isArray(resolved.experienceHighlights)
+    ? resolved.experienceHighlights
+    : [];
   const nextLinks = Array.isArray(resolved.nextLinks) ? resolved.nextLinks : [];
 
   // Add error handling for Best Practices improvement
   try {
-
-  return `
+    return `
     <div class="container space-y-8">
       <!-- Header -->
       <div class="text-center space-y-4">
@@ -51,7 +52,7 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
         </p>
         <div class="flex flex-wrap gap-3 justify-center">
           <a class="button button-primary" href="${escapeHtml(
-            DEFAULT_RESUME_ASSET_PATH,
+            DEFAULT_RESUME_ASSET_PATH
           )}" download data-analytics-event="resume_download">
             <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -60,10 +61,10 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
           </a>
           ${nextLinks
             .map(
-              (link) =>
+              link =>
                 `<a class="button button-outline" href="${escapeHtml(link.href)}" data-analytics-event="resume_next_link_click" data-analytics-prop-destination="${escapeHtml(
-                  link.label.toLowerCase(),
-                )}">${escapeHtml(link.label)}</a>`,
+                  link.label.toLowerCase()
+                )}">${escapeHtml(link.label)}</a>`
             )
             .join('')}
         </div>
@@ -86,14 +87,18 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
         </div>
         <div class="card-content">
           <ul class="space-y-2">
-            ${coreSkills.map(skill => `
+            ${coreSkills
+              .map(
+                skill => `
               <li class="flex items-start gap-2">
                 <svg class="h-4 w-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span>${escapeHtml(skill)}</span>
               </li>
-            `).join('')}
+            `
+              )
+              .join('')}
           </ul>
         </div>
       </div>
@@ -105,12 +110,16 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
         </div>
         <div class="card-content">
           <ul class="space-y-3">
-            ${experienceHighlights.map(highlight => `
+            ${experienceHighlights
+              .map(
+                highlight => `
               <li class="flex items-start gap-3">
                 <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                 <span class="text-muted-foreground">${escapeHtml(highlight)}</span>
               </li>
-            `).join('')}
+            `
+              )
+              .join('')}
           </ul>
         </div>
       </div>
@@ -135,7 +144,6 @@ function renderResumePage(content = DEFAULT_RESUME_CONTENT) {
       </div>
     </div>
   `.trim();
-
   } catch (error) {
     console.error('Error rendering Resume page:', error);
     // Return fallback content for Best Practices compliance

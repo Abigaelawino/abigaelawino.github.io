@@ -1,11 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 export default function TestPage() {
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-2xl font-bold mb-4">shadcn/ui Test Page</h1>
-      
+
       <div className="space-y-4 mb-8">
         <h2 className="text-xl font-semibold">Buttons</h2>
         <div className="flex flex-wrap gap-4">
@@ -27,7 +34,9 @@ export default function TestPage() {
               <CardDescription>Card Description</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>This is the content of the card. It demonstrates the card component from shadcn/ui.</p>
+              <p>
+                This is the content of the card. It demonstrates the card component from shadcn/ui.
+              </p>
             </CardContent>
             <CardFooter>
               <Button>Card Action</Button>
@@ -40,7 +49,9 @@ export default function TestPage() {
               <CardDescription>Secondary card example</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>This card shows the consistency of the design system across different components.</p>
+              <p>
+                This card shows the consistency of the design system across different components.
+              </p>
             </CardContent>
             <CardFooter>
               <div className="flex gap-2">

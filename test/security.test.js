@@ -62,12 +62,24 @@ test('netlify.toml contains required security headers', () => {
   const netlifyConfig = readFileSync(netlifyConfigPath, 'utf8');
 
   // Check for essential security headers
-  assert(netlifyConfig.includes('X-Frame-Options = "DENY"'), 'Should have X-Frame-Options set to DENY');
-  assert(netlifyConfig.includes('X-Content-Type-Options = "nosniff"'), 'Should have X-Content-Type-Options set to nosniff');
-  assert(netlifyConfig.includes('X-XSS-Protection = "1; mode=block"'), 'Should have X-XSS-Protection enabled');
+  assert(
+    netlifyConfig.includes('X-Frame-Options = "DENY"'),
+    'Should have X-Frame-Options set to DENY'
+  );
+  assert(
+    netlifyConfig.includes('X-Content-Type-Options = "nosniff"'),
+    'Should have X-Content-Type-Options set to nosniff'
+  );
+  assert(
+    netlifyConfig.includes('X-XSS-Protection = "1; mode=block"'),
+    'Should have X-XSS-Protection enabled'
+  );
   assert(netlifyConfig.includes('Strict-Transport-Security'), 'Should have HSTS enabled');
   assert(netlifyConfig.includes('Content-Security-Policy'), 'Should have CSP enabled');
-  assert(netlifyConfig.includes("form-action 'self'"), 'CSP should restrict form actions to same origin');
+  assert(
+    netlifyConfig.includes("form-action 'self'"),
+    'CSP should restrict form actions to same origin'
+  );
   assert(netlifyConfig.includes("frame-ancestors 'none'"), 'CSP should prevent clickjacking');
 });
 
@@ -78,7 +90,10 @@ test('contact form includes honeypot fields', () => {
   const contactJs = readFileSync(contactJsPath, 'utf8');
 
   // Check for honeypot implementation
-  assert(contactJs.includes('netlify-honeypot="bot-field"'), 'Should have Netlify honeypot enabled');
+  assert(
+    contactJs.includes('netlify-honeypot="bot-field"'),
+    'Should have Netlify honeypot enabled'
+  );
   assert(contactJs.includes('name="bot-field"'), 'Should have bot-field honeypot input');
   assert(contactJs.includes('aria-hidden="true"'), 'Honeypot should be aria-hidden');
   assert(contactJs.includes('tabindex="-1"'), 'Honeypot should be removed from tab order');
@@ -89,8 +104,14 @@ test('contact form includes security enhancements', () => {
   const contactJs = readFileSync(contactJsPath, 'utf8');
 
   // Check for additional security fields
-  assert(contactJs.includes('data-contact-timestamp'), 'Should have timestamp field for timing analysis');
-  assert(contactJs.includes('data-contact-fingerprint'), 'Should have fingerprint field for bot detection');
+  assert(
+    contactJs.includes('data-contact-timestamp'),
+    'Should have timestamp field for timing analysis'
+  );
+  assert(
+    contactJs.includes('data-contact-fingerprint'),
+    'Should have fingerprint field for bot detection'
+  );
   assert(contactJs.includes('name="timestamp"'), 'Should have hidden timestamp input');
   assert(contactJs.includes('name="form-fingerprint"'), 'Should have hidden fingerprint input');
 });
@@ -102,7 +123,10 @@ test('analytics.js includes form security logic', () => {
   const analyticsJs = readFileSync(analyticsJsPath, 'utf8');
 
   // Check for form security features
-  assert(analyticsJs.includes('generateFingerprint'), 'Should have fingerprint generation function');
+  assert(
+    analyticsJs.includes('generateFingerprint'),
+    'Should have fingerprint generation function'
+  );
   assert(analyticsJs.includes('enhanceContactForm'), 'Should have form enhancement function');
   assert(analyticsJs.includes('timeDiff < 3000'), 'Should validate minimum form fill time');
   assert(analyticsJs.includes('timeDiff > 3600000'), 'Should validate maximum form fill time');
@@ -118,7 +142,7 @@ test('build script generates CSP nonces', () => {
   // Check for nonce generation and usage
   assert(buildScript.includes('generateNonce'), 'Should have nonce generation function');
   assert(buildScript.includes('nonce="${nonce}"'), 'Should add nonce to inline scripts');
-  assert(buildScript.includes('script-src \'self\' \'nonce-'), 'CSP should include nonce policy');
+  assert(buildScript.includes("script-src 'self' 'nonce-"), 'CSP should include nonce policy');
 });
 
 test('security-check.mjs validates content patterns', () => {

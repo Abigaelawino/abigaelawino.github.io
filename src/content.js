@@ -32,7 +32,10 @@ const blogSchema = {
 function parseScalar(value) {
   const trimmed = value.trim();
 
-  if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
     return trimmed.slice(1, -1);
   }
 
@@ -56,8 +59,8 @@ function parseScalar(value) {
 
     return inner
       .split(',')
-      .map((part) => parseScalar(part))
-      .map((part) => String(part));
+      .map(part => parseScalar(part))
+      .map(part => String(part));
   }
 
   return trimmed;
@@ -126,7 +129,10 @@ function splitFrontmatter(sourceText) {
 
   return {
     frontmatter: lines.slice(1, closingIndex).join('\n'),
-    body: lines.slice(closingIndex + 1).join('\n').trim(),
+    body: lines
+      .slice(closingIndex + 1)
+      .join('\n')
+      .trim(),
   };
 }
 
@@ -165,7 +171,11 @@ function assertSchema(entry, schema, sourcePath) {
     }
 
     if (expectedType === 'string[]') {
-      if (!Array.isArray(value) || value.length === 0 || value.some((item) => typeof item !== 'string' || item.trim().length === 0)) {
+      if (
+        !Array.isArray(value) ||
+        value.length === 0 ||
+        value.some(item => typeof item !== 'string' || item.trim().length === 0)
+      ) {
         throw new Error(`${sourcePath}: field "${field}" must be a non-empty string array`);
       }
       continue;

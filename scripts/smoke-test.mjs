@@ -44,11 +44,7 @@ const apiEndpoints = [
 ];
 
 // Static assets to test
-const staticAssets = [
-  '/assets/og.png',
-  '/robots.txt',
-  '/sitemap.xml',
-];
+const staticAssets = ['/assets/og.png', '/robots.txt', '/sitemap.xml'];
 
 // Error log
 const errors = [];
@@ -62,7 +58,7 @@ async function fetchWithTimeout(url, options = {}) {
   try {
     const response = await fetch(url, {
       ...options,
-      signal: controller.signal
+      signal: controller.signal,
     });
     clearTimeout(timeoutId);
     return response;
@@ -95,9 +91,7 @@ async function testEndpoint(endpoint) {
 
     if (!endpoint.skipContentCheck && endpoint.expectedContent) {
       const text = await response.text();
-      const missingContent = endpoint.expectedContent.filter(content =>
-        !text.includes(content)
-      );
+      const missingContent = endpoint.expectedContent.filter(content => !text.includes(content));
 
       if (missingContent.length > 0) {
         const error = `❌ ${method} ${url} - Missing content: ${missingContent.join(', ')}`;
@@ -109,7 +103,6 @@ async function testEndpoint(endpoint) {
 
     console.log(`   ✅ ${method} ${url}`);
     return true;
-
   } catch (fetchError) {
     const error = `❌ ${method} ${url} - Error: ${fetchError.message}`;
     errors.push(error);
@@ -139,7 +132,6 @@ async function testStaticAsset(asset) {
 
     console.log(`   ✅ GET ${url}`);
     return true;
-
   } catch (fetchError) {
     const error = `❌ GET ${url} - Error: ${fetchError.message}`;
     errors.push(error);
@@ -152,13 +144,7 @@ async function testStaticAsset(asset) {
 async function checkRedirects() {
   console.log('\n🔄 Checking for redirect loops...');
 
-  const testUrls = [
-    '/about',
-    '/projects',
-    '/blog',
-    '/contact',
-    '/resume',
-  ];
+  const testUrls = ['/about', '/projects', '/blog', '/contact', '/resume'];
 
   for (const path of testUrls) {
     const url = `${baseUrl}${path}`;
@@ -194,7 +180,6 @@ async function checkRedirects() {
           console.log(`   ✅ ${path} - ${redirectCount} redirect(s)`);
         }
         break;
-
       }
 
       if (redirectCount >= maxRedirects) {
@@ -202,7 +187,6 @@ async function checkRedirects() {
         warnings.push(warning);
         console.log(`   ${warning}`);
       }
-
     } catch (error) {
       const warning = `⚠️  Error checking redirects for ${path}: ${error.message}`;
       warnings.push(warning);
@@ -229,7 +213,7 @@ async function runSmokeTests() {
     }
   }
 
-// Test API endpoints (skip in quick mode)
+  // Test API endpoints (skip in quick mode)
   if (!isQuickMode) {
     console.log('\n🔌 Testing API endpoints...');
     for (const endpoint of apiEndpoints) {
@@ -298,7 +282,7 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1);
 });
 
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', error => {
   console.error('Uncaught Exception:', error);
   process.exit(1);
 });

@@ -18,9 +18,9 @@ function containsSuspiciousContent(content) {
     /<a\s+href/gi,
     /onclick\s*=/gi,
     /onerror\s*=/gi,
-    /onload\s*=/gi
+    /onload\s*=/gi,
   ];
-  
+
   return suspiciousPatterns.some(pattern => pattern.test(content));
 }
 
@@ -30,21 +30,21 @@ const FORM_VALIDATION = {
     required: ['name', 'email', 'message'],
     minLength: {
       name: 2,
-      message: 10
+      message: 10,
     },
     maxLength: {
       name: 100,
       subject: 200,
       message: 1000,
-      email: 255
-    }
+      email: 255,
+    },
   },
   newsletter: {
     required: ['email'],
     maxLength: {
-      email: 255
-    }
-  }
+      email: 255,
+    },
+  },
 };
 
 export async function handler(event, context) {
@@ -53,7 +53,7 @@ export async function handler(event, context) {
     return {
       statusCode: 405,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Method not allowed' })
+      body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
 
@@ -61,12 +61,12 @@ export async function handler(event, context) {
     // Parse form data
     const formData = new URLSearchParams(event.body);
     const formName = formData.get('form-name');
-    
+
     if (!formName || !FORM_VALIDATION[formName]) {
       return {
         statusCode: 400,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Invalid form name' })
+        body: JSON.stringify({ error: 'Invalid form name' }),
       };
     }
 
@@ -80,13 +80,13 @@ export async function handler(event, context) {
       console.log(`Bot submission blocked for ${formName} form:`, {
         ip: event.headers['x-forwarded-for']?.split(',')[0] || 'unknown',
         userAgent: event.headers['user-agent'],
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
-      
+
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: 'Form submitted successfully' })
+        body: JSON.stringify({ message: 'Form submitted successfully' }),
       };
     }
 
@@ -109,7 +109,8 @@ export async function handler(event, context) {
       Object.entries(validation.minLength).forEach(([field, minLength]) => {
         const value = formData.get(field);
         if (value && value.length < minLength) {
-          errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} must be at least ${minLength} characters`;
+          errors[field] =
+            `${field.charAt(0).toUpperCase() + field.slice(1)} must be at least ${minLength} characters`;
         }
       });
     }
@@ -119,7 +120,8 @@ export async function handler(event, context) {
       Object.entries(validation.maxLength).forEach(([field, maxLength]) => {
         const value = formData.get(field);
         if (value && value.length > maxLength) {
-          errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} must be less than ${maxLength} characters`;
+          errors[field] =
+            `${field.charAt(0).toUpperCase() + field.slice(1)} must be less than ${maxLength} characters`;
         }
       });
     }
@@ -135,12 +137,12 @@ export async function handler(event, context) {
     if (timestamp) {
       const now = Date.now();
       const formTime = parseInt(timestamp);
-      
+
       // Check if form was submitted too quickly (less than 2 seconds)
       if (now - formTime < 2000) {
         errors.timing = 'Form submitted too quickly';
       }
-      
+
       // Check if form is too old (more than 1 hour)
       if (now - formTime > 60 * 60 * 1000) {
         errors.timing = 'Form session expired';
@@ -161,36 +163,35 @@ export async function handler(event, context) {
         body: JSON.stringify({
           error: 'Validation failed',
           errors,
-          message: 'Please fix the errors and try again'
-        })
+          message: 'Please fix the errors and try again',
+        }),
       };
     }
 
     // Log successful validation for monitoring
     console.log(`Form validation passed for ${formName}:`, {
       ip: event.headers['x-forwarded-for']?.split(',')[0] || 'unknown',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // Validation passed - continue to Netlify form processing
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Form validation passed',
-        form: formName
-      })
+        form: formName,
+      }),
     };
-
   } catch (error) {
     console.error('Form validation error:', error);
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Internal server error',
-        message: 'An error occurred during validation'
-      })
+        message: 'An error occurred during validation',
+      }),
     };
   }
 }
