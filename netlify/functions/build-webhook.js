@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { validateEnvironment } = require('../../scripts/validate-env.mjs');
 
 // Verify GitHub webhook signature
 function verifySignature(payload, signature, secret) {
@@ -9,6 +10,16 @@ function verifySignature(payload, signature, secret) {
 
 // Main handler function
 exports.handler = async function(event, context) {
+  // Validate environment variables
+  const { errors } = validateEnvironment('webhook');
+  if (errors.length > 0) {
+    console.error('Environment validation failed:', errors);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Server configuration error' })
+    };
+  }
+  
   const signature = event.headers['x-hub-signature-256'];
   const githubEvent = event.headers['x-github-event'];
   const webhookSecret = process.env.GITHUB_WEBHOOK_SECRET;

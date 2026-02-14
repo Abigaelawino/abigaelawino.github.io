@@ -11,7 +11,7 @@
     "coverage": "node scripts/run-coverage.mjs && node scripts/check-coverage.mjs",
     "shadcn:coverage": "node scripts/shadcn-coverage.mjs",
     "deploy": "npm run build && netlify deploy --prod --dir=dist",
-    "ci": "npm run lint && npm run security && npm run typecheck && npm run test && npm run build && npm run coverage"
+    "ci": "npm run lint && npm run security && node scripts/validate-env.mjs production && npm run typecheck && npm run test && npm run build && npm run coverage"
   },
   "devDependencies": {
     "@netlify/mcp": "^1.15.1",

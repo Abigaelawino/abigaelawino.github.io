@@ -98,3 +98,8 @@
   from = "/api/optimize"
   to = "/.netlify/functions/asset-optimization"
   status = 200
+
+[[redirects]]
+  from = "/api/rate-limit"
+  to = "/.netlify/functions/rate-limiter"
+  status = 200
