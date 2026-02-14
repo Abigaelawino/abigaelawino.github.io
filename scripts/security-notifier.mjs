@@ -7,7 +7,7 @@
  * Supports GitHub Issues and Slack integrations.
  */
 
-import { writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
@@ -265,7 +265,7 @@ class SecurityNotifier {
    */
   saveNotificationTemplates(report, outputDir) {
     if (!existsSync(outputDir)) {
-      require('fs').mkdirSync(outputDir, { recursive: true });
+      mkdirSync(outputDir, { recursive: true });
     }
 
     // GitHub issue
@@ -304,8 +304,7 @@ function generateNotifications(report, config = {}) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   // Load latest security report
   const reportsDir = join(process.cwd(), '.security-reports');
-  const files = require('fs')
-    .readdirSync(reportsDir)
+  const files = readdirSync(reportsDir)
     .filter(f => f.startsWith('security-report-') && f.endsWith('.json'))
     .sort()
     .reverse();
@@ -316,7 +315,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
 
   const reportPath = join(reportsDir, files[0]);
-  const report = JSON.parse(require('fs').readFileSync(reportPath, 'utf8'));
+  const report = JSON.parse(readFileSync(reportPath, 'utf8'));
 
   // Generate notifications
   generateNotifications(report);

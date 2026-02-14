@@ -1,0 +1,45 @@
+{
+  "text": "✅ Security Scan Results: 1 vulnerabilities found",
+  "channel": "#security-alerts",
+  "username": "Security Scanner",
+  "icon_emoji": ":shield:",
+  "attachments": [
+    {
+      "color": "good",
+      "fields": [
+        {
+          "title": "Risk Level",
+          "value": "LOW",
+          "short": true
+        },
+        {
+          "title": "Auto-Patched",
+          "value": "1",
+          "short": true
+        },
+        {
+          "title": "Critical",
+          "value": "0",
+          "short": true
+        },
+        {
+          "title": "High",
+          "value": "0",
+          "short": true
+        },
+        {
+          "title": "Moderate",
+          "value": "0",
+          "short": true
+        },
+        {
+          "title": "Low",
+          "value": "1",
+          "short": true
+        }
+      ],
+      "footer": "Security Scanner",
+      "ts": 1771105130
+    }
+  ]
+}

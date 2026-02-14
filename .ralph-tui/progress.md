@@ -5,6 +5,18 @@ after each iteration and it's included in prompts for context.
 
 ## Codebase Patterns (Study These First)
 
+- Dependency Security Scanning Pattern: For automated vulnerability management in npm projects:
+  1. Use npm audit --json for comprehensive vulnerability detection
+  2. Implement risk-based classification (LOW/MEDIUM/HIGH) with different handling strategies
+  3. Auto-patch low-risk vulnerabilities in safe packages (@types/_, eslint-_, prettier, jest, etc.)
+  4. Require manual review for critical packages (next, react, react-dom, express, jsonwebtoken, etc.)
+  5. Create weekly GitHub Actions workflow with cron schedule ('0 2 \* \* 0' for Sundays 2 AM UTC)
+  6. Generate detailed security reports with breakdown by severity and actionable recommendations
+  7. Implement notification system for high/critical vulnerabilities via GitHub Issues
+  8. Handle npm audit exit codes properly (non-zero when vulnerabilities found)
+  9. Use .security-reports/ directory for persistent report storage
+  10. Integrate with CI/CD pipeline for automated security gates
+
 - Form Implementation Pattern: Netlify Forms with Next.js require:
   1. Static HTML form definitions in `public/__forms.html` for deploy-time detection
   2. Client-side React components with fetch POST to `/__forms.html`
@@ -51,6 +63,28 @@ after each iteration and it's included in prompts for context.
   5. Track outbound links and file downloads without cookies or personal data
   6. Use nonce-based CSP for secure script execution
   7. Include analytics.js with custom event tracking for user interactions
+
+---
+
+## [2026-02-14] - abigaelawino-github-io-bnz
+
+- Implemented comprehensive automated dependency security scanning system
+- Enhanced existing security scanner with improved error handling for npm audit exit codes
+- Fixed security notifier to use proper ES module imports instead of require()
+- Created detailed documentation for the security scanning system
+- Verified all components work correctly: scanner, notifier, and GitHub workflow
+- Files changed:
+  - scripts/security-scanner.mjs (enhanced error handling for npm audit)
+  - scripts/security-notifier.mjs (fixed ES module imports)
+  - docs/dependency-security-scanning.md (new comprehensive documentation)
+  - .ralph-tui/progress.md (updated with Dependency Security Scanning Pattern)
+- **Learnings:**
+  - Patterns discovered: npm audit exits with non-zero code when vulnerabilities are found, requiring special error handling
+  - Gotchas encountered: ES modules can't use require() syntax, must use proper import statements
+  - The existing GitHub workflow was already comprehensive but the underlying scripts needed fixes
+  - Auto-patching indirect dependencies requires npm audit fix, not individual package updates
+  - Security scanning should be risk-based with different handling for low vs high severity vulnerabilities
+  - GitHub Actions provide excellent automation for weekly security scans with issue creation and PR comments
 
 ---
 

@@ -1,0 +1,24 @@
+{
+  "scanDate": "2026-02-14",
+  "summary": {
+    "totalVulnerabilities": 1,
+    "autoPatched": 1,
+    "patchFailed": 0,
+    "requireReview": 0,
+    "riskLevel": "LOW"
+  },
+  "breakdown": {
+    "low": 1,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "autoPatched": [
+    {
+      "package": "qs",
+      "severity": "low"
+    }
+  ],
+  "patchFailures": [],
+  "requireReview": []
+}
