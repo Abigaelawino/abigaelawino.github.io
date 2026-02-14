@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, getAllProjects } from '@/lib/content';
 import { ArrowLeft, ExternalLink, Github, Clock, Tag } from 'lucide-react';
+import { MDXContent, enhanceContentWithCharts } from '@/components/mdx-content';
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -168,7 +169,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <section className="case-study-section">
               <h2>Detailed Analysis</h2>
               <div className="section-content markdown-content">
-                <p>{content}</p>
+                <MDXContent content={enhanceContentWithCharts(content, params.slug)} />
               </div>
             </section>
           )}

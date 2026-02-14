@@ -1,0 +1,64 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="segment-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="segment-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="segment-gradient-3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#45b7d1;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#45b7d1;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg-gradient)" />
+  
+  <!-- Customer segments as overlapping circles -->
+  <circle cx="120" cy="120" r="45" fill="url(#segment-gradient-1)" stroke="#fff" stroke-width="2" />
+  <circle cx="200" cy="140" r="50" fill="url(#segment-gradient-2)" stroke="#fff" stroke-width="2" />
+  <circle cx="280" cy="120" r="40" fill="url(#segment-gradient-3)" stroke="#fff" stroke-width="2" />
+  
+  <!-- Dashboard chart representation -->
+  <rect x="50" y="200" width="120" height="80" rx="8" fill="#fff" opacity="0.9" />
+  <rect x="60" y="240" width="15" height="30" fill="#ff6b6b" />
+  <rect x="80" y="220" width="15" height="50" fill="#4ecdc4" />
+  <rect x="100" y="230" width="15" height="40" fill="#45b7d1" />
+  <rect x="120" y="210" width="15" height="60" fill="#ffa500" />
+  
+  <!-- Pie chart representation -->
+  <circle cx="280" cy="240" r="35" fill="#fff" opacity="0.9" />
+  <path d="M280 240 L280 205 A35 35 0 0 1 315 240 Z" fill="#ff6b6b" />
+  <path d="M280 240 L315 240 A35 35 0 0 1 280 275 Z" fill="#4ecdc4" />
+  <path d="M280 240 L280 275 A35 35 0 0 1 245 240 Z" fill="#45b7d1" />
+  <path d="M280 240 L245 240 A35 35 0 0 1 280 205 Z" fill="#ffa500" />
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+    Customer Segmentation
+  </text>
+  
+  <!-- Customer dots in segments -->
+  <circle cx="110" cy="110" r="2" fill="#fff" />
+  <circle cx="125" cy="125" r="2" fill="#fff" />
+  <circle cx="115" cy="130" r="2" fill="#fff" />
+  <circle cx="130" cy="115" r="2" fill="#fff" />
+  
+  <circle cx="190" cy="135" r="2" fill="#fff" />
+  <circle cx="205" cy="140" r="2" fill="#fff" />
+  <circle cx="200" cy="150" r="2" fill="#fff" />
+  <circle cx="210" cy="145" r="2" fill="#fff" />
+  
+  <circle cx="275" cy="115" r="2" fill="#fff" />
+  <circle cx="285" cy="125" r="2" fill="#fff" />
+  <circle cx="280" cy="130" r="2" fill="#fff" />
+  <circle cx="290" cy="120" r="2" fill="#fff" />
+</svg>

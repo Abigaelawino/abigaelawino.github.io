@@ -351,3 +351,41 @@ For MDX-based content systems with TypeScript:
 6. Create content indexes for listing pages with proper sorting and metadata extraction
 
 ---
+
+## [2026-02-14] - abigaelawino-roadmap-3a
+- What was implemented:
+  - Created two new featured projects using shadcn/ui components and interactive visualizations
+  - E-Commerce Product Recommendation Engine: ML project with hybrid collaborative filtering and content-based recommendation system
+  - Customer Segmentation Analytics Dashboard: Analytics project with clustering algorithms and interactive visualizations
+  - Added Recharts library for interactive data visualizations
+  - Created MDX content enhancement system to inject interactive charts into project pages
+  - Designed SVG cover images for both new projects
+  - Updated project listing page to display new projects with proper metadata
+
+- Files changed:
+  - package.json (added recharts dependency)
+  - content/projects/ecommerce-recommendation-engine.mdx (new ML project with comprehensive case study)
+  - content/projects/customer-segmentation-dashboard.mdx (new analytics project with detailed analysis)
+  - components/ui/chart.tsx (new chart component using Recharts)
+  - components/mdx-content.tsx (new MDX content renderer with interactive chart integration)
+  - app/projects/[slug]/page.tsx (updated to use MDX content component)
+  - app/projects/[slug]/page.css (added styles for charts and MDX content)
+  - public/images/projects/recommendation-engine-cover.svg (new cover image)
+  - public/images/projects/segmentation-dashboard-cover.svg (new cover image)
+
+- **Learnings:**
+  - Recharts integrates well with Next.js and shadcn/ui for responsive interactive visualizations
+  - MDX content enhancement allows for dynamic insertion of interactive components based on project context
+  - Case study structure provides excellent narrative flow for both ML and analytics projects
+  - SVG cover images add visual appeal without increasing page load significantly
+  - TypeScript interfaces ensure type safety when working with chart data
+
+### Interactive Visualization Pattern
+For adding interactive charts to MDX content in Next.js:
+1. Create reusable chart components using Recharts with TypeScript interfaces for data
+2. Implement MDX content enhancement function to dynamically add charts based on project type
+3. Use responsive container components to ensure charts adapt to different screen sizes
+4. Style charts to match the existing design system using CSS variables and shadcn/ui tokens
+5. Add proper semantic structure with chart titles and descriptions for accessibility
+
+---

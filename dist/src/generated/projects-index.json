@@ -1,5 +1,67 @@
 [
   {
+    "slug": "customer-segmentation-dashboard",
+    "title": "Customer Segmentation Analytics Dashboard",
+    "date": "2026-02-14",
+    "tags": [
+      "analytics",
+      "visualization",
+      "dashboard"
+    ],
+    "summary": "Built an interactive analytics dashboard for customer segmentation using clustering algorithms and real-time data visualization.",
+    "caseStudyData": "Analyzed 2.5M customer records with 50+ behavioral and demographic features including purchase history, website engagement patterns, demographic information, and customer support interactions. Integrated data from multiple sources (CRM, web analytics, email platform, POS systems) and performed extensive feature engineering to create meaningful segmentation variables.",
+    "caseStudyMethods": "Applied unsupervised machine learning using K-means and hierarchical clustering combined with PCA for dimensionality reduction. Used elbow method, silhouette analysis, and domain expertise to determine optimal cluster count. Implemented real-time segmentation updates using incremental clustering algorithms. Built interactive dashboards with drill-down capabilities and automated insights generation.",
+    "caseStudyResults": "Identified 6 distinct customer segments with clear business characteristics, leading to 42% improvement in targeted marketing ROI. Reduced customer acquisition cost by 28% through optimized channel allocation. Dashboard adoption by 95% of marketing team with 4.7/5 user satisfaction score. Real-time alerts identified 15 high-value customer churn risks weekly.",
+    "caseStudyReproducibility": "Complete Jupyter notebooks with data preprocessing, model training, and evaluation. Docker environment with all dependencies including scikit-learn, plotly, and dashboard framework. SQL scripts for data extraction and transformation. Documentation for deploying dashboard using Docker Compose with automated data pipeline updates.",
+    "caseStudyReflection": "Key insight was that behavioral features outperformed demographic data for meaningful segmentation. Challenge was balancing statistical cluster validity with business interpretability - some mathematically optimal clusters were too complex for marketing campaigns. Next iteration should incorporate temporal segmentation to capture customer lifecycle changes and use deep learning for automatic feature extraction.",
+    "tech": [
+      "python",
+      "plotly",
+      "dash",
+      "postgres",
+      "redis",
+      "scikit-learn",
+      "pandas",
+      "numpy",
+      "sqlalchemy",
+      "docker"
+    ],
+    "repo": "https://github.com/abigaelawino/customer-segmentation-dashboard",
+    "cover": "/images/projects/segmentation-dashboard-cover.svg",
+    "status": "published"
+  },
+  {
+    "slug": "ecommerce-recommendation-engine",
+    "title": "E-Commerce Product Recommendation Engine",
+    "date": "2026-02-14",
+    "tags": [
+      "ml",
+      "recommendation",
+      "analytics"
+    ],
+    "summary": "Developed a hybrid recommendation system combining collaborative filtering and content-based approaches to increase cross-selling and customer engagement.",
+    "caseStudyData": "Processed 3.2M user interactions including clicks, purchases, wishlists, and cart events over 18 months. Integrated product catalog with 50K+ items including categorical features, text descriptions, and image embeddings. Performed extensive data cleaning to remove bots, handle cold-start users, and normalize implicit feedback signals.",
+    "caseStudyMethods": "Implemented hybrid recommendation approach combining matrix factorization (ALS) for collaborative filtering with TF-IDF and neural embeddings for content-based filtering. Used multi-armed bandit exploration for cold-start problems and incorporated temporal dynamics to capture changing user preferences. Evaluated using offline metrics (precision@K, recall@K, MAP) and online A/B testing with business metrics.",
+    "caseStudyResults": "Achieved 38% improvement in click-through rate and 27% increase in conversion rate for recommended products. Reduced cold-start problem impact by 62% through hybrid approach. System generated $4.2M additional revenue in first 6 months through improved product discovery. User session duration increased by 45% when recommendations were prominently displayed.",
+    "caseStudyReproducibility": "Complete pipeline available with Apache Spark for data processing, TensorFlow for neural embeddings, and Flask API for serving recommendations. Includes Docker compose setup for local development, comprehensive unit tests, and monitoring dashboards for model performance tracking. All hyperparameters and experiment logs stored in MLflow for reproducibility.",
+    "caseStudyReflection": "Key challenge was balancing exploration vs exploitation in recommendations while maintaining diversity. Next iteration should incorporate real-time contextual signals and implement graph neural networks for better item relationships. Learned importance of business metrics over pure accuracy - focusing on revenue impact rather than just offline metrics drove better adoption.",
+    "tech": [
+      "python",
+      "spark",
+      "tensorflow",
+      "flask",
+      "kafka",
+      "mysql",
+      "redis",
+      "pandas",
+      "numpy",
+      "scikit-learn"
+    ],
+    "repo": "https://github.com/abigaelawino/recommendation-engine",
+    "cover": "/images/projects/recommendation-engine-cover.svg",
+    "status": "published"
+  },
+  {
     "slug": "customer-churn-case-study",
     "title": "Customer Churn Risk Modeling",
     "date": "2026-01-12",
