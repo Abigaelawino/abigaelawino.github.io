@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Netlify Identity
+[identity]
+  enabled = true
+  endpoint = "/.netlify/identity"
+
 [build.environment]
   NODE_ENV = "production"
   PARALLEL_SESSIONS = "true"

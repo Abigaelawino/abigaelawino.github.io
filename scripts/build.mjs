@@ -505,6 +505,11 @@ mkdirSync(join('dist', 'assets'), { recursive: true });
   } catch {
     // Optional images directory.
   }
+  try {
+    cpSync('admin', join('dist', 'admin'), { recursive: true });
+  } catch {
+    // Admin directory should exist for CMS.
+  }
   writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
   writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);
 

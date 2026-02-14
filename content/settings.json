@@ -1,0 +1,20 @@
+{
+  "siteTitle": "Abigael Awino - Data Scientist & ML Engineer",
+  "siteDescription": "Portfolio of Abigael Awino, a data scientist and machine learning engineer specializing in building innovative data-driven solutions.",
+  "authorName": "Abigael Awino",
+  "authorEmail": "hello@abigaelawino.com",
+  "socialLinks": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/abigaelawino"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/abigaelawino"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://twitter.com/abigaelawino"
+    }
+  ]
+}
