@@ -1,13 +1,13 @@
 {
-  "id": "6964a999-f4e2-402a-baa9-1fe69b4518c8",
+  "id": "db01f0be-7df5-4c2b-b725-990d8849e836",
   "status": "running",
-  "startedAt": "2026-02-14T13:32:42.987Z",
-  "updatedAt": "2026-02-14T14:40:12.794Z",
+  "startedAt": "2026-02-14T18:27:41.394Z",
+  "updatedAt": "2026-02-14T18:27:41.394Z",
   "agentPlugin": "opencode",
   "trackerPlugin": "beads-bv",
-  "currentIteration": 9,
-  "maxIterations": 10,
+  "currentIteration": 0,
+  "maxIterations": 30,
   "totalTasks": 0,
-  "tasksCompleted": 8,
+  "tasksCompleted": 0,
   "cwd": "/home/nick/Projects/abigaelawino.github.io"
 }
