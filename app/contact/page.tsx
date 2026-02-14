@@ -30,7 +30,11 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
-                <a href="mailto:contact@example.com">
+                <a
+                  href="mailto:contact@example.com"
+                  data-analytics-event="cta_email"
+                  data-analytics-prop-location="contact_page"
+                >
                   Send Email
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
@@ -48,7 +52,13 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-analytics-event="cta_linkedin"
+                  data-analytics-prop-location="contact_page"
+                >
                   Connect on LinkedIn
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
@@ -66,7 +76,13 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="w-full" asChild>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-analytics-event="cta_github"
+                  data-analytics-prop-location="contact_page"
+                >
                   Visit GitHub
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
@@ -111,7 +127,13 @@ export default function ContactPage() {
       {/* Back Navigation */}
       <div className="text-center">
         <Button variant="outline" asChild>
-          <Link href="/">← Back to Home</Link>
+          <Link
+            href="/"
+            data-analytics-event="nav_home"
+            data-analytics-prop-location="contact_page"
+          >
+            ← Back to Home
+          </Link>
         </Button>
       </div>
     </div>

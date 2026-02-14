@@ -80,6 +80,10 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
                         : 'hover:bg-secondary/80'
                     }`}
                     onClick={() => toggleTag(tag)}
+                    data-analytics-event="filter_tag"
+                    data-analytics-prop-tag={tag}
+                    data-analytics-prop-action={isSelected ? 'remove' : 'add'}
+                    data-analytics-prop-location="projects_page"
                   >
                     <TagIcon size={12} />
                     {tag}
@@ -174,7 +178,12 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 
               <CardFooter className="flex gap-2 pt-4">
                 <Button asChild className="flex-1">
-                  <Link href={`/projects/${project.slug}`}>
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    data-analytics-event="project_read_more"
+                    data-analytics-prop-project={project.slug}
+                    data-analytics-prop-location="projects_list"
+                  >
                     Read Case Study
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -186,6 +195,9 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View repository"
+                      data-analytics-event="project_repo"
+                      data-analytics-prop-project={project.slug}
+                      data-analytics-prop-location="projects_list"
                     >
                       <Github className="h-4 w-4" />
                     </a>
@@ -200,7 +212,13 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
       {/* Footer */}
       <div className="text-center pt-8">
         <Button asChild variant="outline">
-          <Link href="/">← Back to Home</Link>
+          <Link
+            href="/"
+            data-analytics-event="nav_home"
+            data-analytics-prop-location="projects_page"
+          >
+            ← Back to Home
+          </Link>
         </Button>
       </div>
     </div>

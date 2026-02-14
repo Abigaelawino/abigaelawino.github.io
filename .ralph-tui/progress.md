@@ -43,6 +43,14 @@ after each iteration and it's included in prompts for context.
   4. Include mobile hamburger menu with proper state management
   5. Add skip-to-content link for accessibility
   6. Ensure responsive breakpoints for 360-414px mobile widths
+- Privacy-Friendly Analytics Implementation Pattern: For GDPR-compliant analytics without cookies:
+  1. Use Plausible Analytics with script injection via build.mjs for production
+  2. Implement automatic Do Not Track (DNT) detection and respect user preferences
+  3. Add data-analytics-event attributes to CTAs and navigation elements
+  4. Track per-page events automatically: pageviews, scroll depth, time on page
+  5. Track outbound links and file downloads without cookies or personal data
+  6. Use nonce-based CSP for secure script execution
+  7. Include analytics.js with custom event tracking for user interactions
 
 ---
 
@@ -235,6 +243,30 @@ after each iteration and it's included in prompts for context.
   - Button variants (ghost, outline, default) provide excellent UX differentiation
   - Card hover effects and transitions enhance user engagement significantly
   - shadcn/ui design tokens (CSS variables) ensure consistent theming across components
+
+---
+
+## [2026-02-14] - abigaelawino-roadmap-3c
+
+- Implemented comprehensive privacy-friendly analytics with Plausible Analytics
+- Added per-page event tracking with automatic pageview, scroll depth, and time on page tracking
+- Enhanced CTA buttons throughout the site with analytics tracking attributes
+- Added outbound link and file download tracking
+- Integrated Do Not Track (DNT) detection for GDPR compliance
+- Files changed:
+  - app/layout.tsx (added analytics tracking to navigation and CTAs)
+  - app/page.tsx (added tracking to homepage hero and project cards)
+  - app/contact/page.tsx (added tracking to contact page CTAs)
+  - app/projects/projects-client.tsx (added tracking to project cards and filter tags)
+  - components/contact-form.tsx (added form submission tracking)
+  - assets/analytics.js (enhanced with per-page tracking and outbound link detection)
+- **Learnings:**
+  - Patterns discovered: Plausible Analytics provides excellent privacy-friendly tracking with no cookies required
+  - Gotchas encountered: Analytics script injection needs proper nonce handling for CSP compliance
+  - Data attributes enable flexible event tracking with custom properties for context
+  - Scroll depth and time on page metrics provide valuable engagement insights
+  - Automatic DNT detection ensures GDPR compliance and respects user privacy preferences
+  - Outbound link tracking helps understand how users navigate to external resources
 
 ---
 

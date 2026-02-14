@@ -191,6 +191,8 @@ export function ContactForm() {
         netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
         className="space-y-4"
+        data-analytics-event="form_submit"
+        data-analytics-prop-form-type="contact"
       >
         <input type="hidden" name="form-name" value="contact" />
         <p className="hidden" style={{ display: 'none' }}>

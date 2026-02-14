@@ -27,13 +27,23 @@ export default function HomePage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild size="lg">
-            <Link href="/projects">
+            <Link
+              href="/projects"
+              data-analytics-event="cta_projects"
+              data-analytics-prop-location="hero"
+            >
               View Projects
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="/contact">Get in Touch</Link>
+            <Link
+              href="/contact"
+              data-analytics-event="cta_contact"
+              data-analytics-prop-location="hero"
+            >
+              Get in Touch
+            </Link>
           </Button>
         </div>
       </section>
@@ -95,7 +105,12 @@ export default function HomePage() {
 
                 <CardFooter className="flex gap-2">
                   <Button asChild className="flex-1">
-                    <Link href={`/projects/${project.slug}`}>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      data-analytics-event="project_read_more"
+                      data-analytics-prop-project={project.slug}
+                      data-analytics-prop-location="home_featured"
+                    >
                       Read More
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
@@ -107,6 +122,9 @@ export default function HomePage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View repository"
+                        data-analytics-event="project_repo"
+                        data-analytics-prop-project={project.slug}
+                        data-analytics-prop-location="home_featured"
                       >
                         <Github className="h-4 w-4" />
                       </a>
@@ -128,10 +146,22 @@ export default function HomePage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild>
-            <Link href="/contact">Contact Me</Link>
+            <Link
+              href="/contact"
+              data-analytics-event="cta_contact"
+              data-analytics-prop-location="footer"
+            >
+              Contact Me
+            </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/about">Learn More</Link>
+            <Link
+              href="/about"
+              data-analytics-event="cta_about"
+              data-analytics-prop-location="footer"
+            >
+              Learn More
+            </Link>
           </Button>
         </div>
       </section>
