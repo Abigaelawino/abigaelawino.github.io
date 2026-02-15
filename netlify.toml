@@ -3,12 +3,12 @@
   publish = ".next"
 
 [build.environment]
-  NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
 
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
@@ -24,3 +24,6 @@
   from = "/home"
   to = "/"
   status = 301
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
