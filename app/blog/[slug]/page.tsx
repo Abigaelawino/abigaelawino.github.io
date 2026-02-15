@@ -1,48 +1,36 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import matter from 'gray-matter';
 import { Button } from '@/components/ui/button';
 import { siteUrl } from '@/lib/site';
+import blogIndex from '@/src/generated/blog-index.json';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 export const revalidate = false;
 
 async function getBlogPost(slug: string) {
-  try {
-    const fullPath = join(process.cwd(), 'content/blog', `${slug}.mdx`);
-    const fileContents = readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
+  const entries = blogIndex as Array<{
+    slug: string;
+    frontmatter: Record<string, any>;
+    content: string;
+  }>;
 
-    return {
-      slug,
-      frontmatter: data,
-      content,
-    };
-  } catch {
+  const entry = entries.find(post => post.slug === slug);
+  if (!entry) {
     return null;
   }
+
+  return {
+    slug: entry.slug,
+    frontmatter: entry.frontmatter,
+    content: entry.content,
+  };
 }
 
 export async function generateStaticParams() {
-  const fs = await import('fs');
-  const path = await import('path');
-
-  try {
-    const blogDir = path.join(process.cwd(), 'content/blog');
-    const fileNames = fs.readdirSync(blogDir);
-
-    return fileNames
-      .filter(name => name.endsWith('.mdx'))
-      .map(fileName => ({
-        slug: fileName.replace(/\.mdx$/, ''),
-      }));
-  } catch {
-    return [];
-  }
+  const entries = blogIndex as Array<{ slug: string }>;
+  return entries.map(entry => ({ slug: entry.slug }));
 }
 
 export async function generateMetadata({

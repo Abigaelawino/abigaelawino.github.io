@@ -4,6 +4,7 @@ import { existsSync } from 'node:fs';
 console.log('Running TypeScript type checking...');
 
 try {
+  execSync('node scripts/generate-content-index.mjs', { stdio: 'inherit' });
   // Check if tsc is available
   execSync('npx tsc --noEmit', { stdio: 'inherit' });
   console.log('✅ TypeScript type checks passed.');

@@ -1,7 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import readingTime from 'reading-time';
+import projectsIndex from '@/src/generated/projects-index.json';
 
 export interface ProjectFrontmatter {
   title: string;
@@ -26,18 +24,16 @@ export interface Project {
   readingTime: number;
 }
 
-const contentDirectory = path.join(process.cwd(), 'content');
+type ProjectIndexEntry = {
+  slug: string;
+  frontmatter: ProjectFrontmatter;
+  content: string;
+};
+
+const projectEntries = projectsIndex as ProjectIndexEntry[];
 
 export function getProjectSlugs() {
-  try {
-    return fs
-      .readdirSync(path.join(contentDirectory, 'projects'))
-      .filter(file => file.endsWith('.mdx'))
-      .map(file => file.replace(/\.mdx$/, ''));
-  } catch (error) {
-    console.error('Error reading projects directory:', error);
-    return [];
-  }
+  return projectEntries.map(entry => entry.slug);
 }
 
 export function getProjectBySlug(slug: string): Project | null {
@@ -45,21 +41,17 @@ export function getProjectBySlug(slug: string): Project | null {
     return null;
   }
 
-  try {
-    const fullPath = path.join(contentDirectory, 'projects', `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug,
-      frontmatter: data as ProjectFrontmatter,
-      content,
-      readingTime: readingTime(content).minutes,
-    };
-  } catch (error) {
-    console.error(`Error reading project ${slug}:`, error);
+  const entry = projectEntries.find(project => project.slug === slug);
+  if (!entry) {
     return null;
   }
+
+  return {
+    slug: entry.slug,
+    frontmatter: entry.frontmatter,
+    content: entry.content,
+    readingTime: readingTime(entry.content).minutes,
+  };
 }
 
 export function getAllProjects(): Project[] {

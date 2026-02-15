@@ -214,11 +214,12 @@ function loadCollectionEntries(collectionDir, schema) {
 
     entries.push({
       slug,
-      ...parsed.frontmatter,
+      frontmatter: parsed.frontmatter,
+      content: parsed.body,
     });
   }
 
-  return entries.sort((a, b) => b.date.localeCompare(a.date));
+  return entries.sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
 }
 
 function generateContentIndexes(options = {}) {

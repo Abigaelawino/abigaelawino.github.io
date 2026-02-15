@@ -1,35 +1,17 @@
 import { MetadataRoute } from 'next';
 import { getAllProjects } from '@/lib/content';
-import { readFileSync, readdirSync } from 'fs';
-import { join } from 'path';
-import matter from 'gray-matter';
 import { siteUrl } from '@/lib/site';
+import blogIndex from '@/src/generated/blog-index.json';
 
 export const dynamic = 'force-static';
 
 async function getBlogPosts() {
-  const blogDir = join(process.cwd(), 'content/blog');
+  const entries = blogIndex as Array<{
+    slug: string;
+    frontmatter: Record<string, any>;
+  }>;
 
-  try {
-    const fileNames = readdirSync(blogDir);
-    const posts = fileNames
-      .filter(name => name.endsWith('.mdx'))
-      .map(fileName => {
-        const fullPath = join(blogDir, fileName);
-        const fileContents = readFileSync(fullPath, 'utf8');
-        const { data } = matter(fileContents);
-
-        return {
-          slug: fileName.replace(/\.mdx$/, ''),
-          frontmatter: data,
-        };
-      })
-      .filter(post => post.frontmatter.published !== false);
-
-    return posts;
-  } catch {
-    return [];
-  }
+  return entries.filter(post => post.frontmatter?.published !== false);
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
