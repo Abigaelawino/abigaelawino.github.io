@@ -6,10 +6,10 @@ const nextConfig = {
     unoptimized: true,
   },
   outputFileTracingIncludes: {
-    '/app/projects/[slug]/page': ['content/projects/**/*'],
-    '/app/blog/[slug]/page': ['content/blog/**/*'],
-    '/app/sitemap': ['content/**/*'],
-    '/app/robots': ['content/**/*'],
+    '/projects/[slug]': ['content/projects/**/*'],
+    '/blog/[slug]': ['content/blog/**/*'],
+    '/sitemap.xml': ['content/**/*'],
+    '/robots.txt': ['content/**/*'],
   },
   redirects() {
     return [
