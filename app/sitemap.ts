@@ -4,6 +4,8 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
+export const dynamic = 'force-static';
+
 async function getBlogPosts() {
   const blogDir = join(process.cwd(), 'content/blog');
 

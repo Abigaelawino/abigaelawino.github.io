@@ -1,33 +1,11 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
-
-# Netlify Identity
-[identity]
-  enabled = true
-  endpoint = "/.netlify/identity"
+  command = "next build"
+  publish = "out"
 
 [build.environment]
   NODE_ENV = "production"
-  PARALLEL_SESSIONS = "true"
-  SESSION_TIMEOUT = "300000"  # 5 minutes
-  NPM_FLAGS = "--prefer-offline --no-audit"
   NEXT_TELEMETRY_DISABLED = "1"
-
-[context.production.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  NETLIFY_NEXT_SKEW_PROTECTION = "true"
-  DEPLOYMENT_ENV = "production"
-
-[context.deploy-preview.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  NETLIFY_NEXT_SKEW_PROTECTION = "true"
-  DEPLOYMENT_ENV = "preview"
-
-[context.branch-deploy.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  NETLIFY_NEXT_SKEW_PROTECTION = "true"
-  DEPLOYMENT_ENV = "branch"
+  NETLIFY_NEXT_PLUGIN = "none"
 
 [[headers]]
   for = "/*"
@@ -36,88 +14,19 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io; frame-ancestors 'none'; form-action 'self';"
 
 [[headers]]
-  for = "/assets/*"
+  for = "/_next/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/*.pdf"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-    Content-Disposition = "attachment"
-
-[[headers]]
-  for = "/robots.txt"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-[[headers]]
-  for = "/sitemap.xml"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Hub-Signature-256, X-Gub-Event"
-    Content-Type = "application/json"
-
-[dev]
-  command = "netlify dev"
-
-[functions]
-  directory = "netlify/functions"
-
-# Redirects for API endpoints
 [[redirects]]
-  from = "/api/webhooks/build"
-  to = "/.netlify/functions/build-webhook"
-  status = 200
-
-[[redirects]]
-  from = "/api/webhooks/issue-verification"
-  to = "/.netlify/functions/issue-verification"
-  status = 200
-
-[[redirects]]
-  from = "/api/deployments"
-  to = "/.netlify/functions/deployment-monitoring"
-  status = 200
-
-[[redirects]]
-  from = "/api/sessions/*"
-  to = "/.netlify/functions/session-manager"
-  status = 200
-
-[[redirects]]
-  from = "/api/sessions"
-  to = "/.netlify/functions/session-manager"
-  status = 200
-
-[[redirects]]
-  from = "/api/optimize"
-  to = "/.netlify/functions/asset-optimization"
-  status = 200
-
-[[redirects]]
-  from = "/api/rate-limit"
-  to = "/.netlify/functions/rate-limiter"
-  status = 200
+  from = "/home"
+  to = "/"
+  status = 301
