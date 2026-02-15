@@ -1,6 +1,7 @@
 import { getAllProjects } from '@/lib/content';
 import { ProjectsClient } from './projects-client';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Projects · Abigael Awino',
     description:
       'Explore project case studies in machine learning, analytics, and production data systems. Discover end-to-end data science projects.',
-    url: 'https://abigaelawino.github.io/projects',
+    url: `${siteUrl}/projects`,
     images: [
       {
         url: '/assets/og.png',
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/projects',
+    canonical: `${siteUrl}/projects`,
   },
 };
 

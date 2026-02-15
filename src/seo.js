@@ -30,11 +30,12 @@ function normalizeSiteUrl(rawValue) {
 
 function resolveSiteUrl(env = process.env) {
   return (
+    normalizeSiteUrl(env.NEXT_PUBLIC_SITE_URL) ||
     normalizeSiteUrl(env.SITE_URL) ||
     normalizeSiteUrl(env.URL) ||
     normalizeSiteUrl(env.DEPLOY_PRIME_URL) ||
     normalizeSiteUrl(env.DEPLOY_URL) ||
-    'https://abigaelawino.github.io'
+    'https://abigael-awino-portfolio.netlify.app'
   );
 }
 

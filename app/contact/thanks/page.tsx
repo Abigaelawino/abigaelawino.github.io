@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, ArrowLeft, Mail, Phone } from 'lucide-react';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Thank You - Contact',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Thank You - Contact · Abigael Awino',
     description: 'Your message has been successfully sent. Thank you for reaching out.',
-    url: 'https://abigaelawino.github.io/contact/thanks',
+    url: `${siteUrl}/contact/thanks`,
     images: [
       {
         url: '/assets/og.png',
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/contact/thanks',
+    canonical: `${siteUrl}/contact/thanks`,
   },
 };
 

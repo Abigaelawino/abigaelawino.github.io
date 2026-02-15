@@ -4,8 +4,19 @@
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+  NEXT_PUBLIC_SITE_URL = "https://abigael-awino-portfolio.netlify.app"
   NPM_CONFIG_CACHE = "/opt/build/cache/npm"
   NPM_FLAGS = "--include=dev"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://api.netlify.com https://identity.netlify.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 [[headers]]
   for = "/*"

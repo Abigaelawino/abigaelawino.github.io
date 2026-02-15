@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -24,7 +25,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
       },
     ],
-    sitemap: 'https://abigaelawino.github.io/sitemap.xml',
-    host: 'https://abigaelawino.github.io',
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }

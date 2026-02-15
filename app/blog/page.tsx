@@ -3,6 +3,7 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 async function getBlogPosts() {
   const blogDir = join(process.cwd(), 'content/blog');
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     title: 'Blog · Abigael Awino',
     description:
       'Read notes on model monitoring, analytics implementation, and production workflows. Discover insights on data science best practices.',
-    url: 'https://abigaelawino.github.io/blog',
+    url: `${siteUrl}/blog`,
     images: [
       {
         url: '/assets/og.png',
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/blog',
+    canonical: `${siteUrl}/blog`,
   },
 };
 

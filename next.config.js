@@ -5,6 +5,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  outputFileTracingIncludes: {
+    '/app/projects/[slug]/page': ['content/projects/**/*'],
+    '/app/blog/[slug]/page': ['content/blog/**/*'],
+    '/app/sitemap': ['content/**/*'],
+    '/app/robots': ['content/**/*'],
+  },
   redirects() {
     return [
       {

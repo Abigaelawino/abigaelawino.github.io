@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Download, Mail, Phone, MapPin, Github, Linkedin, Award } from 'lucide-react';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Resume · Abigael Awino',
     description:
       "Download Abigael Awino's professional resume and view a concise web summary of experience, skills, and qualifications in data science.",
-    url: 'https://abigaelawino.github.io/resume',
+    url: `${siteUrl}/resume`,
     images: [
       {
         url: '/assets/og.png',
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/resume',
+    canonical: `${siteUrl}/resume`,
   },
 };
 

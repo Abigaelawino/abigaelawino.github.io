@@ -13,6 +13,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: 'About Abigael Awino · Data Scientist',
     description:
       'Learn about Abigael Awino, a data scientist passionate about transforming complex data into actionable insights and production-ready solutions.',
-    url: 'https://abigaelawino.github.io/about',
+    url: `${siteUrl}/about`,
     images: [
       {
         url: '/assets/og.png',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/about',
+    canonical: `${siteUrl}/about`,
   },
 };
 

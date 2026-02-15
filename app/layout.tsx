@@ -2,10 +2,11 @@ import { ReactNode } from 'react';
 import { Navigation } from '@/components/navigation';
 import { StructuredData } from '@/components/structured-data';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://abigaelawino.github.io'),
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s · Abigael Awino',
     default: 'Abigael Awino · Data Science Portfolio',
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://abigaelawino.github.io',
+    url: siteUrl,
     title: 'Abigael Awino · Data Science Portfolio',
     description:
       'Data scientist specializing in machine learning, analytics, and production-ready data solutions. End-to-end project development from data collection to deployment.',
@@ -66,9 +67,9 @@ export const metadata: Metadata = {
     yandex: 'verify-yandex-site-code',
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io',
+    canonical: siteUrl,
     languages: {
-      'en-US': 'https://abigaelawino.github.io',
+      'en-US': siteUrl,
     },
   },
 };

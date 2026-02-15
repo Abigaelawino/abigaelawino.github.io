@@ -3,6 +3,7 @@ import { getAllProjects } from '@/lib/content';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+import { siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -32,7 +33,7 @@ async function getBlogPosts() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://abigaelawino.github.io';
+  const baseUrl = siteUrl;
   const currentDate = new Date();
 
   // Static pages

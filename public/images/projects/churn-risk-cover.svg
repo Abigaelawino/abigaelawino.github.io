@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Customer Churn Risk Cover</title>
+  <desc id="desc">Placeholder cover showing a churn risk line chart and summary stats.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect x="120" y="120" width="1360" height="660" rx="28" fill="#0b1220" opacity="0.85" />
+  <g fill="none" stroke="#38bdf8" stroke-width="6">
+    <path d="M200 640 L380 520 L560 560 L740 420 L920 460 L1100 340 L1320 380" />
+  </g>
+  <g fill="#94a3b8">
+    <circle cx="380" cy="520" r="8" />
+    <circle cx="740" cy="420" r="8" />
+    <circle cx="1100" cy="340" r="8" />
+  </g>
+  <text x="200" y="220" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700">
+    Customer Churn Risk
+  </text>
+  <text x="200" y="270" fill="#cbd5f5" font-family="Inter, Arial, sans-serif" font-size="20">
+    Retention drivers, early warning signals, and cohort-level insights
+  </text>
+  <g fill="#e2e8f0" font-family="Inter, Arial, sans-serif">
+    <text x="200" y="720" font-size="18">Accuracy</text>
+    <text x="200" y="750" font-size="28" font-weight="700">92.4%</text>
+    <text x="420" y="720" font-size="18">Lift</text>
+    <text x="420" y="750" font-size="28" font-weight="700">+31%</text>
+    <text x="600" y="720" font-size="18">Coverage</text>
+    <text x="600" y="750" font-size="28" font-weight="700">1.2M</text>
+  </g>
+</svg>

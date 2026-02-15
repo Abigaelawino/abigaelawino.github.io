@@ -5,6 +5,11 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { Button } from '@/components/ui/button';
+import { siteUrl } from '@/lib/site';
+
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = false;
 
 async function getBlogPost(slug: string) {
   try {
@@ -65,7 +70,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${title} · Blog | Abigael Awino`,
       description: `${summary}${tags ? ` Topics: ${tags}.` : ''}`,
-      url: `https://abigaelawino.github.io/blog/${post.slug}`,
+      url: `${siteUrl}/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.frontmatter.date,
       modifiedTime: post.frontmatter.updated,
@@ -88,7 +93,7 @@ export async function generateMetadata({
       images: ['/assets/og.png'],
     },
     alternates: {
-      canonical: `https://abigaelawino.github.io/blog/${post.slug}`,
+      canonical: `${siteUrl}/blog/${post.slug}`,
     },
   };
 }

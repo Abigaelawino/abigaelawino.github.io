@@ -1,9 +1,11 @@
+import { siteUrl } from '@/lib/site';
+
 export function StructuredData() {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Abigael Awino Portfolio',
-    url: 'https://abigaelawino.github.io',
+    url: siteUrl,
     description:
       'Data scientist specializing in machine learning, analytics, and production-ready data solutions.',
     inLanguage: 'en-US',
@@ -12,7 +14,7 @@ export function StructuredData() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://abigaelawino.github.io/search?q={search_term_string}',
+        urlTemplate: `${siteUrl}/search?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -22,7 +24,7 @@ export function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Abigael Awino',
-    url: 'https://abigaelawino.github.io',
+    url: siteUrl,
     jobTitle: 'Data Scientist',
     description:
       'Data scientist passionate about transforming complex data into actionable insights and production-ready solutions.',
@@ -47,7 +49,7 @@ export function StructuredData() {
       '@type': 'ContactPoint',
       contactType: 'professional',
       availableLanguage: ['English'],
-      url: 'https://abigaelawino.github.io/contact',
+      url: `${siteUrl}/contact`,
     },
   };
 
@@ -55,7 +57,7 @@ export function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Abigael Awino',
-    url: 'https://abigaelawino.github.io',
+    url: siteUrl,
     description: 'Data science consulting and solutions',
     founder: {
       '@type': 'Person',
@@ -67,7 +69,7 @@ export function StructuredData() {
       '@type': 'ContactPoint',
       contactType: 'professional',
       availableLanguage: ['English'],
-      url: 'https://abigaelawino.github.io/contact',
+      url: `${siteUrl}/contact`,
     },
   };
 
@@ -79,7 +81,7 @@ export function StructuredData() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://abigaelawino.github.io',
+        item: siteUrl,
       },
     ],
   };

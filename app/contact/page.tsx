@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Github, Linkedin, ExternalLink, Clock, CheckCircle } from 'lucide-react';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Contact · Abigael Awino',
     description:
       'Get in touch with Abigael Awino to discuss your data science challenges. Reach out via the secure contact form or connect on LinkedIn and GitHub.',
-    url: 'https://abigaelawino.github.io/contact',
+    url: `${siteUrl}/contact`,
     images: [
       {
         url: '/assets/og.png',
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io/contact',
+    canonical: `${siteUrl}/contact`,
   },
 };
 

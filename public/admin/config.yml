@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-site_url: https://abigaelawino.github.io
-display_url: https://abigaelawino.github.io
+site_url: https://abigael-awino-portfolio.netlify.app
+display_url: https://abigael-awino-portfolio.netlify.app
 
 media_folder: public/images
 public_folder: /images

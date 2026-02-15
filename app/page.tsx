@@ -12,6 +12,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, Clock, ExternalLink, Github } from 'lucide-react';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 import './page.css';
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: 'Abigael Awino · Data Science Portfolio',
     description:
       'Data science solutions bridging exploratory analysis to production-ready outcomes. Explore machine learning projects, analytics implementations, and end-to-end data solutions.',
-    url: 'https://abigaelawino.github.io',
+    url: siteUrl,
     images: [
       {
         url: '/assets/og.png',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     images: ['/assets/og.png'],
   },
   alternates: {
-    canonical: 'https://abigaelawino.github.io',
+    canonical: siteUrl,
   },
 };
 

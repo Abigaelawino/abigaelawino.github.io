@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Support Ticket NLP Cover</title>
+  <desc id="desc">Placeholder cover showing NLP classification tags and throughput metrics.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect x="120" y="120" width="1360" height="660" rx="28" fill="#0b1220" opacity="0.85" />
+  <text x="200" y="220" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700">
+    Support Ticket NLP Triage
+  </text>
+  <text x="200" y="270" fill="#cbd5f5" font-family="Inter, Arial, sans-serif" font-size="20">
+    Automated intent detection, routing, and priority scoring
+  </text>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" fill="#e2e8f0">
+    <rect x="200" y="330" width="180" height="40" rx="20" fill="#1f2937" />
+    <text x="230" y="357">Billing</text>
+    <rect x="400" y="330" width="200" height="40" rx="20" fill="#1f2937" />
+    <text x="430" y="357">Account</text>
+    <rect x="620" y="330" width="200" height="40" rx="20" fill="#1f2937" />
+    <text x="650" y="357">Bug</text>
+    <rect x="840" y="330" width="220" height="40" rx="20" fill="#1f2937" />
+    <text x="870" y="357">Feature</text>
+  </g>
+  <g fill="#e2e8f0" font-family="Inter, Arial, sans-serif">
+    <text x="200" y="720" font-size="18">Auto-triage rate</text>
+    <text x="200" y="750" font-size="28" font-weight="700">89%</text>
+    <text x="420" y="720" font-size="18">Median SLA</text>
+    <text x="420" y="750" font-size="28" font-weight="700">3.2h</text>
+    <text x="600" y="720" font-size="18">Tickets/day</text>
+    <text x="600" y="750" font-size="28" font-weight="700">4.1k</text>
+  </g>
+</svg>

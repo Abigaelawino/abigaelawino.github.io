@@ -6,6 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar, MapPin } from 'lucide-react';
 import { MDXContent, enhanceContentWithCharts } from '@/components/mdx-content';
+import { siteUrl } from '@/lib/site';
+
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = false;
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -51,7 +56,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: `${title} · Case Study | Abigael Awino`,
       description: `${summary} Technologies: ${tech}. Tags: ${tags}.`,
-      url: `https://abigaelawino.github.io/projects/${project.slug}`,
+      url: `${siteUrl}/projects/${project.slug}`,
       type: 'article',
       images: [
         {
@@ -79,7 +84,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: [`/images/projects/${project.slug}-cover.svg`, '/assets/og.png'],
     },
     alternates: {
-      canonical: `https://abigaelawino.github.io/projects/${project.slug}`,
+      canonical: `${siteUrl}/projects/${project.slug}`,
     },
   };
 }

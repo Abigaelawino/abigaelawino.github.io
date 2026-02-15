@@ -68,6 +68,7 @@
     "@types/ms": "^2.1.0",
     "@types/node": "^25.2.3",
     "@types/node-fetch": "^2.6.13",
+    "@types/plotly.js": "^2.35.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.55.0",
@@ -83,6 +84,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
+    "@tailwindcss/postcss": "^4.1.18",
     "autoprefixer": "^10.4.24",
     "chrome-launcher": "^1.2.1",
     "class-variance-authority": "^0.7.1",
@@ -96,6 +98,7 @@
     "qs": "^6.15.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-is": "^19.2.0",
     "react-plotly.js": "^2.6.0",
     "reading-time": "^1.5.0",
     "recharts": "^3.7.0",
