@@ -33,3 +33,40 @@ out/
 # OS
 .DS_Store
 Thumbs.db
+node_modules/
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+out/
+.next/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Coverage
+coverage/
+
+# Ralph TUI
+.ralph-tui/ralph.lock
+
+# Test artifacts
+test-results/
