@@ -4,6 +4,8 @@
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+  NPM_CONFIG_CACHE = "/opt/build/cache/npm"
+  NPM_FLAGS = "--include=dev"
 
 [[headers]]
   for = "/*"

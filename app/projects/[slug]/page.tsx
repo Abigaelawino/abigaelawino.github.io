@@ -17,6 +17,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
+  if (!params?.slug) {
+    return {
+      title: 'Project Not Found',
+      description: 'The requested project case study could not be found.',
+    };
+  }
+
   const project = getProjectBySlug(params.slug);
 
   if (!project) {
@@ -78,6 +85,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
+  if (!params?.slug) {
+    notFound();
+  }
+
   const project = getProjectBySlug(params.slug);
 
   if (!project) {

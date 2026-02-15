@@ -42,7 +42,6 @@ export function getProjectSlugs() {
 
 export function getProjectBySlug(slug: string): Project | null {
   if (!slug || slug === 'undefined' || slug === '') {
-    console.error('Invalid slug provided:', slug);
     return null;
   }
 
