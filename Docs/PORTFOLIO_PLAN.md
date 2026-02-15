@@ -1,93 +1,278 @@
-# Data Science Portfolio Website Plan
+# Data Science Portfolio Website Plan — Netlify-compliant (Next.js + shadcn/ui)
 
 ## Goals & Audience
 
-- Showcase end-to-end data projects, communicating impact and rigor.
-- Target hiring managers, data leads, and peers; highlight reproducibility and clarity.
+- Showcase end-to-end data projects with clear impact, rigor, and reproducibility.
+- Target hiring managers, data leads, and peers.
+- Optimize for fast scanning: strong project summaries + deep case studies.
 
 ## Information Architecture
 
-- Home: value proposition, featured project, quick links to resume/GitHub/LinkedIn.
-- Projects: grid with filters (ML, analytics, visualization, NLP, time series); each links to a detailed case study.
-- About: short bio, strengths, toolkit, speaking/publications.
-- Blog/Notes: short write-ups on experiments, papers, or tech notes.
-- Contact: email form (with spam protection), social links, availability.
-- Resume: downloadable PDF; keep a web-friendly summary.
+### Home
+
+- Value proposition (1–2 lines), featured project, and quick links (Resume / GitHub / LinkedIn)
+
+### Projects
+
+- Grid with filters (ML, analytics, visualization, NLP, time series)
+- Each card links to a case study page
+
+### About
+
+- Short bio, strengths, toolkit, speaking/publications
+
+### Blog / Notes
+
+- Short write-ups: experiments, paper notes, implementation logs
+
+### Contact
+
+- Netlify Form (spam protected) + social links + availability
+
+### Resume
+
+- Web-friendly summary + downloadable PDF
 
 ## Project Case Study Template
 
-- Summary: problem, context, success metric.
-- Data: sources, size, cleaning steps, caveats.
-- Methods: models/algorithms, feature engineering, evaluation approach.
-- Results: metrics (with baselines), visuals, business impact.
-- Reproducibility: repo link, environment specs, how to run.
-- Reflection: what you’d do next, trade-offs, lessons.
+- **Summary**: problem, context, success metric
+- **Data**: sources, size, cleaning steps, caveats
+- **Methods**: models/algorithms, feature engineering, evaluation approach
+- **Results**: metrics with baselines, visuals, business impact
+- **Reproducibility**: repo link, environment specs, how to run
+- **Reflection**: next steps, trade-offs, lessons learned
 
-## Visual & UX Guidelines
+## Visual & UX Guidelines (shadcn/ui)
 
-- Tone: clean, professional; minimalist color palette using shadcn/ui design tokens
-- Components: Leverage shadcn/ui components (Card, Button, Navigation Menu, etc.) for consistency
-- Typography: Use shadcn/ui typography system with custom fonts if needed
-- Navigation: shadcn/ui Navigation Menu with sticky top nav and clear CTAs (View Resume, Contact)
-- Cards: shadcn/ui Card components for consistent project cards with tags, summaries, and primary CTA ("Read case study")
-- Mobile-first: ensure shadcn/ui responsive design works at 360–414 px widths
+- **Tone**: clean, professional, minimalist palette via shadcn tokens
+- **Components**: Card, Button, Navigation Menu, Badge/Tag, Tabs/Accordion for case studies
+- **Typography**: shadcn typography patterns + optional custom font
+- **Navigation**: sticky top nav + CTAs (View Resume, Contact)
+- **Cards**: consistent project cards with tags, summary, primary CTA ("Read case study")
+- **Mobile-first**: verify 360–414px layouts and keyboard/focus behavior
 
-## Tech Stack (focused on shadcn/ui)
+## Tech Stack (Netlify-first)
 
-- Frontend: Next.js + TypeScript; UI components via shadcn/ui (https://ui.shadcn.com/docs)
-- Styling: Tailwind CSS with shadcn/ui component system for consistent design
-- Data viz: Recharts or Plotly for interactive charts; embed static matplotlib/Altair PNGs when needed
-- Content: Markdown/MDX for blog and case studies; consider a headless CMS (e.g., Contentlayer) later
-- Analytics: privacy-friendly (e.g., Plausible or self-hosted) with per-page event tracking
-- Deployment: Vercel or Netlify with preview deploys on PRs; set up a custom domain
+### Framework
+
+- **Next.js + TypeScript** (standard build for Netlify Next.js runtime)
+- Do NOT use `output: 'export'` — let Netlify handle SSR/functions
+
+### UI
+
+- **shadcn/ui + Tailwind CSS**
+
+### Content Management
+
+- **Decap CMS** (formerly Netlify CMS) for content editing
+- MDX for projects/blog (`content/projects`, `content/blog`)
+- Admin interface at `/admin`
+
+### Data Viz
+
+- Recharts/Plotly for interactive; static PNGs for heavier plots
+
+### Analytics
+
+- Privacy-friendly (Plausible or self-hosted)
+
+### Deployment
+
+- **Netlify** (PR preview deploys, branch deploys, custom domain)
+
+## Netlify Deployment Requirements
+
+### 1) Next.js on Netlify
+
+- Use Netlify's Next.js runtime (don't force static export)
+- Next features supported:
+  - `next/image` ✓
+  - API routes ✓ (become Netlify Functions)
+  - Middleware/Edge ✓ (within Netlify constraints)
+
+### 2) netlify.toml (baseline)
+
+```toml
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+```
+
+### 3) Local dev must match deploy
+
+- Primary: `netlify dev` (proxy + functions + Next runtime)
+- Secondary: `npm run dev` (for quick iteration)
+
+### 4) Forms (Contact) — Netlify-native
+
+- Use Netlify Forms for contact form
+- Spam protection: honeypot field + optional reCAPTCHA
+- Add privacy statement on form
+
+### 5) Security headers + CSP
+
+- Content-Security-Policy (CSP)
+- X-Content-Type-Options
+- Referrer-Policy
+- Permissions-Policy
+- Strict-Transport-Security (HSTS)
+
+### 6) Preview deploys and PR checks
+
+- Netlify deploy previews on every PR
+- CI must block merges on failures:
+  - lint
+  - typecheck
+  - tests
+  - coverage gate
+  - build
 
 ## Performance, Accessibility, SEO
 
-- Performance: image optimization (next/image), prefetch featured links, code-split heavy viz.
-- Accessibility: semantic HTML, focus states, alt text on all figures/charts.
-- SEO: per-page titles/descriptions, Open Graph images for projects, sitemap and robots.txt.
+### Performance
 
-## Content Pipeline
+- Use `next/image` + modern formats
+- Code-split heavy viz (dynamic imports)
+- Avoid shipping large JSON blobs client-side
 
-- Projects stored as MDX in `content/projects/`; frontmatter fields: `title`, `date`, `tags`, `summary`, `tech`, `repo`, `cover`, `status`.
-- Blog posts in `content/blog/`; similar frontmatter plus `readingTime`.
-- Auto-generate project index from frontmatter; support tag filtering.
+### Accessibility
+
+- Semantic HTML, focus states, skip-to-content link
+- alt text for charts; table summaries where appropriate
+
+### SEO
+
+- Per-page titles/descriptions
+- Open Graph images per project
+- Sitemap and robots.txt
+- Canonical URLs if needed
+
+## Content Pipeline (MDX + Decap CMS)
+
+### Projects: `content/projects/*.mdx`
+
+Frontmatter fields:
+
+- `title`, `date`, `tags`, `summary`, `tech`, `repo`, `cover`, `status`
+
+### Blog: `content/blog/*.mdx`
+
+Frontmatter fields:
+
+- `title`, `date`, `tags`, `summary`, `readingTime`
+
+### Auto-generate
+
+- Project index from frontmatter
+- Tag filtering + search (client-side)
+
+### Decap CMS Configuration
+
+- Config: `admin/config.yml`
+- Admin UI: `/admin`
+- Supports MDX editing via Netlify Identity
 
 ## Data & Visualization Standards
 
-- Always show baselines and confidence where applicable.
-- Use consistent color encodings and units across charts.
-- Provide downloadable assets for key artifacts (model cards, notebooks, CSV samples).
+- Always show baselines and uncertainty where applicable
+- Consistent units, labels, and encodings across charts
+- Downloadables for key artifacts:
+  - Model cards
+  - Notebook links
+  - Small CSV samples (sanitized)
 
-## Integration & Automation
+## Integration & Automation (CI/CD)
 
-- CI: lint (`eslint`), type-check (`tsc`), format (`prettier --check`), test (`vitest` or `jest`), build.
-- Pre-commit: format + lint staged files.
-- Deploy previews on PRs; block merges on failing checks.
-- shadcn/ui MCP server integration configured for Codex for component management and updates
-- Ensure the local dev workflow exposes `npm run dev`/`netlify dev` with live rebuilds and a lightweight server so helper sessions mirror the Next.js starter experience.
-- Coverage gate: add `npm run coverage` with 100% statement/line/function/branch thresholds so every PR must meet the bar before Netlify builds.
-- Secure Netlify runbooks: keep `netlify.toml` aligned with the Next Platform Starter template, audit webhooks/hooks, and document the CLI steps required for each deploy so helper sessions reproduce the secure flow.
+### CI Pipeline (GitHub Actions)
+
+- eslint
+- `tsc --noEmit`
+- `prettier --check`
+- tests (Node.js built-in test runner)
+- coverage gate: 100% statements/lines/functions/branches
+- `next build` must pass
+
+### Pre-commit (local)
+
+- format + lint staged files
+- optional typecheck on commit (or pre-push)
+
+### Netlify Deploy Controls
+
+- Preview deploys for PRs
+- Branch deploys for staging (optional)
+- Production deploy only from `main` branch
+
+## Netlify Runbooks (operational compliance)
+
+### Document
+
+- Required env vars (and where set in Netlify)
+- CLI commands: `netlify login`, `netlify link`, `netlify dev`, `netlify deploy`, `netlify deploy --prod`
+- How form submissions are reviewed/handled
+- How headers/CSP are tested (curl + Lighthouse)
+
+### Audit
+
+- Build hooks/webhooks
+- Allowed deploy branches
+- Team access
 
 ## Security & Privacy
 
-- No secrets in the repo; use environment variables.
-- If collecting emails, enable spam protection (honeypot/Recaptcha) and note privacy in a short policy.
-- Prioritize secure coding practices: review dependencies, add CSP/security headers, and keep Netlify forms/bots under tight control per the plan.
+- No secrets in repo; only env vars in Netlify
+- Minimal data collection; explicit privacy note on Contact page
+- Dependency hygiene:
+  - Pin major versions
+  - Routine audits
+  - Avoid sketchy MDX plugins
 
-## Launch Checklist
+## Launch Checklist (Netlify-specific)
 
-- [ ] At least 3 polished case studies following the template.
-- [ ] Resume PDF uploaded and linked.
-- [ ] Open Graph/Twitter cards configured and validated.
-- [ ] Lighthouse scores: >90 for Performance, Accessibility, Best Practices, SEO.
-- [ ] Contact form tested end-to-end.
-- [ ] Code coverage 100% for statements/lines/functions/branches enforced by the coverage scripts.
-- [ ] Netlify deploys verify header/CSP policies, require the secure build pipeline, and log every smoke-test URL hit.
+- [ ] ≥ 3 polished case studies using the template
+- [ ] Resume PDF uploaded + linked
+- [ ] OG/Twitter cards validated
+- [ ] Lighthouse > 90 across categories
+- [ ] Contact form tested end-to-end (submission + notifications)
+- [ ] 100% coverage enforced in CI
+- [ ] Netlify deploy verifies:
+  - [ ] headers/CSP present
+  - [ ] preview deploy URLs smoke-tested
+  - [ ] build logs clean and reproducible
+- [ ] Decap CMS configured and accessible at `/admin`
 
-## Roadmap (example)
+## Roadmap
 
-- Week 1: Set up Next.js, configure shadcn/ui, layout, navigation, theming, initial CI
-- Week 2: Implement content pipeline (MDX), iT SHOULD BE BASED project cards, case study page template
-- Week 3: Add two featured projects using shadcn/ui components, blog index, analytics, SEO passes
-- Week 4: Add remaining projects, polish accessibility with shadcn/ui accessibility features, finalize resume/contact, run Lighthouse and ship
+### Week 1
+
+- Next.js + shadcn/ui setup, layout + nav, theming
+- Netlify baseline config + preview deploys
+- Decap CMS setup with Netlify Identity
+
+### Week 2
+
+- MDX pipeline + project cards + case study template
+- Tag filtering + SEO metadata
+- Decap CMS content schemas
+
+### Week 3
+
+- Add 2 featured projects + blog index
+- Analytics + OG images + performance pass
+
+### Week 4
+
+- Finish projects, finalize About/Resume/Contact
+- Accessibility polish + Lighthouse + ship
+
+## Netlify-specific "Gotchas"
+
+1. **Don't rely on local-only behavior** — use `netlify dev` for parity with production
+2. **Update CSP immediately** when adding third-party scripts (analytics, embeds)
+3. **Keep coverage gates strict**, but isolate UI snapshot tests so they don't become brittle
+4. **Ensure package.json has valid `name` and `version`** — npm will fail with "Invalid Version" otherwise
+5. **Build dependencies must be in `dependencies`**, not `devDependencies` — Netlify uses `NODE_ENV=production`
