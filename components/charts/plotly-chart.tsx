@@ -1,7 +1,19 @@
 import dynamic from 'next/dynamic';
+import type { ComponentType, CSSProperties } from 'react';
 import type { Layout, Config, PlotData } from 'plotly.js';
 
-const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
+type PlotComponentProps = {
+  data: PlotData[];
+  layout?: Partial<Layout>;
+  config?: Partial<Config>;
+  style?: CSSProperties;
+  className?: string;
+  useResizeHandler?: boolean;
+};
+
+const Plot = dynamic(() => import('react-plotly.js'), {
+  ssr: false,
+}) as ComponentType<PlotComponentProps>;
 
 export type PlotlyChartProps = {
   data: PlotData[];
