@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  trailingSlash: true,
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },
@@ -13,6 +13,16 @@ const nextConfig = {
   },
   redirects() {
     return [
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+        permanent: false,
+      },
+      {
+        source: '/admin/',
+        destination: '/admin/index.html',
+        permanent: false,
+      },
       {
         source: '/home',
         destination: '/',

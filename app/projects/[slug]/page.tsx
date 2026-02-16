@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar, MapPin } from 'lucide-react';
-import { MDXContent, enhanceContentWithCharts } from '@/components/mdx-content';
+import { MDXContent } from '@/components/mdx-content';
+import { ProjectCharts } from '@/components/project-charts';
 import { siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
@@ -21,15 +22,20 @@ export async function generateStaticParams() {
     .filter(params => params.slug !== undefined);
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  if (!params?.slug) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string } | Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  if (!resolvedParams?.slug) {
     return {
       title: 'Project Not Found',
       description: 'The requested project case study could not be found.',
     };
   }
 
-  const project = getProjectBySlug(params.slug);
+  const project = getProjectBySlug(resolvedParams.slug);
 
   if (!project) {
     return {
@@ -89,12 +95,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  if (!params?.slug) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string } | Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  if (!resolvedParams?.slug) {
     notFound();
   }
 
-  const project = getProjectBySlug(params.slug);
+  const project = getProjectBySlug(resolvedParams.slug);
 
   if (!project) {
     notFound();
@@ -306,11 +317,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </CardHeader>
             <CardContent>
               <div className="prose prose-slate max-w-none">
-                <MDXContent content={enhanceContentWithCharts(content, params.slug)} />
+                <MDXContent content={content} />
               </div>
             </CardContent>
           </Card>
         )}
+
+        <ProjectCharts slug={resolvedParams.slug} />
       </div>
 
       {/* Footer */}
