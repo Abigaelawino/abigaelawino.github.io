@@ -574,24 +574,28 @@ export default async function ProjectPage({
               </CardDescription>
             </CardHeader>
             <CardContent className="@container/viz space-y-6">
-              <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
-                {highlights.map(item => (
-                  <Card
-                    key={item.label}
-                    className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
-                  >
-                    <CardHeader className="border-b">
-                      <CardDescription>{item.label}</CardDescription>
-                      <CardTitle className="text-2xl">{item.value}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-sm text-muted-foreground">
-                      {item.note}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
               <VisualizationPanel
-                interactive={<ProjectCharts slug={resolvedParams.slug} />}
+                interactive={
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
+                      {highlights.map(item => (
+                        <Card
+                          key={item.label}
+                          className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
+                        >
+                          <CardHeader className="border-b">
+                            <CardDescription>{item.label}</CardDescription>
+                            <CardTitle className="text-2xl">{item.value}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="text-sm text-muted-foreground">
+                            {item.note}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                    <ProjectCharts slug={resolvedParams.slug} />
+                  </div>
+                }
                 notebook={
                   visualizationsContent ? (
                     <Card>
