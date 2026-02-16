@@ -1,0 +1,25 @@
+---
+title: F5 Breach 2025 — Difference-in-Differences Analysis
+date: 2026-02-16
+tags: [causal-inference, analytics, finance]
+summary: A Difference-in-Differences analysis of the October 2025 F5 Networks breach and its causal impact on stock returns.
+caseStudyData: Pulled daily stock prices for FFIV and peer/benchmark tickers with `yfinance` for 2025-04-18 to 2025-12-12. Event date: 2025-10-16.
+caseStudyMethods: Computed daily returns and estimated a DiD model with treated, post, and treated-post interaction terms. Validated assumptions with parallel-trends checks, placebo tests, and difference-in-trends robustness.
+caseStudyResults: Estimated a ~9–10% additional drop in FFIV daily returns after the breach relative to peers (treated_post ≈ -0.095, p < 0.001).
+caseStudyReproducibility: The repo includes data collection functions, model scripts, and visualization outputs for replication.
+caseStudyReflection: The strongest signal came from the treated-post coefficient. Next iteration should add volatility/volume effects and intraday data.
+tech: [python, pandas, numpy, statsmodels, yfinance, matplotlib]
+repo: https://github.com/Abigaelawino/F5-Breach
+cover: /images/projects/f5-breach-cover.svg
+status: published
+---
+
+# F5 Breach 2025 — Difference-in-Differences Analysis
+
+This case study quantifies the causal impact of the October 2025 F5 Networks breach on stock returns using a DiD approach.
+
+## Key Outputs
+
+- Event study timeline and peer comparison
+- DiD model results with robustness checks
+- Slide-ready visuals summarizing findings

@@ -2,7 +2,8 @@
   "name": "abigaelawino-portfolio",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node scripts/dev.mjs",
+    "dev": "next dev",
+    "dev:static": "node scripts/dev.mjs",
     "start": "node scripts/dev-server.mjs",
     "lint": "node scripts/lint.mjs && node scripts/eslint.mjs",
     "format": "prettier --write .",

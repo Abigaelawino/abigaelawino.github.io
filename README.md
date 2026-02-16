@@ -10,8 +10,9 @@ This repository tracks the Netlify-deployed Next.js portfolio site outlined in `
 
 ## Local development
 
-- `netlify dev` is the parity workflow and serves the site at `http://localhost:8888` while proxying the app running on `3000`.
-- `npm run dev` runs `scripts/dev.mjs`, refreshes content indexes, rebuilds the static helper output in `dist/`, and serves it on `3000` for quick static checks.
+- `netlify dev` is the parity workflow and serves the site at `http://localhost:8888` while proxying `next dev` on `3000`.
+- `npm run dev` starts the full Next.js dev server.
+- `npm run dev:static` runs `scripts/dev.mjs`, refreshes content indexes, rebuilds the static helper output in `dist/`, and serves it on `3000` for quick static checks.
 - `npm run start` serves the `dist/` output for static smoke testing.
 
 ## CMS

@@ -1,0 +1,22 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#84fab0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8fd3f4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)" />
+  <rect x="60" y="75" width="280" height="150" rx="12" fill="#ffffff" opacity="0.9" />
+  <rect x="90" y="105" width="60" height="40" fill="#10b981" />
+  <rect x="160" y="105" width="60" height="40" fill="#34d399" />
+  <rect x="230" y="105" width="60" height="40" fill="#60a5fa" />
+  <rect x="90" y="155" width="60" height="40" fill="#3b82f6" />
+  <rect x="160" y="155" width="60" height="40" fill="#2563eb" />
+  <rect x="230" y="155" width="60" height="40" fill="#1d4ed8" />
+  <text x="200" y="45" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+    SSA Disability Outcomes
+  </text>
+  <text x="200" y="255" text-anchor="middle" fill="#374151" font-family="Arial, sans-serif" font-size="12">
+    Approval rates by state
+  </text>
+</svg>

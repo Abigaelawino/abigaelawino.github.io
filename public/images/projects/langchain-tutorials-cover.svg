@@ -1,0 +1,21 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a1c4fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c2e9fb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)" />
+  <rect x="60" y="70" width="280" height="160" rx="12" fill="#ffffff" opacity="0.9" />
+  <circle cx="140" cy="150" r="24" fill="#3b82f6" />
+  <circle cx="220" cy="150" r="24" fill="#10b981" />
+  <circle cx="300" cy="150" r="24" fill="#f59e0b" />
+  <line x1="164" y1="150" x2="196" y2="150" stroke="#6b7280" stroke-width="4" />
+  <line x1="244" y1="150" x2="276" y2="150" stroke="#6b7280" stroke-width="4" />
+  <text x="200" y="45" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+    LangChain + Redis RAG
+  </text>
+  <text x="200" y="255" text-anchor="middle" fill="#374151" font-family="Arial, sans-serif" font-size="12">
+    Retrieval, memory, and chat flow
+  </text>
+</svg>

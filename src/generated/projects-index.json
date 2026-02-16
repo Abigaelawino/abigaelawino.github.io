@@ -1,5 +1,120 @@
 [
   {
+    "slug": "babynames-ssa-visual-story",
+    "frontmatter": {
+      "title": "How Basic Is Your Name? SSA Baby Names Visual Story",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "visualization",
+        "storytelling"
+      ],
+      "summary": "A visual exploration of U.S. baby names by generation using SSA data, Tableau, and Python data prep.",
+      "caseStudyData": "Aggregated SSA baby names data (1880–2024) from SSA text files into a single cleaned dataset. Focused on names with at least 5 occurrences per year and grouped records into generational cohorts.",
+      "caseStudyMethods": "Cleaned and normalized SSA name records with pandas, derived generational cohorts, and built Tableau visuals for top-10 trends and cohort comparisons. Exported assets for shareable storytelling.",
+      "caseStudyResults": "Delivered a multi-panel visual story showing top-10 names across Boomers, Gen X, Millennials, Gen Z, and Gen Alpha with cohort-level comparisons.",
+      "caseStudyReproducibility": "Python notebooks cover data ingestion and cleanup. Tableau dashboards can be rebuilt from the exported CSV outputs.",
+      "caseStudyReflection": "The biggest insight was how sharply naming trends shift at cohort boundaries. Next iteration could add regional slices and socioeconomic covariates.",
+      "tech": [
+        "python",
+        "pandas",
+        "tableau",
+        "canva",
+        "data-storytelling"
+      ],
+      "repo": "https://github.com/Abigaelawino/babynames",
+      "cover": "/images/projects/babynames-cover.svg",
+      "status": "published"
+    },
+    "content": "# How Basic Is Your Name?\n\nThis project builds a visual story around SSA baby name data across generations, designed for quick scanning and shareable insights.\n\n## Highlights\n\n- **Generational cohorts** with top-10 names per cohort\n- **Trend shifts** from Boomers to Gen Alpha\n- **Tableau visuals** optimized for storytelling\n\n## Deliverables\n\n- Cleaned SSA dataset (1880–2024)\n- Tableau dashboards by cohort\n- Visual assets for presentation and social sharing"
+  },
+  {
+    "slug": "f5-breach-threat-intelligence",
+    "frontmatter": {
+      "title": "F5 Breach 2025 — Difference-in-Differences Analysis",
+      "date": "2026-02-16",
+      "tags": [
+        "causal-inference",
+        "analytics",
+        "finance"
+      ],
+      "summary": "A Difference-in-Differences analysis of the October 2025 F5 Networks breach and its causal impact on stock returns.",
+      "caseStudyData": "Pulled daily stock prices for FFIV and peer/benchmark tickers with `yfinance` for 2025-04-18 to 2025-12-12. Event date: 2025-10-16.",
+      "caseStudyMethods": "Computed daily returns and estimated a DiD model with treated, post, and treated-post interaction terms. Validated assumptions with parallel-trends checks, placebo tests, and difference-in-trends robustness.",
+      "caseStudyResults": "Estimated a ~9–10% additional drop in FFIV daily returns after the breach relative to peers (treated_post ≈ -0.095, p < 0.001).",
+      "caseStudyReproducibility": "The repo includes data collection functions, model scripts, and visualization outputs for replication.",
+      "caseStudyReflection": "The strongest signal came from the treated-post coefficient. Next iteration should add volatility/volume effects and intraday data.",
+      "tech": [
+        "python",
+        "pandas",
+        "numpy",
+        "statsmodels",
+        "yfinance",
+        "matplotlib"
+      ],
+      "repo": "https://github.com/Abigaelawino/F5-Breach",
+      "cover": "/images/projects/f5-breach-cover.svg",
+      "status": "published"
+    },
+    "content": "# F5 Breach 2025 — Difference-in-Differences Analysis\n\nThis case study quantifies the causal impact of the October 2025 F5 Networks breach on stock returns using a DiD approach.\n\n## Key Outputs\n\n- Event study timeline and peer comparison\n- DiD model results with robustness checks\n- Slide-ready visuals summarizing findings"
+  },
+  {
+    "slug": "langchain-tutorials-lab",
+    "frontmatter": {
+      "title": "LangChain with Redis — RAG Tutorial",
+      "date": "2026-02-16",
+      "tags": [
+        "llm",
+        "nlp",
+        "rag"
+      ],
+      "summary": "A conversational RAG system built with LangChain, Redis vector store, and OpenAI models.",
+      "caseStudyData": "Seeded sample documents and embeddings in Redis, plus chat history storage for multi-turn conversations.",
+      "caseStudyMethods": "Implemented a ConversationalRetrievalChain with Redis-backed memory and vector search. Integrated GPT-4o-mini for response generation.",
+      "caseStudyResults": "Delivered a working CLI chatbot that retrieves relevant context and maintains conversation state across turns.",
+      "caseStudyReproducibility": "Repo includes requirements, configuration notes, and runnable examples for recreating the RAG workflow.",
+      "caseStudyReflection": "Retrieval quality is highly sensitive to chunking and embedding configuration. Next step is automated eval harnesses.",
+      "tech": [
+        "python",
+        "langchain",
+        "redis",
+        "openai"
+      ],
+      "repo": "https://github.com/Abigaelawino/langchain-tutorials",
+      "cover": "/images/projects/langchain-tutorials-cover.svg",
+      "status": "published"
+    },
+    "content": "# LangChain with Redis — RAG Tutorial\n\nThis project demonstrates a conversational RAG workflow using LangChain, Redis vector search, and OpenAI models.\n\n## What’s Included\n\n- Redis vector store retrieval\n- Chat history memory in Redis\n- CLI interface for interactive testing"
+  },
+  {
+    "slug": "ssa-disability-outcomes",
+    "frontmatter": {
+      "title": "SSA Disability Outcomes Analysis",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "policy",
+        "visualization"
+      ],
+      "summary": "Analysis of SSA disability outcomes with a focus on approval rates by state and clear visual summaries.",
+      "caseStudyData": "Collected SSA disability outcomes data and prepared a clean dataset for mapping approval likelihoods.",
+      "caseStudyMethods": "Aggregated outcomes by state and produced a choropleth map visualization for 2021 approval likelihoods.",
+      "caseStudyResults": "Delivered a statewide approval-rate map and summary notes for policy and research context.",
+      "caseStudyReproducibility": "Repo contains the datasets and visualization artifacts used to recreate the map.",
+      "caseStudyReflection": "The state-level view surfaces meaningful geographic differences. Next step is adding multi-year trends and demographic slices.",
+      "tech": [
+        "python",
+        "pandas",
+        "matplotlib",
+        "data-visualization"
+      ],
+      "repo": "https://github.com/Abigaelawino/ssa-disability-outcomes",
+      "cover": "/images/projects/ssa-disability-outcomes-cover.svg",
+      "status": "published"
+    },
+    "content": "# SSA Disability Outcomes Analysis\n\nThis project examines disability claim outcomes with a focus on statewide approval rates.\n\n## Focus Areas\n\n- Approval likelihood by state (2021)\n- Clear methodology and assumptions"
+  },
+  {
     "slug": "customer-segmentation-dashboard",
     "frontmatter": {
       "title": "Customer Segmentation Analytics Dashboard",

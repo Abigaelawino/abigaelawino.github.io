@@ -1,0 +1,25 @@
+---
+title: LangChain with Redis — RAG Tutorial
+date: 2026-02-16
+tags: [llm, nlp, rag]
+summary: A conversational RAG system built with LangChain, Redis vector store, and OpenAI models.
+caseStudyData: Seeded sample documents and embeddings in Redis, plus chat history storage for multi-turn conversations.
+caseStudyMethods: Implemented a ConversationalRetrievalChain with Redis-backed memory and vector search. Integrated GPT-4o-mini for response generation.
+caseStudyResults: Delivered a working CLI chatbot that retrieves relevant context and maintains conversation state across turns.
+caseStudyReproducibility: Repo includes requirements, configuration notes, and runnable examples for recreating the RAG workflow.
+caseStudyReflection: Retrieval quality is highly sensitive to chunking and embedding configuration. Next step is automated eval harnesses.
+tech: [python, langchain, redis, openai]
+repo: https://github.com/Abigaelawino/langchain-tutorials
+cover: /images/projects/langchain-tutorials-cover.svg
+status: published
+---
+
+# LangChain with Redis — RAG Tutorial
+
+This project demonstrates a conversational RAG workflow using LangChain, Redis vector search, and OpenAI models.
+
+## What’s Included
+
+- Redis vector store retrieval
+- Chat history memory in Redis
+- CLI interface for interactive testing
