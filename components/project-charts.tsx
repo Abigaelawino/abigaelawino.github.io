@@ -1397,7 +1397,13 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
             title="Top 10 Names Overall (1880–2024)"
             description="Most common names since 1880"
           >
-            <Chart type="bar" data={babynamesTopNames} height={240} showLegend={false} />
+            <Chart
+              type="bar"
+              data={babynamesTopNames}
+              height={260}
+              showLegend={false}
+              xTickAngle={-35}
+            />
           </ChartPanel>
           <ChartPanel title="Unique Names per Year (2015–2024)" description="Name diversity trend">
             <Chart type="line" data={babynamesUniqueNamesRecent} height={240} color="#f59e0b" />
