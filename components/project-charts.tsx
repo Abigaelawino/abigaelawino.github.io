@@ -1532,7 +1532,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
               <span>{ssaYears[ssaYears.length - 1]}</span>
             </div>
           </div>
-          <div className="h-[420px]">
+          <div className="h-[420px] relative">
             <PlotlyChart
               data={[
                 {
@@ -1556,6 +1556,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
               layout={{
                 title: `Favorable Determination Rate by State (FY${selectedYear})`,
                 geo: { scope: 'usa', projection: { type: 'albers usa' } },
+                hovermode: 'closest',
                 paper_bgcolor: 'transparent',
                 plot_bgcolor: 'transparent',
                 margin: { l: 0, r: 0, t: 50, b: 0 },

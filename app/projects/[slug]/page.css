@@ -443,9 +443,20 @@ h1 {
   white-space: pre;
 }
 
-.viz-layout .viz-tab {
+
+.viz-shell input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.viz-shell {
+  position: relative;
+}
+
+.viz-shell .viz-tab {
   display: block;
-  border-radius: 10px;
+  border-radius: 999px;
   border: 1px solid #e2e8f0;
   padding: 0.5rem 0.75rem;
   font-weight: 500;
@@ -455,15 +466,28 @@ h1 {
   text-align: left;
 }
 
-.viz-layout .viz-tab:hover {
+.viz-shell .viz-tab:hover {
   color: #0f172a;
   background-color: #e2e8f0;
 }
 
-.viz-layout .viz-tab-active {
+#viz-interactive:checked ~ .viz-body .viz-tab[for='viz-interactive'],
+#viz-notebook:checked ~ .viz-body .viz-tab[for='viz-notebook'] {
   background-color: #0f172a;
   color: #f8fafc;
   border-color: #0f172a;
+}
+
+.viz-shell .viz-panel {
+  display: none;
+}
+
+#viz-interactive:checked ~ .viz-body .viz-panel-interactive {
+  display: block;
+}
+
+#viz-notebook:checked ~ .viz-body .viz-panel-notebook {
+  display: block;
 }
 
 .mdx-content h3 {
