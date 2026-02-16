@@ -28,7 +28,12 @@ export function PlotlyChart({ data, layout, config, className }: PlotlyChartProp
       <Plot
         data={data as PlotData[]}
         layout={{ margin: { l: 32, r: 24, t: 32, b: 32 }, ...layout }}
-        config={{ responsive: true, displayModeBar: false, ...config }}
+        config={{
+          responsive: true,
+          displayModeBar: false,
+          topojsonURL: '/plotly/',
+          ...config,
+        }}
         style={{ width: '100%', height: '100%' }}
         useResizeHandler
       />

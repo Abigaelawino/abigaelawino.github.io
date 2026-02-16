@@ -9,6 +9,13 @@ import { MDXContent } from '@/components/mdx-content';
 import { ProjectCharts } from '@/components/project-charts';
 import { siteUrl } from '@/lib/site';
 import blogIndex from '@/src/generated/blog-index.json';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -17,29 +24,71 @@ export const revalidate = false;
 type MdxSplit = {
   analysisContent: string;
   visualizationsContent: string | null;
+  deliverablesContent: string | null;
+  workContent: string | null;
 };
+
+function escapeHeading(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function extractSection(content: string, title: string) {
+  const marker = new RegExp(`(^|\\n)##\\s+${escapeHeading(title)}\\s*\\n`, 'i');
+  const match = content.match(marker);
+  if (!match || match.index === undefined) {
+    return { section: null, rest: content };
+  }
+
+  const headingStart = match.index + (match[1] ? match[1].length : 0);
+  const headingLength = match[0].length - (match[1] ? match[1].length : 0);
+  const contentStart = headingStart + headingLength;
+  const remainder = content.slice(0, headingStart).trimEnd();
+  const tail = content.slice(contentStart);
+  const nextHeadingMatch = tail.match(/\n##\s+/);
+  const sectionBody = nextHeadingMatch
+    ? tail.slice(0, nextHeadingMatch.index).trim()
+    : tail.trim();
+  const nextSectionStart = nextHeadingMatch ? contentStart + nextHeadingMatch.index : content.length;
+  const restTail = content.slice(nextSectionStart).trimStart();
+  const rest = [remainder, restTail].filter(Boolean).join('\n\n');
+
+  return {
+    section: sectionBody || null,
+    rest,
+  };
+}
 
 function splitMdxContent(content: string | undefined): MdxSplit {
   if (!content) {
-    return { analysisContent: '', visualizationsContent: null };
+    return {
+      analysisContent: '',
+      visualizationsContent: null,
+      deliverablesContent: null,
+      workContent: null,
+    };
   }
 
-  const marker = /(^|\n)##\s+Visualizations\s*\n/i;
-  const match = content.match(marker);
-  if (!match || match.index === undefined) {
-    return { analysisContent: content, visualizationsContent: null };
-  }
+  let remaining = content;
+  const visualizations = extractSection(remaining, 'Visualizations');
+  remaining = visualizations.rest;
+  const deliverables = extractSection(remaining, 'Deliverables');
+  remaining = deliverables.rest;
+  const notebookHighlights = extractSection(remaining, 'Notebook Highlights');
+  remaining = notebookHighlights.rest;
+  const tableauDetails = extractSection(remaining, 'Tableau Workbook Details');
+  remaining = tableauDetails.rest;
+  const notebookSnippets = extractSection(remaining, 'Notebook Snippets');
+  remaining = notebookSnippets.rest;
 
-  const markerIndex = match.index + (match[1] ? match[1].length : 0);
-  const analysis = content.slice(0, markerIndex).trim();
-  const visuals = content
-    .slice(markerIndex)
-    .replace(/^##\s+Visualizations\s*\n/i, '')
-    .trim();
+  const workContent = [notebookHighlights.section, tableauDetails.section, notebookSnippets.section]
+    .filter(Boolean)
+    .join('\n\n');
 
   return {
-    analysisContent: analysis,
-    visualizationsContent: visuals || null,
+    analysisContent: remaining.trim(),
+    visualizationsContent: visualizations.section,
+    deliverablesContent: deliverables.section,
+    workContent: workContent || null,
   };
 }
 
@@ -199,7 +248,8 @@ export default async function ProjectPage({
   }
 
   const { frontmatter, content, readingTime } = project;
-  const { analysisContent, visualizationsContent } = splitMdxContent(content);
+  const { analysisContent, visualizationsContent, deliverablesContent, workContent } =
+    splitMdxContent(content);
   const projectHasCharts = [
     'customer-segmentation-dashboard',
     'ecommerce-recommendation-engine',
@@ -328,15 +378,29 @@ export default async function ProjectPage({
         </CardContent>
       </Card>
 
-      {/* Cover Image */}
-      {frontmatter.cover && (
+      {/* Project Visual Carousel */}
+      {(frontmatter.gallery?.length > 0 || frontmatter.cover) && (
         <Card>
           <CardContent className="p-0">
-            <img
-              src={frontmatter.cover}
-              alt={frontmatter.title}
-              className="w-full h-auto rounded-t-lg"
-            />
+            <Carousel className="w-full">
+              <CarouselContent>
+                {[...(frontmatter.gallery ?? []), ...(frontmatter.cover ? [frontmatter.cover] : [])]
+                  .filter((item, index, arr) => arr.indexOf(item) === index)
+                  .map(item => (
+                    <CarouselItem key={item}>
+                      <div className="relative overflow-hidden rounded-lg">
+                        <img
+                          src={item}
+                          alt={`${frontmatter.title} visual`}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </CardContent>
         </Card>
       )}
@@ -389,6 +453,20 @@ export default async function ProjectPage({
           </CardContent>
         </Card>
 
+        {/* Detailed Analysis */}
+        {analysisContent && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Detailed Analysis</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-slate max-w-none">
+                <MDXContent content={analysisContent} />
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Data Section */}
         {frontmatter.caseStudyData && (
           <Card>
@@ -401,6 +479,19 @@ export default async function ProjectPage({
           </Card>
         )}
 
+        {deliverablesContent && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Deliverables</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-slate max-w-none">
+                <MDXContent content={deliverablesContent} />
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Methods Section */}
         {frontmatter.caseStudyMethods && (
           <Card>
@@ -409,6 +500,20 @@ export default async function ProjectPage({
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">{frontmatter.caseStudyMethods}</p>
+            </CardContent>
+          </Card>
+        )}
+
+        {workContent && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Work Artifacts</CardTitle>
+              <CardDescription>Notebook highlights and Tableau workbook details.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-slate max-w-none">
+                <MDXContent content={workContent} />
+              </div>
             </CardContent>
           </Card>
         )}
@@ -436,40 +541,73 @@ export default async function ProjectPage({
             <CardContent className="space-y-6">
               <div className="grid gap-4 md:grid-cols-3">
                 {highlights.map(item => (
-                  <Card key={item.label} className="bg-card/80">
-                    <CardHeader>
+                  <Card
+                    key={item.label}
+                    className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
+                  >
+                    <CardHeader className="border-b">
                       <CardDescription>{item.label}</CardDescription>
                       <CardTitle className="text-2xl">{item.value}</CardTitle>
                     </CardHeader>
-                    <CardContent className="text-sm text-muted-foreground">{item.note}</CardContent>
+                    <CardContent className="text-sm text-muted-foreground">
+                      {item.note}
+                    </CardContent>
                   </Card>
                 ))}
               </div>
-              <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
-                <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-2">
-                  <div className="font-semibold text-foreground">Navigate</div>
-                  <a className="block text-muted-foreground hover:text-foreground" href="#viz-interactive">
-                    Interactive charts
-                  </a>
-                  <a className="block text-muted-foreground hover:text-foreground" href="#viz-notebook">
-                    Notebook figures
-                  </a>
-                </aside>
-                <div className="space-y-8">
-                  <section id="viz-interactive" className="space-y-4">
-                    <h3 className="text-lg font-semibold">Interactive charts</h3>
-                    <div className="space-y-4">
-                      <ProjectCharts slug={resolvedParams.slug} />
+              <div className="viz-layout">
+                <input
+                  type="radio"
+                  id="viz-view-interactive"
+                  name="viz-view"
+                  defaultChecked
+                />
+                {visualizationsContent && (
+                  <input type="radio" id="viz-view-notebook" name="viz-view" />
+                )}
+                <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
+                  <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-3">
+                    <div className="font-semibold text-foreground">Views</div>
+                    <label className="viz-tab" htmlFor="viz-view-interactive">
+                      Interactive charts
+                    </label>
+                    {visualizationsContent && (
+                      <label className="viz-tab" htmlFor="viz-view-notebook">
+                        Notebook figures
+                      </label>
+                    )}
+                    <div className="pt-2 text-xs text-muted-foreground">
+                      Toggle to keep the page focused while reviewing each set.
                     </div>
-                  </section>
-                  {visualizationsContent && (
-                    <section id="viz-notebook" className="space-y-4">
-                      <h3 className="text-lg font-semibold">Notebook figures</h3>
-                      <div className="prose prose-slate max-w-none">
-                        <MDXContent content={visualizationsContent} />
+                  </aside>
+                  <div className="viz-panels space-y-8">
+                    <section data-viz-panel="interactive" className="space-y-6">
+                      <div className="flex flex-col gap-1">
+                        <h3 className="text-lg font-semibold">Interactive charts</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Live charts and maps that anchor the story.
+                        </p>
                       </div>
+                      <ProjectCharts slug={resolvedParams.slug} />
                     </section>
-                  )}
+                    {visualizationsContent && (
+                      <section data-viz-panel="notebook" className="space-y-6">
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-lg font-semibold">Notebook figures</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Notebook exports and Tableau snapshots for deep-dive context.
+                          </p>
+                        </div>
+                        <Card>
+                          <CardContent className="p-6">
+                            <div className="prose prose-slate max-w-none">
+                              <MDXContent content={visualizationsContent} />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </section>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -505,20 +643,6 @@ export default async function ProjectPage({
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">{frontmatter.caseStudyReflection}</p>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Additional Content */}
-        {analysisContent && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Detailed Analysis</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="prose prose-slate max-w-none">
-                <MDXContent content={analysisContent} />
-              </div>
             </CardContent>
           </Card>
         )}

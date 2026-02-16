@@ -39,7 +39,7 @@ Required frontmatter fields:
 - `tech` (list)
 - `caseStudyData` / `caseStudyMethods` / `caseStudyResults` / `caseStudyReproducibility` / `caseStudyReflection`
 
-The **gallery** drives the carousel headers on project cards.
+The **gallery** drives the carousel headers on project cards and the project page visual carousel.
 
 ### Editing Blog Posts
 
@@ -151,6 +151,22 @@ If you want charts/images grouped under the Visualizations panel on the project 
 ```
 
 Everything below that header is routed into the Visualizations area instead of the Detailed Analysis panel.
+
+### Work Artifacts section (Notebook + Tableau)
+
+If you add any of these headers, their content is grouped into the **Work Artifacts** section after Methods:
+
+```mdx
+## Notebook Highlights
+## Tableau Workbook Details
+## Notebook Snippets
+```
+
+Use this area for code blocks, notebook notes, or Tableau workbook field choices.
+
+### Deliverables section placement
+
+If you add a `## Deliverables` header, that content appears right after the Data section.
 
 ### Table (shadcn/ui)
 

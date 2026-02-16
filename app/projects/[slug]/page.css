@@ -443,6 +443,51 @@ h1 {
   white-space: pre;
 }
 
+.viz-layout input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.viz-layout {
+  position: relative;
+}
+
+.viz-layout .viz-tab {
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.viz-layout .viz-tab:hover {
+  color: #0f172a;
+  background-color: #e2e8f0;
+}
+
+#viz-view-interactive:checked ~ .grid .viz-tab[for='viz-view-interactive'],
+#viz-view-notebook:checked ~ .grid .viz-tab[for='viz-view-notebook'] {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: #0f172a;
+}
+
+.viz-layout .viz-panels [data-viz-panel] {
+  display: none;
+}
+
+#viz-view-interactive:checked ~ .grid .viz-panels [data-viz-panel='interactive'] {
+  display: block;
+}
+
+#viz-view-notebook:checked ~ .grid .viz-panels [data-viz-panel='notebook'] {
+  display: block;
+}
+
 .mdx-content h3 {
   color: #1e293b;
   font-size: 1.25rem;
