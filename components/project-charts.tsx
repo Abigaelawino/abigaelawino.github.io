@@ -1402,7 +1402,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
               data={babynamesTopNames}
               height={260}
               showLegend={false}
-              xTickAngle={-35}
+              xTickAngle={-45}
             />
           </ChartPanel>
           <ChartPanel title="Unique Names per Year (2015–2024)" description="Name diversity trend">
