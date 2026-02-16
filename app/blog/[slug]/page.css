@@ -159,6 +159,6 @@ h1 {
 }
 
 .mdx-content .code-block .line-content {
-  color: #1f2937;
+  color: inherit;
   white-space: pre;
 }

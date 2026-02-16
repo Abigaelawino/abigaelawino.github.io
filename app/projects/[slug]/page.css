@@ -439,18 +439,8 @@ h1 {
 }
 
 .mdx-content .code-block .line-content {
-  color: #1f2937;
+  color: inherit;
   white-space: pre;
-}
-
-.viz-layout input[type='radio'] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.viz-layout {
-  position: relative;
 }
 
 .viz-layout .viz-tab {
@@ -462,6 +452,7 @@ h1 {
   color: #475569;
   cursor: pointer;
   transition: all 0.15s ease;
+  text-align: left;
 }
 
 .viz-layout .viz-tab:hover {
@@ -469,23 +460,10 @@ h1 {
   background-color: #e2e8f0;
 }
 
-#viz-view-interactive:checked ~ .grid .viz-tab[for='viz-view-interactive'],
-#viz-view-notebook:checked ~ .grid .viz-tab[for='viz-view-notebook'] {
+.viz-layout .viz-tab-active {
   background-color: #0f172a;
   color: #f8fafc;
   border-color: #0f172a;
-}
-
-.viz-layout .viz-panels [data-viz-panel] {
-  display: none;
-}
-
-#viz-view-interactive:checked ~ .grid .viz-panels [data-viz-panel='interactive'] {
-  display: block;
-}
-
-#viz-view-notebook:checked ~ .grid .viz-panels [data-viz-panel='notebook'] {
-  display: block;
 }
 
 .mdx-content h3 {

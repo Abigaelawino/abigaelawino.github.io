@@ -1,4 +1,5 @@
 import React from 'react';
+import { getHighlighter, type Highlighter, type ThemedToken } from 'shiki';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Chart } from '@/components/ui/chart';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,7 +29,51 @@ function InlineCode({ className, ...props }: InlineCodeProps) {
   );
 }
 
-function PreWithLines({ children, className, ...props }: React.ComponentProps<'pre'>) {
+const shikiLanguages = [
+  'bash',
+  'css',
+  'html',
+  'javascript',
+  'js',
+  'jsx',
+  'json',
+  'markdown',
+  'md',
+  'mdx',
+  'python',
+  'shell',
+  'sql',
+  'ts',
+  'tsx',
+  'yaml',
+  'yml',
+  'text',
+];
+
+const highlighterPromise: Promise<Highlighter> = getHighlighter({
+  themes: ['github-light'],
+  langs: shikiLanguages,
+});
+
+function getLanguage(className: string | undefined) {
+  if (!className) return 'text';
+  const match = className.match(/language-([\w-]+)/);
+  return match?.[1] ?? 'text';
+}
+
+async function highlightWithShiki(code: string, language: string) {
+  try {
+    const highlighter = await highlighterPromise;
+    return highlighter.codeToThemedTokens(code, {
+      lang: language,
+      theme: 'github-light',
+    });
+  } catch {
+    return null;
+  }
+}
+
+async function PreWithLines({ children, className, ...props }: React.ComponentProps<'pre'>) {
   const codeElement = React.Children.toArray(children).find(
     child => React.isValidElement(child) && child.type === 'code'
   ) as React.ReactElement | undefined;
@@ -40,6 +85,8 @@ function PreWithLines({ children, className, ...props }: React.ComponentProps<'p
     return '';
   })();
 
+  const language = getLanguage(codeElement?.props?.className ?? className);
+  const highlighted = await highlightWithShiki(rawCode, language);
   const lines = rawCode.replace(/\n$/, '').split('\n');
 
   return (
@@ -52,12 +99,26 @@ function PreWithLines({ children, className, ...props }: React.ComponentProps<'p
       {...props}
     >
       <code data-line-numbers="">
-        {lines.map((line, index) => (
-          <span className="line" data-line={index + 1} key={`line-${index}`}>
-            <span className="line-number">{index + 1}</span>
-            <span className="line-content">{line || ' '}</span>
-          </span>
-        ))}
+        {lines.map((line, index) => {
+          const tokens = highlighted ? highlighted[index] : null;
+          return (
+            <span className="line" data-line={index + 1} key={`line-${index}`}>
+              <span className="line-number">{index + 1}</span>
+              <span className="line-content">
+                {tokens && tokens.length > 0
+                  ? tokens.map((token: ThemedToken, tokenIndex) => (
+                      <span
+                        key={`token-${index}-${tokenIndex}`}
+                        style={token.color ? { color: token.color } : undefined}
+                      >
+                        {token.content}
+                      </span>
+                    ))
+                  : line || ' '}
+              </span>
+            </span>
+          );
+        })}
       </code>
     </pre>
   );

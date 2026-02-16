@@ -16,6 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { VisualizationPanel } from '@/components/visualization-panel';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -530,90 +531,6 @@ export default async function ProjectPage({
           </Card>
         )}
 
-        {shouldRenderVisualizations && (
-          <Card id="visualizations">
-            <CardHeader>
-              <CardTitle>Visualizations</CardTitle>
-              <CardDescription>
-                Interactive charts and notebook-derived figures grouped for quick review.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid gap-4 md:grid-cols-3">
-                {highlights.map(item => (
-                  <Card
-                    key={item.label}
-                    className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
-                  >
-                    <CardHeader className="border-b">
-                      <CardDescription>{item.label}</CardDescription>
-                      <CardTitle className="text-2xl">{item.value}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-sm text-muted-foreground">
-                      {item.note}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-              <div className="viz-layout">
-                <input
-                  type="radio"
-                  id="viz-view-interactive"
-                  name="viz-view"
-                  defaultChecked
-                />
-                {visualizationsContent && (
-                  <input type="radio" id="viz-view-notebook" name="viz-view" />
-                )}
-                <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
-                  <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-3">
-                    <div className="font-semibold text-foreground">Views</div>
-                    <label className="viz-tab" htmlFor="viz-view-interactive">
-                      Interactive charts
-                    </label>
-                    {visualizationsContent && (
-                      <label className="viz-tab" htmlFor="viz-view-notebook">
-                        Notebook figures
-                      </label>
-                    )}
-                    <div className="pt-2 text-xs text-muted-foreground">
-                      Toggle to keep the page focused while reviewing each set.
-                    </div>
-                  </aside>
-                  <div className="viz-panels space-y-8">
-                    <section data-viz-panel="interactive" className="space-y-6">
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-lg font-semibold">Interactive charts</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Live charts and maps that anchor the story.
-                        </p>
-                      </div>
-                      <ProjectCharts slug={resolvedParams.slug} />
-                    </section>
-                    {visualizationsContent && (
-                      <section data-viz-panel="notebook" className="space-y-6">
-                        <div className="flex flex-col gap-1">
-                          <h3 className="text-lg font-semibold">Notebook figures</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Notebook exports and Tableau snapshots for deep-dive context.
-                          </p>
-                        </div>
-                        <Card>
-                          <CardContent className="p-6">
-                            <div className="prose prose-slate max-w-none">
-                              <MDXContent content={visualizationsContent} />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </section>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
         {/* Reproducibility Section */}
         {frontmatter.caseStudyReproducibility && (
           <Card>
@@ -643,6 +560,49 @@ export default async function ProjectPage({
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">{frontmatter.caseStudyReflection}</p>
+            </CardContent>
+          </Card>
+        )}
+
+        {shouldRenderVisualizations && (
+          <Card id="visualizations">
+            <CardHeader>
+              <CardTitle>Visualizations</CardTitle>
+              <CardDescription>
+                Interactive charts and notebook-derived figures grouped for quick review.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid gap-4 md:grid-cols-3">
+                {highlights.map(item => (
+                  <Card
+                    key={item.label}
+                    className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
+                  >
+                    <CardHeader className="border-b">
+                      <CardDescription>{item.label}</CardDescription>
+                      <CardTitle className="text-2xl">{item.value}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm text-muted-foreground">
+                      {item.note}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              <VisualizationPanel
+                interactive={<ProjectCharts slug={resolvedParams.slug} />}
+                notebook={
+                  visualizationsContent ? (
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="prose prose-slate max-w-none">
+                          <MDXContent content={visualizationsContent} />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ) : undefined
+                }
+              />
             </CardContent>
           </Card>
         )}

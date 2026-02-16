@@ -107,6 +107,7 @@
     "react-plotly.js": "^2.6.0",
     "reading-time": "^1.5.0",
     "recharts": "^3.7.0",
+    "shiki": "^1.29.2",
     "tailwind-merge": "^3.4.1",
     "tailwindcss": "^4.1.18",
     "tailwindcss-animate": "^1.0.7"

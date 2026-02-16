@@ -1549,7 +1549,8 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                     line: { color: '#ffffff', width: 1 },
                   },
                   colorbar: { title: 'Approval %' },
-                  hovertemplate: '%{location}: %{z:.2f}%<extra></extra>',
+                  hovertemplate:
+                    '<b>%{location}</b><br>Approval rate: %{z:.2f}%<extra></extra>',
                 },
               ]}
               layout={{
@@ -1558,6 +1559,12 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                 paper_bgcolor: 'transparent',
                 plot_bgcolor: 'transparent',
                 margin: { l: 0, r: 0, t: 50, b: 0 },
+                hoverlabel: {
+                  align: 'left',
+                  bgcolor: '#ffffff',
+                  bordercolor: '#e2e8f0',
+                  font: { color: '#0f172a' },
+                },
               }}
               className="h-full w-full"
             />

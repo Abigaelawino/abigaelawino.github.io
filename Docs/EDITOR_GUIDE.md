@@ -124,7 +124,7 @@ Use the `treated_post` term to capture the breach impact.
 
 ### Code blocks (scroll + line numbers)
 
-Code blocks automatically render with a light gray background, line numbers, and a scroll area. Use standard Markdown fences:
+Code blocks automatically render with a light gray background, Shiki syntax highlighting, line numbers, and a scroll area. Use standard Markdown fences:
 
 ````mdx
 ```ts
