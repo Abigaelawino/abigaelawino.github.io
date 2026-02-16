@@ -343,8 +343,12 @@ Object.entries(summary.averageScores).forEach(([cat, score]) => {
 });
 
 // Save detailed results
-fs.writeFileSync('lighthouse-static-analysis.json', JSON.stringify(results, null, 2));
-fs.writeFileSync('lighthouse-summary.json', JSON.stringify(summary, null, 2));
+const reportsDir = path.join(process.cwd(), 'reports', 'lighthouse');
+fs.mkdirSync(reportsDir, { recursive: true });
+const analysisPath = path.join(reportsDir, 'lighthouse-static-analysis.json');
+const summaryPath = path.join(reportsDir, 'lighthouse-summary.json');
+fs.writeFileSync(analysisPath, JSON.stringify(results, null, 2));
+fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
 
-console.log('\n📄 Detailed results saved to lighthouse-static-analysis.json');
-console.log('📋 Summary saved to lighthouse-summary.json');
+console.log(`\n📄 Detailed results saved to ${analysisPath}`);
+console.log(`📋 Summary saved to ${summaryPath}`);

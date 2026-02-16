@@ -7,7 +7,7 @@ echo "Running Lighthouse audits on static files..."
 PAGES=("index" "about" "projects" "blog" "contact" "resume")
 
 # Create results directory
-mkdir -p lighthouse-results
+mkdir -p reports/lighthouse
 
 # Function to run audit on a single page
 audit_page() {
@@ -35,7 +35,7 @@ audit_page() {
     # Run Lighthouse audit
     if npx lighthouse "http://localhost:8080/${page}/" \
         --output=json \
-        --output-path="lighthouse-results/lighthouse-${page}.json" \
+        --output-path="reports/lighthouse/lighthouse-${page}.json" \
         --chrome-flags="--headless --no-sandbox --disable-gpu" \
         --quiet; then
         
@@ -65,7 +65,7 @@ const pages = ['index', 'about', 'projects', 'blog', 'contact', 'resume'];
 const results = {};
 
 pages.forEach(page => {
-    const reportPath = \`lighthouse-results/lighthouse-\${page}.json\`;
+    const reportPath = \`reports/lighthouse/lighthouse-\${page}.json\`;
     try {
         if (fs.existsSync(reportPath)) {
             const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
@@ -97,8 +97,8 @@ pages.forEach(page => {
 });
 
 // Save summary
-fs.writeFileSync('lighthouse-results/summary.json', JSON.stringify(results, null, 2));
-console.log('\\nSummary saved to lighthouse-results/summary.json');
+fs.writeFileSync('reports/lighthouse/summary.json', JSON.stringify(results, null, 2));
+console.log('\\nSummary saved to reports/lighthouse/summary.json');
 "
 
-echo "Lighthouse audit complete. Check lighthouse-results/ for detailed reports."
+echo "Lighthouse audit complete. Check reports/lighthouse/ for detailed reports."

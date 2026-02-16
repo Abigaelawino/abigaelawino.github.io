@@ -73,3 +73,6 @@ test-results/
 
 # Local cleanup staging
 .trash/
+
+# Reports
+reports/

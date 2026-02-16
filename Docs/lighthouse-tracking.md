@@ -70,7 +70,7 @@ Based on Google's Core Web Vitals thresholds:
 ├── core-vitals-trends.json         # Core Web Vitals analysis
 ├── core-vitals-monthly-trends.json # Monthly trends data
 ├── monthly-recommendations.json    # Current month recommendations
-├── lighthouse-report-*.json        # Detailed reports (timestamped)
+├── reports/lighthouse/lighthouse-report-*.json        # Detailed reports (timestamped)
 └── monthly-report-*.md            # Monthly markdown reports
 ```
 
@@ -289,7 +289,7 @@ Use Node.js REPL to analyze reports:
 
 ```bash
 node
-> const report = JSON.parse(require('fs').readFileSync('.lighthouse-reports/latest-report.json', 'utf8'));
+> const report = JSON.parse(require('fs').readFileSync('reports/lighthouse/latest-report.json', 'utf8'));
 > console.log(report.summary);
 ```
 
@@ -345,7 +345,7 @@ Old reports are automatically archived after 30 days. Manual cleanup:
 
 ```bash
 # Clean up reports older than 30 days
-find .lighthouse-reports -name "*.json" -mtime +30 -delete
+find reports/lighthouse -name "*.json" -mtime +30 -delete
 find .lighthouse-reports -name "*.md" -mtime +30 -delete
 ```
 
