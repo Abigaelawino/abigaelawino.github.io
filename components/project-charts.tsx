@@ -1610,8 +1610,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                       line: { color: '#ffffff', width: 1 },
                     },
                     colorbar: { title: { text: 'Approval %' } },
-                    hovertemplate:
-                      '<b>%{location}</b><br>Approval rate: %{z:.2f}%<extra></extra>',
+                    hovertemplate: '%{z:.2f}%<extra></extra>',
                   },
                 ]}
                 layout={{
