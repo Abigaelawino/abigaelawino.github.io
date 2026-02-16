@@ -485,43 +485,52 @@ export default async function ProjectPage({
             <CardTitle>Summary</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6 md:grid-cols-3">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Problem</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Implemented a solution to address critical business challenges through
-                    data-driven approaches.
-                  </p>
-                </CardContent>
-              </Card>
+            {isBabyNames ? (
+              <p className="text-muted-foreground">
+                This project analyzes the outcomes of initial disability claims processed by
+                state agencies using SSA Fiscal Year Disability Claim Data from 2001 to 2021.
+                The goal is to provide clear, visual insights into how disability applications
+                are handled across different states and demographics (Adults vs. Children).
+              </p>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-3">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Problem</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Implemented a solution to address critical business challenges through
+                      data-driven approaches.
+                    </p>
+                  </CardContent>
+                </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Context</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Leveraged available data sources and industry best practices to develop an
-                    effective solution.
-                  </p>
-                </CardContent>
-              </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Context</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Leveraged available data sources and industry best practices to develop an
+                      effective solution.
+                    </p>
+                  </CardContent>
+                </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Success Metric</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Achieved measurable improvements in key performance indicators through
-                    systematic implementation.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Success Metric</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Achieved measurable improvements in key performance indicators through
+                      systematic implementation.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </CardContent>
         </Card>
 
