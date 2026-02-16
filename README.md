@@ -36,6 +36,7 @@ This repository tracks the Netlify-deployed Next.js portfolio site outlined in `
 - Netlify redirects `/admin/*` to `/admin/index.html` so the CMS loads from a clean URL.
 - Project entries include `gallery` images that power the card carousel headers.
 - Editing guide: `Docs/EDITOR_GUIDE.md`.
+  - Includes how to add line-numbered code accordions (`CodeAccordion`) and notebook snippet updates.
 
 ## Testing & coverage
 

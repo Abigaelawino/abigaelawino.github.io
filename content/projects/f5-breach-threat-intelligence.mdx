@@ -28,11 +28,29 @@ This case study quantifies the causal impact of the October 2025 F5 Networks bre
 - Code snippets + assumptions
 - Visualizations and assets
 
-## Key Outputs
+## Highlights
 
 - Event study timeline and peer comparison
 - DiD model results with robustness checks
 - Slide-ready visuals summarizing findings
+
+## Model & Assumptions
+
+- **Design:** Difference-in-Differences with treated, post, and interaction terms
+- **Parallel trends:** Validated with pre-period comparison and placebo timing
+- **Event date:** 2025-10-16 (breach)
+- **Window:** 2025-04-18 → 2025-12-12 daily adjusted prices
+
+## Visual Palette (from project assets)
+
+- **Primary:** #1d4ed8
+- **Alert/Breach:** #ef4444
+- **Neutral:** #0f172a
+
+## Visuals & Assets
+
+- Event narrative and summary slides for stakeholder updates
+- Robustness checks packaged for quick review
 
 ## Notebook Highlights
 
@@ -151,21 +169,3 @@ def run_diff_in_diff(df, event_date, treated):
     />
   </CardContent>
 </Card>
-
-## Model & Assumptions
-
-- **Design:** Difference-in-Differences with treated, post, and interaction terms
-- **Parallel trends:** Validated with pre-period comparison and placebo timing
-- **Event date:** 2025-10-16 (breach)
-- **Window:** 2025-04-18 → 2025-12-12 daily adjusted prices
-
-## Visual Palette (from project assets)
-
-- **Primary:** #1d4ed8
-- **Alert/Breach:** #ef4444
-- **Neutral:** #0f172a
-
-## Visuals & Assets
-
-- Event narrative and summary slides for stakeholder updates
-- Robustness checks packaged for quick review

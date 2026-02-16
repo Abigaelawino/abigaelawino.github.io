@@ -29,6 +29,7 @@ type MdxSplit = {
   visualizationsContent: string | null;
   deliverablesContent: string | null;
   workContent: string | null;
+  notebookSnippetsContent: string | null;
 };
 
 function escapeHeading(text: string) {
@@ -36,28 +37,25 @@ function escapeHeading(text: string) {
 }
 
 function extractSection(content: string, title: string) {
-  const marker = new RegExp(`(^|\\n)##\\s+${escapeHeading(title)}\\s*\\n`, 'i');
-  const match = content.match(marker);
-  if (!match || match.index === undefined) {
+  const lines = content.split('\n');
+  const headingPattern = new RegExp(`^##\\s+${escapeHeading(title)}\\s*$`, 'i');
+  const startIndex = lines.findIndex(line => headingPattern.test(line.trimEnd()));
+
+  if (startIndex === -1) {
     return { section: null, rest: content };
   }
 
-  const headingStart = match.index + (match[1] ? match[1].length : 0);
-  const headingLength = match[0].length - (match[1] ? match[1].length : 0);
-  const contentStart = headingStart + headingLength;
-  const remainder = content.slice(0, headingStart).trimEnd();
-  const tail = content.slice(contentStart);
-  const nextHeadingMatch = tail.match(/\n##\s+/);
-  const sectionBody = nextHeadingMatch
-    ? tail.slice(0, nextHeadingMatch.index).trim()
-    : tail.trim();
-  const nextSectionStart = nextHeadingMatch ? contentStart + nextHeadingMatch.index : content.length;
-  const restTail = content.slice(nextSectionStart).trimStart();
-  const rest = [remainder, restTail].filter(Boolean).join('\n\n');
+  const remainingLines = lines.slice(startIndex + 1);
+  const nextHeadingOffset = remainingLines.findIndex(line => /^##\s+/.test(line.trimStart()));
+  const endIndex =
+    nextHeadingOffset === -1 ? lines.length : startIndex + 1 + nextHeadingOffset;
+
+  const sectionLines = lines.slice(startIndex + 1, endIndex);
+  const restLines = [...lines.slice(0, startIndex), ...lines.slice(endIndex)];
 
   return {
-    section: sectionBody || null,
-    rest,
+    section: sectionLines.join('\n').trim() || null,
+    rest: restLines.join('\n').trim(),
   };
 }
 
@@ -68,6 +66,7 @@ function splitMdxContent(content: string | undefined): MdxSplit {
       visualizationsContent: null,
       deliverablesContent: null,
       workContent: null,
+      notebookSnippetsContent: null,
     };
   }
 
@@ -83,7 +82,7 @@ function splitMdxContent(content: string | undefined): MdxSplit {
   const notebookSnippets = extractSection(remaining, 'Notebook Snippets');
   remaining = notebookSnippets.rest;
 
-  const workContent = [notebookHighlights.section, tableauDetails.section, notebookSnippets.section]
+  const workContent = [notebookHighlights.section, tableauDetails.section]
     .filter(Boolean)
     .join('\n\n');
 
@@ -92,6 +91,7 @@ function splitMdxContent(content: string | undefined): MdxSplit {
     visualizationsContent: visualizations.section,
     deliverablesContent: deliverables.section,
     workContent: workContent || null,
+    notebookSnippetsContent: notebookSnippets.section,
   };
 }
 
@@ -251,8 +251,13 @@ export default async function ProjectPage({
   }
 
   const { frontmatter, content, readingTime } = project;
-  const { analysisContent, visualizationsContent, deliverablesContent, workContent } =
-    splitMdxContent(content);
+  const {
+    analysisContent,
+    visualizationsContent,
+    deliverablesContent,
+    workContent,
+    notebookSnippetsContent,
+  } = splitMdxContent(content);
   const projectHasCharts = [
     'customer-segmentation-dashboard',
     'ecommerce-recommendation-engine',
@@ -604,12 +609,22 @@ export default async function ProjectPage({
                         <CardTitle>Notebook Summary</CardTitle>
                         <CardDescription>Key figures and diagnostics from the notebooks.</CardDescription>
                       </CardHeader>
-                      <CardContent className="p-6">
+                      <CardContent className="p-6 min-w-0 overflow-hidden">
                         <NotebookDashboard slug={resolvedParams.slug} />
-                        <div className="mt-6">
+                        <div className="mt-6 min-w-0 overflow-hidden">
                           <NotebookCodeAccordion slug={resolvedParams.slug} />
                         </div>
-                        <div className="prose prose-slate max-w-none viz-notebook">
+                        {notebookSnippetsContent && (
+                          <div className="mt-6 space-y-3 min-w-0 overflow-hidden">
+                            <div className="text-sm font-semibold text-foreground">
+                              Notebook Snippets
+                            </div>
+                            <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
+                              <MDXContent content={notebookSnippetsContent} />
+                            </div>
+                          </div>
+                        )}
+                        <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
                           <MDXContent content={visualizationsContent} />
                         </div>
                       </CardContent>

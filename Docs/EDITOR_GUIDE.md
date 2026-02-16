@@ -55,6 +55,37 @@ Required frontmatter fields:
 
 ## MDX Components You Can Use
 
+### Code Accordion (line-numbered snippets)
+
+Use `CodeAccordion` to drop line-numbered code snippets anywhere inside a project or blog MDX file. This uses Shiki highlighting and the same line-numbered style as regular code fences.
+
+```mdx
+<CodeAccordion
+  items={[
+    {
+      title: 'Load SSA files',
+      description: 'Concatenate yearly files into one DataFrame.',
+      language: 'python',
+      code: `files = sorted(raw_path.glob('yob*.txt'))
+all_data = []
+
+for file in files:
+    year = int(re.search(r'yob(\\d{4})', file.name).group(1))
+    df = pd.read_csv(file, header=None, names=['name', 'sex', 'count'])
+    df['year'] = year
+    all_data.append(df)
+
+babynames = pd.concat(all_data, ignore_index=True)`,
+    },
+  ]}
+/>
+```
+
+Notes:
+- `items` is an array of `{ title, description?, language?, code }`.
+- `language` drives syntax highlighting (ex: `python`, `ts`, `sql`).
+- Line numbers are always shown.
+
 ## Editing MDX Files (Detailed)
 
 Every MDX file has two parts:
@@ -80,6 +111,24 @@ status: published
 
 Intro paragraph here.
 ```
+
+### Recommended project structure
+
+Use this order for all project MDX files to keep the site consistent:
+
+1. `## Page Guide` (short bullets for navigation)
+2. `## Highlights` (key outcomes or challenges)
+3. `## Summary` (problem, context, success metric)
+4. `## Data` (sources, volume, quality)
+5. `## Methods` (modeling, pipeline, evaluation)
+6. `## Results` (metrics and business impact)
+7. `## Notebook Highlights` (optional)
+8. `## Notebook Snippets` (optional)
+9. `## Tableau Workbook Details` (optional)
+10. `## Visualizations` (charts + images for the Visualizations panel)
+11. `## Deliverables` (artifacts and outputs)
+
+Project-specific sections are okay, but keep the core order above.
 
 ### Frontmatter rules
 
@@ -163,6 +212,14 @@ If you add any of these headers, their content is grouped into the **Work Artifa
 ```
 
 Use this area for code blocks, notebook notes, or Tableau workbook field choices.
+
+### Project notebook snippets (auto)
+
+Each project page can include auto-loaded notebook snippets (used in the Notebook Summary panel) by editing:
+
+- `components/notebook-code-accordion.tsx`
+
+Add or update snippets under the matching `slug` key. The notebook code shown there is sourced from the project repositories and rendered with line numbers.
 
 ### Deliverables section placement
 

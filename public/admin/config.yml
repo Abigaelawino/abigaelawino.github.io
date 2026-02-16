@@ -57,7 +57,13 @@ collections:
           widget: 'text',
           required: true,
         }
-      - { label: 'Body', name: 'body', widget: 'markdown', required: true }
+      - {
+          label: 'Body',
+          name: 'body',
+          widget: 'markdown',
+          required: true,
+          hint: 'MDX supported. You can add CodeAccordion, Chart, Table, and DataTable blocks in the body.',
+        }
 
   - name: 'blog'
     label: 'Blog Posts'
@@ -88,7 +94,13 @@ collections:
           required: true,
           value_type: 'int',
         }
-      - { label: 'Body', name: 'body', widget: 'markdown', required: true }
+      - {
+          label: 'Body',
+          name: 'body',
+          widget: 'markdown',
+          required: true,
+          hint: 'MDX supported. You can add CodeAccordion, Chart, Table, and DataTable blocks in the body.',
+        }
 
   - name: 'about'
     label: 'About Content'

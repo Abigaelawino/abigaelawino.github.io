@@ -48,6 +48,23 @@ This project examines disability claim outcomes with a focus on statewide approv
 3. **Exploratory analysis** (trends, state comparisons, COVID marker).
 4. **Tableau export** with `State-FY` keys for joins.
 
+## FY2021 Highlights
+
+- **Top approvals:** KS (60.57), AK (56.53), NH (50.57), NE (47.21), RI (46.14)
+- **Lowest approvals:** DC (26.88), OK (29.14), MS (30.64), WV (30.71), IN (31.37)
+
+## Visual Palette (from project assets)
+
+- **Primary:** #1d4ed8
+- **Mid:** #60a5fa
+- **Light:** #e0f2fe
+- **Neutral:** #94a3b8
+
+## QA & Cleaning
+
+- Standardized numeric fields and date formats
+- Verified field completeness and exported a Tableau-ready file
+
 ## Notebook Highlights
 
 - Approval‑rate trends with a **COVID onset marker (2020)**.
@@ -95,7 +112,7 @@ df.columns = (
 
 Interactive charts in the Visualizations tab include the full approval-rate trend line and map. The notebook exports below match the Tableau-ready outputs.
 
-<DataTableMini
+<DataTable
   title="FY2021 approval-rate sample (highest/lowest)"
   filterKey="state"
   columns={[
@@ -123,22 +140,3 @@ Interactive charts in the Visualizations tab include the full approval-rate tren
     />
   </CardContent>
 </Card>
-
-## FY2021 Highlights
-
-- **Top approvals:** KS (60.57), AK (56.53), NH (50.57), NE (47.21), RI (46.14)
-- **Lowest approvals:** DC (26.88), OK (29.14), MS (30.64), WV (30.71), IN (31.37)
-
-## Visual Palette (from project assets)
-
-- **Primary:** #1d4ed8
-- **Mid:** #60a5fa
-- **Light:** #e0f2fe
-- **Neutral:** #94a3b8
-
-## QA & Cleaning
-
-- Standardized numeric fields and date formats
-- Verified field completeness and exported a Tableau-ready file
-
-## Sample Visual

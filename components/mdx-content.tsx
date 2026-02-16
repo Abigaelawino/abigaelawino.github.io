@@ -20,6 +20,8 @@ import {
 } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
 import { DataTableMini } from '@/components/data-table-mini';
+import { CodeAccordion } from '@/components/code-accordion';
+import { DataTable } from '@/components/data-table';
 
 type InlineCodeProps = React.ComponentProps<'code'>;
 
@@ -77,10 +79,10 @@ function getLanguage(className: string | undefined) {
 async function highlightWithShiki(code: string, language: string) {
   try {
     const highlighter = await highlighterPromise;
-    return highlighter.codeToThemedTokens(code, {
-      lang: language,
+    return highlighter.codeToTokens(code, {
+      lang: language as never,
       theme: 'github-light',
-    });
+    }) as unknown as ThemedToken[][];
   } catch {
     return null;
   }
@@ -89,7 +91,7 @@ async function highlightWithShiki(code: string, language: string) {
 async function PreWithLines({ children, className, ...props }: React.ComponentProps<'pre'>) {
   const codeElement = React.Children.toArray(children).find(
     child => React.isValidElement(child) && child.type === 'code'
-  ) as React.ReactElement | undefined;
+  ) as React.ReactElement<{ children?: React.ReactNode; className?: string }> | undefined;
 
   const rawCode = (() => {
     const content = codeElement?.props?.children;
@@ -152,6 +154,8 @@ const components = {
   TableRow,
   TableCaption,
   DataTableMini,
+  DataTable,
+  CodeAccordion,
   code: InlineCode,
   pre: PreWithLines,
   // Add any other custom components here

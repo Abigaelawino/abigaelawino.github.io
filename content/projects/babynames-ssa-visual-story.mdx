@@ -42,6 +42,12 @@ This project builds a visual story around SSA baby name data across generations,
 - **Nulls:** 0 missing values across core fields
 - **Top names overall:** James, John, Robert, Michael, William, Mary
 
+## Notebook Highlights
+
+- **Total births trend:** ~3.7M in 2015, tapering to ~3.33M by 2024
+- **Gender distribution:** 1,263,426 female rows vs 886,051 male rows
+- **Unisex list:** Jessie, Riley, Casey, Jackie, Johnnie, Peyton, Dakota, Jaime lead balanced usage
+
 ## Notebook Snippets
 
 ```python
@@ -84,11 +90,23 @@ generation_ranges = {
 }
 ```
 
+## Tableau Workbook Details
+
+- **Calculated fields:** `Decade = INT(FLOOR([year] / 10) * 10)` and `Generation` buckets
+- **Generations:** Lost, Greatest, Silent, Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+- **Sheets:** Top 10 Boy/Girl names by generation with linked highlights
+- **Color mapping:** `F` to #e14f7a and `M` to #a0cbe8 for consistent gender encoding
+
+### Sheet Inventory
+
+- Top 10 Boy Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+- Top 10 Girl Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+
 ## Visualizations
 
 The interactive charts in the Visualizations tab contain the working trend lines and ranked name distributions. The notebook figures below provide static exports that match the Tableau visuals.
 
-<DataTableMini
+<DataTable
   title="Sample rows (1880) from the cleaned dataset"
   filterKey="name"
   columns={[
@@ -131,24 +149,6 @@ The interactive charts in the Visualizations tab contain the working trend lines
     />
   </CardContent>
 </Card>
-
-## Tableau Workbook Details
-
-- **Calculated fields:** `Decade = INT(FLOOR([year] / 10) * 10)` and `Generation` buckets
-- **Generations:** Lost, Greatest, Silent, Boomers, Gen X, Millennials, Gen Z, Gen Alpha
-- **Sheets:** Top 10 Boy/Girl names by generation with linked highlights
-- **Color mapping:** `F` to #e14f7a and `M` to #a0cbe8 for consistent gender encoding
-
-### Sheet Inventory
-
-- Top 10 Boy Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
-- Top 10 Girl Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
-
-## Notebook Highlights
-
-- **Total births trend:** ~3.7M in 2015, tapering to ~3.33M by 2024
-- **Gender distribution:** 1,263,426 female rows vs 886,051 male rows
-- **Unisex list:** Jessie, Riley, Casey, Jackie, Johnnie, Peyton, Dakota, Jaime lead balanced usage
 
 ## Deliverables
 
