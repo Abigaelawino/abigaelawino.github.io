@@ -2,22 +2,26 @@
 
 This guide explains how to edit the site content safely using **Decap CMS** or direct MDX edits.
 
-## Quick Start (Local)
+## Common File Edits
 
-1. Run `netlify dev`.
-2. Open `http://localhost:8888`.
-3. If MDX changes do not appear, run `npm run refresh:live` or click `scripts/refresh-live-view.sh`.
+### Projects
+- File path: `content/projects/<slug>.mdx`
+- Update frontmatter and section content.
+- Add charts/tables under a `## Visualizations` heading.
 
----
+### Blog posts
+- File path: `content/blog/<slug>.mdx`
+- Ensure `cover` and `readingTime` are set.
 
-## Where Content Lives
+### About
+- File path: `content/about.mdx`
 
-- **Projects**: `content/projects/*.mdx`
-- **Blog posts**: `content/blog/*.mdx`
-- **About page**: `content/about.mdx`
-- **Settings**: `content/settings.json`
-- **Images**: `public/images/**` (preferred)
-- **Public assets**: `public/assets/**` (og image, resume)
+## Common Pitfalls
+
+1. **Missing required frontmatter** → build will fail.
+2. **Wrong date format** → must be `YYYY-MM-DD`.
+3. **Charts with empty data** → make sure `data` is a proper array of objects.
+4. **CMS not reflecting updates** → run `npm run refresh:live`.
 
 ---
 
@@ -52,39 +56,6 @@ Required frontmatter fields:
 - `cover` (image; defaults to `/assets/og.png` if you omit it)
 
 ---
-
-## MDX Components You Can Use
-
-### Code Accordion (line-numbered snippets)
-
-Use `CodeAccordion` to drop line-numbered code snippets anywhere inside a project or blog MDX file. This uses Shiki highlighting and the same line-numbered style as regular code fences.
-
-```mdx
-<CodeAccordion
-  items={[
-    {
-      title: 'Load SSA files',
-      description: 'Concatenate yearly files into one DataFrame.',
-      language: 'python',
-      code: `files = sorted(raw_path.glob('yob*.txt'))
-all_data = []
-
-for file in files:
-    year = int(re.search(r'yob(\\d{4})', file.name).group(1))
-    df = pd.read_csv(file, header=None, names=['name', 'sex', 'count'])
-    df['year'] = year
-    all_data.append(df)
-
-babynames = pd.concat(all_data, ignore_index=True)`,
-    },
-  ]}
-/>
-```
-
-Notes:
-- `items` is an array of `{ title, description?, language?, code }`.
-- `language` drives syntax highlighting (ex: `python`, `ts`, `sql`).
-- Line numbers are always shown.
 
 ## Editing MDX Files (Detailed)
 
@@ -251,22 +222,53 @@ export function TypographyInlineCode() {
 If you want charts/images grouped under the Visualizations panel on the project page, add a top-level section header in the MDX body:
 
 ```mdx
-## Visualizations
+## Images
 
-<Chart ... />
+- Store images in `public/images/` and reference them as `/images/...`.
+- Example: `cover: /images/projects/my-project-cover.svg`
 
-![Notebook figure](https://example.com/figure.png)
-```
+External images (GitHub raw URLs) are allowed but should be used sparingly.
 
-Everything below that header is routed into the Visualizations area instead of the Detailed Analysis panel.
+## Images & Galleries
 
-### Work Artifacts section (Notebook + Tableau)
+- **Project cards** pull images from `gallery` (carousel).
+- **Blog cards** use `cover`.
+- Store images in `public/images/...` and reference them as `/images/...`.
 
-If you add any of these headers, their content is grouped into the **Work Artifacts** section after Methods:
+## MDX Components You Can Use
+
+### Code Accordion (line-numbered snippets)
+
+Use `CodeAccordion` to drop line-numbered code snippets anywhere inside a project or blog MDX file. This uses Shiki highlighting and the same line-numbered style as regular code fences.
 
 ```mdx
+<CodeAccordion
+  items={[
+    {
+      title: 'Load SSA files',
+      description: 'Concatenate yearly files into one DataFrame.',
+      language: 'python',
+      code: `files = sorted(raw_path.glob('yob*.txt'))
+all_data = []
+
+for file in files:
+    year = int(re.search(r'yob(\\d{4})', file.name).group(1))
+    df = pd.read_csv(file, header=None, names=['name', 'sex', 'count'])
+    df['year'] = year
+    all_data.append(df)
+
+babynames = pd.concat(all_data, ignore_index=True)`,
+    },
+  ]}
+/>
+```
+
+Notes:
+- `items` is an array of `{ title, description?, language?, code }`.
+- `language` drives syntax highlighting (ex: `python`, `ts`, `sql`).
+- Line numbers are always shown.
+
 ## Notebook Highlights
-## Tableau Workbook Details
 ## Notebook Snippets
 ```
 
@@ -319,51 +321,6 @@ If you add a `## Deliverables` header, that content appears right after the Data
 
 ---
 
-## Images
-
-- Store images in `public/images/` and reference them as `/images/...`.
-- Example: `cover: /images/projects/my-project-cover.svg`
-
-External images (GitHub raw URLs) are allowed but should be used sparingly.
-
-## Images & Galleries
-
-- **Project cards** pull images from `gallery` (carousel).
-- **Blog cards** use `cover`.
-- Store images in `public/images/...` and reference them as `/images/...`.
-
-## Common File Edits
-
-### Projects
-- File path: `content/projects/<slug>.mdx`
-- Update frontmatter and section content.
-- Add charts/tables under a `## Visualizations` heading.
-
-### Blog posts
-- File path: `content/blog/<slug>.mdx`
-- Ensure `cover` and `readingTime` are set.
-
-### About
-- File path: `content/about.mdx`
-
-## Refreshing Local Views
-
-If MDX changes do not appear:
-
-- Run `npm run refresh:live`, or
-- Click `scripts/refresh-live-view.sh`
-
----
-
-## Common Pitfalls
-
-1. **Missing required frontmatter** → build will fail.
-2. **Wrong date format** → must be `YYYY-MM-DD`.
-3. **Charts with empty data** → make sure `data` is a proper array of objects.
-4. **CMS not reflecting updates** → run `npm run refresh:live`.
-
----
-
 ## Page-Specific Notes
 
 ### Projects
@@ -385,3 +342,46 @@ If MDX changes do not appear:
 - Open `/projects/<slug>` and verify charts/tables render.
 - Open `/blog` and verify latest posts appear.
 - Open `/admin` and verify CMS loads.
+
+## Quick Start (Local)
+
+1. Run `netlify dev`.
+2. Open `http://localhost:8888`.
+3. If MDX changes do not appear, run `npm run refresh:live` or click `scripts/refresh-live-view.sh`.
+
+---
+
+## Refreshing Local Views
+
+If MDX changes do not appear:
+
+- Run `npm run refresh:live`, or
+- Click `scripts/refresh-live-view.sh`
+
+---
+
+## Tableau Workbook Details
+## Visualizations
+
+<Chart ... />
+
+![Notebook figure](https://example.com/figure.png)
+```
+
+Everything below that header is routed into the Visualizations area instead of the Detailed Analysis panel.
+
+### Work Artifacts section (Notebook + Tableau)
+
+If you add any of these headers, their content is grouped into the **Work Artifacts** section after Methods:
+
+```mdx
+## Where Content Lives
+
+- **Projects**: `content/projects/*.mdx`
+- **Blog posts**: `content/blog/*.mdx`
+- **About page**: `content/about.mdx`
+- **Settings**: `content/settings.json`
+- **Images**: `public/images/**` (preferred)
+- **Public assets**: `public/assets/**` (og image, resume)
+
+---
