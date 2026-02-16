@@ -13,13 +13,15 @@ function ChartPanel({
   title,
   description,
   children,
+  className,
 }: {
   title: string;
   description?: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="rounded-xl border bg-card p-4 shadow-sm space-y-3">
+    <div className={`rounded-xl border bg-card p-4 shadow-sm space-y-3 ${className ?? ''}`}>
       <div className="space-y-1">
         <div className="text-sm text-muted-foreground">{description}</div>
         <div className="text-base font-semibold">{title}</div>
@@ -1566,34 +1568,33 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>SSA Approval Rate Patterns (FY{selectedYear})</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-4 lg:grid-cols-2">
-          <ChartPanel title="Fiscal Year" description="Adjust the year for the map and rankings">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-                <span className="font-medium">Selected</span>
-                <span className="text-muted-foreground">{selectedYear}</span>
-              </div>
-              <input
-                type="range"
-                min={ssaYears[0]}
-                max={ssaYears[ssaYears.length - 1]}
-                step={1}
-                value={selectedYear}
-                onChange={event => setSelectedYear(Number(event.target.value))}
-                className="w-full accent-primary"
-                aria-label="Select fiscal year"
-              />
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>{ssaYears[0]}</span>
-                <span>{ssaYears[ssaYears.length - 1]}</span>
-              </div>
-            </div>
-          </ChartPanel>
+        <CardContent className="grid gap-4 lg:grid-cols-3">
           <ChartPanel
             title={`Favorable Determination Rate by State (FY${selectedYear})`}
             description="Choropleth map"
+            className="lg:col-span-2"
           >
-            <div className="h-[320px] relative">
+            <div className="h-[360px] relative">
+              <div className="absolute left-3 top-3 z-10 w-48 rounded-md border bg-background/90 p-3 text-xs shadow-sm backdrop-blur">
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                  <span>Fiscal Year</span>
+                  <span>FY{selectedYear}</span>
+                </div>
+                <input
+                  type="range"
+                  min={ssaYears[0]}
+                  max={ssaYears[ssaYears.length - 1]}
+                  step={1}
+                  value={selectedYear}
+                  onChange={event => setSelectedYear(Number(event.target.value))}
+                  className="mt-2 w-full accent-primary"
+                  aria-label="Select fiscal year"
+                />
+                <div className="mt-1 flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>FY{ssaYears[0]}</span>
+                  <span>FY{ssaYears[ssaYears.length - 1]}</span>
+                </div>
+              </div>
               <PlotlyChart
                 data={[
                   {
@@ -1611,6 +1612,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                     },
                     colorbar: { title: { text: 'Approval %' } },
                     hovertemplate: '%{z:.2f}%<extra></extra>',
+                    hoverinfo: 'z',
                   },
                 ]}
                 layout={{
@@ -1626,7 +1628,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                     font: { color: '#0f172a', size: 12 },
                     namelength: 0,
                   },
-                  hoverdistance: 20,
+                  hoverdistance: 30,
                 }}
                 className="h-full w-full"
               />
