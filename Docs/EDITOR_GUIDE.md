@@ -163,6 +163,65 @@ Project-specific sections are okay, but keep the core order above.
 - `height`: chart height in px
 - `color`: optional hex color
 
+### Interactive charts (manual edit)
+
+The **Interactive charts** tab on project pages is not driven by MDX. Those blocks are hard-coded in:
+
+- `components/project-charts.tsx` (per-project interactive charts)
+
+To edit a chart block:
+1. Open `components/project-charts.tsx`.
+2. Find the `if (slug === '<project-slug>')` section for your project.
+3. Update the `ChartPanel` blocks or Plotly configs inside that section.
+
+Example (Recharts block):
+
+```tsx
+<ChartPanel title="Top 10 Names Overall" description="Most common names">
+  <Chart
+    type="bar"
+    data={[
+      { name: 'James', value: 5000 },
+      { name: 'Mary', value: 4800 },
+    ]}
+    height={240}
+    color="#e14f7a"
+  />
+</ChartPanel>
+```
+
+Example (Plotly block):
+
+```tsx
+<ChartPanel title="Revenue Trend" description="Monthly lift">
+  <div className="h-[260px]">
+    <PlotlyChart
+      data={[
+        {
+          type: 'scatter',
+          mode: 'lines+markers',
+          x: ['Jan', 'Feb', 'Mar'],
+          y: [120, 180, 250],
+          line: { color: '#2563eb', width: 3 },
+        },
+      ]}
+      layout={{
+        xaxis: { title: 'Month' },
+        yaxis: { title: 'Revenue ($K)' },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+      }}
+      className="h-full w-full"
+    />
+  </div>
+</ChartPanel>
+```
+
+If you add a new project with interactive charts:
+1. Add a new `if (slug === '<your-slug>')` block in `components/project-charts.tsx`.
+2. Add the slug to `projectHasCharts` in `app/projects/[slug]/page.tsx` so the Visualizations panel appears.
+3. (Optional) Update `visualizationHighlights` in `app/projects/[slug]/page.tsx` to control the summary badges above the charts.
+
 ### Inline code (shadcn style)
 
 Inline code is styled using the shadcn typography pattern. Example:
