@@ -76,3 +76,6 @@ test-results/
 
 # Reports
 reports/
+.lighthouse-reports/
+lighthouse-results/
+lighthouse-results-legacy/
