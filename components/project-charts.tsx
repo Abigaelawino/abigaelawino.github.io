@@ -1594,6 +1594,11 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
             description="Choropleth map"
           >
             <div className="h-[320px] relative">
+              {(() => {
+                const cleanedValues = mapValues.filter(v => Number.isFinite(v));
+                const zmin = cleanedValues.length ? Math.min(...cleanedValues) : 0;
+                const zmax = cleanedValues.length ? Math.max(...cleanedValues) : 100;
+                return (
               <PlotlyChart
                 data={[
                   {
@@ -1601,6 +1606,8 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                     locationmode: 'USA-states',
                     locations: mapLocations,
                     z: mapValues,
+                    zmin,
+                    zmax,
                     colorscale: [
                       [0, '#e0f2fe'],
                       [0.5, '#60a5fa'],
@@ -1609,27 +1616,37 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                     marker: {
                       line: { color: '#ffffff', width: 1 },
                     },
+                    hoverinfo: 'z',
                     colorbar: { title: { text: 'Approval %' } },
                     hovertemplate: '%{z:.2f}%<extra></extra>',
                   },
                 ]}
                 layout={{
-                  geo: { scope: 'usa', projection: { type: 'albers usa' } },
+                  geo: {
+                    scope: 'usa',
+                    projection: { type: 'albers usa' },
+                    showlakes: false,
+                    showframe: false,
+                    bgcolor: 'rgba(0,0,0,0)',
+                  },
                   hovermode: 'closest',
+                  dragmode: false,
+                  uirevision: 'ssa-map',
                   paper_bgcolor: 'transparent',
                   plot_bgcolor: 'transparent',
                   margin: { l: 0, r: 0, t: 0, b: 0 },
                   hoverlabel: {
-                    align: 'left',
-                    bgcolor: '#ffffff',
-                    bordercolor: '#e2e8f0',
-                    font: { color: '#0f172a', size: 12 },
+                    bgcolor: '#0f172a',
+                    bordercolor: '#0f172a',
+                    font: { color: '#ffffff', size: 11 },
                     namelength: 0,
                   },
-                  hoverdistance: 20,
+                  hoverdistance: 5,
                 }}
                 className="h-full w-full"
               />
+                );
+              })()}
             </div>
           </ChartPanel>
           <ChartPanel
