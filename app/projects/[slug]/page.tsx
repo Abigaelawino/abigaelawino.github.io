@@ -47,8 +47,7 @@ function extractSection(content: string, title: string) {
 
   const remainingLines = lines.slice(startIndex + 1);
   const nextHeadingOffset = remainingLines.findIndex(line => /^##\s+/.test(line.trimStart()));
-  const endIndex =
-    nextHeadingOffset === -1 ? lines.length : startIndex + 1 + nextHeadingOffset;
+  const endIndex = nextHeadingOffset === -1 ? lines.length : startIndex + 1 + nextHeadingOffset;
 
   const sectionLines = lines.slice(startIndex + 1, endIndex);
   const restLines = [...lines.slice(0, startIndex), ...lines.slice(endIndex)];
@@ -101,19 +100,19 @@ const visualizationHighlights: Record<
 > = {
   'babynames-ssa-visual-story': [
     {
-      label: 'Births (2024)',
+      label: 'Births in 2024',
       value: '3.33M',
-      note: 'Latest SSA total births snapshot.',
+      note: 'Total SSA-recorded births for the latest year.',
     },
     {
       label: 'Top Name',
       value: 'James',
-      note: 'Most common across the full dataset.',
+      note: 'Most recorded name overtime.',
     },
     {
       label: 'Unique Names (2024)',
       value: '29,225',
-      note: 'Counts unique names for the most recent year.',
+      note: 'Count of unique names in the latest year.',
     },
   ],
   'f5-breach-threat-intelligence': [
@@ -266,6 +265,7 @@ export default async function ProjectPage({
     'ssa-disability-outcomes',
   ].includes(resolvedParams.slug);
   const shouldRenderVisualizations = projectHasCharts || Boolean(visualizationsContent);
+  const isBabyNames = resolvedParams.slug === 'babynames-ssa-visual-story';
   const highlights = visualizationHighlights[resolvedParams.slug] ?? [
     {
       label: 'Interactive Views',
@@ -294,10 +294,9 @@ export default async function ProjectPage({
       };
     }>;
 
-    const projectTags = new Set([
-      ...(frontmatter.tags || []),
-      ...(frontmatter.tech || []),
-    ].map(tag => tag.toLowerCase()));
+    const projectTags = new Set(
+      [...(frontmatter.tags || []), ...(frontmatter.tech || [])].map(tag => tag.toLowerCase())
+    );
 
     return entries
       .map(post => {
@@ -319,6 +318,71 @@ export default async function ProjectPage({
       })
       .slice(0, 3);
   })();
+
+  const visualizationsSection = shouldRenderVisualizations ? (
+    <Card id="visualizations">
+      <CardHeader>
+        <CardTitle>Visualizations</CardTitle>
+        <CardDescription>
+          Interactive charts and notebook-derived figures grouped for quick review.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="@container/viz space-y-6">
+        <VisualizationPanel
+          interactive={
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
+                {highlights.map(item => (
+                  <Card
+                    key={item.label}
+                    className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
+                  >
+                    <CardHeader className="border-b">
+                      <CardDescription>{item.label}</CardDescription>
+                      <CardTitle className="text-2xl">{item.value}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm text-muted-foreground">{item.note}</CardContent>
+                  </Card>
+                ))}
+              </div>
+              <ProjectCharts slug={resolvedParams.slug} />
+            </div>
+          }
+          notebook={
+            visualizationsContent ? (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Notebook Summary</CardTitle>
+                  <CardDescription>
+                    Key figures and diagnostics from the notebooks.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 min-w-0 overflow-hidden">
+                  <NotebookDashboard slug={resolvedParams.slug} />
+                  <div className="mt-6 min-w-0 overflow-hidden mdx-content">
+                    <NotebookCodeAccordion slug={resolvedParams.slug} />
+                  </div>
+                  {notebookSnippetsContent && (
+                    <div className="mt-6 space-y-3 min-w-0 overflow-hidden">
+                      <div className="text-sm font-semibold text-foreground">
+                        Notebook Snippets
+                      </div>
+                      <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden mdx-content">
+                        <MDXContent content={notebookSnippetsContent} />
+                      </div>
+                    </div>
+                  )}
+                  <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
+                    <MDXContent content={visualizationsContent} />
+                  </div>
+                </CardContent>
+              </Card>
+            ) : undefined
+          }
+        />
+      </CardContent>
+    </Card>
+  ) : null;
 
   return (
     <div className="space-y-8">
@@ -461,6 +525,8 @@ export default async function ProjectPage({
           </CardContent>
         </Card>
 
+        {isBabyNames && visualizationsSection}
+
         {/* Detailed Analysis */}
         {analysisContent && (
           <Card>
@@ -571,70 +637,7 @@ export default async function ProjectPage({
           </Card>
         )}
 
-        {shouldRenderVisualizations && (
-          <Card id="visualizations">
-            <CardHeader>
-              <CardTitle>Visualizations</CardTitle>
-              <CardDescription>
-                Interactive charts and notebook-derived figures grouped for quick review.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="@container/viz space-y-6">
-              <VisualizationPanel
-                interactive={
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
-                      {highlights.map(item => (
-                        <Card
-                          key={item.label}
-                          className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
-                        >
-                          <CardHeader className="border-b">
-                            <CardDescription>{item.label}</CardDescription>
-                            <CardTitle className="text-2xl">{item.value}</CardTitle>
-                          </CardHeader>
-                          <CardContent className="text-sm text-muted-foreground">
-                            {item.note}
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                    <ProjectCharts slug={resolvedParams.slug} />
-                  </div>
-                }
-                notebook={
-                  visualizationsContent ? (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Notebook Summary</CardTitle>
-                        <CardDescription>Key figures and diagnostics from the notebooks.</CardDescription>
-                      </CardHeader>
-                      <CardContent className="p-6 min-w-0 overflow-hidden">
-                        <NotebookDashboard slug={resolvedParams.slug} />
-                        <div className="mt-6 min-w-0 overflow-hidden mdx-content">
-                          <NotebookCodeAccordion slug={resolvedParams.slug} />
-                        </div>
-                        {notebookSnippetsContent && (
-                          <div className="mt-6 space-y-3 min-w-0 overflow-hidden">
-                            <div className="text-sm font-semibold text-foreground">
-                              Notebook Snippets
-                            </div>
-                            <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden mdx-content">
-                              <MDXContent content={notebookSnippetsContent} />
-                            </div>
-                          </div>
-                        )}
-                        <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
-                          <MDXContent content={visualizationsContent} />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ) : undefined
-                }
-              />
-            </CardContent>
-          </Card>
-        )}
+        {!isBabyNames && visualizationsSection}
 
         {relatedPosts.length > 0 && (
           <Card>
