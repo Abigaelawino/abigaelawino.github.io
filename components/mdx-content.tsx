@@ -19,6 +19,7 @@ import {
   TableCaption,
 } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
+import { DataTableMini } from '@/components/data-table-mini';
 
 type InlineCodeProps = React.ComponentProps<'code'>;
 
@@ -144,6 +145,7 @@ const components = {
   TableHeader,
   TableRow,
   TableCaption,
+  DataTableMini,
   code: InlineCode,
   pre: PreWithLines,
   // Add any other custom components here

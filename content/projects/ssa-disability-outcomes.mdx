@@ -102,37 +102,21 @@ df.columns = (
   color="#1d4ed8"
 />
 
-<Table>
-  <TableCaption>FY2021 approval-rate sample (highest/lowest).</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead>State</TableHead>
-      <TableHead>Rate (%)</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>KS</TableCell>
-      <TableCell>60.57</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>AK</TableCell>
-      <TableCell>56.53</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>NH</TableCell>
-      <TableCell>50.57</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>DC</TableCell>
-      <TableCell>26.88</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>OK</TableCell>
-      <TableCell>29.14</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
+<DataTableMini
+  title="FY2021 approval-rate sample (highest/lowest)"
+  filterKey="state"
+  columns={[
+    { key: 'state', label: 'State' },
+    { key: 'rate', label: 'Rate (%)' }
+  ]}
+  data={[
+    { state: 'KS', rate: 60.57 },
+    { state: 'AK', rate: 56.53 },
+    { state: 'NH', rate: 50.57 },
+    { state: 'DC', rate: 26.88 },
+    { state: 'OK', rate: 29.14 }
+  ]}
+/>
 
 <Card>
   <CardHeader>

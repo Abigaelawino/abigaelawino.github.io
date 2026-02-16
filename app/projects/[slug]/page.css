@@ -474,23 +474,18 @@ h1 {
   background-color: #e2e8f0;
 }
 
-#viz-interactive:checked ~ .viz-body .viz-tab[for='viz-interactive'],
-#viz-notebook:checked ~ .viz-body .viz-tab[for='viz-notebook'] {
+.viz-shell .viz-tab-active {
   background-color: #0f172a;
   color: #f8fafc;
   border-color: #0f172a;
 }
 
-.viz-shell .viz-panel {
-  display: none;
-}
-
-#viz-interactive:checked ~ .viz-body .viz-panel-interactive {
-  display: block;
-}
-
-#viz-notebook:checked ~ .viz-body .viz-panel-notebook {
-  display: block;
+.viz-shell .viz-pill {
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.7rem;
+  color: inherit;
 }
 
 .viz-notebook img {

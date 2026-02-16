@@ -16,6 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { VisualizationPanel } from '@/components/visualization-panel';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -579,10 +580,7 @@ export default async function ProjectPage({
                     className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
                   >
                     <CardHeader className="border-b">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardDescription>{item.label}</CardDescription>
-                        <Badge variant="outline">Updated</Badge>
-                      </div>
+                      <CardDescription>{item.label}</CardDescription>
                       <CardTitle className="text-2xl">{item.value}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm text-muted-foreground">
@@ -591,63 +589,20 @@ export default async function ProjectPage({
                   </Card>
                 ))}
               </div>
-              <div className="viz-shell">
-                <input
-                  type="radio"
-                  id="viz-interactive"
-                  name="viz-view"
-                  defaultChecked
-                />
-                {visualizationsContent && (
-                  <input type="radio" id="viz-notebook" name="viz-view" />
-                )}
-                <div className="viz-body grid gap-6 lg:grid-cols-[260px_1fr]">
-                  <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-3">
-                    <div className="font-semibold text-foreground">Views</div>
-                    <label className="viz-tab" htmlFor="viz-interactive">
-                      <span>Interactive charts</span>
-                      <Badge variant="secondary">Live</Badge>
-                    </label>
-                    {visualizationsContent && (
-                      <label className="viz-tab" htmlFor="viz-notebook">
-                        <span>Notebook figures</span>
-                        <Badge variant="outline">Figures</Badge>
-                      </label>
-                    )}
-                    <div className="pt-2 text-xs text-muted-foreground">
-                      Select a view to keep the story focused.
-                    </div>
-                  </aside>
-                  <div className="viz-panels space-y-8">
-                    <section className="viz-panel viz-panel-interactive space-y-6">
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-lg font-semibold">Interactive charts</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Live charts and maps that anchor the story.
-                        </p>
-                      </div>
-                      <ProjectCharts slug={resolvedParams.slug} />
-                    </section>
-                    {visualizationsContent && (
-                      <section className="viz-panel viz-panel-notebook space-y-6">
-                        <div className="flex flex-col gap-1">
-                          <h3 className="text-lg font-semibold">Notebook figures</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Notebook exports and Tableau snapshots for deep-dive context.
-                          </p>
+              <VisualizationPanel
+                interactive={<ProjectCharts slug={resolvedParams.slug} />}
+                notebook={
+                  visualizationsContent ? (
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="prose prose-slate max-w-none viz-notebook">
+                          <MDXContent content={visualizationsContent} />
                         </div>
-                        <Card>
-                          <CardContent className="p-6">
-                            <div className="prose prose-slate max-w-none viz-notebook">
-                              <MDXContent content={visualizationsContent} />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </section>
-                    )}
-                  </div>
-                </div>
-              </div>
+                      </CardContent>
+                    </Card>
+                  ) : undefined
+                }
+              />
             </CardContent>
           </Card>
         )}

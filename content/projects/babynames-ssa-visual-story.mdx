@@ -112,37 +112,23 @@ generation_ranges = {
   color="#a0cbe8"
 />
 
-<Table>
-  <TableCaption>Sample rows (1880) from the cleaned dataset.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Name</TableHead>
-      <TableHead>Sex</TableHead>
-      <TableHead>Count</TableHead>
-      <TableHead>Year</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>Mary</TableCell>
-      <TableCell>F</TableCell>
-      <TableCell>7065</TableCell>
-      <TableCell>1880</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>Anna</TableCell>
-      <TableCell>F</TableCell>
-      <TableCell>2604</TableCell>
-      <TableCell>1880</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>Emma</TableCell>
-      <TableCell>F</TableCell>
-      <TableCell>2003</TableCell>
-      <TableCell>1880</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
+<DataTableMini
+  title="Sample rows (1880) from the cleaned dataset"
+  filterKey="name"
+  columns={[
+    { key: 'name', label: 'Name' },
+    { key: 'sex', label: 'Sex' },
+    { key: 'count', label: 'Count' },
+    { key: 'year', label: 'Year' }
+  ]}
+  data={[
+    { name: 'Mary', sex: 'F', count: 7065, year: 1880 },
+    { name: 'Anna', sex: 'F', count: 2604, year: 1880 },
+    { name: 'Emma', sex: 'F', count: 2003, year: 1880 },
+    { name: 'Elizabeth', sex: 'F', count: 1939, year: 1880 },
+    { name: 'Minnie', sex: 'F', count: 1746, year: 1880 }
+  ]}
+/>
 
 <Card>
   <CardHeader>
