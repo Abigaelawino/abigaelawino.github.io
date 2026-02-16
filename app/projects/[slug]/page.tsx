@@ -593,13 +593,17 @@ export default async function ProjectPage({
                 interactive={<ProjectCharts slug={resolvedParams.slug} />}
                 notebook={
                   visualizationsContent ? (
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="prose prose-slate max-w-none viz-notebook">
-                          <MDXContent content={visualizationsContent} />
-                        </div>
-                      </CardContent>
-                    </Card>
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Notebook Summary</CardTitle>
+                            <CardDescription>Key figures and diagnostics from the notebooks.</CardDescription>
+                          </CardHeader>
+                          <CardContent className="p-6">
+                            <div className="prose prose-slate max-w-none viz-notebook">
+                              <MDXContent content={visualizationsContent} />
+                            </div>
+                          </CardContent>
+                        </Card>
                   ) : undefined
                 }
               />

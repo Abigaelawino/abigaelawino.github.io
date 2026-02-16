@@ -14,16 +14,16 @@ type DataTableMiniProps = {
   title?: string;
   filterPlaceholder?: string;
   filterKey?: string;
-  columns: Array<{ key: string; label: string }>;
-  data: Array<Record<string, string | number>>;
+  columns?: Array<{ key: string; label: string }>;
+  data?: Array<Record<string, string | number>>;
 };
 
 export function DataTableMini({
   title,
   filterPlaceholder = 'Filter rows…',
   filterKey,
-  columns,
-  data,
+  columns = [],
+  data = [],
 }: DataTableMiniProps) {
   const [query, setQuery] = useState('');
   const filtered = useMemo(() => {
@@ -43,29 +43,37 @@ export function DataTableMini({
         value={query}
         onChange={event => setQuery(event.target.value)}
       />
-      <div className="rounded-lg border overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map(col => (
-                <TableHead key={col.key}>{col.label}</TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filtered.map((row, index) => (
-              <TableRow key={`${row[columns[0]?.key] ?? index}-${index}`}>
-                {columns.map(col => (
-                  <TableCell key={`${col.key}-${index}`}>{row[col.key]}</TableCell>
+      {columns.length === 0 ? (
+        <div className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+          No columns configured.
+        </div>
+      ) : (
+        <>
+          <div className="rounded-lg border overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  {columns.map(col => (
+                    <TableHead key={col.key}>{col.label}</TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((row, index) => (
+                  <TableRow key={`${row[columns[0]?.key] ?? index}-${index}`}>
+                    {columns.map(col => (
+                      <TableCell key={`${col.key}-${index}`}>{row[col.key]}</TableCell>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="text-xs text-muted-foreground">
-        Showing {filtered.length} of {data.length} rows
-      </div>
+              </TableBody>
+            </Table>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            Showing {filtered.length} of {data.length} rows
+          </div>
+        </>
+      )}
     </div>
   );
 }
