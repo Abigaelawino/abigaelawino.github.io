@@ -502,14 +502,22 @@ mkdirSync('dist', { recursive: true });
 mkdirSync(join('dist', 'assets'), { recursive: true });
 cpSync('assets', join('dist', 'assets'), { recursive: true });
 try {
-  cpSync('images', join('dist', 'images'), { recursive: true });
+  cpSync('public/images', join('dist', 'images'), { recursive: true });
 } catch {
-  // Optional images directory.
+  try {
+    cpSync('images', join('dist', 'images'), { recursive: true });
+  } catch {
+    // Optional images directory.
+  }
 }
 try {
-  cpSync('admin', join('dist', 'admin'), { recursive: true });
+  cpSync('public/admin', join('dist', 'admin'), { recursive: true });
 } catch {
-  // Admin directory should exist for CMS.
+  try {
+    cpSync('admin', join('dist', 'admin'), { recursive: true });
+  } catch {
+    // Admin directory should exist for CMS.
+  }
 }
 writeFileSync(join('dist', 'assets', 'og.png'), buildDefaultOgPng());
 writeFileSync(join('dist', 'assets', 'shell.css'), `${SHELL_CSS}\n`);

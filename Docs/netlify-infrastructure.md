@@ -40,4 +40,4 @@ Optional integrations:
 
 ## Observability
 
-Monitoring and dashboards are generated via scripts in `scripts/` and documented in `docs/netlify-performance-monitoring.md` and `docs/netlify-function-health-monitoring.md`.
+Monitoring and dashboards are generated via scripts in `scripts/` and documented in `Docs/netlify-performance-monitoring.md` and `Docs/netlify-function-health-monitoring.md`.

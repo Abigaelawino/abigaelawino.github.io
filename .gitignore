@@ -70,3 +70,6 @@ coverage/
 
 # Test artifacts
 test-results/
+
+# Local cleanup staging
+.trash/
