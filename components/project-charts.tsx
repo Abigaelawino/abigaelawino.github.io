@@ -43,16 +43,16 @@ const babynamesBirthsRecent = [
 ];
 
 const babynamesTopNames = [
-  { name: 'James', value: 5262396 },
-  { name: 'John', value: 5196210 },
-  { name: 'Robert', value: 4866007 },
-  { name: 'Michael', value: 4440391 },
-  { name: 'William', value: 4205026 },
-  { name: 'Mary', value: 4154332 },
-  { name: 'David', value: 3682683 },
-  { name: 'Joseph', value: 2672746 },
-  { name: 'Richard', value: 2585535 },
-  { name: 'Charles', value: 2441151 },
+  { name: 'James', value: 5262396, sex: 'M', color: '#a0cbe8' },
+  { name: 'John', value: 5196210, sex: 'M', color: '#a0cbe8' },
+  { name: 'Robert', value: 4866007, sex: 'M', color: '#a0cbe8' },
+  { name: 'Michael', value: 4440391, sex: 'M', color: '#a0cbe8' },
+  { name: 'William', value: 4205026, sex: 'M', color: '#a0cbe8' },
+  { name: 'Mary', value: 4154332, sex: 'F', color: '#e14f7a' },
+  { name: 'David', value: 3682683, sex: 'M', color: '#a0cbe8' },
+  { name: 'Joseph', value: 2672746, sex: 'M', color: '#a0cbe8' },
+  { name: 'Richard', value: 2585535, sex: 'M', color: '#a0cbe8' },
+  { name: 'Charles', value: 2441151, sex: 'M', color: '#a0cbe8' },
 ];
 
 const babynamesUniqueNamesRecent = [
@@ -120,7 +120,6 @@ const ssaApprovalBottomStates = [
   { name: 'OK', value: 29.14 },
   { name: 'DC', value: 26.88 },
 ];
-
 
 const ssaApprovalByYear: Record<number, { state: string; rate: number }[]> = {
   2001: [
@@ -1288,10 +1287,7 @@ const ssaApprovalTrend = [
 
 export function ProjectCharts({ slug }: ProjectChartsProps) {
   const [selectedYear, setSelectedYear] = useState<number>(ssaYears[ssaYears.length - 1]);
-  const mapData = useMemo(
-    () => ssaApprovalByYear[selectedYear] ?? [],
-    [selectedYear]
-  );
+  const mapData = useMemo(() => ssaApprovalByYear[selectedYear] ?? [], [selectedYear]);
   const mapLocations = mapData.map(entry => entry.state);
   const mapValues = mapData.map(entry => entry.rate);
 
@@ -1388,41 +1384,23 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Interactive Baby Names Trends</CardTitle>
+          <CardTitle>Baby Names Trends & Insights (1880 - 2024) </CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">
           <ChartPanel
             title="Total Births by Year (2015–2024)"
-            description="SSA births trend"
+            description="Birth trends in the most recent decade"
           >
-            <Chart
-              type="line"
-              data={babynamesBirthsRecent}
-              height={240}
-              color="#a0cbe8"
-            />
+            <Chart type="line" data={babynamesBirthsRecent} height={240} color="#a0cbe8" />
           </ChartPanel>
           <ChartPanel
             title="Top 10 Names Overall (1880–2024)"
-            description="Most common names"
+            description="Most common names since 1880"
           >
-            <Chart
-              type="bar"
-              data={babynamesTopNames}
-              height={240}
-              color="#e14f7a"
-            />
+            <Chart type="bar" data={babynamesTopNames} height={240} showLegend={false} />
           </ChartPanel>
-          <ChartPanel
-            title="Unique Names per Year (2015–2024)"
-            description="Name diversity trend"
-          >
-            <Chart
-              type="line"
-              data={babynamesUniqueNamesRecent}
-              height={240}
-              color="#f59e0b"
-            />
+          <ChartPanel title="Unique Names per Year (2015–2024)" description="Name diversity trend">
+            <Chart type="line" data={babynamesUniqueNamesRecent} height={240} color="#f59e0b" />
           </ChartPanel>
           <ChartPanel
             title="Top Unisex Names (Female vs Male Counts)"
@@ -1549,10 +1527,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
           >
             <Chart type="bar" data={f5BreachDiD} height={220} color="#ef4444" />
           </ChartPanel>
-          <ChartPanel
-            title="Core DiD Model Coefficients"
-            description="Model term contributions"
-          >
+          <ChartPanel title="Core DiD Model Coefficients" description="Model term contributions">
             <Chart type="bar" data={f5BreachCoefficients} height={220} color="#0f172a" />
           </ChartPanel>
         </CardContent>
@@ -1599,52 +1574,52 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
                 const zmin = cleanedValues.length ? Math.min(...cleanedValues) : 0;
                 const zmax = cleanedValues.length ? Math.max(...cleanedValues) : 100;
                 return (
-              <PlotlyChart
-                data={[
-                  {
-                    type: 'choropleth',
-                    locationmode: 'USA-states',
-                    locations: mapLocations,
-                    z: mapValues,
-                    zmin,
-                    zmax,
-                    colorscale: [
-                      [0, '#e0f2fe'],
-                      [0.5, '#60a5fa'],
-                      [1, '#1d4ed8'],
-                    ],
-                    marker: {
-                      line: { color: '#ffffff', width: 1 },
-                    },
-                    hoverinfo: 'z',
-                    colorbar: { title: { text: 'Approval %' } },
-                    hovertemplate: '%{z:.2f}%<extra></extra>',
-                  },
-                ]}
-                layout={{
-                  geo: {
-                    scope: 'usa',
-                    projection: { type: 'albers usa' },
-                    showlakes: false,
-                    showframe: false,
-                    bgcolor: 'rgba(0,0,0,0)',
-                  },
-                  hovermode: 'closest',
-                  dragmode: false,
-                  uirevision: 'ssa-map',
-                  paper_bgcolor: 'transparent',
-                  plot_bgcolor: 'transparent',
-                  margin: { l: 0, r: 0, t: 0, b: 0 },
-                  hoverlabel: {
-                    bgcolor: '#0f172a',
-                    bordercolor: '#0f172a',
-                    font: { color: '#ffffff', size: 11 },
-                    namelength: 0,
-                  },
-                  hoverdistance: 5,
-                }}
-                className="h-full w-full"
-              />
+                  <PlotlyChart
+                    data={[
+                      {
+                        type: 'choropleth',
+                        locationmode: 'USA-states',
+                        locations: mapLocations,
+                        z: mapValues,
+                        zmin,
+                        zmax,
+                        colorscale: [
+                          [0, '#e0f2fe'],
+                          [0.5, '#60a5fa'],
+                          [1, '#1d4ed8'],
+                        ],
+                        marker: {
+                          line: { color: '#ffffff', width: 1 },
+                        },
+                        hoverinfo: 'z',
+                        colorbar: { title: { text: 'Approval %' } },
+                        hovertemplate: '%{z:.2f}%<extra></extra>',
+                      },
+                    ]}
+                    layout={{
+                      geo: {
+                        scope: 'usa',
+                        projection: { type: 'albers usa' },
+                        showlakes: false,
+                        showframe: false,
+                        bgcolor: 'rgba(0,0,0,0)',
+                      },
+                      hovermode: 'closest',
+                      dragmode: false,
+                      uirevision: 'ssa-map',
+                      paper_bgcolor: 'transparent',
+                      plot_bgcolor: 'transparent',
+                      margin: { l: 0, r: 0, t: 0, b: 0 },
+                      hoverlabel: {
+                        bgcolor: '#0f172a',
+                        bordercolor: '#0f172a',
+                        font: { color: '#ffffff', size: 11 },
+                        namelength: 0,
+                      },
+                      hoverdistance: 5,
+                    }}
+                    className="h-full w-full"
+                  />
                 );
               })()}
             </div>

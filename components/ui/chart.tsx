@@ -31,6 +31,7 @@ interface ChartProps {
   accessibilityLabel?: string;
   color?: string;
   colors?: string[];
+  showLegend?: boolean;
 }
 
 const COLORS = [
@@ -77,8 +78,10 @@ export function Chart({
   accessibilityLabel,
   color,
   colors,
+  showLegend = true,
 }: ChartProps) {
   const normalizedData = normalizeChartData(data as unknown as ChartData[] | string | undefined);
+  const hasItemColors = normalizedData.some(item => typeof item.color === 'string');
   const renderChart = () => {
     const fallbackColor = color || '#8884d8';
     const palette = colors && colors.length > 0 ? colors : COLORS;
@@ -91,8 +94,13 @@ export function Chart({
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Legend />
-              <Bar dataKey="value" fill={fallbackColor} />
+              {showLegend && <Legend />}
+              <Bar dataKey="value" fill={fallbackColor}>
+                {hasItemColors &&
+                  normalizedData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         );
@@ -104,7 +112,7 @@ export function Chart({
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Legend />
+              {showLegend && <Legend />}
               <Line type="monotone" dataKey="value" stroke={fallbackColor} strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
