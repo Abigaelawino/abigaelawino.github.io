@@ -67,6 +67,57 @@
     "content": "# F5 Breach: Validating DiD Assumptions and Placebo Tests\n\nDifference-in-Differences only works if the treated and control series behave similarly **before** the event. This post summarizes the quick checks I used to validate the setup.\n\n## Parallel Trends Check\n\nI compared the pre-breach trend of FFIV returns against a basket of peer/benchmark tickers. The lack of a pre-event slope shift supported the DiD setup.\n\n## Placebo Test\n\nI shifted the event date one week earlier and re-estimated the model. The placebo interaction was effectively zero (`treated_post ≈ 0.0042`), which increases confidence that the real event drove the observed effect.\n\n## Takeaway\n\nThe strongest evidence still comes from the main DiD interaction (`treated_post ≈ -0.0951`), but the placebo check and trend test make the story defensible."
   },
   {
+    "slug": "ssa-disability-data-cleaning",
+    "frontmatter": {
+      "title": "SSA Disability Outcomes — Cleaning and Type Fixes",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "policy",
+        "data-cleaning"
+      ],
+      "summary": "Cleaning numeric columns, handling commas, and preserving required fields for analysis.",
+      "cover": "/assets/og.png",
+      "readingTime": 5,
+      "status": "published"
+    },
+    "content": "# SSA Disability Outcomes — Cleaning and Type Fixes\n\nRaw SSA tables contain numeric fields stored as strings and occasional formatting artifacts. This step normalizes data types so calculations are reliable.\n\n## Key Fixes\n\n- **Numeric columns:** Removed commas and cast to numeric\n- **Required fields:** Dropped rows missing eligible population fields\n- **Data types:** Verified 30 columns with consistent dtypes\n\n## Why This Matters\n\nApproval rates and filing rates are computed fields. If source columns are not numeric, those rates become incorrect or missing."
+  },
+  {
+    "slug": "ssa-disability-data-loading",
+    "frontmatter": {
+      "title": "SSA Disability Outcomes — Data Loading Walkthrough",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "policy",
+        "data-engineering"
+      ],
+      "summary": "How the SSA disability outcomes dataset is loaded, validated, and inspected before cleaning.",
+      "cover": "/assets/og.png",
+      "readingTime": 4,
+      "status": "published"
+    },
+    "content": "# SSA Disability Outcomes — Data Loading Walkthrough\n\nThis post documents the first step in the SSA disability outcomes workflow: loading the raw dataset and validating its basic structure before any transformations.\n\n## What’s Loaded\n\n- **File:** SSA-SA-FYWL.csv\n- **Scope:** State‑level fiscal year records\n- **Fields:** 30 columns covering populations, filings, determinations, and rates\n\n## Quick Validation\n\nThe notebook immediately checks:\n\n- File presence + basic shape\n- Column headers\n- First rows to confirm expected values\n\n## Why This Matters\n\nIf the load step is wrong, every downstream chart and model is wrong. This pass ensures we’re working with expected fields and a stable schema."
+  },
+  {
+    "slug": "ssa-disability-eda-findings",
+    "frontmatter": {
+      "title": "SSA Disability Outcomes — Exploratory Analysis Highlights",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "policy",
+        "visualization"
+      ],
+      "summary": "Key trends and patterns uncovered during exploratory analysis of SSA disability approvals.",
+      "cover": "/assets/og.png",
+      "readingTime": 5,
+      "status": "published"
+    },
+    "content": "# SSA Disability Outcomes — Exploratory Analysis Highlights\n\nThe exploratory analysis step focuses on trends over time and differences across states. It also marks **2020** as a critical breakpoint for system-wide shifts.\n\n## EDA Focus Areas\n\n- Approval‑rate trends across FY2001–FY2021\n- State‑level ranking comparisons\n- COVID onset marker (2020) for timeline reference\n\n## Why This Matters\n\nEDA guides what the final dashboards emphasize and ensures the map and trends tell a consistent story."
+  },
+  {
     "slug": "ssa-disability-qa-notes",
     "frontmatter": {
       "title": "QA Notes on SSA Disability Approval Rates (FY2021)",
@@ -98,6 +149,23 @@
       "status": "published"
     },
     "content": "# Preparing SSA Disability Data for Tableau (FY2001–FY2021)\n\nThe SSA dataset arrives with mixed data types, wide columns, and date formatting inconsistencies. This post summarizes the cleaning steps I used before visualization.\n\n## Cleaning Steps\n\n- Standardized numeric fields (removed commas and cast to numeric)\n- Parsed update dates into a consistent format\n- Constructed `State-FY` keys for easy map and filter usage\n\n## Output\n\nThe result is a Tableau-ready CSV (`ssa_disability_tableau_ready.csv`) with:\n\n- 1,092 rows\n- 30 fields\n- FY2001–FY2021 coverage\n\nThis file drives the choropleth map and ranking charts in the project."
+  },
+  {
+    "slug": "ssa-disability-tableau-reporting",
+    "frontmatter": {
+      "title": "SSA Disability Outcomes — Tableau Reporting Notes",
+      "date": "2026-02-16",
+      "tags": [
+        "visualization",
+        "tableau",
+        "policy"
+      ],
+      "summary": "How the SSA outcomes dataset was shaped for Tableau and mapped into a choropleth.",
+      "cover": "/assets/og.png",
+      "readingTime": 4,
+      "status": "published"
+    },
+    "content": "# SSA Disability Outcomes — Tableau Reporting Notes\n\nThis step produces a Tableau‑ready export and defines the fields used in the choropleth.\n\n## Tableau Prep\n\n- Added `State-FY` key for stable joins\n- Reordered columns to keep high‑value metrics first\n- Exported `ssa_disability_tableau_ready.csv`\n\n## Reporting Choices\n\n- Choropleth uses **favorable determination rate**\n- Ranking tables highlight top/bottom states\n- FY2021 is the default map view for reporting"
   },
   {
     "slug": "model-monitoring-lessons",

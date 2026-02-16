@@ -1,0 +1,25 @@
+---
+title: SSA Disability Outcomes — Tableau Reporting Notes
+date: 2026-02-16
+tags: [visualization, tableau, policy]
+summary: How the SSA outcomes dataset was shaped for Tableau and mapped into a choropleth.
+cover: /assets/og.png
+readingTime: 4
+status: published
+---
+
+# SSA Disability Outcomes — Tableau Reporting Notes
+
+This step produces a Tableau‑ready export and defines the fields used in the choropleth.
+
+## Tableau Prep
+
+- Added `State-FY` key for stable joins
+- Reordered columns to keep high‑value metrics first
+- Exported `ssa_disability_tableau_ready.csv`
+
+## Reporting Choices
+
+- Choropleth uses **favorable determination rate**
+- Ranking tables highlight top/bottom states
+- FY2021 is the default map view for reporting

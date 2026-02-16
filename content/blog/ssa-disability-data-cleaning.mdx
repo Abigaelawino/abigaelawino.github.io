@@ -1,0 +1,23 @@
+---
+title: SSA Disability Outcomes — Cleaning and Type Fixes
+date: 2026-02-16
+tags: [analytics, policy, data-cleaning]
+summary: Cleaning numeric columns, handling commas, and preserving required fields for analysis.
+cover: /assets/og.png
+readingTime: 5
+status: published
+---
+
+# SSA Disability Outcomes — Cleaning and Type Fixes
+
+Raw SSA tables contain numeric fields stored as strings and occasional formatting artifacts. This step normalizes data types so calculations are reliable.
+
+## Key Fixes
+
+- **Numeric columns:** Removed commas and cast to numeric
+- **Required fields:** Dropped rows missing eligible population fields
+- **Data types:** Verified 30 columns with consistent dtypes
+
+## Why This Matters
+
+Approval rates and filing rates are computed fields. If source columns are not numeric, those rates become incorrect or missing.

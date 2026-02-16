@@ -1,0 +1,31 @@
+---
+title: SSA Disability Outcomes — Data Loading Walkthrough
+date: 2026-02-16
+tags: [analytics, policy, data-engineering]
+summary: How the SSA disability outcomes dataset is loaded, validated, and inspected before cleaning.
+cover: /assets/og.png
+readingTime: 4
+status: published
+---
+
+# SSA Disability Outcomes — Data Loading Walkthrough
+
+This post documents the first step in the SSA disability outcomes workflow: loading the raw dataset and validating its basic structure before any transformations.
+
+## What’s Loaded
+
+- **File:** SSA-SA-FYWL.csv
+- **Scope:** State‑level fiscal year records
+- **Fields:** 30 columns covering populations, filings, determinations, and rates
+
+## Quick Validation
+
+The notebook immediately checks:
+
+- File presence + basic shape
+- Column headers
+- First rows to confirm expected values
+
+## Why This Matters
+
+If the load step is wrong, every downstream chart and model is wrong. This pass ensures we’re working with expected fields and a stable schema.

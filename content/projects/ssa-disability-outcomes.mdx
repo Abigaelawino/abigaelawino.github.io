@@ -35,6 +35,19 @@ This project examines disability claim outcomes with a focus on statewide approv
 - **Key rates:** adult/child filing rates, allowance rates, and favorable determination rates
 - **Output:** `ssa_disability_tableau_ready.csv` for Tableau/BI workflows
 
+## Workflow Overview
+
+1. **Load raw SSA tables** and validate schema/headers.
+2. **Clean numeric fields** (remove commas, cast to numeric).
+3. **Exploratory analysis** (trends, state comparisons, COVID marker).
+4. **Tableau export** with `State-FY` keys for joins.
+
+## Notebook Visual Focus
+
+- Approval‑rate trends with a **COVID onset marker (2020)**.
+- State ranking tables to highlight top/bottom approvals.
+- Choropleth map for FY2021 as the main reporting snapshot.
+
 ## Notebook Snippets
 
 ```python

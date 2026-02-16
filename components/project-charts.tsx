@@ -1567,13 +1567,48 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
               className="h-full w-full"
             />
           </div>
-          <Chart
-            type="line"
-            title="Average Approval Rate Trend (FY2001–FY2021)"
-            data={ssaApprovalTrend}
-            height={280}
-            color="#1d4ed8"
-          />
+          <div className="h-[320px]">
+            <PlotlyChart
+              data={[
+                {
+                  type: 'scatter',
+                  mode: 'lines+markers',
+                  x: ssaApprovalTrend.map(entry => entry.name),
+                  y: ssaApprovalTrend.map(entry => entry.value),
+                  line: { color: '#1d4ed8', width: 3 },
+                  name: 'Average Approval Rate',
+                },
+              ]}
+              layout={{
+                title: 'Average Approval Rate Trend (FY2001–FY2021)',
+                xaxis: { title: 'Fiscal Year' },
+                yaxis: { title: 'Approval Rate (%)' },
+                paper_bgcolor: 'transparent',
+                plot_bgcolor: 'transparent',
+                shapes: [
+                  {
+                    type: 'line',
+                    x0: '2020',
+                    x1: '2020',
+                    y0: Math.min(...ssaApprovalTrend.map(entry => entry.value)),
+                    y1: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
+                    line: { color: '#ef4444', width: 2, dash: 'dash' },
+                  },
+                ],
+                annotations: [
+                  {
+                    x: '2020',
+                    y: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
+                    text: 'COVID onset',
+                    showarrow: false,
+                    yanchor: 'bottom',
+                    font: { color: '#ef4444' },
+                  },
+                ],
+              }}
+              className="h-full w-full"
+            />
+          </div>
           <Chart
             type="bar"
             title="Top States by Favorable Determination Rate"
