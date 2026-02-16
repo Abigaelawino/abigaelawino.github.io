@@ -32,6 +32,8 @@ interface ChartProps {
   color?: string;
   colors?: string[];
   showLegend?: boolean;
+  xTickAngle?: number;
+  xTickFontSize?: number;
 }
 
 const COLORS = [
@@ -79,6 +81,8 @@ export function Chart({
   color,
   colors,
   showLegend = true,
+  xTickAngle = 0,
+  xTickFontSize = 12,
 }: ChartProps) {
   const normalizedData = normalizeChartData(data as unknown as ChartData[] | string | undefined);
   const hasItemColors = normalizedData.some(item => typeof item.color === 'string');
@@ -91,7 +95,14 @@ export function Chart({
           <ResponsiveContainer width="100%" height={height}>
             <BarChart data={normalizedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis
+                dataKey="name"
+                angle={xTickAngle}
+                textAnchor={xTickAngle ? 'end' : 'middle'}
+                height={xTickAngle ? 60 : undefined}
+                tick={{ fontSize: xTickFontSize }}
+                interval={0}
+              />
               <YAxis />
               <Tooltip />
               {showLegend && <Legend />}
@@ -109,7 +120,14 @@ export function Chart({
           <ResponsiveContainer width="100%" height={height}>
             <LineChart data={normalizedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis
+                dataKey="name"
+                angle={xTickAngle}
+                textAnchor={xTickAngle ? 'end' : 'middle'}
+                height={xTickAngle ? 60 : undefined}
+                tick={{ fontSize: xTickFontSize }}
+                interval={0}
+              />
               <YAxis />
               <Tooltip />
               {showLegend && <Legend />}
