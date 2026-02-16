@@ -122,6 +122,36 @@ Inline code is styled using the shadcn typography pattern. Example:
 Use the `treated_post` term to capture the breach impact.
 ```
 
+### Code blocks (scroll + line numbers)
+
+Code blocks automatically render with a light gray background, line numbers, and a scroll area. Use standard Markdown fences:
+
+````mdx
+```ts
+export function TypographyInlineCode() {
+  return (
+    <code className="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+      @radix-ui/react-alert-dialog
+    </code>
+  )
+}
+```
+````
+
+### Visualizations section placement
+
+If you want charts/images grouped under the Visualizations panel on the project page, add a top-level section header in the MDX body:
+
+```mdx
+## Visualizations
+
+<Chart ... />
+
+![Notebook figure](https://example.com/figure.png)
+```
+
+Everything below that header is routed into the Visualizations area instead of the Detailed Analysis panel.
+
 ### Table (shadcn/ui)
 
 ```mdx

@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { siteUrl } from '@/lib/site';
 import blogIndex from '@/src/generated/blog-index.json';
+import { MDXContent } from '@/components/mdx-content';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -141,8 +142,7 @@ export default async function BlogPostPage({
         </header>
 
         <div className="prose prose-gray max-w-none">
-          {/* Blog content would be rendered here with MDX processing */}
-          <div className="whitespace-pre-wrap">{post.content}</div>
+          <MDXContent content={post.content} />
         </div>
       </article>
     </div>

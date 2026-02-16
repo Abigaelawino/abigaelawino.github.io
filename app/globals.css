@@ -177,3 +177,12 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/30;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

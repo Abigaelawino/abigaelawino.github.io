@@ -4,7 +4,7 @@ import { getProjectBySlug, getAllProjects } from '@/lib/content';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar, MapPin } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar } from 'lucide-react';
 import { MDXContent } from '@/components/mdx-content';
 import { ProjectCharts } from '@/components/project-charts';
 import { siteUrl } from '@/lib/site';
@@ -13,6 +13,92 @@ import blogIndex from '@/src/generated/blog-index.json';
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 export const revalidate = false;
+
+type MdxSplit = {
+  analysisContent: string;
+  visualizationsContent: string | null;
+};
+
+function splitMdxContent(content: string | undefined): MdxSplit {
+  if (!content) {
+    return { analysisContent: '', visualizationsContent: null };
+  }
+
+  const marker = /(^|\n)##\s+Visualizations\s*\n/i;
+  const match = content.match(marker);
+  if (!match || match.index === undefined) {
+    return { analysisContent: content, visualizationsContent: null };
+  }
+
+  const markerIndex = match.index + (match[1] ? match[1].length : 0);
+  const analysis = content.slice(0, markerIndex).trim();
+  const visuals = content
+    .slice(markerIndex)
+    .replace(/^##\s+Visualizations\s*\n/i, '')
+    .trim();
+
+  return {
+    analysisContent: analysis,
+    visualizationsContent: visuals || null,
+  };
+}
+
+const visualizationHighlights: Record<
+  string,
+  Array<{ label: string; value: string; note: string }>
+> = {
+  'babynames-ssa-visual-story': [
+    {
+      label: 'Births (2024)',
+      value: '3.33M',
+      note: 'Latest SSA total births snapshot.',
+    },
+    {
+      label: 'Top Name',
+      value: 'James',
+      note: 'Most common across the full dataset.',
+    },
+    {
+      label: 'Unique Names (2024)',
+      value: '29,225',
+      note: 'Counts unique names for the most recent year.',
+    },
+  ],
+  'f5-breach-threat-intelligence': [
+    {
+      label: 'Event Window',
+      value: 'Oct 16–23',
+      note: 'Primary impact window used for the DiD visuals.',
+    },
+    {
+      label: 'Max Drawdown',
+      value: '-10.7%',
+      note: 'Largest daily return drop around the breach.',
+    },
+    {
+      label: 'DiD Effect',
+      value: '-9.5%',
+      note: 'Estimated breach impact coefficient.',
+    },
+  ],
+  'ssa-disability-outcomes': [
+    {
+      label: 'Top State FY2021',
+      value: 'KS 60.6%',
+      note: 'Highest favorable determination rate.',
+    },
+    {
+      label: 'Lowest State FY2021',
+      value: 'DC 26.9%',
+      note: 'Lowest favorable determination rate.',
+    },
+    {
+      label: 'COVID Marker',
+      value: 'FY2020',
+      note: 'Structural break highlighted in the trend.',
+    },
+  ],
+};
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -113,6 +199,32 @@ export default async function ProjectPage({
   }
 
   const { frontmatter, content, readingTime } = project;
+  const { analysisContent, visualizationsContent } = splitMdxContent(content);
+  const projectHasCharts = [
+    'customer-segmentation-dashboard',
+    'ecommerce-recommendation-engine',
+    'babynames-ssa-visual-story',
+    'f5-breach-threat-intelligence',
+    'ssa-disability-outcomes',
+  ].includes(resolvedParams.slug);
+  const shouldRenderVisualizations = projectHasCharts || Boolean(visualizationsContent);
+  const highlights = visualizationHighlights[resolvedParams.slug] ?? [
+    {
+      label: 'Interactive Views',
+      value: '3+',
+      note: 'Primary charts highlight the core story.',
+    },
+    {
+      label: 'Static Figures',
+      value: '2+',
+      note: 'Notebook exports and report snapshots.',
+    },
+    {
+      label: 'Data Samples',
+      value: '1+',
+      note: 'Inline tables or summaries support the charts.',
+    },
+  ];
   const relatedPosts = (() => {
     const entries = blogIndex as Array<{
       slug: string;
@@ -313,6 +425,57 @@ export default async function ProjectPage({
           </Card>
         )}
 
+        {shouldRenderVisualizations && (
+          <Card id="visualizations">
+            <CardHeader>
+              <CardTitle>Visualizations</CardTitle>
+              <CardDescription>
+                Interactive charts and notebook-derived figures grouped for quick review.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid gap-4 md:grid-cols-3">
+                {highlights.map(item => (
+                  <Card key={item.label} className="bg-card/80">
+                    <CardHeader>
+                      <CardDescription>{item.label}</CardDescription>
+                      <CardTitle className="text-2xl">{item.value}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm text-muted-foreground">{item.note}</CardContent>
+                  </Card>
+                ))}
+              </div>
+              <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
+                <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-2">
+                  <div className="font-semibold text-foreground">Navigate</div>
+                  <a className="block text-muted-foreground hover:text-foreground" href="#viz-interactive">
+                    Interactive charts
+                  </a>
+                  <a className="block text-muted-foreground hover:text-foreground" href="#viz-notebook">
+                    Notebook figures
+                  </a>
+                </aside>
+                <div className="space-y-8">
+                  <section id="viz-interactive" className="space-y-4">
+                    <h3 className="text-lg font-semibold">Interactive charts</h3>
+                    <div className="space-y-4">
+                      <ProjectCharts slug={resolvedParams.slug} />
+                    </div>
+                  </section>
+                  {visualizationsContent && (
+                    <section id="viz-notebook" className="space-y-4">
+                      <h3 className="text-lg font-semibold">Notebook figures</h3>
+                      <div className="prose prose-slate max-w-none">
+                        <MDXContent content={visualizationsContent} />
+                      </div>
+                    </section>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Reproducibility Section */}
         {frontmatter.caseStudyReproducibility && (
           <Card>
@@ -347,20 +510,18 @@ export default async function ProjectPage({
         )}
 
         {/* Additional Content */}
-        {content && (
+        {analysisContent && (
           <Card>
             <CardHeader>
               <CardTitle>Detailed Analysis</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="prose prose-slate max-w-none">
-                <MDXContent content={content} />
+                <MDXContent content={analysisContent} />
               </div>
             </CardContent>
           </Card>
         )}
-
-        <ProjectCharts slug={resolvedParams.slug} />
 
         {relatedPosts.length > 0 && (
           <Card>

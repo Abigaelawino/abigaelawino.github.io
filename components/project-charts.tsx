@@ -101,11 +101,6 @@ const ssaApprovalBottomStates = [
   { name: 'DC', value: 26.88 },
 ];
 
-const ssaAdultChildRates = {
-  states: ['KS', 'AK', 'NH', 'NE', 'RI'],
-  adult: [58.55, 53.1, 49.69, 44.64, 44.87],
-  child: [64.1, 83.43, 66.01, 67.74, 56.69],
-};
 
 const ssaApprovalByYear: Record<number, { state: string; rate: number }[]> = {
   2001: [
@@ -1623,35 +1618,6 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
             height={320}
             color="#94a3b8"
           />
-          <div className="h-[340px]">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'bar',
-                  name: 'Adult Approval Rate',
-                  x: ssaAdultChildRates.states,
-                  y: ssaAdultChildRates.adult,
-                  marker: { color: '#2563eb' },
-                },
-                {
-                  type: 'bar',
-                  name: 'Child Approval Rate',
-                  x: ssaAdultChildRates.states,
-                  y: ssaAdultChildRates.child,
-                  marker: { color: '#22c55e' },
-                },
-              ]}
-              layout={{
-                title: 'Adult vs Child Approval Rates (Top States)',
-                barmode: 'group',
-                xaxis: { title: 'State' },
-                yaxis: { title: 'Approval Rate (%)' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-              }}
-              className="h-full w-full"
-            />
-          </div>
         </CardContent>
       </Card>
     );
