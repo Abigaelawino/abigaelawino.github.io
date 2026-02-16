@@ -15,6 +15,7 @@
     "smoke-test:prod": "node scripts/smoke-test.mjs https://abigael-awino-portfolio.netlify.app",
     "smoke-test:quick": "node scripts/smoke-test.mjs https://abigael-awino-portfolio.netlify.app --quick",
     "smoke-test:local": "node scripts/smoke-test-local.mjs",
+    "setup:local": "node scripts/setup-local.mjs",
     "generate:content": "node scripts/generate-content-index.mjs",
     "build": "node scripts/generate-content-index.mjs && next build",
     "build:full": "NODE_ENV=production node scripts/validate-env.mjs production && node scripts/build.mjs && NODE_ENV=production next build",
