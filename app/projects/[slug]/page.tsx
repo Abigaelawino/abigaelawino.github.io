@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/carousel';
 import { VisualizationPanel } from '@/components/visualization-panel';
 import { NotebookDashboard } from '@/components/notebook-dashboard';
+import { NotebookCodeAccordion } from '@/components/notebook-code-accordion';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -605,6 +606,9 @@ export default async function ProjectPage({
                       </CardHeader>
                       <CardContent className="p-6">
                         <NotebookDashboard slug={resolvedParams.slug} />
+                        <div className="mt-6">
+                          <NotebookCodeAccordion slug={resolvedParams.slug} />
+                        </div>
                         <div className="prose prose-slate max-w-none viz-notebook">
                           <MDXContent content={visualizationsContent} />
                         </div>
