@@ -32,6 +32,8 @@ export function PlotlyChart({ data, layout, config, className }: PlotlyChartProp
           responsive: true,
           displayModeBar: false,
           topojsonURL: '/plotly/',
+          scrollZoom: false,
+          doubleClick: false,
           ...config,
         }}
         style={{ width: '100%', height: '100%' }}

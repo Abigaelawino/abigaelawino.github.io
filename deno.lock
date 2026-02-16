@@ -52,6 +52,7 @@
         "npm:reading-time@^1.5.0",
         "npm:recharts@^3.7.0",
         "npm:shadcn@^3.8.4",
+        "npm:shiki@^1.29.2",
         "npm:tailwind-merge@^3.4.1",
         "npm:tailwindcss-animate@^1.0.7",
         "npm:tailwindcss@^4.1.18",

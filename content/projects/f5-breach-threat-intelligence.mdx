@@ -52,6 +52,18 @@ df["treated_post_placebo"] = df["treated"] * df["post_placebo"]
 placebo = sm.OLS(df["returns"], sm.add_constant(df[["treated", "post_placebo", "treated_post_placebo"]])).fit()
 ```
 
+```python
+# Run Difference-in-Differences regression from the notebook
+def run_diff_in_diff(df, event_date, treated):
+    start_date = event_date - datetime.timedelta(days=180)
+    df = df[(df["date"] >= start_date) & (df["date"] <= event_date)].copy()
+    df["treated"] = np.where(df["ticker"] == treated, 1, 0)
+    df["post"] = np.where(df["date"] >= event_date, 1, 0)
+    df["treated_post"] = df["treated"] * df["post"]
+    model = smf.ols("returns ~ treated + post + treated_post", data=df).fit()
+    return model
+```
+
 ## Visualizations
 
 <Chart
@@ -107,6 +119,26 @@ placebo = sm.OLS(df["returns"], sm.add_constant(df[["treated", "post_placebo", "
     </TableRow>
   </TableBody>
 </Table>
+
+<Card>
+  <CardHeader>
+    <CardTitle>Executive Slide (Event Window)</CardTitle>
+    <CardDescription>Slide-ready summary from the notebook.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    ![Event window slide](https://raw.githubusercontent.com/Abigaelawino/F5-Breach/main/2025_f5_cybersecurity_breach/Slide1.PNG)
+  </CardContent>
+</Card>
+
+<Card>
+  <CardHeader>
+    <CardTitle>Impact Summary Slide</CardTitle>
+    <CardDescription>DiD impact visual for stakeholders.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    ![Impact summary slide](https://raw.githubusercontent.com/Abigaelawino/F5-Breach/main/2025_f5_cybersecurity_breach/Slide5.PNG)
+  </CardContent>
+</Card>
 
 ## Model & Assumptions
 

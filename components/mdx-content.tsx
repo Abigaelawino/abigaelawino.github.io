@@ -2,7 +2,13 @@ import React from 'react';
 import { getHighlighter, type Highlighter, type ThemedToken } from 'shiki';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Chart } from '@/components/ui/chart';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -130,6 +136,7 @@ const components = {
   CardContent,
   CardHeader,
   CardTitle,
+  CardDescription,
   Table,
   TableBody,
   TableCell,

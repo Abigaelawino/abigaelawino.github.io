@@ -63,6 +63,20 @@ babynames["generation"] = np.select(
 )
 ```
 
+```python
+# Generation ranges used for cohort comparisons
+generation_ranges = {
+    "Lost Generation": (1883, 1900),
+    "Greatest Generation": (1901, 1927),
+    "Silent Generation": (1928, 1945),
+    "Baby Boomers": (1946, 1964),
+    "Generation X": (1965, 1980),
+    "Millennials (Gen Y)": (1981, 1996),
+    "Generation Z": (1997, 2012),
+    "Generation Alpha": (2013, 2024),
+}
+```
+
 ## Visualizations
 
 <Chart
@@ -130,6 +144,26 @@ babynames["generation"] = np.select(
   </TableBody>
 </Table>
 
+<Card>
+  <CardHeader>
+    <CardTitle>Top 10 Overview (Notebook Export)</CardTitle>
+    <CardDescription>All-time snapshot used in the Tableau story.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    ![Top 10 overview](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/00_top10_overview.png)
+  </CardContent>
+</Card>
+
+<Card>
+  <CardHeader>
+    <CardTitle>Gen Z Top 10 Names</CardTitle>
+    <CardDescription>Generation bucket comparison.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    ![Gen Z top 10 names](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/04_genz.png)
+  </CardContent>
+</Card>
+
 ## Tableau Workbook Details
 
 - **Calculated fields:** `Decade = INT(FLOOR([year] / 10) * 10)` and `Generation` buckets
@@ -155,7 +189,3 @@ babynames["generation"] = np.select(
 - Visual assets for presentation and social sharing
 
 ## Sample Visuals
-
-![Top 10 overview](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/00_top10_overview.png)
-
-![Gen Z top 10 names](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/04_genz.png)

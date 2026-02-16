@@ -571,15 +571,18 @@ export default async function ProjectPage({
                 Interactive charts and notebook-derived figures grouped for quick review.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid gap-4 md:grid-cols-3">
+            <CardContent className="@container/viz space-y-6">
+              <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
                 {highlights.map(item => (
                   <Card
                     key={item.label}
                     className="bg-gradient-to-t from-muted/30 to-background shadow-sm"
                   >
                     <CardHeader className="border-b">
-                      <CardDescription>{item.label}</CardDescription>
+                      <div className="flex items-center justify-between gap-2">
+                        <CardDescription>{item.label}</CardDescription>
+                        <Badge variant="outline">Updated</Badge>
+                      </div>
                       <CardTitle className="text-2xl">{item.value}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm text-muted-foreground">
@@ -598,19 +601,21 @@ export default async function ProjectPage({
                 {visualizationsContent && (
                   <input type="radio" id="viz-notebook" name="viz-view" />
                 )}
-                <div className="viz-body grid gap-6 lg:grid-cols-[240px_1fr]">
+                <div className="viz-body grid gap-6 lg:grid-cols-[260px_1fr]">
                   <aside className="rounded-lg border bg-muted/30 p-4 text-sm space-y-3">
                     <div className="font-semibold text-foreground">Views</div>
                     <label className="viz-tab" htmlFor="viz-interactive">
-                      Interactive charts
+                      <span>Interactive charts</span>
+                      <Badge variant="secondary">Live</Badge>
                     </label>
                     {visualizationsContent && (
                       <label className="viz-tab" htmlFor="viz-notebook">
-                        Notebook figures
+                        <span>Notebook figures</span>
+                        <Badge variant="outline">Figures</Badge>
                       </label>
                     )}
                     <div className="pt-2 text-xs text-muted-foreground">
-                      Toggle views to keep the story focused.
+                      Select a view to keep the story focused.
                     </div>
                   </aside>
                   <div className="viz-panels space-y-8">
@@ -633,7 +638,7 @@ export default async function ProjectPage({
                         </div>
                         <Card>
                           <CardContent className="p-6">
-                            <div className="prose prose-slate max-w-none">
+                            <div className="prose prose-slate max-w-none viz-notebook">
                               <MDXContent content={visualizationsContent} />
                             </div>
                           </CardContent>

@@ -455,7 +455,10 @@ h1 {
 }
 
 .viz-shell .viz-tab {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   border-radius: 999px;
   border: 1px solid #e2e8f0;
   padding: 0.5rem 0.75rem;
@@ -488,6 +491,31 @@ h1 {
 
 #viz-notebook:checked ~ .viz-body .viz-panel-notebook {
   display: block;
+}
+
+.viz-notebook img {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  margin: 1.5rem 0;
+}
+
+.viz-notebook table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.viz-notebook thead {
+  background-color: #f1f5f9;
+}
+
+.viz-notebook th,
+.viz-notebook td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .mdx-content h3 {

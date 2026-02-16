@@ -73,6 +73,18 @@ df["State-FY"] = df["State Code"].astype(str) + "-" + df["Fiscal Year"].astype(s
 df.to_csv("ssa_disability_tableau_ready.csv", index=False)
 ```
 
+```python
+# Normalize headers and clean key dimensions
+df["Update Date"] = pd.to_datetime(df["Update Date"], errors="coerce")
+df["Fiscal Year"] = pd.to_numeric(df["Fiscal Year"], errors="coerce").astype("Int64")
+for col in ["File Name", "Region Code", "State Code", "Date Type"]:
+    df[col] = df[col].astype(str).str.strip()
+df["State Code"] = df["State Code"].str.upper()
+df.columns = (
+    df.columns.str.replace("*", "", regex=False).str.replace(r"\\s+", " ", regex=True).str.strip()
+)
+```
+
 ## Visualizations
 
 <Chart
@@ -122,6 +134,16 @@ df.to_csv("ssa_disability_tableau_ready.csv", index=False)
   </TableBody>
 </Table>
 
+<Card>
+  <CardHeader>
+    <CardTitle>FY2021 Choropleth (Notebook Export)</CardTitle>
+    <CardDescription>Static snapshot used in reporting.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    ![Disability claim approval rates by state](https://raw.githubusercontent.com/Abigaelawino/ssa-disability-outcomes/main/visualizations/disability_claim_aproval__rates_by_state_2021.png)
+  </CardContent>
+</Card>
+
 ## FY2021 Highlights
 
 - **Top approvals:** KS (60.57), AK (56.53), NH (50.57), NE (47.21), RI (46.14)
@@ -140,5 +162,3 @@ df.to_csv("ssa_disability_tableau_ready.csv", index=False)
 - Verified field completeness and exported a Tableau-ready file
 
 ## Sample Visual
-
-![Disability claim approval rates by state](https://raw.githubusercontent.com/Abigaelawino/ssa-disability-outcomes/main/visualizations/disability_claim_aproval__rates_by_state_2021.png)

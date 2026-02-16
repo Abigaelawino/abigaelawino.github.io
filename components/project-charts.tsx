@@ -9,6 +9,26 @@ type ProjectChartsProps = {
   slug: string;
 };
 
+function ChartPanel({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-xl border bg-card p-4 shadow-sm space-y-3">
+      <div className="space-y-1">
+        <div className="text-sm text-muted-foreground">{description}</div>
+        <div className="text-base font-semibold">{title}</div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
 const babynamesBirthsRecent = [
   { name: '2015', value: 3700912 },
   { name: '2016', value: 3668698 },
@@ -1281,29 +1301,37 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>Interactive Segment Insights</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <Chart
-            type="pie"
+        <CardContent className="grid gap-4 md:grid-cols-2">
+          <ChartPanel
             title="Customer Segment Distribution (%)"
-            data={[
-              { name: 'High-Value Loyalists', value: 8 },
-              { name: 'Occasional Bargain Hunters', value: 22 },
-              { name: 'New Explorers', value: 15 },
-              { name: 'Brand Devotees', value: 12 },
-              { name: 'Multi-Channel Shoppers', value: 18 },
-              { name: 'At-Risk Customers', value: 8 },
-            ]}
-            height={320}
-          />
-          <Chart
-            type="bar"
+            description="Share of customers by segment"
+          >
+            <Chart
+              type="pie"
+              data={[
+                { name: 'High-Value Loyalists', value: 8 },
+                { name: 'Occasional Bargain Hunters', value: 22 },
+                { name: 'New Explorers', value: 15 },
+                { name: 'Brand Devotees', value: 12 },
+                { name: 'Multi-Channel Shoppers', value: 18 },
+                { name: 'At-Risk Customers', value: 8 },
+              ]}
+              height={260}
+            />
+          </ChartPanel>
+          <ChartPanel
             title="Campaign Conversion Rate (%)"
-            data={[
-              { name: 'Before Segmentation', value: 3.2 },
-              { name: 'After Segmentation', value: 4.5 },
-            ]}
-            height={280}
-          />
+            description="Lift after segmentation rollout"
+          >
+            <Chart
+              type="bar"
+              data={[
+                { name: 'Before Segmentation', value: 3.2 },
+                { name: 'After Segmentation', value: 4.5 },
+              ]}
+              height={260}
+            />
+          </ChartPanel>
         </CardContent>
       </Card>
     );
@@ -1315,37 +1343,42 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>Recommendation Impact</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <Chart
-            type="bar"
+        <CardContent className="grid gap-4 md:grid-cols-2">
+          <ChartPanel
             title="Click-Through Rate Improvement (%)"
-            data={[
-              { name: 'Before System', value: 4.2 },
-              { name: 'After System', value: 5.8 },
-            ]}
-            height={260}
-          />
-          <div className="h-[320px]">
-            <PlotlyChart
+            description="Recommendation engine uplift"
+          >
+            <Chart
+              type="bar"
               data={[
-                {
-                  type: 'scatter',
-                  mode: 'lines+markers',
-                  x: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
-                  y: [100, 250, 450, 680, 920, 1200],
-                  line: { color: '#2563eb', width: 3 },
-                },
+                { name: 'Before System', value: 4.2 },
+                { name: 'After System', value: 5.8 },
               ]}
-              layout={{
-                title: 'Monthly Revenue Impact ($K)',
-                xaxis: { title: 'Month' },
-                yaxis: { title: 'Revenue ($K)' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-              }}
-              className="h-full w-full"
+              height={240}
             />
-          </div>
+          </ChartPanel>
+          <ChartPanel title="Monthly Revenue Impact ($K)" description="Incremental revenue trend">
+            <div className="h-[260px]">
+              <PlotlyChart
+                data={[
+                  {
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    x: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    y: [100, 250, 450, 680, 920, 1200],
+                    line: { color: '#2563eb', width: 3 },
+                  },
+                ]}
+                layout={{
+                  xaxis: { title: 'Month' },
+                  yaxis: { title: 'Revenue ($K)' },
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                }}
+                className="h-full w-full"
+              />
+            </div>
+          </ChartPanel>
         </CardContent>
       </Card>
     );
@@ -1357,57 +1390,73 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>Interactive Baby Names Trends</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <Chart
-            type="line"
+        <CardContent className="grid gap-4 md:grid-cols-2">
+          <ChartPanel
             title="Total Births by Year (2015–2024)"
-            data={babynamesBirthsRecent}
-            height={300}
-            color="#a0cbe8"
-          />
-          <Chart
-            type="bar"
-            title="Top 10 Names Overall (1880–2024)"
-            data={babynamesTopNames}
-            height={340}
-            color="#e14f7a"
-          />
-          <Chart
-            type="line"
-            title="Unique Names per Year (2015–2024)"
-            data={babynamesUniqueNamesRecent}
-            height={280}
-            color="#f59e0b"
-          />
-          <div className="h-[360px]">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'bar',
-                  name: 'Female',
-                  x: babynamesUnisexNames.names,
-                  y: babynamesUnisexNames.female,
-                  marker: { color: '#e14f7a' },
-                },
-                {
-                  type: 'bar',
-                  name: 'Male',
-                  x: babynamesUnisexNames.names,
-                  y: babynamesUnisexNames.male,
-                  marker: { color: '#a0cbe8' },
-                },
-              ]}
-              layout={{
-                title: 'Top Unisex Names (Female vs Male Counts)',
-                barmode: 'group',
-                xaxis: { title: 'Name' },
-                yaxis: { title: 'Total Count' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-              }}
-              className="h-full w-full"
+            description="SSA births trend"
+          >
+            <Chart
+              type="line"
+              data={babynamesBirthsRecent}
+              height={240}
+              color="#a0cbe8"
             />
-          </div>
+          </ChartPanel>
+          <ChartPanel
+            title="Top 10 Names Overall (1880–2024)"
+            description="Most common names"
+          >
+            <Chart
+              type="bar"
+              data={babynamesTopNames}
+              height={240}
+              color="#e14f7a"
+            />
+          </ChartPanel>
+          <ChartPanel
+            title="Unique Names per Year (2015–2024)"
+            description="Name diversity trend"
+          >
+            <Chart
+              type="line"
+              data={babynamesUniqueNamesRecent}
+              height={240}
+              color="#f59e0b"
+            />
+          </ChartPanel>
+          <ChartPanel
+            title="Top Unisex Names (Female vs Male Counts)"
+            description="Gender balance by name"
+          >
+            <div className="h-[260px]">
+              <PlotlyChart
+                data={[
+                  {
+                    type: 'bar',
+                    name: 'Female',
+                    x: babynamesUnisexNames.names,
+                    y: babynamesUnisexNames.female,
+                    marker: { color: '#e14f7a' },
+                  },
+                  {
+                    type: 'bar',
+                    name: 'Male',
+                    x: babynamesUnisexNames.names,
+                    y: babynamesUnisexNames.male,
+                    marker: { color: '#a0cbe8' },
+                  },
+                ]}
+                layout={{
+                  barmode: 'group',
+                  xaxis: { title: 'Name' },
+                  yaxis: { title: 'Total Count' },
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                }}
+                className="h-full w-full"
+              />
+            </div>
+          </ChartPanel>
         </CardContent>
       </Card>
     );
@@ -1419,87 +1468,93 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>Breach Impact Signals</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="h-[320px]">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'scatter',
-                  mode: 'lines+markers',
-                  x: f5BreachReturns.dates,
-                  y: f5BreachReturns.returns,
-                  line: { color: '#1d4ed8', width: 3 },
-                  name: 'FFIV Daily Returns',
-                },
-              ]}
-              layout={{
-                title: 'FFIV Returns Around Breach Date',
-                xaxis: { title: 'Date' },
-                yaxis: { title: 'Daily Return' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-                shapes: [
+        <CardContent className="grid gap-4 md:grid-cols-2">
+          <ChartPanel
+            title="FFIV Returns Around Breach Date"
+            description="Event window daily returns"
+          >
+            <div className="h-[260px]">
+              <PlotlyChart
+                data={[
                   {
-                    type: 'line',
-                    x0: '2025-10-16',
-                    x1: '2025-10-16',
-                    y0: Math.min(...f5BreachReturns.returns),
-                    y1: Math.max(...f5BreachReturns.returns),
-                    line: { color: '#ef4444', width: 2, dash: 'dash' },
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    x: f5BreachReturns.dates,
+                    y: f5BreachReturns.returns,
+                    line: { color: '#1d4ed8', width: 3 },
+                    name: 'FFIV Daily Returns',
                   },
-                ],
-              }}
-              className="h-full w-full"
-            />
-          </div>
-          <div className="h-[320px]">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'scatter',
-                  mode: 'lines+markers',
-                  x: f5BreachReturns.dates,
-                  y: f5BreachCumulativeIndex,
-                  line: { color: '#0f172a', width: 3 },
-                  fill: 'tozeroy',
-                  fillcolor: 'rgba(148, 163, 184, 0.2)',
-                  name: 'Cumulative Return Index',
-                },
-              ]}
-              layout={{
-                title: 'Stock Impact Index (Cumulative Return)',
-                xaxis: { title: 'Date' },
-                yaxis: { title: 'Index (Base = 100)' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-                shapes: [
+                ]}
+                layout={{
+                  xaxis: { title: 'Date' },
+                  yaxis: { title: 'Daily Return' },
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                  shapes: [
+                    {
+                      type: 'line',
+                      x0: '2025-10-16',
+                      x1: '2025-10-16',
+                      y0: Math.min(...f5BreachReturns.returns),
+                      y1: Math.max(...f5BreachReturns.returns),
+                      line: { color: '#ef4444', width: 2, dash: 'dash' },
+                    },
+                  ],
+                }}
+                className="h-full w-full"
+              />
+            </div>
+          </ChartPanel>
+          <ChartPanel
+            title="Stock Impact Index (Cumulative Return)"
+            description="Indexed performance vs event date"
+          >
+            <div className="h-[260px]">
+              <PlotlyChart
+                data={[
                   {
-                    type: 'line',
-                    x0: '2025-10-16',
-                    x1: '2025-10-16',
-                    y0: Math.min(...f5BreachCumulativeIndex),
-                    y1: Math.max(...f5BreachCumulativeIndex),
-                    line: { color: '#ef4444', width: 2, dash: 'dash' },
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    x: f5BreachReturns.dates,
+                    y: f5BreachCumulativeIndex,
+                    line: { color: '#0f172a', width: 3 },
+                    fill: 'tozeroy',
+                    fillcolor: 'rgba(148, 163, 184, 0.2)',
+                    name: 'Cumulative Return Index',
                   },
-                ],
-              }}
-              className="h-full w-full"
-            />
-          </div>
-          <Chart
-            type="bar"
+                ]}
+                layout={{
+                  xaxis: { title: 'Date' },
+                  yaxis: { title: 'Index (Base = 100)' },
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                  shapes: [
+                    {
+                      type: 'line',
+                      x0: '2025-10-16',
+                      x1: '2025-10-16',
+                      y0: Math.min(...f5BreachCumulativeIndex),
+                      y1: Math.max(...f5BreachCumulativeIndex),
+                      line: { color: '#ef4444', width: 2, dash: 'dash' },
+                    },
+                  ],
+                }}
+                className="h-full w-full"
+              />
+            </div>
+          </ChartPanel>
+          <ChartPanel
             title="Difference-in-Differences Coefficients"
-            data={f5BreachDiD}
-            height={260}
-            color="#ef4444"
-          />
-          <Chart
-            type="bar"
+            description="Treatment vs placebo comparison"
+          >
+            <Chart type="bar" data={f5BreachDiD} height={220} color="#ef4444" />
+          </ChartPanel>
+          <ChartPanel
             title="Core DiD Model Coefficients"
-            data={f5BreachCoefficients}
-            height={280}
-            color="#0f172a"
-          />
+            description="Model term contributions"
+          >
+            <Chart type="bar" data={f5BreachCoefficients} height={220} color="#0f172a" />
+          </ChartPanel>
         </CardContent>
       </Card>
     );
@@ -1511,121 +1566,131 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
         <CardHeader>
           <CardTitle>SSA Approval Rate Patterns (FY{selectedYear})</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="rounded-lg border p-4 space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="text-sm font-medium">Fiscal Year</div>
-              <div className="text-sm text-muted-foreground">{selectedYear}</div>
+        <CardContent className="grid gap-4 lg:grid-cols-2">
+          <ChartPanel title="Fiscal Year" description="Adjust the year for the map and rankings">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+                <span className="font-medium">Selected</span>
+                <span className="text-muted-foreground">{selectedYear}</span>
+              </div>
+              <input
+                type="range"
+                min={ssaYears[0]}
+                max={ssaYears[ssaYears.length - 1]}
+                step={1}
+                value={selectedYear}
+                onChange={event => setSelectedYear(Number(event.target.value))}
+                className="w-full accent-primary"
+                aria-label="Select fiscal year"
+              />
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>{ssaYears[0]}</span>
+                <span>{ssaYears[ssaYears.length - 1]}</span>
+              </div>
             </div>
-            <input
-              type="range"
-              min={ssaYears[0]}
-              max={ssaYears[ssaYears.length - 1]}
-              step={1}
-              value={selectedYear}
-              onChange={event => setSelectedYear(Number(event.target.value))}
-              className="w-full accent-primary"
-              aria-label="Select fiscal year"
-            />
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{ssaYears[0]}</span>
-              <span>{ssaYears[ssaYears.length - 1]}</span>
+          </ChartPanel>
+          <ChartPanel
+            title={`Favorable Determination Rate by State (FY${selectedYear})`}
+            description="Choropleth map"
+          >
+            <div className="h-[320px] relative">
+              <PlotlyChart
+                data={[
+                  {
+                    type: 'choropleth',
+                    locationmode: 'USA-states',
+                    locations: mapLocations,
+                    z: mapValues,
+                    colorscale: [
+                      [0, '#e0f2fe'],
+                      [0.5, '#60a5fa'],
+                      [1, '#1d4ed8'],
+                    ],
+                    marker: {
+                      line: { color: '#ffffff', width: 1 },
+                    },
+                    colorbar: { title: 'Approval %' },
+                    hovertemplate:
+                      '<b>%{location}</b><br>Approval rate: %{z:.2f}%<extra></extra>',
+                  },
+                ]}
+                layout={{
+                  geo: { scope: 'usa', projection: { type: 'albers usa' } },
+                  hovermode: 'closest',
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                  margin: { l: 0, r: 0, t: 0, b: 0 },
+                  hoverlabel: {
+                    align: 'left',
+                    bgcolor: '#ffffff',
+                    bordercolor: '#e2e8f0',
+                    font: { color: '#0f172a', size: 12 },
+                    namelength: 0,
+                  },
+                  hoverdistance: 20,
+                }}
+                className="h-full w-full"
+              />
             </div>
-          </div>
-          <div className="h-[420px] relative">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'choropleth',
-                  locationmode: 'USA-states',
-                  locations: mapLocations,
-                  z: mapValues,
-                  colorscale: [
-                    [0, '#e0f2fe'],
-                    [0.5, '#60a5fa'],
-                    [1, '#1d4ed8'],
+          </ChartPanel>
+          <ChartPanel
+            title="Average Approval Rate Trend (FY2001–FY2021)"
+            description="National trend line"
+          >
+            <div className="h-[260px]">
+              <PlotlyChart
+                data={[
+                  {
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    x: ssaApprovalTrend.map(entry => entry.name),
+                    y: ssaApprovalTrend.map(entry => entry.value),
+                    line: { color: '#1d4ed8', width: 3 },
+                    name: 'Average Approval Rate',
+                  },
+                ]}
+                layout={{
+                  xaxis: { title: 'Fiscal Year' },
+                  yaxis: { title: 'Approval Rate (%)' },
+                  paper_bgcolor: 'transparent',
+                  plot_bgcolor: 'transparent',
+                  shapes: [
+                    {
+                      type: 'line',
+                      x0: '2020',
+                      x1: '2020',
+                      y0: Math.min(...ssaApprovalTrend.map(entry => entry.value)),
+                      y1: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
+                      line: { color: '#ef4444', width: 2, dash: 'dash' },
+                    },
                   ],
-                  marker: {
-                    line: { color: '#ffffff', width: 1 },
-                  },
-                  colorbar: { title: 'Approval %' },
-                  hovertemplate:
-                    '<b>%{location}</b><br>Approval rate: %{z:.2f}%<extra></extra>',
-                },
-              ]}
-              layout={{
-                title: `Favorable Determination Rate by State (FY${selectedYear})`,
-                geo: { scope: 'usa', projection: { type: 'albers usa' } },
-                hovermode: 'closest',
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-                margin: { l: 0, r: 0, t: 50, b: 0 },
-                hoverlabel: {
-                  align: 'left',
-                  bgcolor: '#ffffff',
-                  bordercolor: '#e2e8f0',
-                  font: { color: '#0f172a' },
-                },
-              }}
-              className="h-full w-full"
-            />
-          </div>
-          <div className="h-[320px]">
-            <PlotlyChart
-              data={[
-                {
-                  type: 'scatter',
-                  mode: 'lines+markers',
-                  x: ssaApprovalTrend.map(entry => entry.name),
-                  y: ssaApprovalTrend.map(entry => entry.value),
-                  line: { color: '#1d4ed8', width: 3 },
-                  name: 'Average Approval Rate',
-                },
-              ]}
-              layout={{
-                title: 'Average Approval Rate Trend (FY2001–FY2021)',
-                xaxis: { title: 'Fiscal Year' },
-                yaxis: { title: 'Approval Rate (%)' },
-                paper_bgcolor: 'transparent',
-                plot_bgcolor: 'transparent',
-                shapes: [
-                  {
-                    type: 'line',
-                    x0: '2020',
-                    x1: '2020',
-                    y0: Math.min(...ssaApprovalTrend.map(entry => entry.value)),
-                    y1: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
-                    line: { color: '#ef4444', width: 2, dash: 'dash' },
-                  },
-                ],
-                annotations: [
-                  {
-                    x: '2020',
-                    y: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
-                    text: 'COVID onset',
-                    showarrow: false,
-                    yanchor: 'bottom',
-                    font: { color: '#ef4444' },
-                  },
-                ],
-              }}
-              className="h-full w-full"
-            />
-          </div>
-          <Chart
-            type="bar"
+                  annotations: [
+                    {
+                      x: '2020',
+                      y: Math.max(...ssaApprovalTrend.map(entry => entry.value)),
+                      text: 'COVID onset',
+                      showarrow: false,
+                      yanchor: 'bottom',
+                      font: { color: '#ef4444' },
+                    },
+                  ],
+                }}
+                className="h-full w-full"
+              />
+            </div>
+          </ChartPanel>
+          <ChartPanel
             title="Top States by Favorable Determination Rate"
-            data={ssaApprovalTopStates}
-            height={320}
-            color="#2563eb"
-          />
-          <Chart
-            type="bar"
+            description="Best-performing states"
+          >
+            <Chart type="bar" data={ssaApprovalTopStates} height={220} color="#2563eb" />
+          </ChartPanel>
+          <ChartPanel
             title="Lowest States by Favorable Determination Rate"
-            data={ssaApprovalBottomStates}
-            height={320}
-            color="#94a3b8"
-          />
+            description="Lowest-performing states"
+          >
+            <Chart type="bar" data={ssaApprovalBottomStates} height={220} color="#94a3b8" />
+          </ChartPanel>
         </CardContent>
       </Card>
     );
