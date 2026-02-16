@@ -17,6 +17,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { VisualizationPanel } from '@/components/visualization-panel';
+import { NotebookDashboard } from '@/components/notebook-dashboard';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -593,17 +594,18 @@ export default async function ProjectPage({
                 interactive={<ProjectCharts slug={resolvedParams.slug} />}
                 notebook={
                   visualizationsContent ? (
-                        <Card>
-                          <CardHeader>
-                            <CardTitle>Notebook Summary</CardTitle>
-                            <CardDescription>Key figures and diagnostics from the notebooks.</CardDescription>
-                          </CardHeader>
-                          <CardContent className="p-6">
-                            <div className="prose prose-slate max-w-none viz-notebook">
-                              <MDXContent content={visualizationsContent} />
-                            </div>
-                          </CardContent>
-                        </Card>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Notebook Summary</CardTitle>
+                        <CardDescription>Key figures and diagnostics from the notebooks.</CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-6">
+                        <NotebookDashboard slug={resolvedParams.slug} />
+                        <div className="prose prose-slate max-w-none viz-notebook">
+                          <MDXContent content={visualizationsContent} />
+                        </div>
+                      </CardContent>
+                    </Card>
                   ) : undefined
                 }
               />

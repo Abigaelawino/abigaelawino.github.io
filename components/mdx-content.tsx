@@ -57,10 +57,16 @@ const shikiLanguages = [
   'text',
 ];
 
-const highlighterPromise: Promise<Highlighter> = getHighlighter({
-  themes: ['github-light'],
-  langs: shikiLanguages,
-});
+const highlighterPromise: Promise<Highlighter> = (() => {
+  const globalAny = globalThis as { __shikiHighlighter?: Promise<Highlighter> };
+  if (!globalAny.__shikiHighlighter) {
+    globalAny.__shikiHighlighter = getHighlighter({
+      themes: ['github-light'],
+      langs: shikiLanguages,
+    });
+  }
+  return globalAny.__shikiHighlighter;
+})();
 
 function getLanguage(className: string | undefined) {
   if (!className) return 'text';
