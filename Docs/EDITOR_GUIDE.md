@@ -55,6 +55,45 @@ Required frontmatter fields:
 
 ## MDX Components You Can Use
 
+## Editing MDX Files (Detailed)
+
+Every MDX file has two parts:
+1. **Frontmatter** (metadata between `---` lines)
+2. **Body** (content written in Markdown + MDX components)
+
+Example structure:
+
+```mdx
+---
+title: Example Project
+date: 2026-02-16
+tags: [analytics, visualization]
+summary: One-line summary used on cards.
+cover: /images/projects/example-cover.svg
+gallery:
+  - /images/projects/example-cover.svg
+  - /images/projects/example-detail.png
+status: published
+---
+
+# Example Project
+
+Intro paragraph here.
+```
+
+### Frontmatter rules
+
+- Dates must be `YYYY-MM-DD`.
+- `status` must be `published` or `draft`.
+- `cover` and `gallery` should point to `/images/...` in `public/images`.
+- `tags` and `tech` are required list fields for projects.
+
+### Body content tips
+
+- Use headings (`##`) to break sections.
+- Use MDX components (`Chart`, `Table`, `Card`) for richer blocks.
+- Use standard Markdown for lists and text.
+
 ### Chart (Recharts)
 
 ```mdx
@@ -74,6 +113,14 @@ Required frontmatter fields:
 - `data`: array of `{ name, value }`
 - `height`: chart height in px
 - `color`: optional hex color
+
+### Inline code (shadcn style)
+
+Inline code is styled using the shadcn typography pattern. Example:
+
+```mdx
+Use the `treated_post` term to capture the breach impact.
+```
 
 ### Table (shadcn/ui)
 
@@ -116,6 +163,33 @@ Required frontmatter fields:
 - Example: `cover: /images/projects/my-project-cover.svg`
 
 External images (GitHub raw URLs) are allowed but should be used sparingly.
+
+## Images & Galleries
+
+- **Project cards** pull images from `gallery` (carousel).
+- **Blog cards** use `cover`.
+- Store images in `public/images/...` and reference them as `/images/...`.
+
+## Common File Edits
+
+### Projects
+- File path: `content/projects/<slug>.mdx`
+- Update frontmatter and section content.
+- Add charts/tables under a `## Visualizations` heading.
+
+### Blog posts
+- File path: `content/blog/<slug>.mdx`
+- Ensure `cover` and `readingTime` are set.
+
+### About
+- File path: `content/about.mdx`
+
+## Refreshing Local Views
+
+If MDX changes do not appear:
+
+- Run `npm run refresh:live`, or
+- Click `scripts/refresh-live-view.sh`
 
 ---
 

@@ -32,6 +32,7 @@
         "npm:chrome-launcher@^1.2.1",
         "npm:class-variance-authority@~0.7.1",
         "npm:clsx@^2.1.1",
+        "npm:embla-carousel-react@^8.6.0",
         "npm:gray-matter@^4.0.3",
         "npm:jsdom@^28.1.0",
         "npm:lighthouse@^13.0.3",

@@ -67,6 +67,8 @@ df["State-FY"] = df["State Code"].astype(str) + "-" + df["Fiscal Year"].astype(s
 df.to_csv("ssa_disability_tableau_ready.csv", index=False)
 ```
 
+## Visualizations
+
 <Chart
   type="line"
   title="Average Approval Rate (FY2001–FY2021)"

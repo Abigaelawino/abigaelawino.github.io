@@ -11,6 +11,21 @@ import {
   TableCaption,
 } from '@/components/ui/table';
 
+type InlineCodeProps = React.ComponentProps<'code'>;
+
+function InlineCode({ className, ...props }: InlineCodeProps) {
+  if (className?.includes('language-')) {
+    return <code className={className} {...props} />;
+  }
+
+  return (
+    <code
+      className="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
+      {...props}
+    />
+  );
+}
+
 const components = {
   Chart,
   Card,
@@ -24,6 +39,7 @@ const components = {
   TableHeader,
   TableRow,
   TableCaption,
+  code: InlineCode,
   // Add any other custom components here
 };
 

@@ -52,6 +52,8 @@ df["treated_post_placebo"] = df["treated"] * df["post_placebo"]
 placebo = sm.OLS(df["returns"], sm.add_constant(df[["treated", "post_placebo", "treated_post_placebo"]])).fit()
 ```
 
+## Visualizations
+
 <Chart
   type="bar"
   title="DiD Effect vs Placebo (Coefficient)"
