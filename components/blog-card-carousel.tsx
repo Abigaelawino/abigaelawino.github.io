@@ -20,6 +20,7 @@ type BlogPost = {
     date: string;
     tags: string[];
     summary: string;
+    cover?: string;
   };
 };
 
@@ -39,6 +40,14 @@ export function BlogCardCarousel({ posts }: BlogCardCarouselProps) {
           {posts.map(post => (
             <CarouselItem key={post.slug}>
               <Card className="flex h-full flex-col">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img
+                    src={post.frontmatter.cover || '/assets/og.png'}
+                    alt={`${post.frontmatter.title} cover`}
+                    className="h-36 w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
                 <CardHeader>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {post.frontmatter.tags.slice(0, 2).map(tag => (

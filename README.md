@@ -35,6 +35,7 @@ This repository tracks the Netlify-deployed Next.js portfolio site outlined in `
 - Decap CMS lives at `public/admin/index.html`.
 - Netlify redirects `/admin/*` to `/admin/index.html` so the CMS loads from a clean URL.
 - Project entries include `gallery` images that power the card carousel headers.
+- Editing guide: `Docs/EDITOR_GUIDE.md`.
 
 ## Testing & coverage
 

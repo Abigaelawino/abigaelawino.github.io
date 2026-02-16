@@ -10,6 +10,7 @@
         "visualization"
       ],
       "summary": "How I stitched 145 SSA text files into a clean 2.1M-row dataset and prepared it for Tableau storytelling.",
+      "cover": "/assets/og.png",
       "readingTime": 4,
       "status": "published"
     },
@@ -25,6 +26,7 @@
         "visualization"
       ],
       "summary": "A focused look at unisex name balance using SSA counts and a gender-split chart.",
+      "cover": "/assets/og.png",
       "readingTime": 3,
       "status": "published"
     },
@@ -41,6 +43,7 @@
         "finance"
       ],
       "summary": "The chart sequence I used to communicate breach impact quickly and clearly.",
+      "cover": "/assets/og.png",
       "readingTime": 3,
       "status": "published"
     },
@@ -57,6 +60,7 @@
         "security"
       ],
       "summary": "How I checked parallel trends and ran a placebo test to validate the breach impact analysis.",
+      "cover": "/assets/og.png",
       "readingTime": 3,
       "status": "published"
     },
@@ -72,6 +76,7 @@
         "policy"
       ],
       "summary": "A short QA checklist for validating state approval rates before publishing.",
+      "cover": "/assets/og.png",
       "readingTime": 2,
       "status": "published"
     },
@@ -88,6 +93,7 @@
         "visualization"
       ],
       "summary": "How I cleaned SSA outcome fields, standardized dates, and exported a Tableau-ready dataset.",
+      "cover": "/assets/og.png",
       "readingTime": 3,
       "status": "published"
     },
@@ -103,7 +109,8 @@
         "monitoring",
         "reliability"
       ],
-      "summary": "A short breakdown of model drift signals, alerting thresholds, and rollback playbooks.",
+      "summary": "A practical write-up on drift detection and production response workflows.",
+      "cover": "/assets/og.png",
       "readingTime": 7
     },
     "content": "# What Broke in Production and How We Fixed It\n\nA practical write-up on drift detection and production response workflows."
@@ -118,7 +125,8 @@
         "data-engineering",
         "scalability"
       ],
-      "summary": "Lessons learned from building analytics pipelines that handle millions of events daily.",
+      "summary": "Lessons learned from building analytics pipelines that handle millions of events daily. From data ingestion to real-time processing.",
+      "cover": "/assets/og.png",
       "readingTime": 12
     },
     "content": "# Building Scalable Analytics Pipelines\n\nLessons learned from building analytics pipelines that handle millions of events daily. From data ingestion to real-time processing."
@@ -133,7 +141,8 @@
         "performance",
         "frontend"
       ],
-      "summary": "Practical React performance tips from production apps that reduced bundle size by 40%.",
+      "summary": "Practical React performance tips from production apps that reduced bundle size by 40%. Includes code splitting, memoization strategies, and bundle analysis.",
+      "cover": "/assets/og.png",
       "readingTime": 8
     },
     "content": "# React Performance Optimization Techniques\n\nPractical React performance tips from production apps that reduced bundle size by 40%. Includes code splitting, memoization strategies, and bundle analysis."
@@ -148,7 +157,8 @@
         "performance",
         "backend"
       ],
-      "summary": "How proper indexing reduced query times from seconds to milliseconds in high-traffic applications.",
+      "summary": "How proper indexing reduced query times from seconds to milliseconds in high-traffic applications. Covering B-tree, hash, and composite indexes.",
+      "cover": "/assets/og.png",
       "readingTime": 10
     },
     "content": "# Database Indexing Strategies\n\nHow proper indexing reduced query times from seconds to milliseconds in high-traffic applications. Covering B-tree, hash, and composite indexes."
@@ -163,7 +173,8 @@
         "docker",
         "production"
       ],
-      "summary": "Container optimization strategies that reduced deployment time and improved resource utilization.",
+      "summary": "Container optimization strategies that reduced deployment time and improved resource utilization. Multi-stage builds, layer caching, and security hardening.",
+      "cover": "/assets/og.png",
       "readingTime": 9
     },
     "content": "# Docker Best Practices for Production\n\nContainer optimization strategies that reduced deployment time and improved resource utilization. Multi-stage builds, layer caching, and security hardening."
@@ -178,7 +189,8 @@
         "api",
         "backend"
       ],
-      "summary": "Essential security patterns for REST APIs including authentication, rate limiting, and input validation.",
+      "summary": "Essential security patterns for REST APIs including authentication, rate limiting, and input validation. Real-world examples from production systems.",
+      "cover": "/assets/og.png",
       "readingTime": 11
     },
     "content": "# API Security Patterns\n\nEssential security patterns for REST APIs including authentication, rate limiting, and input validation. Real-world examples from production systems."
@@ -193,7 +205,8 @@
         "production",
         "mlops"
       ],
-      "summary": "Moving ML models from experimentation to production with proper monitoring and maintenance.",
+      "summary": "Moving ML models from experimentation to production with proper monitoring and maintenance. Model versioning, A/B testing, and performance tracking.",
+      "cover": "/assets/og.png",
       "readingTime": 13
     },
     "content": "# Machine Learning in Production\n\nMoving ML models from experimentation to production with proper monitoring and maintenance. Model versioning, A/B testing, and performance tracking."
@@ -208,7 +221,8 @@
         "frontend",
         "migration"
       ],
-      "summary": "Step-by-step approach to migrating large JavaScript codebases to TypeScript with minimal downtime.",
+      "summary": "Step-by-step approach to migrating large JavaScript codebases to TypeScript with minimal downtime. Gradual adoption strategies and tooling setup.",
+      "cover": "/assets/og.png",
       "readingTime": 7
     },
     "content": "# TypeScript Migration Guide\n\nStep-by-step approach to migrating large JavaScript codebases to TypeScript with minimal downtime. Gradual adoption strategies and tooling setup."

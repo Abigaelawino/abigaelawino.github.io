@@ -394,6 +394,31 @@ h1 {
   line-height: 1.7;
 }
 
+.mdx-content code {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  padding: 0.2rem 0.35rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.mdx-content pre {
+  background-color: #0b1220;
+  color: #e2e8f0;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.mdx-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
 .mdx-content h3 {
   color: #1e293b;
   font-size: 1.25rem;

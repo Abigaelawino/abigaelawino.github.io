@@ -27,6 +27,7 @@ const blogSchema = {
   date: 'date',
   tags: 'string[]',
   summary: 'string',
+  cover: 'string',
   readingTime: 'number',
 };
 

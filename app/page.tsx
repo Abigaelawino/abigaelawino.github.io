@@ -52,7 +52,7 @@ export default function HomePage() {
   const projects = getAllProjects().slice(0, 3); // Get first 3 projects for featured section
   const blogPosts = (blogIndex as Array<{
     slug: string;
-    frontmatter: { title?: string; date?: string; tags?: string[]; summary?: string };
+    frontmatter: { title?: string; date?: string; tags?: string[]; summary?: string; cover?: string };
     content: string;
   }>)
     .map(entry => ({
@@ -62,6 +62,7 @@ export default function HomePage() {
         date: entry.frontmatter.date || '',
         tags: entry.frontmatter.tags || [],
         summary: entry.frontmatter.summary || '',
+        cover: entry.frontmatter.cover,
       },
       content: entry.content,
     }))
