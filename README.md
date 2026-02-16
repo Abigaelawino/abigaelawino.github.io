@@ -1,6 +1,6 @@
 # abigaelawino.github.io
 
-This repository tracks the Netlify-deployed Next.js portfolio site outlined in `Docs/PORTFOLIO_PLAN.md`. It uses shadcn/ui, MDX content, Recharts, and Plotly for data visualization.
+This repository tracks the Netlify-deployed Next.js portfolio site outlined in `Docs/PORTFOLIO_PLAN.md`. It uses shadcn/ui, MDX content, Recharts, Plotly, carousels, and inline tables/charts for data visualization.
 
 ## Deployment
 
@@ -15,6 +15,8 @@ This repository tracks the Netlify-deployed Next.js portfolio site outlined in `
 - `npm run dev:static` runs `scripts/dev.mjs`, refreshes content indexes, rebuilds the static helper output in `dist/`, and serves it on `3000` for quick static checks.
 - `npm run start` serves the `dist/` output for static smoke testing.
 - `npm run setup:local` installs dependencies and generates content indexes for a fast local setup.
+- `npm run refresh:live` regenerates MDX content indexes when you edit `content/**`.
+- `scripts/refresh-live-view.sh` is a click-to-run helper for the same MDX refresh.
 
 ## Local QA (rapid)
 
@@ -32,6 +34,7 @@ This repository tracks the Netlify-deployed Next.js portfolio site outlined in `
 
 - Decap CMS lives at `public/admin/index.html`.
 - Netlify redirects `/admin/*` to `/admin/index.html` so the CMS loads from a clean URL.
+- Project entries include `gallery` images that power the card carousel headers.
 
 ## Testing & coverage
 

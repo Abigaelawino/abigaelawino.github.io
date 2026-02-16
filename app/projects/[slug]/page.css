@@ -127,11 +127,12 @@ h1 {
 }
 
 .project-content code {
-  background-color: #f1f5f9;
-  padding: 0.125rem 0.25rem;
+  background-color: #0f172a;
+  padding: 0.2rem 0.35rem;
   border-radius: 4px;
   font-family: monospace;
   font-size: 0.875rem;
+  color: #e2e8f0;
 }
 
 .project-content pre {

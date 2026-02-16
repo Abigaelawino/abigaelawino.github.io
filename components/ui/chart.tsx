@@ -44,6 +44,30 @@ const COLORS = [
   '#ff0000',
 ];
 
+function normalizeChartData(rawData: ChartData[] | string | undefined) {
+  if (!rawData) return [];
+
+  if (typeof rawData === 'string') {
+    try {
+      const parsed = JSON.parse(rawData);
+      if (Array.isArray(parsed)) {
+        return parsed as ChartData[];
+      }
+    } catch {
+      return [];
+    }
+  }
+
+  if (Array.isArray(rawData)) {
+    return rawData.map(item => ({
+      ...item,
+      value: typeof item.value === 'string' ? Number(item.value) : item.value,
+    }));
+  }
+
+  return [];
+}
+
 export function Chart({
   data = [],
   type,
@@ -54,6 +78,7 @@ export function Chart({
   color,
   colors,
 }: ChartProps) {
+  const normalizedData = normalizeChartData(data as unknown as ChartData[] | string | undefined);
   const renderChart = () => {
     const fallbackColor = color || '#8884d8';
     const palette = colors && colors.length > 0 ? colors : COLORS;
@@ -61,7 +86,7 @@ export function Chart({
       case 'bar':
         return (
           <ResponsiveContainer width="100%" height={height}>
-            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <BarChart data={normalizedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -74,7 +99,7 @@ export function Chart({
       case 'line':
         return (
           <ResponsiveContainer width="100%" height={height}>
-            <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <LineChart data={normalizedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -89,7 +114,7 @@ export function Chart({
           <ResponsiveContainer width="100%" height={height}>
             <PieChart>
               <Pie
-                data={data}
+                data={normalizedData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
@@ -98,7 +123,7 @@ export function Chart({
                 fill="#8884d8"
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {normalizedData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={palette[index % palette.length]} />
                 ))}
               </Pie>
@@ -118,11 +143,11 @@ export function Chart({
     if (description) return description;
 
     // Auto-generate description based on data
-    if (!data || data.length === 0) {
+    if (!normalizedData || normalizedData.length === 0) {
       return `Chart with no data available`;
     }
 
-    const dataSummary = data.map(d => `${d.name}: ${d.value}`).join(', ');
+    const dataSummary = normalizedData.map(d => `${d.name}: ${d.value}`).join(', ');
     switch (type) {
       case 'bar':
         return `Bar chart showing ${dataSummary}`;
@@ -147,7 +172,7 @@ export function Chart({
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {normalizedData.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.value}</td>

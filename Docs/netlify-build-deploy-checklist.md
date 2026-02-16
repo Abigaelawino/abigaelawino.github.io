@@ -31,6 +31,7 @@ This checklist reflects the current Next.js + Netlify runtime setup.
    - `netlify dev`
    - Confirm local proxy at `http://localhost:8888`
    - Make a small edit (e.g., `content/projects/*.mdx`) and confirm hot reload updates the page.
+   - If MDX edits do not appear, run `npm run refresh:live` or click `scripts/refresh-live-view.sh`.
 
 2. Key routes
    - `/`
