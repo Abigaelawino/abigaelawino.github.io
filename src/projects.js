@@ -21,15 +21,30 @@ function normalizeTag(tag) {
   return String(tag).trim().toLowerCase().replaceAll('_', '-').replaceAll(/\s+/g, '-');
 }
 
+function getProjectMeta(project) {
+  const frontmatter = project.frontmatter || {};
+  return {
+    slug: project.slug || frontmatter.slug || '',
+    title: frontmatter.title || project.title || 'Untitled Project',
+    summary: frontmatter.summary || project.summary || '',
+    date: frontmatter.date || project.date || '',
+    tags: frontmatter.tags || project.tags || [],
+    tech: frontmatter.tech || project.tech || [],
+    repo: frontmatter.repo || project.repo || '',
+    readingTime: project.readingTime || frontmatter.readingTime || 5,
+  };
+}
+
 function filterProjectsByTag(projects, tag) {
   const normalizedTag = normalizeTag(tag);
   if (normalizedTag === 'all') {
     return projects;
   }
 
-  return projects.filter(project =>
-    project.tags.some(projectTag => normalizeTag(projectTag) === normalizedTag)
-  );
+  return projects.filter(project => {
+    const { tags } = getProjectMeta(project);
+    return tags.some(projectTag => normalizeTag(projectTag) === normalizedTag);
+  });
 }
 
 function renderTagPills(tags) {
@@ -37,12 +52,13 @@ function renderTagPills(tags) {
 }
 
 function renderProjectCard(project) {
-  const normalizedTags = project.tags.map(tag => normalizeTag(tag)).join(',');
+  const meta = getProjectMeta(project);
+  const normalizedTags = meta.tags.map(tag => normalizeTag(tag)).join(',');
 
-  const tagBadges = project.tags
+  const tagBadges = meta.tags
     .map(tag => `<span class="badge badge-secondary">${escapeHtml(tag)}</span>`)
     .join('');
-  const techBadges = (project.tech || [])
+  const techBadges = (meta.tech || [])
     .slice(0, 3)
     .map(tech => `<span class="badge badge-outline">${escapeHtml(tech)}</span>`)
     .join('');
@@ -55,8 +71,8 @@ function renderProjectCard(project) {
             ${tagBadges}
           </div>
 
-          <h2 class="card-title text-xl">${escapeHtml(project.title)}</h2>
-          <p class="card-description text-base">${escapeHtml(project.summary)}</p>
+          <h2 class="card-title text-xl">${escapeHtml(meta.title)}</h2>
+          <p class="card-description text-base">${escapeHtml(meta.summary)}</p>
         </div>
       </div>
 
@@ -70,7 +86,7 @@ function renderProjectCard(project) {
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
-            ${new Date(project.date).toLocaleDateString('en-US', {
+            ${new Date(meta.date || Date.now()).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'short',
               day: 'numeric',
@@ -80,22 +96,22 @@ function renderProjectCard(project) {
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            ${Math.round(project.readingTime || 5)} min
+            ${Math.round(meta.readingTime || 5)} min
           </div>
         </div>
       </div>
 
       <div class="card-footer flex gap-2 pt-4">
-        <a class="button button-primary flex-1" href="/projects/${escapeHtml(project.slug)}" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="${escapeHtml(project.slug)}">
+        <a class="button button-primary flex-1" href="/projects/${escapeHtml(meta.slug)}" data-analytics-event="projects_case_study_click" data-analytics-prop-slug="${escapeHtml(meta.slug)}">
           Read Case Study
           <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
         ${
-          project.repo
+          meta.repo
             ? `
-          <a class="button button-outline button-icon" href="${escapeHtml(project.repo)}" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="${escapeHtml(project.slug)}" aria-label="View repository">
+          <a class="button button-outline button-icon" href="${escapeHtml(meta.repo)}" target="_blank" rel="noopener noreferrer" data-analytics-event="projects_repo_click" data-analytics-prop-slug="${escapeHtml(meta.slug)}" aria-label="View repository">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
             </svg>
@@ -122,7 +138,8 @@ function renderFilterButtons() {
 function renderProjectsPage(projects) {
   const cards = projects.map(renderProjectCard).join('\n');
   const allTags = projects.reduce((tags, project) => {
-    project.tags.forEach(tag => {
+    const meta = getProjectMeta(project);
+    meta.tags.forEach(tag => {
       if (!tags.includes(tag)) {
         tags.push(tag);
       }

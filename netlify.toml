@@ -8,6 +8,11 @@
   NPM_CONFIG_CACHE = "/opt/build/cache/npm"
   NPM_FLAGS = "--include=dev"
 
+[dev]
+  command = "npm run dev"
+  targetPort = 3000
+  framework = "next"
+
 [[headers]]
   for = "/admin/*"
   [headers.values]
