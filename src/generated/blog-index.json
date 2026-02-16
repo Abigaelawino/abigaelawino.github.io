@@ -1,5 +1,99 @@
 [
   {
+    "slug": "babynames-data-pipeline",
+    "frontmatter": {
+      "title": "Building the SSA Baby Names Data Pipeline (1880–2024)",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "data-engineering",
+        "visualization"
+      ],
+      "summary": "How I stitched 145 SSA text files into a clean 2.1M-row dataset and prepared it for Tableau storytelling.",
+      "readingTime": 4,
+      "status": "published"
+    },
+    "content": "# Building the SSA Baby Names Data Pipeline (1880–2024)\n\nThis post documents the exact ingestion and cleanup steps behind the Baby Names visual story. The goal was a single, tidy table that could drive both Python analysis and Tableau dashboards without manual fixes.\n\n## Source Files\n\n- 145 SSA text files (1880–2024)\n- Fields: name, sex, count, year\n- Minimum count per name-year enforced by SSA source\n\n## Core Cleaning Decisions\n\n- Concatenated all yearly files into one dataset\n- Standardized column names and data types\n- Validated categorical values for `sex` (F, M)\n- Ensured no missing values across core fields\n\n## Output Snapshot\n\n- **Rows:** 2,149,477\n- **Years:** 1880–2024\n- **Nulls:** 0 missing across core fields\n\n## Why This Matters for Viz\n\nOnce the data was flat and consistent, it became trivial to generate:\n\n- Year-over-year birth counts\n- Generation-based top-10 lists\n- Gender split comparisons\n\nIf you want to reproduce the pipeline, the notebook in the repo walks through every step and includes the final CSV export."
+  },
+  {
+    "slug": "babynames-unisex-names",
+    "frontmatter": {
+      "title": "Unisex Baby Names: Balancing Female vs Male Usage",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "visualization"
+      ],
+      "summary": "A focused look at unisex name balance using SSA counts and a gender-split chart.",
+      "readingTime": 3,
+      "status": "published"
+    },
+    "content": "# Unisex Baby Names: Balancing Female vs Male Usage\n\nThe Baby Names project surfaces a set of names that show meaningful balance between female and male usage. Rather than highlight one-year spikes, I used the full historical counts to avoid noisy conclusions.\n\n## Balanced Names (Top Examples)\n\n- Jessie (F: 169,704 | M: 111,202)\n- Riley (F: 137,477 | M: 103,344)\n- Casey (F: 77,869 | M: 115,589)\n- Jackie (F: 91,167 | M: 78,836)\n- Johnnie (F: 49,154 | M: 102,028)\n\n## Chart Rationale\n\nI used a grouped bar chart to show female vs male totals side-by-side. It keeps the comparison immediate and avoids confusion when the gap is narrow.\n\n## What I’d Add Next\n\n- Highlight shifts in balance over time (e.g., when a name flips gender dominance)\n- Add regional filters to see localized patterns"
+  },
+  {
+    "slug": "f5-breach-charting-playbook",
+    "frontmatter": {
+      "title": "Charting the F5 Breach Impact for Stakeholders",
+      "date": "2026-02-16",
+      "tags": [
+        "visualization",
+        "analytics",
+        "finance"
+      ],
+      "summary": "The chart sequence I used to communicate breach impact quickly and clearly.",
+      "readingTime": 3,
+      "status": "published"
+    },
+    "content": "# Charting the F5 Breach Impact for Stakeholders\n\nThis analysis needed to be understood in seconds. I built a small set of charts that move from signal to interpretation without overwhelming the reader.\n\n## 1) Returns Around the Event\n\nA simple line chart of FFIV daily returns around the breach date makes the immediate impact visible.\n\n## 2) DiD Coefficients\n\nI used a coefficient bar chart to show the interaction term alongside the treated and post controls. It keeps focus on the size and direction of the breach effect.\n\n## 3) Robustness Story\n\nThe placebo and trend checks are summarized in plain language, with the key numbers highlighted. This keeps the slide deck tight without burying assumptions.\n\n## Outcome\n\nThis structure let non-technical stakeholders validate the story quickly and still gave analysts enough detail to trust the results."
+  },
+  {
+    "slug": "f5-breach-did-assumptions",
+    "frontmatter": {
+      "title": "F5 Breach: Validating DiD Assumptions and Placebo Tests",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "finance",
+        "security"
+      ],
+      "summary": "How I checked parallel trends and ran a placebo test to validate the breach impact analysis.",
+      "readingTime": 3,
+      "status": "published"
+    },
+    "content": "# F5 Breach: Validating DiD Assumptions and Placebo Tests\n\nDifference-in-Differences only works if the treated and control series behave similarly **before** the event. This post summarizes the quick checks I used to validate the setup.\n\n## Parallel Trends Check\n\nI compared the pre-breach trend of FFIV returns against a basket of peer/benchmark tickers. The lack of a pre-event slope shift supported the DiD setup.\n\n## Placebo Test\n\nI shifted the event date one week earlier and re-estimated the model. The placebo interaction was effectively zero (`treated_post ≈ 0.0042`), which increases confidence that the real event drove the observed effect.\n\n## Takeaway\n\nThe strongest evidence still comes from the main DiD interaction (`treated_post ≈ -0.0951`), but the placebo check and trend test make the story defensible."
+  },
+  {
+    "slug": "ssa-disability-qa-notes",
+    "frontmatter": {
+      "title": "QA Notes on SSA Disability Approval Rates (FY2021)",
+      "date": "2026-02-16",
+      "tags": [
+        "analytics",
+        "policy"
+      ],
+      "summary": "A short QA checklist for validating state approval rates before publishing.",
+      "readingTime": 2,
+      "status": "published"
+    },
+    "content": "# QA Notes on SSA Disability Approval Rates (FY2021)\n\nWhen approval-rate visuals are used in policy contexts, a quick QA pass is essential. Here’s the checklist I used before publishing the FY2021 map and rankings.\n\n## QA Checklist\n\n- Confirm fiscal year filter = FY2021\n- Validate state count = 52 (including DC)\n- Spot-check top/bottom states for outliers\n- Verify rate fields are numeric and within 0–100\n\n## FY2021 Snapshot\n\n- **Highest approval rates:** KS, AK, NH, NE, RI\n- **Lowest approval rates:** DC, OK, MS, WV, IN\n\nThis QA pass keeps the map trustworthy and avoids misleading readers."
+  },
+  {
+    "slug": "ssa-disability-tableau-prep",
+    "frontmatter": {
+      "title": "Preparing SSA Disability Data for Tableau (FY2001–FY2021)",
+      "date": "2026-02-16",
+      "tags": [
+        "data-engineering",
+        "policy",
+        "visualization"
+      ],
+      "summary": "How I cleaned SSA outcome fields, standardized dates, and exported a Tableau-ready dataset.",
+      "readingTime": 3,
+      "status": "published"
+    },
+    "content": "# Preparing SSA Disability Data for Tableau (FY2001–FY2021)\n\nThe SSA dataset arrives with mixed data types, wide columns, and date formatting inconsistencies. This post summarizes the cleaning steps I used before visualization.\n\n## Cleaning Steps\n\n- Standardized numeric fields (removed commas and cast to numeric)\n- Parsed update dates into a consistent format\n- Constructed `State-FY` keys for easy map and filter usage\n\n## Output\n\nThe result is a Tableau-ready CSV (`ssa_disability_tableau_ready.csv`) with:\n\n- 1,092 rows\n- 30 fields\n- FY2001–FY2021 coverage\n\nThis file drives the choropleth map and ranking charts in the project."
+  },
+  {
     "slug": "model-monitoring-lessons",
     "frontmatter": {
       "title": "What Broke in Production and How We Fixed It",

@@ -32,23 +32,30 @@ collections:
           default: 'draft',
           required: true,
         }
-      - { label: 'Cover Image', name: 'cover', widget: 'image', required: false }
-      - { label: 'Repository URL', name: 'repo', widget: 'string', required: false }
-      - { label: 'Tech Stack', name: 'tech', widget: 'list', required: false }
-      - { label: 'Case Study Data', name: 'caseStudyData', widget: 'text', required: false }
-      - { label: 'Case Study Methods', name: 'caseStudyMethods', widget: 'text', required: false }
-      - { label: 'Case Study Results', name: 'caseStudyResults', widget: 'text', required: false }
+      - { label: 'Cover Image', name: 'cover', widget: 'image', required: true }
+      - {
+          label: 'Gallery Images',
+          name: 'gallery',
+          widget: 'list',
+          field: { label: 'Image', name: 'image', widget: 'image' },
+          required: true,
+        }
+      - { label: 'Repository URL', name: 'repo', widget: 'string', required: true }
+      - { label: 'Tech Stack', name: 'tech', widget: 'list', required: true }
+      - { label: 'Case Study Data', name: 'caseStudyData', widget: 'text', required: true }
+      - { label: 'Case Study Methods', name: 'caseStudyMethods', widget: 'text', required: true }
+      - { label: 'Case Study Results', name: 'caseStudyResults', widget: 'text', required: true }
       - {
           label: 'Case Study Reproducibility',
           name: 'caseStudyReproducibility',
           widget: 'text',
-          required: false,
+          required: true,
         }
       - {
           label: 'Case Study Reflection',
           name: 'caseStudyReflection',
           widget: 'text',
-          required: false,
+          required: true,
         }
       - { label: 'Body', name: 'body', widget: 'markdown', required: true }
 
@@ -78,7 +85,7 @@ collections:
           label: 'Reading Time',
           name: 'readingTime',
           widget: 'number',
-          required: false,
+          required: true,
           value_type: 'int',
         }
       - { label: 'Body', name: 'body', widget: 'markdown', required: true }

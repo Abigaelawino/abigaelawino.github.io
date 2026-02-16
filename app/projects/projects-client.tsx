@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowRight, Tag as TagIcon, Github, X } from 'lucide-react';
 import Link from 'next/link';
 import { Project } from '@/hooks/use-project-filters';
+import { ProjectCardCarousel } from '@/components/project-card-carousel';
 
 interface ProjectsClientProps {
   projects: Project[];
@@ -125,6 +126,14 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
           {filteredProjects.map(project => (
             <Card key={project.slug} className="flex flex-col">
               <article className="h-full flex flex-col">
+                <ProjectCardCarousel
+                  images={
+                    project.frontmatter.gallery?.length
+                      ? project.frontmatter.gallery
+                      : [project.frontmatter.cover]
+                  }
+                  title={project.frontmatter.title}
+                />
                 <CardHeader className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex flex-wrap gap-1">

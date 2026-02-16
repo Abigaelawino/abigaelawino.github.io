@@ -29,6 +29,8 @@ interface ChartProps {
   height?: number;
   description?: string;
   accessibilityLabel?: string;
+  color?: string;
+  colors?: string[];
 }
 
 const COLORS = [
@@ -43,14 +45,18 @@ const COLORS = [
 ];
 
 export function Chart({
-  data,
+  data = [],
   type,
   title,
   height = 300,
   description,
   accessibilityLabel,
+  color,
+  colors,
 }: ChartProps) {
   const renderChart = () => {
+    const fallbackColor = color || '#8884d8';
+    const palette = colors && colors.length > 0 ? colors : COLORS;
     switch (type) {
       case 'bar':
         return (
@@ -61,7 +67,7 @@ export function Chart({
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="value" fill="#8884d8" />
+              <Bar dataKey="value" fill={fallbackColor} />
             </BarChart>
           </ResponsiveContainer>
         );
@@ -74,7 +80,7 @@ export function Chart({
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} />
+              <Line type="monotone" dataKey="value" stroke={fallbackColor} strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         );
@@ -93,7 +99,7 @@ export function Chart({
                 dataKey="value"
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={palette[index % palette.length]} />
                 ))}
               </Pie>
               <Tooltip />
@@ -112,6 +118,10 @@ export function Chart({
     if (description) return description;
 
     // Auto-generate description based on data
+    if (!data || data.length === 0) {
+      return `Chart with no data available`;
+    }
+
     const dataSummary = data.map(d => `${d.name}: ${d.value}`).join(', ');
     switch (type) {
       case 'bar':

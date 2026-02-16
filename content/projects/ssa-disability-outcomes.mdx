@@ -3,14 +3,17 @@ title: SSA Disability Outcomes Analysis
 date: 2026-02-16
 tags: [analytics, policy, visualization]
 summary: Analysis of SSA disability outcomes with a focus on approval rates by state and clear visual summaries.
-caseStudyData: Collected SSA disability outcomes data and prepared a clean dataset for mapping approval likelihoods.
-caseStudyMethods: Aggregated outcomes by state and produced a choropleth map visualization for 2021 approval likelihoods.
-caseStudyResults: Delivered a statewide approval-rate map and summary notes for policy and research context.
+caseStudyData: SSA disability outcomes dataset with 1,092 records and 30 fields spanning fiscal years 2001–2021, including adult and child determinations by state.
+caseStudyMethods: Cleaned numeric fields, standardized dates, and exported a Tableau-ready CSV for mapping and comparative analysis.
+caseStudyResults: Delivered a statewide approval-rate map plus rankings for favorable determination rates in FY2021.
 caseStudyReproducibility: Repo contains the datasets and visualization artifacts used to recreate the map.
 caseStudyReflection: The state-level view surfaces meaningful geographic differences. Next step is adding multi-year trends and demographic slices.
 tech: [python, pandas, matplotlib, data-visualization]
 repo: https://github.com/Abigaelawino/ssa-disability-outcomes
 cover: /images/projects/ssa-disability-outcomes-cover.svg
+gallery:
+  - /images/projects/ssa-disability-outcomes-cover.svg
+  - https://raw.githubusercontent.com/Abigaelawino/ssa-disability-outcomes/main/visualizations/disability_claim_aproval__rates_by_state_2021.png
 status: published
 ---
 
@@ -21,7 +24,99 @@ This project examines disability claim outcomes with a focus on statewide approv
 ## Focus Areas
 
 - Approval likelihood by state (2021)
+- Interactive choropleth map + ranking charts
 - Clear methodology and assumptions
+- Tableau-ready dataset for map/filters
+
+## Data & Prep Notes
+
+- **Rows/Columns:** 1,092 rows × 30 fields
+- **Years covered:** FY2001–FY2021
+- **Key rates:** adult/child filing rates, allowance rates, and favorable determination rates
+- **Output:** `ssa_disability_tableau_ready.csv` for Tableau/BI workflows
+
+## Notebook Snippets
+
+```python
+# Clean numeric fields stored as strings with commas
+numeric_cols = [
+    "SSA Disability Beneficiaries  age 18-64*",
+    "Favorable Adult Determinations",
+    "All Adult Determinations",
+]
+for col in numeric_cols:
+    df[col] = pd.to_numeric(df[col].astype(str).str.replace(",", ""), errors="coerce")
+```
+
+```python
+# Tableau-ready export
+df["State-FY"] = df["State Code"].astype(str) + "-" + df["Fiscal Year"].astype(str)
+df.to_csv("ssa_disability_tableau_ready.csv", index=False)
+```
+
+<Chart
+  type="line"
+  title="Average Approval Rate (FY2001–FY2021)"
+  data={[
+    { name: '2001', value: 41.02 },
+    { name: '2005', value: 36.98 },
+    { name: '2010', value: 37.35 },
+    { name: '2015', value: 35.32 },
+    { name: '2020', value: 41.77 },
+    { name: '2021', value: 38.83 }
+  ]}
+  height={260}
+  color="#1d4ed8"
+/>
+
+<Table>
+  <TableCaption>FY2021 approval-rate sample (highest/lowest).</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>State</TableHead>
+      <TableHead>Rate (%)</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>KS</TableCell>
+      <TableCell>60.57</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>AK</TableCell>
+      <TableCell>56.53</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>NH</TableCell>
+      <TableCell>50.57</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>DC</TableCell>
+      <TableCell>26.88</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>OK</TableCell>
+      <TableCell>29.14</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+## FY2021 Highlights
+
+- **Top approvals:** KS (60.57), AK (56.53), NH (50.57), NE (47.21), RI (46.14)
+- **Lowest approvals:** DC (26.88), OK (29.14), MS (30.64), WV (30.71), IN (31.37)
+
+## Visual Palette (from project assets)
+
+- **Primary:** #1d4ed8
+- **Mid:** #60a5fa
+- **Light:** #e0f2fe
+- **Neutral:** #94a3b8
+
+## QA & Cleaning
+
+- Standardized numeric fields and date formats
+- Verified field completeness and exported a Tableau-ready file
 
 ## Sample Visual
 

@@ -1,0 +1,24 @@
+---
+title: F5 Breach: Validating DiD Assumptions and Placebo Tests
+date: 2026-02-16
+tags: [analytics, finance, security]
+summary: How I checked parallel trends and ran a placebo test to validate the breach impact analysis.
+readingTime: 3
+status: published
+---
+
+# F5 Breach: Validating DiD Assumptions and Placebo Tests
+
+Difference-in-Differences only works if the treated and control series behave similarly **before** the event. This post summarizes the quick checks I used to validate the setup.
+
+## Parallel Trends Check
+
+I compared the pre-breach trend of FFIV returns against a basket of peer/benchmark tickers. The lack of a pre-event slope shift supported the DiD setup.
+
+## Placebo Test
+
+I shifted the event date one week earlier and re-estimated the model. The placebo interaction was effectively zero (`treated_post ≈ 0.0042`), which increases confidence that the real event drove the observed effect.
+
+## Takeaway
+
+The strongest evidence still comes from the main DiD interaction (`treated_post ≈ -0.0951`), but the placebo check and trend test make the story defensible.

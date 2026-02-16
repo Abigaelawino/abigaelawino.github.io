@@ -12,6 +12,7 @@ export interface Project {
     tech: string[];
     repo?: string;
     cover: string;
+    gallery: string[];
     status: 'published' | 'draft';
   };
   content: string;

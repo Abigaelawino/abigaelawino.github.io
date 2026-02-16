@@ -1,0 +1,41 @@
+---
+title: Building the SSA Baby Names Data Pipeline (1880–2024)
+date: 2026-02-16
+tags: [analytics, data-engineering, visualization]
+summary: How I stitched 145 SSA text files into a clean 2.1M-row dataset and prepared it for Tableau storytelling.
+readingTime: 4
+status: published
+---
+
+# Building the SSA Baby Names Data Pipeline (1880–2024)
+
+This post documents the exact ingestion and cleanup steps behind the Baby Names visual story. The goal was a single, tidy table that could drive both Python analysis and Tableau dashboards without manual fixes.
+
+## Source Files
+
+- 145 SSA text files (1880–2024)
+- Fields: name, sex, count, year
+- Minimum count per name-year enforced by SSA source
+
+## Core Cleaning Decisions
+
+- Concatenated all yearly files into one dataset
+- Standardized column names and data types
+- Validated categorical values for `sex` (F, M)
+- Ensured no missing values across core fields
+
+## Output Snapshot
+
+- **Rows:** 2,149,477
+- **Years:** 1880–2024
+- **Nulls:** 0 missing across core fields
+
+## Why This Matters for Viz
+
+Once the data was flat and consistent, it became trivial to generate:
+
+- Year-over-year birth counts
+- Generation-based top-10 lists
+- Gender split comparisons
+
+If you want to reproduce the pipeline, the notebook in the repo walks through every step and includes the final CSV export.

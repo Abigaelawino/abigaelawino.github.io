@@ -1,8 +1,15 @@
-'use client';
-
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Chart } from '@/components/ui/chart';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCaption,
+} from '@/components/ui/table';
 
 const components = {
   Chart,
@@ -10,6 +17,13 @@ const components = {
   CardContent,
   CardHeader,
   CardTitle,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCaption,
   // Add any other custom components here
 };
 

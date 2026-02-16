@@ -1,0 +1,28 @@
+---
+title: Preparing SSA Disability Data for Tableau (FY2001–FY2021)
+date: 2026-02-16
+tags: [data-engineering, policy, visualization]
+summary: How I cleaned SSA outcome fields, standardized dates, and exported a Tableau-ready dataset.
+readingTime: 3
+status: published
+---
+
+# Preparing SSA Disability Data for Tableau (FY2001–FY2021)
+
+The SSA dataset arrives with mixed data types, wide columns, and date formatting inconsistencies. This post summarizes the cleaning steps I used before visualization.
+
+## Cleaning Steps
+
+- Standardized numeric fields (removed commas and cast to numeric)
+- Parsed update dates into a consistent format
+- Constructed `State-FY` keys for easy map and filter usage
+
+## Output
+
+The result is a Tableau-ready CSV (`ssa_disability_tableau_ready.csv`) with:
+
+- 1,092 rows
+- 30 fields
+- FY2001–FY2021 coverage
+
+This file drives the choropleth map and ranking charts in the project.

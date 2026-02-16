@@ -3,14 +3,18 @@ title: How Basic Is Your Name? SSA Baby Names Visual Story
 date: 2026-02-16
 tags: [analytics, visualization, storytelling]
 summary: A visual exploration of U.S. baby names by generation using SSA data, Tableau, and Python data prep.
-caseStudyData: Aggregated SSA baby names data (1880–2024) from SSA text files into a single cleaned dataset. Focused on names with at least 5 occurrences per year and grouped records into generational cohorts.
-caseStudyMethods: Cleaned and normalized SSA name records with pandas, derived generational cohorts, and built Tableau visuals for top-10 trends and cohort comparisons. Exported assets for shareable storytelling.
-caseStudyResults: Delivered a multi-panel visual story showing top-10 names across Boomers, Gen X, Millennials, Gen Z, and Gen Alpha with cohort-level comparisons.
+caseStudyData: Aggregated 145 SSA text files into a 2,149,477-row dataset spanning 1880–2024 with no missing values across name, sex, count, and year.
+caseStudyMethods: Cleaned and normalized SSA name records with pandas, derived decade and generation cohorts, and built Tableau visuals for top-10 trends and cohort comparisons. Exported assets for shareable storytelling.
+caseStudyResults: Delivered a multi-panel visual story showing top-10 names across Lost, Greatest, Silent, Boomers, Gen X, Millennials, Gen Z, and Gen Alpha with cohort-level comparisons and gender splits.
 caseStudyReproducibility: Python notebooks cover data ingestion and cleanup. Tableau dashboards can be rebuilt from the exported CSV outputs.
 caseStudyReflection: The biggest insight was how sharply naming trends shift at cohort boundaries. Next iteration could add regional slices and socioeconomic covariates.
 tech: [python, pandas, tableau, canva, data-storytelling]
 repo: https://github.com/Abigaelawino/babynames
 cover: /images/projects/babynames-cover.svg
+gallery:
+  - /images/projects/babynames-cover.svg
+  - https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/00_top10_overview.png
+  - https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/04_genz.png
 status: published
 ---
 
@@ -23,6 +27,124 @@ This project builds a visual story around SSA baby name data across generations,
 - **Generational cohorts** with top-10 names per cohort
 - **Trend shifts** from Boomers to Gen Alpha
 - **Tableau visuals** optimized for storytelling
+
+## Data Snapshot
+
+- **Rows:** 2,149,477 baby-name records
+- **Coverage:** 1880–2024 (145 years)
+- **Nulls:** 0 missing values across core fields
+- **Top names overall:** James, John, Robert, Michael, William, Mary
+
+## Notebook Snippets
+
+```python
+# Concatenate yearly SSA files into a single dataset
+dfs = [pd.read_csv(path, names=["name", "sex", "count"], header=None) for path in files]
+for year, df in zip(years, dfs):
+    df["year"] = year
+babynames = pd.concat(dfs, ignore_index=True)
+```
+
+```python
+# Generation buckets (Tableau-compatible)
+babynames["generation"] = np.select(
+    [
+        babynames["year"].between(1883, 1900),
+        babynames["year"].between(1901, 1927),
+        babynames["year"].between(1928, 1945),
+        babynames["year"].between(1946, 1964),
+        babynames["year"].between(1965, 1980),
+        babynames["year"].between(1981, 1996),
+        babynames["year"].between(1997, 2012),
+        babynames["year"].between(2013, 2024),
+    ],
+    ["Lost", "Greatest", "Silent", "Boomers", "Gen X", "Millennials", "Gen Z", "Gen Alpha"],
+    default="Other",
+)
+```
+
+<Chart
+  type="bar"
+  title="Top Names (All-Time Sample)"
+  data={[
+    { name: 'James', value: 5262396 },
+    { name: 'John', value: 5196210 },
+    { name: 'Robert', value: 4866007 },
+    { name: 'Michael', value: 4440391 },
+    { name: 'William', value: 4205026 }
+  ]}
+  height={260}
+  color="#e14f7a"
+/>
+
+<Chart
+  type="line"
+  title="Unique Names per Year (Recent Sample)"
+  data={[
+    { name: '2015', value: 30662 },
+    { name: '2016', value: 30475 },
+    { name: '2017', value: 30101 },
+    { name: '2018', value: 29693 },
+    { name: '2019', value: 29512 },
+    { name: '2020', value: 28864 },
+    { name: '2021', value: 28991 },
+    { name: '2022', value: 29303 },
+    { name: '2023', value: 29054 },
+    { name: '2024', value: 29225 }
+  ]}
+  height={260}
+  color="#a0cbe8"
+/>
+
+<Table>
+  <TableCaption>Sample rows (1880) from the cleaned dataset.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Sex</TableHead>
+      <TableHead>Count</TableHead>
+      <TableHead>Year</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Mary</TableCell>
+      <TableCell>F</TableCell>
+      <TableCell>7065</TableCell>
+      <TableCell>1880</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Anna</TableCell>
+      <TableCell>F</TableCell>
+      <TableCell>2604</TableCell>
+      <TableCell>1880</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Emma</TableCell>
+      <TableCell>F</TableCell>
+      <TableCell>2003</TableCell>
+      <TableCell>1880</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+## Tableau Workbook Details
+
+- **Calculated fields:** `Decade = INT(FLOOR([year] / 10) * 10)` and `Generation` buckets
+- **Generations:** Lost, Greatest, Silent, Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+- **Sheets:** Top 10 Boy/Girl names by generation with linked highlights
+- **Color mapping:** `F` to #e14f7a and `M` to #a0cbe8 for consistent gender encoding
+
+### Sheet Inventory
+
+- Top 10 Boy Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+- Top 10 Girl Names — Boomers, Gen X, Millennials, Gen Z, Gen Alpha
+
+## Notebook Highlights
+
+- **Total births trend:** ~3.7M in 2015, tapering to ~3.33M by 2024
+- **Gender distribution:** 1,263,426 female rows vs 886,051 male rows
+- **Unisex list:** Jessie, Riley, Casey, Jackie, Johnnie, Peyton, Dakota, Jaime lead balanced usage
 
 ## Deliverables
 

@@ -13,6 +13,9 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, Clock, ExternalLink, Github } from 'lucide-react';
 import type { Metadata } from 'next';
 import { siteUrl } from '@/lib/site';
+import blogIndex from '@/src/generated/blog-index.json';
+import { ProjectCardCarousel } from '@/components/project-card-carousel';
+import { BlogCardCarousel } from '@/components/blog-card-carousel';
 import './page.css';
 
 export const metadata: Metadata = {
@@ -47,6 +50,23 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const projects = getAllProjects().slice(0, 3); // Get first 3 projects for featured section
+  const blogPosts = (blogIndex as Array<{
+    slug: string;
+    frontmatter: { title?: string; date?: string; tags?: string[]; summary?: string };
+    content: string;
+  }>)
+    .map(entry => ({
+      slug: entry.slug,
+      frontmatter: {
+        title: entry.frontmatter.title || '',
+        date: entry.frontmatter.date || '',
+        tags: entry.frontmatter.tags || [],
+        summary: entry.frontmatter.summary || '',
+      },
+      content: entry.content,
+    }))
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .slice(0, 3);
 
   return (
     <div className="page-content space-y-12">
@@ -99,6 +119,14 @@ export default function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map(project => (
               <Card key={project.slug} className="flex flex-col">
+                <ProjectCardCarousel
+                  images={
+                    project.frontmatter.gallery?.length
+                      ? project.frontmatter.gallery
+                      : [project.frontmatter.cover]
+                  }
+                  title={project.frontmatter.title}
+                />
                 <CardHeader>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {project.frontmatter.tags.slice(0, 2).map(tag => (
@@ -167,6 +195,34 @@ export default function HomePage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* Latest Writing */}
+      <section className="space-y-8">
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">Latest Writing</h2>
+          <p className="text-muted-foreground">
+            Deep dives on data cleaning, visualization choices, and model validation
+          </p>
+        </div>
+
+        {blogPosts.length === 0 ? (
+          <Card>
+            <CardContent className="p-8 text-center">
+              <p className="text-muted-foreground">Blog posts coming soon.</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <BlogCardCarousel posts={blogPosts} />
+        )}
+
+        <div className="flex justify-center">
+          <Button variant="outline" asChild>
+            <Link href="/blog" data-analytics-event="cta_blog" data-analytics-prop-location="home">
+              View All Posts
+            </Link>
+          </Button>
+        </div>
       </section>
 
       {/* Call to Action */}

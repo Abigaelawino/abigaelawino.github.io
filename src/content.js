@@ -18,6 +18,7 @@ const projectSchema = {
   tech: 'string[]',
   repo: 'string',
   cover: 'string',
+  gallery: 'string[]',
   status: 'string',
 };
 
