@@ -26,7 +26,7 @@
       "cover": "/images/projects/babynames-cover.svg",
       "status": "published"
     },
-    "content": "# How Basic Is Your Name?\n\nThis project builds a visual story around SSA baby name data across generations, designed for quick scanning and shareable insights.\n\n## Highlights\n\n- **Generational cohorts** with top-10 names per cohort\n- **Trend shifts** from Boomers to Gen Alpha\n- **Tableau visuals** optimized for storytelling\n\n## Deliverables\n\n- Cleaned SSA dataset (1880–2024)\n- Tableau dashboards by cohort\n- Visual assets for presentation and social sharing"
+    "content": "# How Basic Is Your Name?\n\nThis project builds a visual story around SSA baby name data across generations, designed for quick scanning and shareable insights.\n\n## Highlights\n\n- **Generational cohorts** with top-10 names per cohort\n- **Trend shifts** from Boomers to Gen Alpha\n- **Tableau visuals** optimized for storytelling\n\n## Deliverables\n\n- Cleaned SSA dataset (1880–2024)\n- Tableau dashboards by cohort\n- Visual assets for presentation and social sharing\n\n## Sample Visuals\n\n![Top 10 overview](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/00_top10_overview.png)\n\n![Gen Z top 10 names](https://raw.githubusercontent.com/Abigaelawino/babynames/main/visualizations/top_10_baby_names/04_genz.png)"
   },
   {
     "slug": "f5-breach-threat-intelligence",
@@ -56,7 +56,7 @@
       "cover": "/images/projects/f5-breach-cover.svg",
       "status": "published"
     },
-    "content": "# F5 Breach 2025 — Difference-in-Differences Analysis\n\nThis case study quantifies the causal impact of the October 2025 F5 Networks breach on stock returns using a DiD approach.\n\n## Key Outputs\n\n- Event study timeline and peer comparison\n- DiD model results with robustness checks\n- Slide-ready visuals summarizing findings"
+    "content": "# F5 Breach 2025 — Difference-in-Differences Analysis\n\nThis case study quantifies the causal impact of the October 2025 F5 Networks breach on stock returns using a DiD approach.\n\n## Key Outputs\n\n- Event study timeline and peer comparison\n- DiD model results with robustness checks\n- Slide-ready visuals summarizing findings\n\n## Sample Visuals\n\n![Overview slide](https://raw.githubusercontent.com/Abigaelawino/F5-Breach/main/2025_f5_cybersecurity_breach/Slide1.PNG)\n\n![DiD results](https://raw.githubusercontent.com/Abigaelawino/F5-Breach/main/2025_f5_cybersecurity_breach/Slide5.PNG)"
   },
   {
     "slug": "langchain-tutorials-lab",
@@ -84,7 +84,7 @@
       "cover": "/images/projects/langchain-tutorials-cover.svg",
       "status": "published"
     },
-    "content": "# LangChain with Redis — RAG Tutorial\n\nThis project demonstrates a conversational RAG workflow using LangChain, Redis vector search, and OpenAI models.\n\n## What’s Included\n\n- Redis vector store retrieval\n- Chat history memory in Redis\n- CLI interface for interactive testing"
+    "content": "# LangChain with Redis — RAG Tutorial\n\nThis project demonstrates a conversational RAG workflow using LangChain, Redis vector search, and OpenAI models.\n\n## What’s Included\n\n- Redis vector store retrieval\n- Chat history memory in Redis\n- CLI interface for interactive testing\n\n## Architecture Snapshot\n\n1. Load environment variables (OpenAI + Redis credentials).\n2. Build embeddings and index documents in Redis.\n3. Use `ConversationalRetrievalChain` for retrieval + memory.\n4. Serve responses via a simple CLI loop."
   },
   {
     "slug": "ssa-disability-outcomes",
@@ -112,7 +112,7 @@
       "cover": "/images/projects/ssa-disability-outcomes-cover.svg",
       "status": "published"
     },
-    "content": "# SSA Disability Outcomes Analysis\n\nThis project examines disability claim outcomes with a focus on statewide approval rates.\n\n## Focus Areas\n\n- Approval likelihood by state (2021)\n- Clear methodology and assumptions"
+    "content": "# SSA Disability Outcomes Analysis\n\nThis project examines disability claim outcomes with a focus on statewide approval rates.\n\n## Focus Areas\n\n- Approval likelihood by state (2021)\n- Clear methodology and assumptions\n\n## Sample Visual\n\n![Disability claim approval rates by state](https://raw.githubusercontent.com/Abigaelawino/ssa-disability-outcomes/main/visualizations/disability_claim_aproval__rates_by_state_2021.png)"
   },
   {
     "slug": "customer-segmentation-dashboard",

@@ -27,9 +27,10 @@ This checklist reflects the current Next.js + Netlify runtime setup.
 
 ## Local QA
 
-1. Netlify parity
+1. Netlify parity + hot reload
    - `netlify dev`
    - Confirm local proxy at `http://localhost:8888`
+   - Make a small edit (e.g., `content/projects/*.mdx`) and confirm hot reload updates the page.
 
 2. Key routes
    - `/`
@@ -44,6 +45,11 @@ This checklist reflects the current Next.js + Netlify runtime setup.
    - `/sitemap.xml`
    - `/robots.txt`
    - `/admin` (Decap CMS)
+
+3. Content spot-checks
+   - Projects index shows all project titles.
+   - Blog index shows all blog titles.
+   - Each project page renders its title and cover image.
 
 ## Deploy
 

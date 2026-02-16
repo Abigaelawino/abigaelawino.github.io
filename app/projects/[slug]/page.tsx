@@ -8,6 +8,7 @@ import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar, MapPin } from 'l
 import { MDXContent } from '@/components/mdx-content';
 import { ProjectCharts } from '@/components/project-charts';
 import { siteUrl } from '@/lib/site';
+import blogIndex from '@/src/generated/blog-index.json';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -112,6 +113,42 @@ export default async function ProjectPage({
   }
 
   const { frontmatter, content, readingTime } = project;
+  const relatedPosts = (() => {
+    const entries = blogIndex as Array<{
+      slug: string;
+      frontmatter: {
+        title?: string;
+        date?: string;
+        summary?: string;
+        tags?: string[];
+      };
+    }>;
+
+    const projectTags = new Set([
+      ...(frontmatter.tags || []),
+      ...(frontmatter.tech || []),
+    ].map(tag => tag.toLowerCase()));
+
+    return entries
+      .map(post => {
+        const tags = (post.frontmatter.tags || []).map(tag => tag.toLowerCase());
+        const overlap = tags.filter(tag => projectTags.has(tag));
+        return {
+          ...post,
+          overlapCount: overlap.length,
+        };
+      })
+      .filter(post => post.overlapCount > 0)
+      .sort((a, b) => {
+        if (b.overlapCount !== a.overlapCount) {
+          return b.overlapCount - a.overlapCount;
+        }
+        const dateA = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0;
+        const dateB = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0;
+        return dateB - dateA;
+      })
+      .slice(0, 3);
+  })();
 
   return (
     <div className="space-y-8">
@@ -324,6 +361,30 @@ export default async function ProjectPage({
         )}
 
         <ProjectCharts slug={resolvedParams.slug} />
+
+        {relatedPosts.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Related Blog Posts</CardTitle>
+              <CardDescription>Additional context and implementation notes.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {relatedPosts.map(post => (
+                <div key={post.slug} className="flex flex-col gap-1">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-base font-semibold hover:text-primary"
+                  >
+                    {post.frontmatter.title || 'Untitled Post'}
+                  </Link>
+                  {post.frontmatter.summary && (
+                    <p className="text-sm text-muted-foreground">{post.frontmatter.summary}</p>
+                  )}
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       {/* Footer */}

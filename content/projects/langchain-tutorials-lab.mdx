@@ -23,3 +23,10 @@ This project demonstrates a conversational RAG workflow using LangChain, Redis v
 - Redis vector store retrieval
 - Chat history memory in Redis
 - CLI interface for interactive testing
+
+## Architecture Snapshot
+
+1. Load environment variables (OpenAI + Redis credentials).
+2. Build embeddings and index documents in Redis.
+3. Use `ConversationalRetrievalChain` for retrieval + memory.
+4. Serve responses via a simple CLI loop.
