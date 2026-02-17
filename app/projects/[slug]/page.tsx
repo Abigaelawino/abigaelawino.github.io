@@ -563,29 +563,6 @@ export default async function ProjectPage({
                   </div>
                 </CardContent>
               </Card>
-              {(notebookSnippetsContent || visualizationsContent) && (
-                <Card className="mt-6">
-                  <CardHeader>
-                    <CardTitle className="text-base">Additional Notebook Material</CardTitle>
-                    <CardDescription>Other excerpts and supplemental figures.</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {notebookSnippetsContent && (
-                      <div className="space-y-3 min-w-0 overflow-hidden">
-                        <div className="text-sm font-semibold text-foreground">Notebook Snippets</div>
-                        <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden mdx-content">
-                          <MDXContent content={notebookSnippetsContent} />
-                        </div>
-                      </div>
-                    )}
-                    {visualizationsContent && (
-                      <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
-                        <MDXContent content={visualizationsContent} />
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
             </CardContent>
           </Card>
         )}
