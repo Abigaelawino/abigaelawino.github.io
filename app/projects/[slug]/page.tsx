@@ -633,7 +633,7 @@ export default async function ProjectPage({
         )}
 
         {/* Results Section */}
-        {frontmatter.caseStudyResults && (
+        {!isBabyNames && frontmatter.caseStudyResults && (
           <Card>
             <CardHeader>
               <CardTitle>Results</CardTitle>
