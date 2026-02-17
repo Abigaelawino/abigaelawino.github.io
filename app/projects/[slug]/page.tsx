@@ -593,7 +593,7 @@ export default async function ProjectPage({
           </Card>
         )}
 
-        {deliverablesContent && (
+        {!isBabyNames && deliverablesContent && (
           <Card>
             <CardHeader>
               <CardTitle>Deliverables</CardTitle>
@@ -607,7 +607,7 @@ export default async function ProjectPage({
         )}
 
         {/* Methods Section */}
-        {frontmatter.caseStudyMethods && (
+        {!isBabyNames && frontmatter.caseStudyMethods && (
           <Card>
             <CardHeader>
               <CardTitle>Methods</CardTitle>
@@ -618,7 +618,7 @@ export default async function ProjectPage({
           </Card>
         )}
 
-        {workContent && (
+        {!isBabyNames && workContent && (
           <Card>
             <CardHeader>
               <CardTitle>Work Artifacts</CardTitle>
