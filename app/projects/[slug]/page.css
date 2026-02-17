@@ -617,6 +617,15 @@ h1 {
   max-width: 100%;
 }
 
+.viz-notebook code:not(pre code) {
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  padding: 0.15rem 0.35rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-weight: 600;
+}
+
 .viz-notebook thead {
   background-color: #f1f5f9;
 }

@@ -150,18 +150,13 @@ export function NotebookCodeAccordion({ slug }: NotebookCodeAccordionProps) {
   return (
     <div className="space-y-3">
       {snippets.map(snippet => (
-        <details
-          key={snippet.title}
-          className="rounded-lg border bg-muted/20 p-4 overflow-hidden"
-        >
-          <summary className="cursor-pointer text-sm font-semibold text-foreground">
-            {snippet.title}
-          </summary>
+        <div key={snippet.title} className="rounded-lg border bg-muted/20 p-4 overflow-hidden">
+          <div className="text-sm font-semibold text-foreground">{snippet.title}</div>
           <p className="mt-2 text-sm text-muted-foreground">{snippet.description}</p>
           <div className="mt-3">
             <CodeBlock code={snippet.code} language={snippet.language ?? 'text'} />
           </div>
-        </details>
+        </div>
       ))}
     </div>
   );
