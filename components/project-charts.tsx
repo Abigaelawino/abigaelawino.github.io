@@ -1712,7 +1712,13 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
             title="Total Births by Year (2015–2024)"
             description="Birth trends in the most recent decade"
           >
-            <Chart type="line" data={babynamesBirthsRecent} height={240} color="#a0cbe8" />
+            <Chart
+              type="line"
+              data={babynamesBirthsRecent}
+              height={240}
+              color="#a0cbe8"
+              showLegend={false}
+            />
           </ChartPanel>
           <ChartPanel
             title="Top 10 Names Overall (1880–2024)"
@@ -1728,7 +1734,13 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
             />
           </ChartPanel>
           <ChartPanel title="Unique Names per Year (2015–2024)" description="Name diversity trend">
-            <Chart type="line" data={babynamesUniqueNamesRecent} height={240} color="#f59e0b" />
+            <Chart
+              type="line"
+              data={babynamesUniqueNamesRecent}
+              height={240}
+              color="#f59e0b"
+              showLegend={false}
+            />
           </ChartPanel>
           <ChartPanel
             title="Top Unisex Names (Female vs Male Counts)"
