@@ -452,7 +452,7 @@ export default async function ProjectPage({
       </Card>
 
       {/* Project Visual Carousel */}
-      {(frontmatter.gallery?.length > 0 || frontmatter.cover) && (
+      {!isBabyNames && (frontmatter.gallery?.length > 0 || frontmatter.cover) && (
         <Card>
           <CardContent className="p-0">
             <Carousel className="w-full">
