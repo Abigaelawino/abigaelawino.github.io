@@ -6,11 +6,7 @@ type VisualizationPanelProps = {
   generation?: React.ReactNode;
 };
 
-export function VisualizationPanel({
-  interactive,
-  notebook,
-  generation,
-}: VisualizationPanelProps) {
+export function VisualizationPanel({ interactive, notebook, generation }: VisualizationPanelProps) {
   const hasNotebook = Boolean(notebook);
   const hasGeneration = Boolean(generation);
 
@@ -24,7 +20,7 @@ export function VisualizationPanel({
         <div className="font-semibold text-foreground">Views</div>
         <TabsList className="viz-tabs-list flex w-full flex-col gap-2 bg-transparent p-0">
           <TabsTrigger value="interactive" className="viz-tab">
-            <span>Interactive charts</span>
+            <span>Interactive charts live</span>
             <span className="viz-pill">Live</span>
           </TabsTrigger>
           {hasGeneration && (
