@@ -324,7 +324,8 @@ export default async function ProjectPage({
       <CardHeader>
         <CardTitle>Visualizations</CardTitle>
         <CardDescription>
-          Interactive charts and notebook-derived figures grouped for quick review.
+          Use the Views menu to switch between dashboards, generation cohorts, and notebook
+          excerpts. Each view highlights a different part of the story.
         </CardDescription>
       </CardHeader>
       <CardContent className="@container/viz space-y-6">
