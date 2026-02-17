@@ -331,7 +331,11 @@ export default async function ProjectPage({
         <VisualizationPanel
           interactive={
             <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-4 px-1 @xl/viz:grid-cols-2 @5xl/viz:grid-cols-4">
+              <div
+                className={`grid grid-cols-1 gap-4 px-1 ${
+                  isBabyNames ? '@xl/viz:grid-cols-3' : '@xl/viz:grid-cols-2 @5xl/viz:grid-cols-4'
+                }`}
+              >
                 {highlights.map(item => (
                   <Card
                     key={item.label}
