@@ -21,12 +21,10 @@ export function VisualizationPanel({ interactive, notebook, generation }: Visual
         <TabsList className="viz-tabs-list flex w-full flex-col gap-2 bg-transparent p-0">
           <TabsTrigger value="interactive" className="viz-tab">
             <span>Baby Names Trends</span>
-            <span className="viz-pill">Live</span>
           </TabsTrigger>
           {hasGeneration && (
             <TabsTrigger value="generation" className="viz-tab">
               <span>Baby Name Trends by Generations</span>
-              <span className="viz-pill">Cohorts</span>
             </TabsTrigger>
           )}
           {hasNotebook && (
