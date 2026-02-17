@@ -3,10 +3,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 type VisualizationPanelProps = {
   interactive: React.ReactNode;
   notebook?: React.ReactNode;
+  generation?: React.ReactNode;
 };
 
-export function VisualizationPanel({ interactive, notebook }: VisualizationPanelProps) {
+export function VisualizationPanel({
+  interactive,
+  notebook,
+  generation,
+}: VisualizationPanelProps) {
   const hasNotebook = Boolean(notebook);
+  const hasGeneration = Boolean(generation);
 
   return (
     <Tabs
@@ -21,6 +27,12 @@ export function VisualizationPanel({ interactive, notebook }: VisualizationPanel
             <span>Interactive charts</span>
             <span className="viz-pill">Live</span>
           </TabsTrigger>
+          {hasGeneration && (
+            <TabsTrigger value="generation" className="viz-tab">
+              <span>Trends by Generation</span>
+              <span className="viz-pill">Cohorts</span>
+            </TabsTrigger>
+          )}
           {hasNotebook && (
             <TabsTrigger value="notebook" className="viz-tab">
               <span>Notebook figures</span>
@@ -35,17 +47,28 @@ export function VisualizationPanel({ interactive, notebook }: VisualizationPanel
       <div className="viz-panels space-y-8">
         <TabsContent value="interactive" className="mt-0 space-y-6">
           <div className="flex flex-col gap-1">
-            <h3 className="text-lg font-semibold">Interactive charts</h3>
+            <h3 className="text-lg font-semibold">Dashboards </h3>
             <p className="text-sm text-muted-foreground">
-              Live charts and maps that anchor the story.
+              Live interactive dashboards from the SSA baby names analysis.
             </p>
           </div>
           {interactive}
         </TabsContent>
+        {hasGeneration && (
+          <TabsContent value="generation" className="mt-0 space-y-6">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-lg font-semibold">Trends by Generation</h3>
+              <p className="text-sm text-muted-foreground">
+                Top 10 names by cohort for each gender.
+              </p>
+            </div>
+            {generation}
+          </TabsContent>
+        )}
         {hasNotebook && (
           <TabsContent value="notebook" className="mt-0 space-y-6">
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-semibold">Notebook figures</h3>
+              <h3 className="text-lg font-semibold">Notebook Excerpts </h3>
               <p className="text-sm text-muted-foreground">
                 Notebook exports and Tableau snapshots for deep-dive context.
               </p>

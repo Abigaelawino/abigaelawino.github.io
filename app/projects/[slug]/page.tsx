@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, Github, Clock, Tag, Calendar } from 'lucide-react';
 import { MDXContent } from '@/components/mdx-content';
-import { ProjectCharts } from '@/components/project-charts';
+import { BabyNamesGenerationTrends, ProjectCharts } from '@/components/project-charts';
 import { siteUrl } from '@/lib/site';
 import blogIndex from '@/src/generated/blog-index.json';
 import {
@@ -348,6 +348,7 @@ export default async function ProjectPage({
               <ProjectCharts slug={resolvedParams.slug} />
             </div>
           }
+          generation={isBabyNames ? <BabyNamesGenerationTrends /> : undefined}
           notebook={
             !isBabyNames && visualizationsContent ? (
               <Card>

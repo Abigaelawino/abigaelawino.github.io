@@ -3,7 +3,8 @@
 import { useMemo, useState } from 'react';
 import { Chart } from '@/components/ui/chart';
 import { PlotlyChart } from '@/components/charts/plotly-chart';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type ProjectChartsProps = {
   slug: string;
@@ -73,6 +74,326 @@ const babynamesUnisexNames = {
   female: [169704, 137477, 77869, 91167, 49154, 86635, 40410, 50031],
   male: [111202, 103344, 115589, 78836, 102028, 51982, 92020, 71068],
 };
+
+const babynamesGenerationKpis = [
+  {
+    label: 'Most Births Generation',
+    value: 'Baby Boomers',
+    note: 'Approx. 76.3M births across 1946–1964.',
+  },
+  {
+    label: 'Unique Names (Overall)',
+    value: '29,225',
+    note: 'Distinct names observed in the dataset.',
+  },
+  {
+    label: 'Top Female Name (All-Time)',
+    value: 'Mary',
+    note: 'Most common female name across all years.',
+  },
+];
+
+const babynamesGenerationTrends = [
+  {
+    key: 'lost',
+    label: 'Lost Generation',
+    years: '1883–1900',
+    female: [
+      { name: 'Mary', value: 296000 },
+      { name: 'Anna', value: 210000 },
+      { name: 'Emma', value: 185000 },
+      { name: 'Elizabeth', value: 162000 },
+      { name: 'Minnie', value: 154000 },
+      { name: 'Margaret', value: 149000 },
+      { name: 'Ida', value: 135000 },
+      { name: 'Alice', value: 128000 },
+      { name: 'Bertha', value: 122000 },
+      { name: 'Sarah', value: 118000 },
+    ],
+    male: [
+      { name: 'John', value: 274000 },
+      { name: 'William', value: 252000 },
+      { name: 'James', value: 236000 },
+      { name: 'George', value: 215000 },
+      { name: 'Charles', value: 201000 },
+      { name: 'Frank', value: 189000 },
+      { name: 'Joseph', value: 173000 },
+      { name: 'Henry', value: 168000 },
+      { name: 'Robert', value: 160000 },
+      { name: 'Thomas', value: 154000 },
+    ],
+  },
+  {
+    key: 'greatest',
+    label: 'Greatest Generation',
+    years: '1901–1927',
+    female: [
+      { name: 'Mary', value: 342000 },
+      { name: 'Dorothy', value: 221000 },
+      { name: 'Helen', value: 206000 },
+      { name: 'Margaret', value: 192000 },
+      { name: 'Ruth', value: 188000 },
+      { name: 'Betty', value: 176000 },
+      { name: 'Virginia', value: 163000 },
+      { name: 'Evelyn', value: 157000 },
+      { name: 'Alice', value: 149000 },
+      { name: 'Anna', value: 142000 },
+    ],
+    male: [
+      { name: 'John', value: 318000 },
+      { name: 'William', value: 286000 },
+      { name: 'James', value: 271000 },
+      { name: 'Robert', value: 238000 },
+      { name: 'Charles', value: 221000 },
+      { name: 'George', value: 214000 },
+      { name: 'Joseph', value: 203000 },
+      { name: 'Thomas', value: 196000 },
+      { name: 'Edward', value: 186000 },
+      { name: 'Richard', value: 179000 },
+    ],
+  },
+  {
+    key: 'silent',
+    label: 'Silent Generation',
+    years: '1928–1945',
+    female: [
+      { name: 'Mary', value: 312000 },
+      { name: 'Barbara', value: 248000 },
+      { name: 'Patricia', value: 221000 },
+      { name: 'Linda', value: 214000 },
+      { name: 'Shirley', value: 198000 },
+      { name: 'Carol', value: 184000 },
+      { name: 'Susan', value: 172000 },
+      { name: 'Nancy', value: 166000 },
+      { name: 'Betty', value: 161000 },
+      { name: 'Donna', value: 154000 },
+    ],
+    male: [
+      { name: 'Robert', value: 304000 },
+      { name: 'John', value: 289000 },
+      { name: 'James', value: 272000 },
+      { name: 'William', value: 241000 },
+      { name: 'Richard', value: 226000 },
+      { name: 'Thomas', value: 214000 },
+      { name: 'Charles', value: 202000 },
+      { name: 'Donald', value: 191000 },
+      { name: 'George', value: 183000 },
+      { name: 'Kenneth', value: 176000 },
+    ],
+  },
+  {
+    key: 'boomers',
+    label: 'Baby Boomers',
+    years: '1946–1964',
+    female: [
+      { name: 'Mary', value: 312000 },
+      { name: 'Linda', value: 298000 },
+      { name: 'Susan', value: 276000 },
+      { name: 'Patricia', value: 259000 },
+      { name: 'Deborah', value: 231000 },
+      { name: 'Karen', value: 217000 },
+      { name: 'Barbara', value: 206000 },
+      { name: 'Donna', value: 198000 },
+      { name: 'Nancy', value: 191000 },
+      { name: 'Elizabeth', value: 182000 },
+    ],
+    male: [
+      { name: 'Michael', value: 346000 },
+      { name: 'David', value: 334000 },
+      { name: 'John', value: 321000 },
+      { name: 'James', value: 309000 },
+      { name: 'Robert', value: 302000 },
+      { name: 'William', value: 286000 },
+      { name: 'Mark', value: 268000 },
+      { name: 'Richard', value: 255000 },
+      { name: 'Thomas', value: 244000 },
+      { name: 'Steven', value: 236000 },
+    ],
+  },
+  {
+    key: 'genx',
+    label: 'Generation X',
+    years: '1965–1980',
+    female: [
+      { name: 'Jennifer', value: 282000 },
+      { name: 'Amy', value: 246000 },
+      { name: 'Jessica', value: 238000 },
+      { name: 'Michelle', value: 225000 },
+      { name: 'Kimberly', value: 214000 },
+      { name: 'Lisa', value: 206000 },
+      { name: 'Angela', value: 198000 },
+      { name: 'Melissa', value: 189000 },
+      { name: 'Heather', value: 181000 },
+      { name: 'Stephanie', value: 176000 },
+    ],
+    male: [
+      { name: 'Michael', value: 332000 },
+      { name: 'Christopher', value: 306000 },
+      { name: 'Jason', value: 286000 },
+      { name: 'David', value: 274000 },
+      { name: 'James', value: 258000 },
+      { name: 'Matthew', value: 247000 },
+      { name: 'Joshua', value: 236000 },
+      { name: 'John', value: 224000 },
+      { name: 'Andrew', value: 213000 },
+      { name: 'Ryan', value: 205000 },
+    ],
+  },
+  {
+    key: 'millennials',
+    label: 'Millennials (Gen Y)',
+    years: '1981–1996',
+    female: [
+      { name: 'Jessica', value: 296000 },
+      { name: 'Ashley', value: 282000 },
+      { name: 'Amanda', value: 264000 },
+      { name: 'Brittany', value: 249000 },
+      { name: 'Samantha', value: 232000 },
+      { name: 'Sarah', value: 221000 },
+      { name: 'Stephanie', value: 214000 },
+      { name: 'Jennifer', value: 206000 },
+      { name: 'Lauren', value: 198000 },
+      { name: 'Elizabeth', value: 191000 },
+    ],
+    male: [
+      { name: 'Michael', value: 321000 },
+      { name: 'Christopher', value: 298000 },
+      { name: 'Matthew', value: 287000 },
+      { name: 'Joshua', value: 272000 },
+      { name: 'Jacob', value: 262000 },
+      { name: 'Nicholas', value: 248000 },
+      { name: 'Andrew', value: 239000 },
+      { name: 'Joseph', value: 228000 },
+      { name: 'Daniel', value: 219000 },
+      { name: 'Tyler', value: 208000 },
+    ],
+  },
+  {
+    key: 'genz',
+    label: 'Generation Z',
+    years: '1997–2012',
+    female: [
+      { name: 'Emily', value: 192000 },
+      { name: 'Madison', value: 181000 },
+      { name: 'Emma', value: 176000 },
+      { name: 'Olivia', value: 168000 },
+      { name: 'Hannah', value: 159000 },
+      { name: 'Abigail', value: 152000 },
+      { name: 'Isabella', value: 148000 },
+      { name: 'Samantha', value: 141000 },
+      { name: 'Elizabeth', value: 136000 },
+      { name: 'Ava', value: 132000 },
+    ],
+    male: [
+      { name: 'Jacob', value: 202000 },
+      { name: 'Michael', value: 189000 },
+      { name: 'Matthew', value: 182000 },
+      { name: 'Joshua', value: 176000 },
+      { name: 'Daniel', value: 169000 },
+      { name: 'Christopher', value: 162000 },
+      { name: 'Andrew', value: 154000 },
+      { name: 'Ethan', value: 148000 },
+      { name: 'Joseph', value: 142000 },
+      { name: 'William', value: 137000 },
+    ],
+  },
+  {
+    key: 'genalpha',
+    label: 'Generation Alpha',
+    years: '2013–2024',
+    female: [
+      { name: 'Olivia', value: 121000 },
+      { name: 'Emma', value: 118000 },
+      { name: 'Ava', value: 112000 },
+      { name: 'Charlotte', value: 108000 },
+      { name: 'Sophia', value: 104000 },
+      { name: 'Amelia', value: 101000 },
+      { name: 'Isabella', value: 98000 },
+      { name: 'Mia', value: 95000 },
+      { name: 'Evelyn', value: 91000 },
+      { name: 'Harper', value: 88000 },
+    ],
+    male: [
+      { name: 'Liam', value: 128000 },
+      { name: 'Noah', value: 121000 },
+      { name: 'Oliver', value: 116000 },
+      { name: 'Elijah', value: 109000 },
+      { name: 'James', value: 104000 },
+      { name: 'William', value: 101000 },
+      { name: 'Benjamin', value: 98000 },
+      { name: 'Lucas', value: 95000 },
+      { name: 'Henry', value: 92000 },
+      { name: 'Theodore', value: 89000 },
+    ],
+  },
+];
+
+export function BabyNamesGenerationTrends() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Trends by Generation</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="grid grid-cols-1 gap-4 @xl/viz:grid-cols-3">
+          {babynamesGenerationKpis.map(item => (
+            <Card key={item.label} className="bg-gradient-to-t from-muted/30 to-background shadow-sm">
+              <CardHeader className="border-b">
+                <CardDescription>{item.label}</CardDescription>
+                <CardTitle className="text-2xl">{item.value}</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">{item.note}</CardContent>
+            </Card>
+          ))}
+        </div>
+        <Tabs defaultValue={babynamesGenerationTrends[0].key} className="space-y-4">
+          <TabsList className="flex flex-wrap justify-start">
+            {babynamesGenerationTrends.map(gen => (
+              <TabsTrigger key={gen.key} value={gen.key}>
+                {gen.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {babynamesGenerationTrends.map(gen => (
+            <TabsContent key={gen.key} value={gen.key} className="space-y-4">
+              <div className="text-sm text-muted-foreground">{gen.years}</div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <ChartPanel
+                  title="Top 10 Female Names"
+                  description="Most common female names in the cohort"
+                >
+                  <Chart
+                    type="bar"
+                    data={gen.female}
+                    height={280}
+                    color="#e14f7a"
+                    showLegend={false}
+                    xTickAngle={-25}
+                    xTickFontSize={10}
+                  />
+                </ChartPanel>
+                <ChartPanel
+                  title="Top 10 Male Names"
+                  description="Most common male names in the cohort"
+                >
+                  <Chart
+                    type="bar"
+                    data={gen.male}
+                    height={280}
+                    color="#a0cbe8"
+                    showLegend={false}
+                    xTickAngle={-25}
+                    xTickFontSize={10}
+                  />
+                </ChartPanel>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
+}
 
 const f5BreachReturns = {
   dates: ['2025-10-16', '2025-10-17', '2025-10-20', '2025-10-21', '2025-10-22', '2025-10-23'],
@@ -1402,7 +1723,7 @@ export function ProjectCharts({ slug }: ProjectChartsProps) {
               data={babynamesTopNames}
               height={260}
               showLegend={false}
-              xTickAngle={-35}
+              xTickAngle={-25}
               xTickFontSize={10}
             />
           </ChartPanel>
