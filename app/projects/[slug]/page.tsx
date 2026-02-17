@@ -548,10 +548,21 @@ export default async function ProjectPage({
               <CardDescription>Notebook exports and Tableau snapshots for deep-dive context.</CardDescription>
             </CardHeader>
             <CardContent className="p-6 min-w-0 overflow-hidden">
-              <NotebookDashboard slug={resolvedParams.slug} />
-              <div className="mt-6 min-w-0 overflow-hidden mdx-content">
-                <NotebookCodeAccordion slug={resolvedParams.slug} />
-              </div>
+              <Card className="bg-muted/20">
+                <CardHeader>
+                  <CardTitle className="text-base">Notebook KPI + Core Charts</CardTitle>
+                  <CardDescription>
+                    KPI snapshots, core charts, and key code excerpts (Ingest SSA Files + Generation
+                    Buckets).
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <NotebookDashboard slug={resolvedParams.slug} />
+                  <div className="min-w-0 overflow-hidden mdx-content">
+                    <NotebookCodeAccordion slug={resolvedParams.slug} />
+                  </div>
+                </CardContent>
+              </Card>
               {notebookSnippetsContent && (
                 <div className="mt-6 space-y-3 min-w-0 overflow-hidden">
                   <div className="text-sm font-semibold text-foreground">Notebook Snippets</div>
