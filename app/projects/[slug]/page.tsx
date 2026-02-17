@@ -568,7 +568,7 @@ export default async function ProjectPage({
         )}
 
         {/* Detailed Analysis */}
-        {analysisContent && (
+        {!isBabyNames && analysisContent && (
           <Card>
             <CardHeader>
               <CardTitle>Detailed Analysis</CardTitle>
