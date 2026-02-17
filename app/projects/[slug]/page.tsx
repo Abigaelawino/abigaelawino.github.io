@@ -541,7 +541,7 @@ export default async function ProjectPage({
 
         {isBabyNames && visualizationsSection}
 
-        {isBabyNames && visualizationsContent && (
+        {isBabyNames && (
           <Card>
             <CardHeader>
               <CardTitle>Notebook Excerpts</CardTitle>
@@ -549,20 +549,6 @@ export default async function ProjectPage({
             </CardHeader>
             <CardContent className="p-6 min-w-0 overflow-hidden">
               <NotebookDashboard slug={resolvedParams.slug} />
-              <div className="mt-6 min-w-0 overflow-hidden mdx-content">
-                <NotebookCodeAccordion slug={resolvedParams.slug} />
-              </div>
-              {notebookSnippetsContent && (
-                <div className="mt-6 space-y-3 min-w-0 overflow-hidden">
-                  <div className="text-sm font-semibold text-foreground">Notebook Snippets</div>
-                  <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden mdx-content">
-                    <MDXContent content={notebookSnippetsContent} />
-                  </div>
-                </div>
-              )}
-              <div className="prose prose-slate max-w-none viz-notebook min-w-0 overflow-hidden">
-                <MDXContent content={visualizationsContent} />
-              </div>
             </CardContent>
           </Card>
         )}
